@@ -5,13 +5,15 @@
  * 
  * \author zjhlogo (zjhlogo@gmail.com)
  */
-#include "LogUtilWin32.h"
+#include <utils/LogUtil.h>
 #include <sstream>
 #include <stdarg.h>
 #include <windows.h>
 
 void LogUtil::debug(const char* location, int line, PRIORITY prio, const char* format, ...)
 {
+	static std::mutex s_mutex;
+
 	static const char* PRIORITY_MAP[NUM_PRIO] =
 	{
 		"Info",
@@ -22,7 +24,7 @@ void LogUtil::debug(const char* location, int line, PRIORITY prio, const char* f
 	static const int MAX_BUFFER_SIZE = 1024 * 4;
 	static char g_szBuffer[MAX_BUFFER_SIZE];
 
-	m_mutex.lock();
+	s_mutex.lock();
 	va_list marker;
 	va_start(marker, format);
 
@@ -32,5 +34,5 @@ void LogUtil::debug(const char* location, int line, PRIORITY prio, const char* f
 	std::ostringstream strStream;
 	strStream << location << "(" << line << "): " << PRIORITY_MAP[prio] << ": " << g_szBuffer << std::endl;
 	OutputDebugString(strStream.str().c_str());
-	m_mutex.unlock();
+	s_mutex.unlock();
 }

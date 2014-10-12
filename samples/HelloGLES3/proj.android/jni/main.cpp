@@ -27,6 +27,7 @@ JNIEXPORT jboolean JNICALL Java_com_zjhlogo_libspank_GameEntry_initialize(JNIEnv
 
 	// initialize app
 	g_pHelloGLES3App = new HelloGLES3App();
+	g_pHelloGLES3App->setFramework(g_pFrameworkAndroid);
 	if (!g_pHelloGLES3App->initialize(g_pFrameworkAndroid))
 	{
 		g_pHelloGLES3App->terminate();

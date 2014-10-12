@@ -23,9 +23,6 @@ public:
 public:
 	static void debug(const char* location, int line, PRIORITY prio, const char* format, ...);
 
-private:
-	static std::mutex m_mutex;
-
 };
 
 #define LOGI(...) (LogUtil::debug(__FILE__, __LINE__, LogUtil::INFO, __VA_ARGS__))

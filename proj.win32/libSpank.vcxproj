@@ -22,14 +22,14 @@
     <ClCompile Include="..\source\render\RenderTarget.cpp" />
     <ClCompile Include="..\source\render\Shader.cpp" />
     <ClCompile Include="..\source\render\Texture.cpp" />
-    <ClCompile Include="..\source\utils\LogUtil.cpp" />
-    <ClCompile Include="..\source\utils\TimeUtil.cpp" />
     <ClCompile Include="DeviceWin32.cpp" />
+    <ClCompile Include="utils\FileUtilWin32.cpp" />
     <ClCompile Include="utils\LogUtilWin32.cpp" />
     <ClCompile Include="utils\TimeUtilWin32.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\source\base\IMgr.h" />
+    <ClInclude Include="..\source\base\PlatformDefine.h" />
     <ClInclude Include="..\source\Framework.h" />
     <ClInclude Include="..\source\IApp.h" />
     <ClInclude Include="..\source\render\IRenderer.h" />
@@ -40,11 +40,10 @@
     <ClInclude Include="..\source\render\RenderTarget.h" />
     <ClInclude Include="..\source\render\Shader.h" />
     <ClInclude Include="..\source\render\Texture.h" />
+    <ClInclude Include="..\source\utils\FileUtil.h" />
     <ClInclude Include="..\source\utils\LogUtil.h" />
     <ClInclude Include="..\source\utils\TimeUtil.h" />
     <ClInclude Include="DeviceWin32.h" />
-    <ClInclude Include="utils\LogUtilWin32.h" />
-    <ClInclude Include="utils\TimeUtilWin32.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{A368B246-2128-4143-A03C-4E1CD9833D52}</ProjectGuid>

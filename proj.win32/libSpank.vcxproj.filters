@@ -42,16 +42,13 @@
     <ClCompile Include="..\source\Framework.cpp" />
     <ClCompile Include="DeviceWin32.cpp" />
     <ClCompile Include="..\source\IApp.cpp" />
-    <ClCompile Include="..\source\utils\TimeUtil.cpp">
-      <Filter>utils</Filter>
-    </ClCompile>
     <ClCompile Include="utils\TimeUtilWin32.cpp">
       <Filter>utils</Filter>
     </ClCompile>
-    <ClCompile Include="..\source\utils\LogUtil.cpp">
+    <ClCompile Include="utils\LogUtilWin32.cpp">
       <Filter>utils</Filter>
     </ClCompile>
-    <ClCompile Include="utils\LogUtilWin32.cpp">
+    <ClCompile Include="utils\FileUtilWin32.cpp">
       <Filter>utils</Filter>
     </ClCompile>
   </ItemGroup>
@@ -89,14 +86,14 @@
     <ClInclude Include="..\source\utils\TimeUtil.h">
       <Filter>utils</Filter>
     </ClInclude>
-    <ClInclude Include="utils\TimeUtilWin32.h">
-      <Filter>utils</Filter>
-    </ClInclude>
     <ClInclude Include="..\source\utils\LogUtil.h">
       <Filter>utils</Filter>
     </ClInclude>
-    <ClInclude Include="utils\LogUtilWin32.h">
+    <ClInclude Include="..\source\utils\FileUtil.h">
       <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\base\PlatformDefine.h">
+      <Filter>base</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

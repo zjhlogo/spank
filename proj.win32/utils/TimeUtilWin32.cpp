@@ -5,7 +5,7 @@
  * 
  * \author zjhlogo (zjhlogo@gmail.com)
  */
-#include "TimeUtilWin32.h"
+#include <utils/TimeUtil.h>
 #include <windows.h>
 
 int TimeUtil::getNowTime()

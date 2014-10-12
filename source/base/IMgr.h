@@ -8,7 +8,7 @@
  */
 #pragma once
 
-#include "MacroDefine.h"
+#include "PlatformDefine.h"
 
 class IMgr
 {

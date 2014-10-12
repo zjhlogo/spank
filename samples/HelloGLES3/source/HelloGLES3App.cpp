@@ -7,6 +7,7 @@
  */
 #include "HelloGLES3App.h"
 #include <utils/LogUtil.h>
+#include <utils/FileUtil.h>
 
 HelloGLES3App::HelloGLES3App()
 {
@@ -20,9 +21,9 @@ HelloGLES3App::~HelloGLES3App()
 
 bool HelloGLES3App::initialize(Framework* pFramework)
 {
-	LOGD("OpenGLES3TestApp::initialize");
+	BUFFER_DATA buffer;
+	if (!FileUtil::readFile(buffer, "data/grid16.png")) return false;
 
-	m_pFramework = pFramework;
 	return true;
 }
 
@@ -38,7 +39,7 @@ void HelloGLES3App::update(float dt)
 
 void HelloGLES3App::render()
 {
-	IRenderer* pRenderer = m_pFramework->getRenderer();
+	IRenderer* pRenderer = getRenderer();
 
 	pRenderer->clearColor(0.6f, 0.8f, 1.0f, 1.0f);
 }

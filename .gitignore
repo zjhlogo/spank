@@ -15,15 +15,17 @@ x64/
 x86/
 build/
 bld/
-# [Bb]in/
 [Oo]bj/
-/bin/
+bin/*.exe
+bin/*.lib
+bin/*.dll
 gen/
 .settings/
 proj.android/bin/
 proj.android/libs/
 samples/**/bin/
 samples/**/libs/
+samples/**/assets/
 
 # Roslyn cache directories
 *.ide/

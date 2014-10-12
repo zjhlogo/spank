@@ -7,7 +7,8 @@ LOCAL_MODULE := spank
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../source
 LOCAL_CFLAGS    := -Werror
 
-LOCAL_SRC_FILES := utils/LogUtilAndroid.cpp \
+LOCAL_SRC_FILES := utils/FileUtilAndroid.cpp \
+                   utils/LogUtilAndroid.cpp \
                    utils/TimeUtilAndroid.cpp \
                    ../../source/base/IMgr.cpp \
                    ../../source/render/IRenderer.cpp \
@@ -18,10 +19,11 @@ LOCAL_SRC_FILES := utils/LogUtilAndroid.cpp \
                    ../../source/render/RenderTarget.cpp \
                    ../../source/render/Shader.cpp \
                    ../../source/render/Texture.cpp \
-                   ../../source/utils/LogUtil.cpp \
-                   ../../source/utils/TimeUtil.cpp \
                    ../../source/Framework.cpp \
                    ../../source/IApp.cpp \
+
+
+LOCAL_EXPORT_LDLIBS := -llog -lGLESv3 -lEGL -landroid
 
 
 include $(BUILD_STATIC_LIBRARY)

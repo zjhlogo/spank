@@ -17,6 +17,10 @@ public:
 
 	void step();
 
+	inline void setFramework(Framework* pFramework) { m_pFramework = pFramework; };
+	inline Framework* getFramework() const { return m_pFramework; };
+	inline IRenderer* getRenderer() const { return m_pFramework->getRenderer(); };
+
 protected:
 	IApp();
 	virtual ~IApp();
@@ -28,5 +32,6 @@ private:
 	int m_lastTime{ 0 };
 	int m_currTime{ 0 };
 	float m_frameTime{ 0.0f };
+	Framework* m_pFramework{ nullptr };
 
 };

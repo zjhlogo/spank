@@ -34,6 +34,7 @@ int __stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdL
 
 	// initialize app
 	HelloGLES3App app;
+	app.setFramework(&framework);
 	if (!app.initialize(&framework))
 	{
 		app.terminate();

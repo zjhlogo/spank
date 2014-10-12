@@ -1,5 +1,6 @@
 package com.zjhlogo.libspank;
 import android.app.Activity;
+import android.content.res.AssetManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -12,6 +13,9 @@ public class SpankActivityBase extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+		initNativeAssetManager(getApplication().getAssets());
+		
 		mView = new OpenGLES3View(getApplication());
 		setContentView(mView);
 
@@ -49,5 +53,7 @@ public class SpankActivityBase extends Activity {
 		super.onResume();
 		mView.onResume();
 	}
+
+	public static native void initNativeAssetManager(AssetManager assetManager);
 
 }

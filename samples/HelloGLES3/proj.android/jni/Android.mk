@@ -12,8 +12,6 @@ LOCAL_SRC_FILES := main.cpp \
                    ../../source/HelloGLES3App.cpp \
 
 
-LOCAL_LDLIBS    := -llog -lGLESv3 -lEGL
-
 LOCAL_WHOLE_STATIC_LIBRARIES := spank
 
 include $(BUILD_SHARED_LIBRARY)

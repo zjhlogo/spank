@@ -5,12 +5,14 @@
  * 
  * \author zjhlogo (zjhlogo@gmail.com)
  */
-#include "LogUtilAndroid.h"
+#include <utils/LogUtil.h>
 #include <stdarg.h>
 #include <android/log.h>
 
 void LogUtil::debug(const char* location, int line, PRIORITY prio, const char* format, ...)
 {
+	static std::mutex s_mutex;
+
 	static const int PRIORITY_MAP[NUM_PRIO] =
 	{
 		ANDROID_LOG_INFO,
@@ -18,12 +20,12 @@ void LogUtil::debug(const char* location, int line, PRIORITY prio, const char* f
 		ANDROID_LOG_ERROR,
 	};
 
-	m_mutex.lock();
+	s_mutex.lock();
 	va_list marker;
 	va_start(marker, format);
 
 	__android_log_vprint(PRIORITY_MAP[prio], "tag", format, marker);
 	va_end(marker);
 
-	m_mutex.unlock();
+	s_mutex.unlock();
 }

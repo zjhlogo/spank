@@ -5,7 +5,7 @@
  * 
  * \author zjhlogo (zjhlogo@gmail.com)
  */
-#include "TimeUtilAndroid.h"
+#include <utils/TimeUtil.h>
 #include <time.h>
 
 int TimeUtil::getNowTime()

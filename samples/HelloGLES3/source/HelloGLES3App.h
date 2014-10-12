@@ -22,7 +22,4 @@ protected:
 	virtual void update(float dt) override;
 	virtual void render() override;
 
-private:
-	Framework* m_pFramework{ nullptr };
-
 };
