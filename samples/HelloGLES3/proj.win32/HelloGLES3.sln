@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30723.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "HelloGLES3", "HelloGLES3.vcxproj", "{8A914E2A-E551-46D4-AEF0-38868B7ED502}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A368B246-2128-4143-A03C-4E1CD9833D52} = {A368B246-2128-4143-A03C-4E1CD9833D52}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libSpank", "..\..\..\proj.win32\libSpank.vcxproj", "{A368B246-2128-4143-A03C-4E1CD9833D52}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8A914E2A-E551-46D4-AEF0-38868B7ED502}.Debug|Win32.ActiveCfg = Debug|Win32
+		{8A914E2A-E551-46D4-AEF0-38868B7ED502}.Debug|Win32.Build.0 = Debug|Win32
+		{8A914E2A-E551-46D4-AEF0-38868B7ED502}.Release|Win32.ActiveCfg = Release|Win32
+		{8A914E2A-E551-46D4-AEF0-38868B7ED502}.Release|Win32.Build.0 = Release|Win32
+		{A368B246-2128-4143-A03C-4E1CD9833D52}.Debug|Win32.ActiveCfg = Debug|Win32
+		{A368B246-2128-4143-A03C-4E1CD9833D52}.Debug|Win32.Build.0 = Debug|Win32
+		{A368B246-2128-4143-A03C-4E1CD9833D52}.Release|Win32.ActiveCfg = Release|Win32
+		{A368B246-2128-4143-A03C-4E1CD9833D52}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

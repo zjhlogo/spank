@@ -1,0 +1,401 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<logicalClassDesignerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" dslVersion="1.0.0.0" Id="2985566f-5b44-4bc3-9db8-4ae7330f1bc2" name="render_system" linkedPackageId="fb7e9f27-a0fc-4e04-8499-04b8999631e0" xmlns="http://schemas.microsoft.com/dsltools/LogicalClassDesigner">
+  <packagedElements>
+    <packageHasNamedElement>
+      <referencedType Id="b7ff64d8-1ff5-4cfd-b666-a91eee3e7df6" name="Boolean" isAbstract="false" isLeaf="false" cachedFullName="Boolean">
+        <elementDefinition Id="8943dc84-709e-4f62-b15a-a3273aa6f165" />
+      </referencedType>
+    </packageHasNamedElement>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="c1ca89a9-30a9-4875-b422-20fe6e2c7a0c" name="RenderTarget" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="303a5d93-42c1-4578-ab4a-f912a4769994" />
+        <generalsInternal>
+          <generalization Id="d2c30c89-e01b-48b7-ae7e-d57cbe41c2c2" isSubstitutable="false">
+            <classMoniker Id="a44b3c63-28f7-4395-b478-750e571e9414" LastKnownName="RenderObject" />
+            <elementDefinition Id="d2a58983-be8a-427a-8d44-abc81a0c567c" />
+          </generalization>
+        </generalsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <packageHasNamedElement>
+      <referencedType Id="34aed0bc-cc12-42d1-bef0-15973779874c" name="RenderTarget" isAbstract="false" isLeaf="false" cachedFullName="diagram::RenderTarget">
+        <elementDefinition Id="303a5d93-42c1-4578-ab4a-f912a4769994" />
+      </referencedType>
+    </packageHasNamedElement>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="a44b3c63-28f7-4395-b478-750e571e9414" name="RenderObject" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="109174e7-fc26-46c0-88e6-2f35a0ed77c2" />
+        <ownedOperationsInternal>
+          <operation Id="f2426924-1245-4c81-b0de-2ce413a6a416" name="reCreate" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="76efd68d-8b88-42a5-acc2-12dd0031244b" />
+          </operation>
+        </ownedOperationsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="139607d0-cdde-462d-84db-00f297b9994d" name="Shader" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="15dcff4e-6704-4cd9-8364-a32b4efe9494" />
+        <generalsInternal>
+          <generalization Id="1618497c-765f-421b-80ed-f695e7656731" isSubstitutable="false">
+            <classMoniker Id="a44b3c63-28f7-4395-b478-750e571e9414" LastKnownName="RenderObject" />
+            <elementDefinition Id="cd91acfa-4deb-48aa-b543-712dea2380bd" />
+          </generalization>
+        </generalsInternal>
+        <ownedOperationsInternal>
+          <operation Id="135d5add-0af7-4b21-b57f-360cf9dd5e28" name="setUniform" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="716b8a5f-4f7a-42f3-a6f9-eeffe2129760" />
+          </operation>
+          <operation Id="ab9bbdd4-7548-4901-8b8c-96f2ca4105cb" name="draw" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="5b353c8b-a6da-4140-9922-b41efb6cf922" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="c7ea303e-f27c-4c42-b526-f7a29927b94e" name="buffer" direction="In" isUnique="false">
+                  <elementDefinition Id="eac58c5b-a36c-445d-82b9-4427e784d2bd" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="f01a2884-67c3-4e27-8f8e-04736c6c9148" LastKnownName="RenderBuffer" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="d15041f4-75f2-4498-82a3-3543e5670679" name="setTexture" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="9ec5c01b-58f7-4bf7-bb21-bbd321a9343c" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="10f6f67b-f033-4548-a6f5-3d9d516bd673" name="texture" direction="In" isUnique="false">
+                  <elementDefinition Id="3286c74e-e38c-40dc-9d17-a7d13d4c7b14" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="340379cb-4ab5-42cf-8cbe-0902a91ca7ef" LastKnownName="Texture" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperationsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="33f07d6d-10e5-4475-8bd6-37c9e61316b1" name="Texture" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="02ff362e-3e9c-4464-af5c-eb665474c09e" />
+        <generalsInternal>
+          <generalization Id="b840af5b-03ba-4a0a-bd1a-02728ac740f5" isSubstitutable="false">
+            <classMoniker Id="a44b3c63-28f7-4395-b478-750e571e9414" LastKnownName="RenderObject" />
+            <elementDefinition Id="42e900c3-fd0e-46a0-ba7f-4ef6307cae2e" />
+          </generalization>
+        </generalsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <Interface Id="f3bf0b3a-928b-4406-8d6e-cc7052de5975" name="IMgr" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="494f0d04-5cd4-48e5-bf0d-96d588c0612f" />
+        <ownedOperations>
+          <operation Id="76cb9792-05f8-4439-b35f-24dbd9d7468d" name="initialize" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="7792f7a5-0ea6-4bd3-865e-d10fece7a103" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="261b0868-905f-4872-b218-de6f6e26640c" direction="Return">
+                  <elementDefinition Id="fb6efaad-e2bd-4e19-b9ef-bf6217abce17" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="8a4db268-171f-48c9-9979-41494bfe7540" LastKnownName="Boolean" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="44c33aa1-77a7-4dad-a15c-cd43768661e0" name="terminate" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="c765b9c3-d9da-4f1f-b0ac-72eacb23f86e" />
+          </operation>
+        </ownedOperations>
+      </Interface>
+    </logicalClassDesignerModelHasTypes>
+    <packageHasNamedElement>
+      <referencedType Id="8a4db268-171f-48c9-9979-41494bfe7540" name="Boolean" isAbstract="false" isLeaf="false" cachedFullName="Boolean">
+        <elementDefinition Id="8943dc84-709e-4f62-b15a-a3273aa6f165" />
+      </referencedType>
+    </packageHasNamedElement>
+    <logicalClassDesignerModelHasTypes>
+      <Interface Id="617d7792-4c4b-44b3-942c-f584d4033f75" name="IRenderer" visibility="Protected" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="46521ce4-ce66-48d9-9427-771dc297bc20" />
+        <generalsInternal>
+          <generalization Id="0ee5110d-6ef5-4ad5-b771-6cc0eab52f1f" isSubstitutable="false">
+            <interfaceMoniker Id="f3bf0b3a-928b-4406-8d6e-cc7052de5975" LastKnownName="IMgr" />
+            <elementDefinition Id="f9d2db02-ad8f-4d92-9612-abc75e6ea13c" />
+          </generalization>
+        </generalsInternal>
+        <ownedAttributes>
+          <property Id="6e937196-2ea5-4fa0-b2df-22dc2a848ce6" name="m_renderTargets" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="4d303df4-cf1c-413a-b4cc-d95c7bc33cee" />
+          </property>
+          <property Id="ef2f8eca-3a1b-42ab-a2a2-3d04a4364c10" name="m_textures" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="78dac1a8-1eac-403f-ba61-05f05948a217" />
+          </property>
+          <property Id="c63fee79-6dd0-4125-a1c1-d2c9c7e19115" name="m_shaders" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="5faf501f-31db-465c-96e7-4570a07deeb3" />
+          </property>
+          <property Id="29468227-da72-413e-8666-fe1db5853025" name="m_renderBuffers" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="4d9bbf1b-b1a1-4399-b858-61f6fa6c0572" />
+          </property>
+        </ownedAttributes>
+        <ownedOperations>
+          <operation Id="179d8e1d-273c-4118-a729-dd021a19922a" name="getRenderTarget" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="c10a1679-a82d-472b-af4f-d5d0101775f1" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="ef17c94f-8a06-47d5-98ea-37a4cd6d85d5" direction="Return">
+                  <elementDefinition Id="6d0d3535-47e9-4cd9-9155-2166fbcc837d" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="42be2661-bfdf-4559-b678-f3c90b4a2f40" LastKnownName="RenderTarget" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="1b413ef3-6aa0-41f2-804f-078f28130e31" name="setRenderTarget" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="e6b69a2c-ffd7-439a-b1da-db353b1983b6" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="b9f7e657-ea25-42d6-ba36-465c7e7ef811" direction="Return" isUnique="false">
+                  <elementDefinition Id="12762b10-933f-4757-b2f1-017a8c9c22c5" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="60a342a0-8a8d-4745-9e91-88069f96e7df" LastKnownName="Boolean" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="e2bc6e5b-a6c7-4697-9556-0e679736d929" name="renderTarget" direction="In">
+                  <elementDefinition Id="94a7351d-aeb5-4ff5-94d3-85e478480cb7" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="0289310f-7864-4bb5-9c7f-19af08cf2fa4" LastKnownName="RenderTarget" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperations>
+      </Interface>
+    </logicalClassDesignerModelHasTypes>
+    <packageHasNamedElement>
+      <referencedType Id="42be2661-bfdf-4559-b678-f3c90b4a2f40" name="RenderTarget" isAbstract="false" isLeaf="false" cachedFullName="diagram::RenderTarget">
+        <elementDefinition Id="303a5d93-42c1-4578-ab4a-f912a4769994" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="60a342a0-8a8d-4745-9e91-88069f96e7df" name="Boolean" isAbstract="false" isLeaf="false" cachedFullName="Boolean">
+        <elementDefinition Id="8943dc84-709e-4f62-b15a-a3273aa6f165" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="0289310f-7864-4bb5-9c7f-19af08cf2fa4" name="RenderTarget" isAbstract="false" isLeaf="false" cachedFullName="diagram::RenderTarget">
+        <elementDefinition Id="303a5d93-42c1-4578-ab4a-f912a4769994" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="340379cb-4ab5-42cf-8cbe-0902a91ca7ef" name="Texture" isAbstract="false" isLeaf="false" cachedFullName="diagram::Texture">
+        <elementDefinition Id="02ff362e-3e9c-4464-af5c-eb665474c09e" />
+      </referencedType>
+    </packageHasNamedElement>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="59d93689-f9ef-4609-9fdd-a9b41e69d512" name="RendererGl2" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="acfc244b-222a-4888-a1fb-b6c27d6d0274" />
+        <suppliersInternal>
+          <interfaceRealization Id="ab693dc1-cea0-4416-9105-98fe2d528b10">
+            <interfaceMoniker Id="617d7792-4c4b-44b3-942c-f584d4033f75" LastKnownName="IRenderer" />
+            <elementDefinition Id="5959abc3-d1e7-4266-8aa9-f4f2a456d3b2" />
+          </interfaceRealization>
+        </suppliersInternal>
+        <ownedOperationsInternal>
+          <operation Id="7bb2847a-fa1f-4005-9554-eff303a954ba" name="getRenderTarget" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="075a09f0-9f8f-4bca-b417-e6c4e1c7027b" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="058b8c2e-de6d-4560-8c37-4e815fc2e8ae" direction="Return">
+                  <elementDefinition Id="0b4334d4-5197-4603-9ae0-316ce66d7d7c" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="34aed0bc-cc12-42d1-bef0-15973779874c" LastKnownName="RenderTarget" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="55542cc8-3775-419e-ada3-b3bbcfcf17c5" name="setRenderTarget" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="0ff06fd4-8430-4759-9c2e-2b6d74c2c061" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="befbb0de-da4e-4d3e-bfdf-f6739a2fd157" name="renderTarget" direction="In">
+                  <elementDefinition Id="82aeaf7c-68fb-41b8-acf5-e1a6dde04433" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="34aed0bc-cc12-42d1-bef0-15973779874c" LastKnownName="RenderTarget" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="ba21c456-007e-4741-ae35-a928b41cb797" direction="Return" isUnique="false">
+                  <elementDefinition Id="9dc105a4-24aa-4e1c-a7fa-abf9d4ca40d9" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="b7ff64d8-1ff5-4cfd-b666-a91eee3e7df6" LastKnownName="Boolean" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="ec4db656-41f5-40c5-a908-e6537d2b7daa" name="initialize" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="66d5d124-eecf-4e9a-a267-91d560269f8d" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="393659b0-824a-4f1e-af29-b47e3c60cdc5" direction="Return">
+                  <elementDefinition Id="351b97e2-6660-42d4-8257-05781f50dbbe" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="b7ff64d8-1ff5-4cfd-b666-a91eee3e7df6" LastKnownName="Boolean" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="8826156c-b027-42b0-b345-9cfcfbaab098" name="terminate" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="70e2656f-4c6b-4761-92e0-0f99b3e2d93e" />
+          </operation>
+        </ownedOperationsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="eebf694f-8c42-4e8d-a05e-2242220dd783" name="RendererGl3" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="fd017528-1858-48c2-b19b-9e6bc1b82d3a" />
+        <suppliersInternal>
+          <interfaceRealization Id="45da8432-8fd1-44fe-9310-63c4c7c6e436">
+            <interfaceMoniker Id="617d7792-4c4b-44b3-942c-f584d4033f75" LastKnownName="IRenderer" />
+            <elementDefinition Id="8d5d6726-9508-415a-828b-f362a77a945f" />
+          </interfaceRealization>
+        </suppliersInternal>
+        <ownedOperationsInternal>
+          <operation Id="6aeff6c6-caf3-4aed-903a-42814edc14c0" name="getRenderTarget" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="e60e12c1-2e0b-4b66-83b4-e023bd6e8ea4" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="04eb8b78-93b7-4ed1-bc27-7ce79a1044e8" direction="Return">
+                  <elementDefinition Id="e95f5ed2-403e-4d20-b203-6cf8c4f5e27a" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="34aed0bc-cc12-42d1-bef0-15973779874c" LastKnownName="RenderTarget" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="510a3a1e-f5ea-40ef-a48b-b175098b9c39" name="setRenderTarget" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="18871fd1-ee85-4d0d-816c-ff91b48a225f" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="726c04f1-41ed-412f-bf60-735c20ea4ff8" name="renderTarget" direction="In">
+                  <elementDefinition Id="29a360ae-8104-475b-bac3-9804c1e981a1" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="34aed0bc-cc12-42d1-bef0-15973779874c" LastKnownName="RenderTarget" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="16f064ce-13a5-4a20-bc30-7c573f1c86d9" direction="Return" isUnique="false">
+                  <elementDefinition Id="86fe3a0f-ef32-4a92-9e9c-90d7bd31062a" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="b7ff64d8-1ff5-4cfd-b666-a91eee3e7df6" LastKnownName="Boolean" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="e67be947-c52f-4fa9-b7f1-90e7a8e11aa0" name="initialize" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="8ccc5b49-aee7-4be3-b288-683dfc9d402f" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="ef7d46aa-6e6d-47aa-8ca0-761d6afda568" direction="Return">
+                  <elementDefinition Id="49e5958e-6a27-45b2-a648-a56595526f12" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="b7ff64d8-1ff5-4cfd-b666-a91eee3e7df6" LastKnownName="Boolean" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="c4168c5e-b607-492b-b6ef-0ef9035704b3" name="terminate" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="1e8728e8-951d-4b02-a433-1b46f510f4fc" />
+          </operation>
+        </ownedOperationsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="d880aa2a-6c8b-44b2-9efe-f0a3b3a4c527" name="RenderBuffer" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="1e801d47-062c-4f83-931a-e5b4e53415e1" />
+        <generalsInternal>
+          <generalization Id="604c332e-2ca2-4d93-8c45-107a2d271bf2" isSubstitutable="false">
+            <classMoniker Id="a44b3c63-28f7-4395-b478-750e571e9414" LastKnownName="RenderObject" />
+            <elementDefinition Id="daf75eb6-0a50-4f6e-864d-08afdeb27611" />
+          </generalization>
+        </generalsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="a553e593-7c20-4f9a-abf8-068f57306571" name="MemoryRenderBuffer" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="2e26203d-8132-4690-a6f4-70004d0894aa" />
+        <generalsInternal>
+          <generalization Id="c9f17d7a-cff9-43ac-b664-1039b37c3ec1" isSubstitutable="false">
+            <classMoniker Id="d880aa2a-6c8b-44b2-9efe-f0a3b3a4c527" LastKnownName="RenderBuffer" />
+            <elementDefinition Id="f78e246d-4653-4029-ae64-e9ff1cab4d7c" />
+          </generalization>
+        </generalsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="f3bde302-f56d-48f4-9fc5-b548cfd74f7e" name="VideoMemoryRenderBuffer" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="f41be4a7-a5b0-4c7b-974b-11b7be87d566" />
+        <generalsInternal>
+          <generalization Id="89b78f7e-d0c9-4ec7-8cd2-ecc6b29c7c21" isSubstitutable="false">
+            <classMoniker Id="d880aa2a-6c8b-44b2-9efe-f0a3b3a4c527" LastKnownName="RenderBuffer" />
+            <elementDefinition Id="0018971d-e13d-4cf5-a93d-37a4bbed4ee7" />
+          </generalization>
+        </generalsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="cc5efe5c-05e1-4f43-96f2-ec5b9d668130" name="ScreenRenderTarget" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="6fbf9314-d4bd-4148-b8a6-2b4d5a8c0f93" />
+        <generalsInternal>
+          <generalization Id="2d245a35-a981-4535-b468-54b8ae817663" isSubstitutable="false">
+            <classMoniker Id="c1ca89a9-30a9-4875-b422-20fe6e2c7a0c" LastKnownName="RenderTarget" />
+            <elementDefinition Id="6965b46e-29bb-46f3-a59b-338d5ba3cf24" />
+          </generalization>
+        </generalsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="c35b4cc7-902c-4173-813d-35177727f1fa" name="TextureRenderTarget" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="098731f5-3f87-4e11-baf3-5ae7553546fd" />
+        <generalsInternal>
+          <generalization Id="799e4978-d7df-4bf7-b3b7-d2168df27eda" isSubstitutable="false">
+            <classMoniker Id="c1ca89a9-30a9-4875-b422-20fe6e2c7a0c" LastKnownName="RenderTarget" />
+            <elementDefinition Id="9b662576-ddc3-4fa6-b819-e783c9444f7c" />
+          </generalization>
+        </generalsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <packageHasNamedElement>
+      <referencedType Id="f01a2884-67c3-4e27-8f8e-04736c6c9148" name="RenderBuffer" isAbstract="false" isLeaf="false" cachedFullName="diagram::RenderBuffer">
+        <elementDefinition Id="1e801d47-062c-4f83-931a-e5b4e53415e1" />
+      </referencedType>
+    </packageHasNamedElement>
+  </packagedElements>
+  <package Id="fb7e9f27-a0fc-4e04-8499-04b8999631e0" name="diagram">
+    <elementDefinition Id="67f9593b-f1e6-4370-b6bb-003be3040b87" />
+    <profileInstances>
+      <packageHasProfileInstances Id="2d5e3789-bcaa-4d99-a10f-7e82f0ec3df9">
+        <profileInstance Id="cd52b1ee-3151-4cb3-8f8b-cfc36ba9b8ed" name="StandardProfileL2">
+          <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+        </profileInstance>
+        <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+      </packageHasProfileInstances>
+      <packageHasProfileInstances Id="6b954c31-2717-46ee-a038-09f3f63917b8">
+        <profileInstance Id="6360328e-334c-453a-9e2f-ab134728f649" name="StandardProfileL3">
+          <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+        </profileInstance>
+        <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+      </packageHasProfileInstances>
+    </profileInstances>
+  </package>
+</logicalClassDesignerModel>

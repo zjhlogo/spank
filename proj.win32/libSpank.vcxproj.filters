@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="base">
+      <UniqueIdentifier>{4b35e832-af79-4703-ab93-773214f43448}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="render">
+      <UniqueIdentifier>{8e03aefc-45e9-42cb-99ac-f48313048c3b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="utils">
+      <UniqueIdentifier>{cb0838a1-e310-43ad-a51f-27c50d9e4217}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\source\base\IMgr.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\render\IRenderer.cpp">
+      <Filter>render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\render\RenderBuffer.cpp">
+      <Filter>render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\render\RendererGl2.cpp">
+      <Filter>render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\render\RendererGl3.cpp">
+      <Filter>render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\render\RenderObject.cpp">
+      <Filter>render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\render\RenderTarget.cpp">
+      <Filter>render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\render\Shader.cpp">
+      <Filter>render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\render\Texture.cpp">
+      <Filter>render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\Framework.cpp" />
+    <ClCompile Include="DeviceWin32.cpp" />
+    <ClCompile Include="..\source\IApp.cpp" />
+    <ClCompile Include="..\source\utils\TimeUtil.cpp">
+      <Filter>utils</Filter>
+    </ClCompile>
+    <ClCompile Include="utils\TimeUtilWin32.cpp">
+      <Filter>utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\utils\LogUtil.cpp">
+      <Filter>utils</Filter>
+    </ClCompile>
+    <ClCompile Include="utils\LogUtilWin32.cpp">
+      <Filter>utils</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\source\base\IMgr.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\render\IRenderer.h">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\render\RenderBuffer.h">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\render\RendererGl2.h">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\render\RendererGl3.h">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\render\RenderObject.h">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\render\RenderTarget.h">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\render\Shader.h">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\render\Texture.h">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\Framework.h" />
+    <ClInclude Include="DeviceWin32.h" />
+    <ClInclude Include="..\source\IApp.h" />
+    <ClInclude Include="..\source\utils\TimeUtil.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\TimeUtilWin32.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\utils\LogUtil.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\LogUtilWin32.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
