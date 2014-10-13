@@ -20,18 +20,6 @@ RendererGl2::~RendererGl2()
 
 }
 
-RenderTarget* RendererGl2::getRenderTarget()
-{
-	// TODO: 
-	return nullptr;
-}
-
-bool RendererGl2::setRenderTarget(RenderTarget* pRenderTarget)
-{
-	// TODO: 
-	return false;
-}
-
 bool RendererGl2::initialize()
 {
 	LOGI("Version: %s", glGetString(GL_VERSION));
@@ -45,6 +33,12 @@ bool RendererGl2::initialize()
 void RendererGl2::terminate()
 {
 	// TODO: 
+}
+
+Texture* RendererGl2::createTexture(const std::string& filePath)
+{
+	// TODO: 
+	return nullptr;
 }
 
 void RendererGl2::clearColor(float r, float g, float b, float a)

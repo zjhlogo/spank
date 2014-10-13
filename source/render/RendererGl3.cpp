@@ -20,18 +20,6 @@ RendererGl3::~RendererGl3()
 
 }
 
-RenderTarget* RendererGl3::getRenderTarget()
-{
-	// TODO: 
-	return nullptr;
-}
-
-bool RendererGl3::setRenderTarget(RenderTarget* pRenderTarget)
-{
-	// TODO: 
-	return false;
-}
-
 bool RendererGl3::initialize()
 {
 	LOGI("Version: %s", glGetString(GL_VERSION));
@@ -45,6 +33,18 @@ bool RendererGl3::initialize()
 void RendererGl3::terminate()
 {
 	// TODO: 
+}
+
+Texture* RendererGl3::createTexture(const std::string& filePath)
+{
+	Texture* pTexture = new Texture();
+	if (!pTexture->loadFromFile(filePath))
+	{
+		SAFE_DELETE(pTexture);
+		return nullptr;
+	}
+
+	return pTexture;
 }
 
 void RendererGl3::clearColor(float r, float g, float b, float a)

@@ -12,19 +12,19 @@
 class LogUtil
 {
 public:
-	enum PRIORITY
+	enum LOG_PRIORITY
 	{
-		INFO = 0,
-		DEBUG,
-		ERROR,
-		NUM_PRIO,
+		LPRIO_INFO = 0,
+		LPRIO_DEBUG,
+		LPRIO_ERROR,
+		LPRIO_NUM_PRIO,
 	};
 
 public:
-	static void debug(const char* location, int line, PRIORITY prio, const char* format, ...);
+	static void debug(const char* location, int line, LOG_PRIORITY prio, const char* format, ...);
 
 };
 
-#define LOGI(...) (LogUtil::debug(__FILE__, __LINE__, LogUtil::INFO, __VA_ARGS__))
-#define LOGD(...) (LogUtil::debug(__FILE__, __LINE__, LogUtil::DEBUG, __VA_ARGS__))
-#define LOGE(...) (LogUtil::debug(__FILE__, __LINE__, LogUtil::ERROR, __VA_ARGS__))
+#define LOGI(...) (LogUtil::debug(__FILE__, __LINE__, LogUtil::LPRIO_INFO, __VA_ARGS__))
+#define LOGD(...) (LogUtil::debug(__FILE__, __LINE__, LogUtil::LPRIO_DEBUG, __VA_ARGS__))
+#define LOGE(...) (LogUtil::debug(__FILE__, __LINE__, LogUtil::LPRIO_ERROR, __VA_ARGS__))

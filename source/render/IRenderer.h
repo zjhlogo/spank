@@ -9,7 +9,7 @@
 #pragma once
 
 #include "../base/IMgr.h"
-#include "RenderTarget.h"
+#include "Texture.h"
 
 class IRenderer : public IMgr
 {
@@ -17,8 +17,7 @@ public:
 	IRenderer();
 	virtual ~IRenderer();
 
-	virtual RenderTarget* getRenderTarget() = 0;
-	virtual bool setRenderTarget(RenderTarget* pRenderTarget) = 0;
+	virtual Texture* createTexture(const std::string& filePath) = 0;
 
 	virtual void clearColor(float r, float g, float b, float a) = 0;
 };

@@ -21,9 +21,6 @@
     <ClCompile Include="..\source\render\RenderBuffer.cpp">
       <Filter>render</Filter>
     </ClCompile>
-    <ClCompile Include="..\source\render\RendererGl2.cpp">
-      <Filter>render</Filter>
-    </ClCompile>
     <ClCompile Include="..\source\render\RendererGl3.cpp">
       <Filter>render</Filter>
     </ClCompile>
@@ -51,6 +48,9 @@
     <ClCompile Include="utils\FileUtilWin32.cpp">
       <Filter>utils</Filter>
     </ClCompile>
+    <ClCompile Include="..\source\render\RendererGl2.cpp">
+      <Filter>render</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\source\base\IMgr.h">
@@ -60,9 +60,6 @@
       <Filter>render</Filter>
     </ClInclude>
     <ClInclude Include="..\source\render\RenderBuffer.h">
-      <Filter>render</Filter>
-    </ClInclude>
-    <ClInclude Include="..\source\render\RendererGl2.h">
       <Filter>render</Filter>
     </ClInclude>
     <ClInclude Include="..\source\render\RendererGl3.h">
@@ -94,6 +91,9 @@
     </ClInclude>
     <ClInclude Include="..\source\base\PlatformDefine.h">
       <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\render\RendererGl2.h">
+      <Filter>render</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -10,11 +10,11 @@
 #include <stdarg.h>
 #include <windows.h>
 
-void LogUtil::debug(const char* location, int line, PRIORITY prio, const char* format, ...)
+void LogUtil::debug(const char* location, int line, LOG_PRIORITY prio, const char* format, ...)
 {
 	static std::mutex s_mutex;
 
-	static const char* PRIORITY_MAP[NUM_PRIO] =
+	static const char* PRIORITY_MAP[LPRIO_NUM_PRIO] =
 	{
 		"Info",
 		"Debug",

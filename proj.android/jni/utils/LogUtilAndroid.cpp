@@ -9,11 +9,11 @@
 #include <stdarg.h>
 #include <android/log.h>
 
-void LogUtil::debug(const char* location, int line, PRIORITY prio, const char* format, ...)
+void LogUtil::debug(const char* location, int line, LOG_PRIORITY prio, const char* format, ...)
 {
 	static std::mutex s_mutex;
 
-	static const int PRIORITY_MAP[NUM_PRIO] =
+	static const int PRIORITY_MAP[LPRIO_NUM_PRIO] =
 	{
 		ANDROID_LOG_INFO,
 		ANDROID_LOG_DEBUG,

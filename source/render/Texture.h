@@ -16,5 +16,6 @@ public:
 	Texture();
 	virtual ~Texture();
 
+	bool loadFromFile(const std::string& filePath);
 
 };

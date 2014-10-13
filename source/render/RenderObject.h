@@ -8,6 +8,8 @@
  */
 #pragma once
 
+#include "../base/PlatformDefine.h"
+
 class RenderObject
 {
 public:

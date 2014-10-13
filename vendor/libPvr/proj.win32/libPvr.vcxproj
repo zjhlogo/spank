@@ -10,20 +10,47 @@
       <Platform>Win32</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\source\PVRTDecompress.cpp" />
+    <ClCompile Include="..\source\PVRTError.cpp" />
+    <ClCompile Include="..\source\PVRTFixedPoint.cpp" />
+    <ClCompile Include="..\source\PVRTgles3Ext.cpp" />
+    <ClCompile Include="..\source\PVRTMatrixF.cpp" />
+    <ClCompile Include="..\source\PVRTMatrixX.cpp" />
+    <ClCompile Include="..\source\PVRTMisc.cpp" />
+    <ClCompile Include="..\source\PVRTTexture.cpp" />
+    <ClCompile Include="..\source\PVRTTextureAPI.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\source\gl2extimg.h" />
+    <ClInclude Include="..\source\PVRTArray.h" />
+    <ClInclude Include="..\source\PVRTContext.h" />
+    <ClInclude Include="..\source\PVRTDecompress.h" />
+    <ClInclude Include="..\source\PVRTError.h" />
+    <ClInclude Include="..\source\PVRTFixedPoint.h" />
+    <ClInclude Include="..\source\PVRTgles3Ext.h" />
+    <ClInclude Include="..\source\PVRTGlobal.h" />
+    <ClInclude Include="..\source\PVRTMap.h" />
+    <ClInclude Include="..\source\PVRTMathTable.h" />
+    <ClInclude Include="..\source\PVRTMatrix.h" />
+    <ClInclude Include="..\source\PVRTMisc.h" />
+    <ClInclude Include="..\source\PVRTTexture.h" />
+    <ClInclude Include="..\source\PVRTTextureAPI.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{8A914E2A-E551-46D4-AEF0-38868B7ED502}</ProjectGuid>
-    <Keyword>HelloGLES3</Keyword>
-    <RootNamespace>HelloGLES3</RootNamespace>
+    <ProjectGuid>{8F0A56FE-1D93-4719-8443-1197E95B5725}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>libPvr</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v120</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v120</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -40,12 +67,10 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <LinkIncremental>true</LinkIncremental>
     <TargetName>$(ProjectName)_D</TargetName>
     <OutDir>../../../bin/</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <LinkIncremental>false</LinkIncremental>
     <OutDir>../../../bin/</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -54,16 +79,13 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>../source;../../../source;../../../proj.win32;../../../vendor/PowerVR_SDK_3.3_R2/inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;BUILD_OGLES3;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../PowerVR_SDK_3.3_R2/inc/;../../../source/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>libEGL.lib;libGLESv2.lib;winmm.lib;libSpank_D.lib;libPvr_D.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>../../../bin/;../../../vendor/PowerVR_SDK_3.3_R2/lib/;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
-    <ProjectReference />
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -73,27 +95,16 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>../source;../../../source;../../../proj.win32;../../../vendor/PowerVR_SDK_3.3_R2/inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;BUILD_OGLES3;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../PowerVR_SDK_3.3_R2/inc/;../../../source/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>libEGL.lib;libGLESv2.lib;winmm.lib;libSpank.lib;libPvr.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>../../../bin/;../../../vendor/PowerVR_SDK_3.3_R2/lib/;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
-    <ProjectReference />
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="..\source\HelloGLES3App.cpp" />
-    <ClCompile Include="main.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\source\HelloGLES3App.h" />
-    <ClInclude Include="main.h" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

@@ -4,7 +4,10 @@ include $(CLEAR_VARS)
 
 LOCAL_MODULE := spank
 
-LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../source
+LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../source \
+                    $(LOCAL_PATH)/../../vendor \
+
+
 LOCAL_CFLAGS    := -Werror
 
 LOCAL_SRC_FILES := utils/FileUtilAndroid.cpp \
@@ -25,5 +28,9 @@ LOCAL_SRC_FILES := utils/FileUtilAndroid.cpp \
 
 LOCAL_EXPORT_LDLIBS := -llog -lGLESv3 -lEGL -landroid
 
+LOCAL_WHOLE_STATIC_LIBRARIES := pvr
+
 
 include $(BUILD_STATIC_LIBRARY)
+
+$(call import-module,libPvr/proj.android/jni)

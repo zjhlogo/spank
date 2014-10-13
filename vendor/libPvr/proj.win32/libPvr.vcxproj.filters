@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="..\source\PVRTTextureAPI.cpp" />
+    <ClCompile Include="..\source\PVRTgles3Ext.cpp" />
+    <ClCompile Include="..\source\PVRTTexture.cpp" />
+    <ClCompile Include="..\source\PVRTDecompress.cpp" />
+    <ClCompile Include="..\source\PVRTFixedPoint.cpp" />
+    <ClCompile Include="..\source\PVRTMatrixF.cpp" />
+    <ClCompile Include="..\source\PVRTMatrixX.cpp" />
+    <ClCompile Include="..\source\PVRTMisc.cpp" />
+    <ClCompile Include="..\source\PVRTError.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\source\PVRTTextureAPI.h" />
+    <ClInclude Include="..\source\PVRTgles3Ext.h" />
+    <ClInclude Include="..\source\PVRTTexture.h" />
+    <ClInclude Include="..\source\PVRTGlobal.h" />
+    <ClInclude Include="..\source\PVRTDecompress.h" />
+    <ClInclude Include="..\source\PVRTFixedPoint.h" />
+    <ClInclude Include="..\source\PVRTMathTable.h" />
+    <ClInclude Include="..\source\PVRTContext.h" />
+    <ClInclude Include="..\source\PVRTMap.h" />
+    <ClInclude Include="..\source\PVRTMatrix.h" />
+    <ClInclude Include="..\source\PVRTMisc.h" />
+    <ClInclude Include="..\source\PVRTArray.h" />
+    <ClInclude Include="..\source\PVRTError.h" />
+    <ClInclude Include="..\source\gl2extimg.h" />
+  </ItemGroup>
+</Project>

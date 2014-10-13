@@ -40,6 +40,7 @@ int __stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdL
 		app.terminate();
 		framework.terminate();
 		device.terminate();
+		return 0;
 	}
 
 	// start message loop

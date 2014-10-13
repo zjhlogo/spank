@@ -89,7 +89,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>../vendor/PowerVR_SDK_3.3_R2/inc/;../source/</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../vendor/PowerVR_SDK_3.3_R2/inc/;../source/;../vendor/</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -119,7 +119,7 @@ copy /Y ..\vendor\PowerVR_SDK_3.3_R2\bin\*.dll ..\bin\
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>../vendor/PowerVR_SDK_3.3_R2/inc/;../source/</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../vendor/PowerVR_SDK_3.3_R2/inc/;../source/;../vendor/</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

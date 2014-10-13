@@ -24,6 +24,9 @@ bool HelloGLES3App::initialize(Framework* pFramework)
 	BUFFER_DATA buffer;
 	if (!FileUtil::readFile(buffer, "data/grid16.png")) return false;
 
+	IRenderer* pRenderer = getRenderer();
+	Texture* pTexture = pRenderer->createTexture("data/image.pvr");
+
 	return true;
 }
 
