@@ -23,7 +23,7 @@ typedef uint64_t    uint64;
 
 typedef unsigned int uint;
 
-typedef std::vector<int8> BUFFER_DATA;
+typedef std::vector<char> BUFFER_DATA;
 
 #define SAFE_DELETE(x) if (x) {delete x; x=nullptr;}
 #define SAFE_DELETE_ARRAY(x) if (x) {delete[] x; x=nullptr;}

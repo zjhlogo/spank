@@ -17,5 +17,9 @@ public:
 	virtual ~Texture();
 
 	bool loadFromFile(const std::string& filePath);
+	inline uint getTextureId() const { return m_textureId; };
+
+private:
+	GLuint m_textureId{ 0 };
 
 };

@@ -332,7 +332,7 @@
       </class>
     </logicalClassDesignerModelHasTypes>
     <logicalClassDesignerModelHasTypes>
-      <class Id="a553e593-7c20-4f9a-abf8-068f57306571" name="MemoryRenderBuffer" isAbstract="false" isLeaf="false" isActiveClass="false">
+      <class Id="a553e593-7c20-4f9a-abf8-068f57306571" name="MemRenderBuffer" isAbstract="false" isLeaf="false" isActiveClass="false">
         <elementDefinition Id="2e26203d-8132-4690-a6f4-70004d0894aa" />
         <generalsInternal>
           <generalization Id="c9f17d7a-cff9-43ac-b664-1039b37c3ec1" isSubstitutable="false">
@@ -343,7 +343,7 @@
       </class>
     </logicalClassDesignerModelHasTypes>
     <logicalClassDesignerModelHasTypes>
-      <class Id="f3bde302-f56d-48f4-9fc5-b548cfd74f7e" name="VideoMemoryRenderBuffer" isAbstract="false" isLeaf="false" isActiveClass="false">
+      <class Id="f3bde302-f56d-48f4-9fc5-b548cfd74f7e" name="VMemRenderBuffer" isAbstract="false" isLeaf="false" isActiveClass="false">
         <elementDefinition Id="f41be4a7-a5b0-4c7b-974b-11b7be87d566" />
         <generalsInternal>
           <generalization Id="89b78f7e-d0c9-4ec7-8cd2-ecc6b29c7c21" isSubstitutable="false">

@@ -9,6 +9,7 @@
 #pragma once
 
 #include "../base/PlatformDefine.h"
+#include <GLES3/gl3.h>
 
 class RenderObject
 {

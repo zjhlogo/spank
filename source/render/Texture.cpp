@@ -17,13 +17,13 @@ Texture::Texture()
 
 Texture::~Texture()
 {
-
+	glDeleteTextures(1, &m_textureId);
+	m_textureId = 0;
 }
 
 bool Texture::loadFromFile(const std::string& filePath)
 {
-	uint uiTexture = 0;
-	PVRTTextureLoadFromPVR(filePath.c_str(), &uiTexture);
+	if (m_textureId != 0) return false;
 
-	return true;
+	return (PVRTTextureLoadFromPVR(filePath.c_str(), &m_textureId) == PVR_SUCCESS);
 }

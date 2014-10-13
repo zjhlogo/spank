@@ -34,15 +34,38 @@ void RendererGl2::terminate()
 {
 	// TODO: 
 }
-
 Texture* RendererGl2::createTexture(const std::string& filePath)
 {
-	// TODO: 
-	return nullptr;
+	Texture* pTexture = new Texture();
+	if (!pTexture->loadFromFile(filePath))
+	{
+		SAFE_DELETE(pTexture);
+		return nullptr;
+	}
+
+	return pTexture;
 }
 
-void RendererGl2::clearColor(float r, float g, float b, float a)
+Shader* RendererGl2::createShader(const std::string& vertexShaderFile, const std::string& fragShaderFile)
 {
-	glClearColor(r, g, b, a);
-	glClear(GL_COLOR_BUFFER_BIT);
+	Shader* pShader = new Shader();
+	if (!pShader->loadFromFile(vertexShaderFile, fragShaderFile))
+	{
+		SAFE_DELETE(pShader);
+		return nullptr;
+	}
+
+	return pShader;
+}
+
+VMemRenderBuffer* RendererGl2::createVMemRenderBuffer()
+{
+	VMemRenderBuffer* pRenderBuffer = new VMemRenderBuffer();
+	if (!pRenderBuffer->createBufferObject())
+	{
+		SAFE_DELETE(pRenderBuffer);
+		return nullptr;
+	}
+
+	return pRenderBuffer;
 }

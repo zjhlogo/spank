@@ -10,6 +10,8 @@
 
 #include "../base/IMgr.h"
 #include "Texture.h"
+#include "Shader.h"
+#include "RenderBuffer.h"
 
 class IRenderer : public IMgr
 {
@@ -18,6 +20,7 @@ public:
 	virtual ~IRenderer();
 
 	virtual Texture* createTexture(const std::string& filePath) = 0;
+	virtual Shader* createShader(const std::string& vertexShaderFile, const std::string&  fragShaderFile) = 0;
+	virtual VMemRenderBuffer* createVMemRenderBuffer() = 0;
 
-	virtual void clearColor(float r, float g, float b, float a) = 0;
 };

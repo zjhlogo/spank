@@ -770,7 +770,7 @@
     <packageHasNamedElement>
       <class
         Id="2e26203d-8132-4690-a6f4-70004d0894aa"
-        name="MemoryRenderBuffer"
+        name="MemRenderBuffer"
         isAbstract="false"
         isLeaf="false"
         isActiveClass="false">
@@ -789,7 +789,7 @@
     <packageHasNamedElement>
       <class
         Id="f41be4a7-a5b0-4c7b-974b-11b7be87d566"
-        name="VideoMemoryRenderBuffer"
+        name="VMemRenderBuffer"
         isAbstract="false"
         isLeaf="false"
         isActiveClass="false">

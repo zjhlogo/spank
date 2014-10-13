@@ -22,4 +22,9 @@ protected:
 	virtual void update(float dt) override;
 	virtual void render() override;
 
+private:
+	Texture* m_pTexture{ nullptr };
+	Shader* m_pShader{ nullptr };
+	VMemRenderBuffer* m_pRenderBuffer{ nullptr };
+
 };

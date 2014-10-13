@@ -20,7 +20,7 @@ public:
 	void terminate() override;
 
 	virtual Texture* createTexture(const std::string& filePath) override;
-
-	virtual void clearColor(float r, float g, float b, float a) override;
+	virtual Shader* createShader(const std::string& vertexShaderFile, const std::string&  fragShaderFile) override;
+	virtual VMemRenderBuffer* createVMemRenderBuffer() override;
 
 };

@@ -8,19 +8,12 @@
  */
 #pragma once
 
-#include "IRenderer.h"
+#include "RendererGl2.h"
 
-class RendererGl3 : public IRenderer
+class RendererGl3 : public RendererGl2
 {
 public:
 	RendererGl3();
 	virtual ~RendererGl3();
-
-	bool initialize() override;
-	void terminate() override;
-
-	virtual Texture* createTexture(const std::string& filePath) override;
-
-	virtual void clearColor(float r, float g, float b, float a) override;
 
 };
