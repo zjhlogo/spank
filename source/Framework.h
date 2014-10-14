@@ -9,6 +9,10 @@
 
 #include "base/IMgr.h"
 #include "render/IRenderer.h"
+#include "render/Texture.h"
+#include "render/Shader.h"
+#include "render/RenderBuffer.h"
+#include "render/VertexAttributes.h"
 
 class Framework : public IMgr
 {

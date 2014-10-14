@@ -2,7 +2,6 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="..\source\PVRTTextureAPI.cpp" />
-    <ClCompile Include="..\source\PVRTgles3Ext.cpp" />
     <ClCompile Include="..\source\PVRTTexture.cpp" />
     <ClCompile Include="..\source\PVRTDecompress.cpp" />
     <ClCompile Include="..\source\PVRTFixedPoint.cpp" />
@@ -10,10 +9,10 @@
     <ClCompile Include="..\source\PVRTMatrixX.cpp" />
     <ClCompile Include="..\source\PVRTMisc.cpp" />
     <ClCompile Include="..\source\PVRTError.cpp" />
+    <ClCompile Include="..\source\PVRTgles2Ext.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\source\PVRTTextureAPI.h" />
-    <ClInclude Include="..\source\PVRTgles3Ext.h" />
     <ClInclude Include="..\source\PVRTTexture.h" />
     <ClInclude Include="..\source\PVRTGlobal.h" />
     <ClInclude Include="..\source\PVRTDecompress.h" />
@@ -26,5 +25,6 @@
     <ClInclude Include="..\source\PVRTArray.h" />
     <ClInclude Include="..\source\PVRTError.h" />
     <ClInclude Include="..\source\gl2extimg.h" />
+    <ClInclude Include="..\source\PVRTgles2Ext.h" />
   </ItemGroup>
 </Project>

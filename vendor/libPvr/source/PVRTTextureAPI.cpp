@@ -1,8 +1,8 @@
 /******************************************************************************
 
- @File         OGLES3/PVRTTextureAPI.cpp
+ @File         OGLES2/PVRTTextureAPI.cpp
 
- @Title        OGLES3/PVRTTextureAPI
+ @Title        OGLES2/PVRTTextureAPI
 
  @Version      
 
@@ -10,7 +10,7 @@
 
  @Platform     ANSI compatible
 
- @Description  OGLES3 texture loading.
+ @Description  OGLES2 texture loading.
 
 ******************************************************************************/
 
@@ -18,7 +18,7 @@
 #include <stdlib.h>
 
 #include "PVRTContext.h"
-#include "PVRTgles3Ext.h"
+#include "PVRTgles2Ext.h"
 #include "PVRTTexture.h"
 #include "PVRTTextureAPI.h"
 #include "PVRTDecompress.h"
@@ -32,27 +32,28 @@
 ** Functions
 ****************************************************************************/
 
+
 /*!***********************************************************************
-	@Function:		PVRTGetOGLES3TextureFormat
+	@Function:		PVRTGetOGLESTextureFormat
 	@Input:			sTextureHeader
-	@Modified:		glInternalFormat
-	@Modified:		glFormat
-	@Modified:		glType
+	@Modified:		internalformat
+	@Modified:		format
+	@Modified:		type
 	@Description:	Gets the OpenGLES equivalent values of internal format, 
 					format and type for this texture header. This will return 
 					any supported OpenGLES texture values, it is up to the user 
 					to decide if these are valid for their current platform.
 *************************************************************************/
-static const void PVRTGetOGLES3TextureFormat(const PVRTextureHeaderV3& sTextureHeader, PVRTuint32& glInternalFormat, PVRTuint32& glFormat, PVRTuint32& glType)
-{	
+static const void PVRTGetOGLES2TextureFormat(const PVRTextureHeaderV3& sTextureHeader, PVRTuint32& internalformat, PVRTuint32& format, PVRTuint32& type)
+{
 	PVRTuint64 PixelFormat = sTextureHeader.u64PixelFormat;
 	EPVRTVariableType ChannelType = (EPVRTVariableType)sTextureHeader.u32ChannelType;
 	EPVRTColourSpace ColourSpace = (EPVRTColourSpace)sTextureHeader.u32ColourSpace;
-
+	
 	//Initialisation. Any invalid formats will return 0 always.
-	glFormat = 0;
-	glType = 0;
-	glInternalFormat=0;
+	format = 0;
+	type = 0;
+	internalformat=0;
 
 	//Get the last 32 bits of the pixel format.
 	PVRTuint64 PixelFormatPartHigh = PixelFormat&PVRTEX_PFHIGHMASK;
@@ -67,11 +68,11 @@ static const void PVRTGetOGLES3TextureFormat(const PVRTextureHeaderV3& sTextureH
 			{
 				if (ColourSpace == ePVRTCSpacesRGB)
 				{
-					glInternalFormat=GL_COMPRESSED_SRGB_PVRTC_2BPPV1_EXT;
+					internalformat=GL_COMPRESSED_SRGB_PVRTC_2BPPV1_EXT;
 				}
 				else
 				{
-					glInternalFormat=GL_COMPRESSED_RGB_PVRTC_2BPPV1_IMG;
+					internalformat=GL_COMPRESSED_RGB_PVRTC_2BPPV1_IMG;
 				}
 				return;
 			}
@@ -79,11 +80,11 @@ static const void PVRTGetOGLES3TextureFormat(const PVRTextureHeaderV3& sTextureH
 			{
 				if (ColourSpace == ePVRTCSpacesRGB)
 				{
-					glInternalFormat=GL_COMPRESSED_SRGB_ALPHA_PVRTC_2BPPV1_EXT;
+					internalformat=GL_COMPRESSED_SRGB_ALPHA_PVRTC_2BPPV1_EXT;
 				}
 				else
 				{
-					glInternalFormat=GL_COMPRESSED_RGBA_PVRTC_2BPPV1_IMG;
+					internalformat=GL_COMPRESSED_RGBA_PVRTC_2BPPV1_IMG;
 				}
 				return;
 			}
@@ -91,11 +92,11 @@ static const void PVRTGetOGLES3TextureFormat(const PVRTextureHeaderV3& sTextureH
 			{
 				if (ColourSpace == ePVRTCSpacesRGB)
 				{
-					glInternalFormat=GL_COMPRESSED_SRGB_PVRTC_4BPPV1_EXT;
+					internalformat=GL_COMPRESSED_SRGB_PVRTC_4BPPV1_EXT;
 				}
 				else
 				{
-					glInternalFormat=GL_COMPRESSED_RGB_PVRTC_4BPPV1_IMG;
+					internalformat=GL_COMPRESSED_RGB_PVRTC_4BPPV1_IMG;
 				}
 				return;
 			}
@@ -103,11 +104,11 @@ static const void PVRTGetOGLES3TextureFormat(const PVRTextureHeaderV3& sTextureH
 			{
 				if (ColourSpace == ePVRTCSpacesRGB)
 				{
-					glInternalFormat=GL_COMPRESSED_SRGB_ALPHA_PVRTC_4BPPV1_EXT;
+					internalformat=GL_COMPRESSED_SRGB_ALPHA_PVRTC_4BPPV1_EXT;
 				}
 				else
 				{
-					glInternalFormat=GL_COMPRESSED_RGBA_PVRTC_4BPPV1_IMG;
+					internalformat=GL_COMPRESSED_RGBA_PVRTC_4BPPV1_IMG;
 				}
 				return;
 			}
@@ -116,11 +117,11 @@ static const void PVRTGetOGLES3TextureFormat(const PVRTextureHeaderV3& sTextureH
 			{
 				if (ColourSpace == ePVRTCSpacesRGB)
 				{
-					glInternalFormat=GL_COMPRESSED_SRGB_ALPHA_PVRTC_2BPPV2_IMG;
+					internalformat=GL_COMPRESSED_SRGB_ALPHA_PVRTC_2BPPV2_IMG;
 				}
 				else
 				{
-					glInternalFormat=GL_COMPRESSED_RGBA_PVRTC_2BPPV2_IMG;
+					internalformat=GL_COMPRESSED_RGBA_PVRTC_2BPPV2_IMG;
 				}
 				return;
 			}
@@ -128,191 +129,102 @@ static const void PVRTGetOGLES3TextureFormat(const PVRTextureHeaderV3& sTextureH
 			{
 				if (ColourSpace == ePVRTCSpacesRGB)
 				{
-					glInternalFormat=GL_COMPRESSED_SRGB_ALPHA_PVRTC_4BPPV2_IMG;
+					internalformat=GL_COMPRESSED_SRGB_ALPHA_PVRTC_4BPPV2_IMG;
 				}
 				else
 				{
-					glInternalFormat=GL_COMPRESSED_RGBA_PVRTC_4BPPV2_IMG;
+					internalformat=GL_COMPRESSED_RGBA_PVRTC_4BPPV2_IMG;
 				}
 				return;
 			}
 		case ePVRTPF_ETC1:
 			{
-				glInternalFormat=GL_ETC1_RGB8_OES;
+				internalformat=GL_ETC1_RGB8_OES;
 				return;
 			}
 #endif
-		case ePVRTPF_ETC2_RGB:
-			{
-				if (ColourSpace==ePVRTCSpacesRGB)
-					glInternalFormat=GL_COMPRESSED_SRGB8_ETC2;
-				else
-					glInternalFormat=GL_COMPRESSED_RGB8_ETC2;
-				return;
-			}
-		case ePVRTPF_ETC2_RGBA:
-			{
-				if (ColourSpace==ePVRTCSpacesRGB)
-					glInternalFormat=GL_COMPRESSED_SRGB8_ALPHA8_ETC2_EAC;
-				else
-					glInternalFormat=GL_COMPRESSED_RGBA8_ETC2_EAC;
-				return;
-			}
-		case ePVRTPF_ETC2_RGB_A1:
-			{
-				if (ColourSpace==ePVRTCSpacesRGB)
-					glInternalFormat=GL_COMPRESSED_SRGB8_PUNCHTHROUGH_ALPHA1_ETC2;
-				else
-					glInternalFormat=GL_COMPRESSED_RGB8_PUNCHTHROUGH_ALPHA1_ETC2;
-				return;
-			}
-		case ePVRTPF_EAC_R11:
-			{
-				if (ChannelType==ePVRTVarTypeSignedInteger || ChannelType==ePVRTVarTypeSignedIntegerNorm || 
-					ChannelType==ePVRTVarTypeSignedShort || ChannelType==ePVRTVarTypeSignedShortNorm || 
-					ChannelType==ePVRTVarTypeSignedByte || ChannelType==ePVRTVarTypeSignedByteNorm || 
-					ChannelType==ePVRTVarTypeSignedFloat)
-				{
-					glInternalFormat=GL_COMPRESSED_SIGNED_R11_EAC;
-				}
-				else
-				{
-					glInternalFormat=GL_COMPRESSED_R11_EAC;
-				}
-				return;
-			}
-		case ePVRTPF_EAC_RG11:
-			{
-				if (ChannelType==ePVRTVarTypeSignedInteger || ChannelType==ePVRTVarTypeSignedIntegerNorm || 
-					ChannelType==ePVRTVarTypeSignedShort || ChannelType==ePVRTVarTypeSignedShortNorm || 
-					ChannelType==ePVRTVarTypeSignedByte || ChannelType==ePVRTVarTypeSignedByteNorm || 
-					ChannelType==ePVRTVarTypeSignedFloat)
-				{
-					glInternalFormat=GL_COMPRESSED_SIGNED_RG11_EAC;
-				}
-				else
-				{
-					glInternalFormat=GL_COMPRESSED_RG11_EAC;
-				}
-				return;
-			}
+		default:
+			return;
 		}
 	}
 	else
 	{
 		switch (ChannelType)
 		{
-		case ePVRTVarTypeUnsignedFloat:
-			if (PixelFormat==PVRTGENPIXELID3('r','g','b',11,11,10) )
-			{
-				glType=GL_UNSIGNED_INT_10F_11F_11F_REV;
-				glFormat = GL_RGB;
-				glInternalFormat=GL_R11F_G11F_B10F;
-				return;
-			}
-			break;
-		case ePVRTVarTypeSignedFloat:
+		case ePVRTVarTypeFloat:
 			{
 				switch (PixelFormat)
 				{
-					//HALF_FLOAT
+					//HALF_FLOAT_OES
 				case PVRTGENPIXELID4('r','g','b','a',16,16,16,16):
 					{
-						glType=GL_HALF_FLOAT;
-						glFormat = GL_RGBA;
-						glInternalFormat=GL_RGBA;
+						type=GL_HALF_FLOAT_OES;
+						format = GL_RGBA;
+						internalformat=GL_RGBA;
 						return;
 					}
 				case PVRTGENPIXELID3('r','g','b',16,16,16):
 					{
-						glType=GL_HALF_FLOAT;
-						glFormat = GL_RGB;
-						glInternalFormat=GL_RGB16F;
-						return;
-					}
-				case PVRTGENPIXELID2('r','g',16,16):
-					{
-						glType=GL_HALF_FLOAT;
-						glFormat = GL_RG;
-						glInternalFormat=GL_RG16F;
-						return;
-					}
-				case PVRTGENPIXELID1('r',16):
-					{
-						glType=GL_HALF_FLOAT;
-						glFormat = GL_RED;
-						glInternalFormat=GL_R16F;
+						type=GL_HALF_FLOAT_OES;
+						format = GL_RGB;
+						internalformat=GL_RGB;
 						return;
 					}
 				case PVRTGENPIXELID2('l','a',16,16):
 					{
-						glType=GL_HALF_FLOAT;
-						glFormat = GL_LUMINANCE_ALPHA;
-						glInternalFormat=GL_LUMINANCE_ALPHA;
+						type=GL_HALF_FLOAT_OES;
+						format = GL_LUMINANCE_ALPHA;
+						internalformat=GL_LUMINANCE_ALPHA;
 						return;
 					}
 				case PVRTGENPIXELID1('l',16):
 					{
-						glType=GL_HALF_FLOAT;
-						glFormat = GL_LUMINANCE;
-						glInternalFormat=GL_LUMINANCE;
+						type=GL_HALF_FLOAT_OES;
+						format = GL_LUMINANCE;
+						internalformat=GL_LUMINANCE;
 						return;
 					}
 				case PVRTGENPIXELID1('a',16):
 					{
-						glType=GL_HALF_FLOAT;
-						glFormat = GL_ALPHA;
-						glInternalFormat=GL_ALPHA;
+						type=GL_HALF_FLOAT_OES;
+						format = GL_ALPHA;
+						internalformat=GL_ALPHA;
 						return;
 					}
-					//FLOAT
+					//FLOAT (OES)
 				case PVRTGENPIXELID4('r','g','b','a',32,32,32,32):
 					{
-						glType=GL_FLOAT;
-						glFormat = GL_RGBA;
-						glInternalFormat=GL_RGBA32F;
+						type=GL_FLOAT;
+						format = GL_RGBA;
+						internalformat=GL_RGBA;
 						return;
 					}
 				case PVRTGENPIXELID3('r','g','b',32,32,32):
 					{
-						glType=GL_FLOAT;
-						glFormat = GL_RGB;
-						glInternalFormat=GL_RGB32F;
-						return;
-					}
-				case PVRTGENPIXELID2('r','g',32,32):
-					{
-						glType=GL_FLOAT;
-						glFormat = GL_RG;
-						glInternalFormat=GL_RG32F;
-						return;
-					}
-				case PVRTGENPIXELID1('r',32):
-					{
-						glType=GL_FLOAT;
-						glFormat = GL_RED;
-						glInternalFormat=GL_R32F;
+						type=GL_FLOAT;
+						format = GL_RGB;
+						internalformat=GL_RGB;
 						return;
 					}
 				case PVRTGENPIXELID2('l','a',32,32):
 					{
-						glType=GL_FLOAT;
-						glFormat = GL_LUMINANCE_ALPHA;
-						glInternalFormat=GL_LUMINANCE_ALPHA;
+						type=GL_FLOAT;
+						format = GL_LUMINANCE_ALPHA;
+						internalformat=GL_LUMINANCE_ALPHA;
 						return;
 					}
 				case PVRTGENPIXELID1('l',32):
 					{
-						glType=GL_FLOAT;
-						glFormat = GL_LUMINANCE;
-						glInternalFormat=GL_LUMINANCE;
+						type=GL_FLOAT;
+						format = GL_LUMINANCE;
+						internalformat=GL_LUMINANCE;
 						return;
 					}
 				case PVRTGENPIXELID1('a',32):
 					{
-						glType=GL_FLOAT;
-						glFormat = GL_ALPHA;
-						glInternalFormat=GL_ALPHA;
+						type=GL_FLOAT;
+						format = GL_ALPHA;
+						internalformat=GL_ALPHA;
 						return;
 					}
 				}
@@ -320,157 +232,37 @@ static const void PVRTGetOGLES3TextureFormat(const PVRTextureHeaderV3& sTextureH
 			}
 		case ePVRTVarTypeUnsignedByteNorm:
 			{
-				glType = GL_UNSIGNED_BYTE;
+				type = GL_UNSIGNED_BYTE;
 				switch (PixelFormat)
 				{
 				case PVRTGENPIXELID4('r','g','b','a',8,8,8,8):
 					{
-						glFormat = GL_RGBA;
-						if (ColourSpace==ePVRTCSpacesRGB)
-							glInternalFormat=GL_SRGB8_ALPHA8;
-						else
-							glInternalFormat=GL_RGBA8;
+						format = internalformat = GL_RGBA;
 						return;
 					}
 				case PVRTGENPIXELID3('r','g','b',8,8,8):
 					{
-						glFormat = GL_RGB;
-						if (ColourSpace==ePVRTCSpacesRGB)
-							glInternalFormat=GL_SRGB8;
-						else
-							glInternalFormat=GL_RGB8;
-						return;
-					}
-				case PVRTGENPIXELID2('r','g',8,8):
-					{
-						glFormat = GL_RG;
-						glInternalFormat=GL_RG8;
-						return;
-					}
-				case PVRTGENPIXELID1('r',8):
-					{
-						glFormat = GL_RED;
-						glInternalFormat=GL_R8;
+						format = internalformat = GL_RGB;
 						return;
 					}
 				case PVRTGENPIXELID2('l','a',8,8):
 					{
-						glFormat = GL_LUMINANCE_ALPHA;
-						glInternalFormat=GL_LUMINANCE_ALPHA;
+						format = internalformat = GL_LUMINANCE_ALPHA;
 						return;
 					}
 				case PVRTGENPIXELID1('l',8):
 					{
-						glFormat = GL_LUMINANCE;
-						glInternalFormat=GL_LUMINANCE;
+						format = internalformat = GL_LUMINANCE;
 						return;
 					}
 				case PVRTGENPIXELID1('a',8):
 					{
-						glFormat = GL_ALPHA;
-						glInternalFormat=GL_ALPHA;
+						format = internalformat = GL_ALPHA;
 						return;
 					}
 				case PVRTGENPIXELID4('b','g','r','a',8,8,8,8):
 					{
-						glFormat = GL_BGRA_EXT;
-						glInternalFormat=GL_BGRA_EXT;
-						return;
-					}
-				}
-				break;
-			}
-		case ePVRTVarTypeSignedByteNorm:
-			{
-				glType = GL_BYTE;
-				switch (PixelFormat)
-				{
-				case PVRTGENPIXELID4('r','g','b','a',8,8,8,8):
-					{
-						glFormat = GL_RGBA;
-						glInternalFormat=GL_RGBA8_SNORM;
-						return;
-					}
-				case PVRTGENPIXELID3('r','g','b',8,8,8):
-					{
-						glFormat = GL_RGB;
-						glInternalFormat=GL_RGB8_SNORM;
-						return;
-					}
-				case PVRTGENPIXELID2('r','g',8,8):
-					{
-						glFormat = GL_RG;
-						glInternalFormat=GL_RGB8_SNORM;
-						return;
-					}
-				case PVRTGENPIXELID1('r',8):
-					{
-						glFormat = GL_RED;
-						glInternalFormat=GL_R8_SNORM;
-						return;
-					}
-				}
-				break;
-			}
-		case ePVRTVarTypeUnsignedByte:
-			{
-				glType = GL_UNSIGNED_BYTE;
-				switch (PixelFormat)
-				{
-				case PVRTGENPIXELID4('r','g','b','a',8,8,8,8):
-					{
-						glFormat = GL_RGBA_INTEGER;
-						glInternalFormat=GL_RGBA8UI;
-						return;
-					}
-				case PVRTGENPIXELID3('r','g','b',8,8,8):
-					{
-						glFormat = GL_RGB_INTEGER;
-						glInternalFormat=GL_RGB8UI;
-						return;
-					}
-				case PVRTGENPIXELID2('r','g',8,8):
-					{
-						glFormat = GL_RG_INTEGER;
-						glInternalFormat=GL_RG8UI;
-						return;
-					}
-				case PVRTGENPIXELID1('r',8):
-					{
-						glFormat = GL_RED_INTEGER;
-						glInternalFormat=GL_R8UI;
-						return;
-					}
-				}
-				break;
-			}
-		case ePVRTVarTypeSignedByte:
-			{
-				glType = GL_BYTE;
-				switch (PixelFormat)
-				{
-				case PVRTGENPIXELID4('r','g','b','a',8,8,8,8):
-					{
-						glFormat = GL_RGBA_INTEGER;
-						glInternalFormat=GL_RGBA8I;
-						return;
-					}
-				case PVRTGENPIXELID3('r','g','b',8,8,8):
-					{
-						glFormat = GL_RGB_INTEGER;
-						glInternalFormat=GL_RGB8I;
-						return;
-					}
-				case PVRTGENPIXELID2('r','g',8,8):
-					{
-						glFormat = GL_RG_INTEGER;
-						glInternalFormat=GL_RG8I;
-						return;
-					}
-				case PVRTGENPIXELID1('r',8):
-					{
-						glFormat = GL_RED_INTEGER;
-						glInternalFormat=GL_R8I;
+						format = internalformat = GL_BGRA;
 						return;
 					}
 				}
@@ -482,182 +274,30 @@ static const void PVRTGetOGLES3TextureFormat(const PVRTextureHeaderV3& sTextureH
 				{
 				case PVRTGENPIXELID4('r','g','b','a',4,4,4,4):
 					{
-						glType = GL_UNSIGNED_SHORT_4_4_4_4;
-						glFormat = GL_RGBA;
-						glInternalFormat=GL_RGBA4;
+						type = GL_UNSIGNED_SHORT_4_4_4_4;
+						format = internalformat = GL_RGBA;
 						return;
 					}
 				case PVRTGENPIXELID4('r','g','b','a',5,5,5,1):
 					{
-						glType = GL_UNSIGNED_SHORT_5_5_5_1;
-						glFormat = GL_RGBA;
-						glInternalFormat=GL_RGB5_A1;
+						type = GL_UNSIGNED_SHORT_5_5_5_1;
+						format = internalformat = GL_RGBA;
 						return;
 					}
 				case PVRTGENPIXELID3('r','g','b',5,6,5):
 					{
-						glType = GL_UNSIGNED_SHORT_5_6_5;
-						glFormat = GL_RGB;
-						glInternalFormat=GL_RGB565;
+						type = GL_UNSIGNED_SHORT_5_6_5;
+						format = internalformat = GL_RGB;
 						return;
 					}
 				}
 				break;
 			}
-		case ePVRTVarTypeUnsignedShort:
-			{
-				glType = GL_UNSIGNED_SHORT;
-				switch (PixelFormat)
-				{
-				case PVRTGENPIXELID4('r','g','b','a',16,16,16,16):
-					{
-						glFormat = GL_RGBA_INTEGER;
-						glInternalFormat=GL_RGBA16UI;
-						return;
-					}
-				case PVRTGENPIXELID3('r','g','b',16,16,16):
-					{
-						glFormat = GL_RGB_INTEGER;
-						glInternalFormat=GL_RGB16UI;
-						return;
-					}
-				case PVRTGENPIXELID2('r','g',16,16):
-					{
-						glFormat = GL_RG_INTEGER;
-						glInternalFormat=GL_RG16UI;
-						return;
-					}
-				case PVRTGENPIXELID1('r',16):
-					{
-						glFormat = GL_RED_INTEGER;
-						glInternalFormat=GL_R16UI;
-						return;
-					}
-				}
-				break;
-			}
-		case ePVRTVarTypeSignedShort:
-			{
-				glType = GL_SHORT;
-				switch (PixelFormat)
-				{
-				case PVRTGENPIXELID4('r','g','b','a',16,16,16,16):
-					{
-						glFormat = GL_RGBA_INTEGER;
-						glInternalFormat=GL_RGBA16I;
-						return;
-					}
-				case PVRTGENPIXELID3('r','g','b',16,16,16):
-					{
-						glFormat = GL_RGB_INTEGER;
-						glInternalFormat=GL_RGB16I;
-						return;
-					}
-				case PVRTGENPIXELID2('r','g',16,16):
-					{
-						glFormat = GL_RG_INTEGER;
-						glInternalFormat=GL_RG16I;
-						return;
-					}
-				case PVRTGENPIXELID1('r',16):
-					{
-						glFormat = GL_RED_INTEGER;
-						glInternalFormat=GL_R16I;
-						return;
-					}
-				}
-				break;
-			}
-		case ePVRTVarTypeUnsignedIntegerNorm:
-			{
-				if (PixelFormat==PVRTGENPIXELID4('a','b','g','r',2,10,10,10))
-				{
-					glType = GL_UNSIGNED_INT_2_10_10_10_REV;
-					glFormat = GL_RGBA;
-					glInternalFormat=GL_RGB10_A2;
-					return;
-				}
-				break;
-			}
-		case ePVRTVarTypeUnsignedInteger:
-			{
-				glType = GL_UNSIGNED_INT;
-				switch (PixelFormat)
-				{
-				case PVRTGENPIXELID4('r','g','b','a',32,32,32,32):
-					{
-						glFormat = GL_RGBA_INTEGER;
-						glInternalFormat=GL_RGBA32UI;
-						return;
-					}
-				case PVRTGENPIXELID3('r','g','b',32,32,32):
-					{
-						glFormat = GL_RGB_INTEGER;
-						glInternalFormat=GL_RGB32UI;
-						return;
-					}
-				case PVRTGENPIXELID2('r','g',32,32):
-					{
-						glFormat = GL_RG_INTEGER;
-						glInternalFormat=GL_RG32UI;
-						return;
-					}
-				case PVRTGENPIXELID1('r',32):
-					{
-						glFormat = GL_RED_INTEGER;
-						glInternalFormat=GL_R32UI;
-						return;
-					}
-				case PVRTGENPIXELID4('a','b','g','r',2,10,10,10):
-					{
-						glType = GL_UNSIGNED_INT_2_10_10_10_REV;
-						glFormat = GL_RGBA_INTEGER;
-						glInternalFormat=GL_RGB10_A2UI;
-						return;
-					}
-				}
-				break;
-			}
-		case ePVRTVarTypeSignedInteger:
-			{
-				glType = GL_INT;
-				switch (PixelFormat)
-				{
-				case PVRTGENPIXELID4('r','g','b','a',32,32,32,32):
-					{
-						glFormat = GL_RGBA_INTEGER;
-						glInternalFormat=GL_RGBA32I;
-						return;
-					}
-				case PVRTGENPIXELID3('r','g','b',32,32,32):
-					{
-						glFormat = GL_RGB_INTEGER;
-						glInternalFormat=GL_RGB32I;
-						return;
-					}
-				case PVRTGENPIXELID2('r','g',32,32):
-					{
-						glFormat = GL_RG_INTEGER;
-						glInternalFormat=GL_RG32I;
-						return;
-					}
-				case PVRTGENPIXELID1('r',32):
-					{
-						glFormat = GL_RED_INTEGER;
-						glInternalFormat=GL_R32I;
-						return;
-					}
-				}
-				break;
-			}
-		default: { }
+		default:
+			return;
 		}
 	}
-
-	//Default (erroneous) return values.
-	glType = glFormat = glInternalFormat = 0;
 }
-
 
 /*!***************************************************************************
 @Function		PVRTTextureTile
@@ -681,7 +321,7 @@ void PVRTTextureTile(
 	_ASSERT(pIn->u32Width == pIn->u32Height);
 	_ASSERT(nRepeatCnt > 1);
 
-	PVRTGetOGLES3TextureFormat(*pIn,nFormat,nFormat,nType);
+	PVRTGetOGLES2TextureFormat(*pIn,nFormat,nFormat,nType);
 	PVRTGetFormatMinDims(pIn->u64PixelFormat,nElW,nElH,nElD);
 	
 	nBPP = PVRTGetBitsPerPixel(pIn->u64PixelFormat);
@@ -708,7 +348,7 @@ void PVRTTextureTile(
 			nBlocksSrcW,
 			nBlocksSrcH,
 			nBlocksS,
-			(pIn->u64PixelFormat>=ePVRTPF_PVRTCI_2bpp_RGB && pIn->u64PixelFormat<=ePVRTPF_PVRTCI_4bpp_RGBA) ? true : false);
+			(/*pIn->u64PixelFormat>=ePVRTPF_PVRTCI_2bpp_RGB &&*/ pIn->u64PixelFormat<=ePVRTPF_PVRTCI_4bpp_RGBA) ? true : false);
 
 		pMmDst += nBlocksDstW * nBlocksDstH * nBlocksS;
 		pMmSrc += nBlocksSrcW * nBlocksSrcH * nBlocksS;
@@ -752,7 +392,6 @@ EPVRTError PVRTTextureLoadFromPointer(	const void* pointer,
 	bool bIsCompressedFormatSupported=false;
 	bool bIsCompressedFormat=false;
 	bool bIsLegacyPVR=false;
-	bool bUsesTexImage3D=false;
 
 	//Texture setup
 	PVRTextureHeaderV3 sTextureHeader;
@@ -835,16 +474,20 @@ EPVRTError PVRTTextureLoadFromPointer(	const void* pointer,
 	GLenum eTextureType = 0;
 
 	//Get the OGLES format values.
-	PVRTGetOGLES3TextureFormat(sTextureHeader,eTextureInternalFormat,eTextureFormat,eTextureType);
+	PVRTGetOGLES2TextureFormat(sTextureHeader,eTextureInternalFormat,eTextureFormat,eTextureType);
 
-	bool bIsPVRTCSupported = CPVRTgles3Ext::IsGLExtensionSupported("GL_IMG_texture_compression_pvrtc");
+	//Check supported texture formats.
+	bool bIsPVRTCSupported = CPVRTgles2Ext::IsGLExtensionSupported("GL_IMG_texture_compression_pvrtc");
+	bool bIsPVRTC2Supported = CPVRTgles2Ext::IsGLExtensionSupported("GL_IMG_texture_compression_pvrtc2");
 #ifndef TARGET_OS_IPHONE
-	bool bIsBGRA8888Supported  = CPVRTgles3Ext::IsGLExtensionSupported("GL_IMG_texture_format_BGRA8888");
+	bool bIsBGRA8888Supported  = CPVRTgles2Ext::IsGLExtensionSupported("GL_IMG_texture_format_BGRA8888");
 #else
-	bool bIsBGRA8888Supported  = CPVRTgles3Ext::IsGLExtensionSupported("GL_APPLE_texture_format_BGRA8888");
-#endif	
+	bool bIsBGRA8888Supported  = CPVRTgles2Ext::IsGLExtensionSupported("GL_APPLE_texture_format_BGRA8888");
+#endif
+	bool bIsFloat16Supported = CPVRTgles2Ext::IsGLExtensionSupported("GL_OES_texture_half_float");
+	bool bIsFloat32Supported = CPVRTgles2Ext::IsGLExtensionSupported("GL_OES_texture_float");
 #ifndef TARGET_OS_IPHONE
-	bool bIsETCSupported = CPVRTgles3Ext::IsGLExtensionSupported("GL_OES_compressed_ETC1_RGB8_texture");
+	bool bIsETCSupported = CPVRTgles2Ext::IsGLExtensionSupported("GL_OES_compressed_ETC1_RGB8_texture");
 #endif
 		
 	//Check for compressed formats
@@ -863,7 +506,7 @@ EPVRTError PVRTTextureLoadFromPointer(	const void* pointer,
 				if(bAllowDecompress)
 				{
 					//Output a warning.
-					LOGD("PVRTTextureLoadFromPointer warning: PVRTC not supported. Converting to RGBA8888 instead.");
+					LOGE("PVRTTextureLoadFromPointer warning: PVRTC not supported. Converting to RGBA8888 instead.");
 
 					//Modify boolean values.
 					bIsCompressedFormatSupported = false;
@@ -882,7 +525,7 @@ EPVRTError PVRTTextureLoadFromPointer(	const void* pointer,
 					sTextureHeaderDecomp.u32ColourSpace=ePVRTCSpacelRGB;
 					sTextureHeaderDecomp.u64PixelFormat=PVRTGENPIXELID4('r','g','b','a',8,8,8,8);
 
-					//Allocate enough memory for the decompressed data. OGLES2, so only decompress one surface/face.
+					//Allocate enough memory for the decompressed data. OGLES2, so only decompress one surface, but all faces.
 					pDecompressedData = malloc(PVRTGetTextureDataSize(sTextureHeaderDecomp, PVRTEX_ALLMIPLEVELS, false, true) );
 
 					//Check the malloc.
@@ -962,6 +605,19 @@ EPVRTError PVRTTextureLoadFromPointer(	const void* pointer,
 			}
 		}
 #ifndef TARGET_OS_IPHONE //TODO
+		else if (eTextureInternalFormat==GL_COMPRESSED_RGBA_PVRTC_4BPPV2_IMG || eTextureInternalFormat==GL_COMPRESSED_RGBA_PVRTC_2BPPV2_IMG)
+		{
+			//Check for PVRTCI support.
+			if(bIsPVRTC2Supported)
+			{
+				bIsCompressedFormatSupported = bIsCompressedFormat = true;
+			}
+			else
+			{				
+				LOGE("PVRTTextureLoadFromPointer error: PVRTC not supported.");
+				return PVR_FAIL;
+			}
+		}
 		else if (eTextureInternalFormat==GL_ETC1_RGB8_OES)
 		{
 			if(bIsETCSupported)
@@ -1072,7 +728,7 @@ EPVRTError PVRTTextureLoadFromPointer(	const void* pointer,
 	}
 
 	//Check for BGRA support.	
-	if(eTextureFormat==GL_BGRA_IMG)
+	if(eTextureFormat==GL_BGRA)
 	{
 #ifdef TARGET_OS_IPHONE
 		eTextureInternalFormat = GL_RGBA;
@@ -1080,11 +736,27 @@ EPVRTError PVRTTextureLoadFromPointer(	const void* pointer,
 		if(!bIsBGRA8888Supported)
 		{
 #ifdef TARGET_OS_IPHONE
-			LOGE("PVRTTextureLoadFromPointer failed: Unable to load GL_BGRA_IMG texture as extension GL_APPLE_texture_format_BGRA8888 is unsupported.");
+			LOGE("PVRTTextureLoadFromPointer failed: Unable to load GL_BGRA texture as extension GL_APPLE_texture_format_BGRA8888 is unsupported.");
 #else
-			LOGE("PVRTTextureLoadFromPointer failed: Unable to load GL_BGRA_IMG texture as extension GL_IMG_texture_format_BGRA8888 is unsupported.");
+			LOGE("PVRTTextureLoadFromPointer failed: Unable to load GL_BGRA texture as extension GL_IMG_texture_format_BGRA8888 is unsupported.");
 #endif
 			return PVR_FAIL;
+		}
+	}
+
+	//Check for floating point textures
+	if (eTextureType==GL_HALF_FLOAT_OES)
+	{
+		if(!bIsFloat16Supported)
+		{
+			LOGE("PVRTTextureLoadFromPointer failed: Unable to load GL_HALF_FLOAT_OES texture as extension GL_OES_texture_half_float is unsupported.");
+		}
+	}
+	if (eTextureType==GL_FLOAT)
+	{
+		if(!bIsFloat32Supported)
+		{
+			LOGE("PVRTTextureLoadFromPointer failed: Unable to load GL_FLOAT texture as extension GL_OES_texture_float is unsupported.");
 		}
 	}
 
@@ -1103,43 +775,21 @@ EPVRTError PVRTTextureLoadFromPointer(	const void* pointer,
 
 	//Initialise a texture target.
 	GLint eTarget=GL_TEXTURE_2D;
-
-	//A mix of arrays/cubes/depths are not permitted in OpenGL ES. Check.
-	if (sTextureHeader.u32NumFaces>1 || sTextureHeader.u32NumSurfaces>1 || sTextureHeader.u32Depth>1)
+	
+	if(sTextureHeader.u32NumFaces>1)
 	{
-		if((sTextureHeader.u32NumFaces>1) && (sTextureHeader.u32NumSurfaces>1))
-		{
-			LOGE("PVRTTextureLoadFromPointer failed: Arrays of cubemaps are not supported by OpenGL ES 3.0");
-			return PVR_FAIL;
-		}
-		else if ((sTextureHeader.u32NumFaces>1) && (sTextureHeader.u32Depth>1))
-		{
-			LOGE("PVRTTextureLoadFromPointer failed: 3D Cubemap textures are not supported by OpenGL ES 3.0");
-			return PVR_FAIL;
-		}
-		else if ((sTextureHeader.u32NumSurfaces>1) && (sTextureHeader.u32Depth>1))
-		{
-			LOGE("PVRTTextureLoadFromPointer failed: Arrays of 3D textures are not supported by OpenGL ES 3.0");
-			return PVR_FAIL;
-		}
-
-		if(sTextureHeader.u32NumSurfaces>1)
-		{
-			eTarget=GL_TEXTURE_2D_ARRAY;
-			bUsesTexImage3D=true;
-		}
-		else if(sTextureHeader.u32NumFaces>1)
-		{
-			eTarget=GL_TEXTURE_CUBE_MAP;
-		}
-		else if (sTextureHeader.u32Depth>1)
-		{
-			eTarget=GL_TEXTURE_3D;
-			bUsesTexImage3D=true;
-		}
+		eTarget=GL_TEXTURE_CUBE_MAP;
 	}
 
-	//Bind the texture
+	//Check if this is a texture array.
+	if(sTextureHeader.u32NumSurfaces>1)
+	{
+		//Not supported in OpenGLES 2.0
+		LOGE("PVRTTextureLoadFromPointer failed: Texture arrays are not available in OGLES2.0.");
+		return PVR_FAIL;
+	}
+
+	//Bind the 2D texture
 	glBindTexture(eTarget, *texName);
 
 	if(glGetError())
@@ -1147,6 +797,20 @@ EPVRTError PVRTTextureLoadFromPointer(	const void* pointer,
 		LOGE("PVRTTextureLoadFromPointer failed: glBindTexture() failed.");
 		return PVR_FAIL;
 	}
+
+	//Initialise the current MIP size.
+	PVRTuint32 uiCurrentMIPSize=0;
+
+	//Loop through the faces
+	//Check if this is a cube map.
+	if(sTextureHeader.u32NumFaces>1)
+	{
+		eTarget=GL_TEXTURE_CUBE_MAP_POSITIVE_X;
+	}
+
+	//Initialise the width/height
+	PVRTuint32 u32MIPWidth = sTextureHeader.u32Width;
+	PVRTuint32 u32MIPHeight = sTextureHeader.u32Height;
 
 	//Temporary data to save on if statements within the load loops.
 	PVRTuint8* pTempData=NULL;
@@ -1162,33 +826,11 @@ EPVRTError PVRTTextureLoadFromPointer(	const void* pointer,
 		psTempHeader=&sTextureHeader;
 	}
 
-	//Initialise the current MIP size.
-	PVRTuint32 uiCurrentMIPSize=0;
-
-	//Initialise the width/height
-	PVRTuint32 u32MIPWidth = sTextureHeader.u32Width;
-	PVRTuint32 u32MIPHeight = sTextureHeader.u32Height;
-	PVRTuint32 u32MIPDepth;
-	if (psTempHeader->u32Depth>1)
-	{
-		u32MIPDepth=psTempHeader->u32Depth; //3d texture.
-	}
-	else
-	{
-		u32MIPDepth=psTempHeader->u32NumSurfaces; //2d arrays.
-	}
-
 	//Loop through all MIP levels.
 	if (bIsLegacyPVR)
 	{
 		//Temporary texture target.
 		GLint eTextureTarget=eTarget;
-
-		//Cubemaps are special.
-		if (eTextureTarget==GL_TEXTURE_CUBE_MAP)
-		{
-			eTextureTarget=GL_TEXTURE_CUBE_MAP_POSITIVE_X;
-		}
 
 		//Loop through all the faces.
 		for (PVRTuint32 uiFace=0; uiFace<psTempHeader->u32NumFaces; ++uiFace)
@@ -1202,27 +844,13 @@ EPVRTError PVRTTextureLoadFromPointer(	const void* pointer,
 				if (uiMIPLevel>=nLoadFromLevel)
 				{
 					//Upload the texture
-					if (bUsesTexImage3D)
+					if (bIsCompressedFormat && bIsCompressedFormatSupported)
 					{
-						if (bIsCompressedFormat && bIsCompressedFormatSupported)
-						{
-							glCompressedTexImage3D(eTextureTarget,uiMIPLevel-nLoadFromLevel,eTextureInternalFormat,u32MIPWidth, u32MIPHeight, u32MIPDepth, 0, uiCurrentMIPSize, pTempData);
-						}
-						else
-						{
-							glTexImage3D(eTextureTarget,uiMIPLevel-nLoadFromLevel,eTextureInternalFormat, u32MIPWidth, u32MIPHeight, u32MIPDepth,  0, eTextureFormat, eTextureType, pTempData);
-						}
+						glCompressedTexImage2D(eTextureTarget,uiMIPLevel-nLoadFromLevel,eTextureInternalFormat,u32MIPWidth, u32MIPHeight, 0, uiCurrentMIPSize, pTempData);
 					}
 					else
 					{
-						if (bIsCompressedFormat && bIsCompressedFormatSupported)
-						{
-							glCompressedTexImage2D(eTextureTarget,uiMIPLevel-nLoadFromLevel,eTextureInternalFormat,u32MIPWidth, u32MIPHeight, 0, uiCurrentMIPSize, pTempData);
-						}
-						else
-						{
-							glTexImage2D(eTextureTarget,uiMIPLevel-nLoadFromLevel,eTextureInternalFormat, u32MIPWidth, u32MIPHeight, 0, eTextureFormat, eTextureType, pTempData);
-						}
+						glTexImage2D(eTextureTarget,uiMIPLevel-nLoadFromLevel,eTextureInternalFormat, u32MIPWidth, u32MIPHeight, 0, eTextureFormat, eTextureType, pTempData);
 					}
 				}
 				pTempData+=uiCurrentMIPSize;
@@ -1230,10 +858,6 @@ EPVRTError PVRTTextureLoadFromPointer(	const void* pointer,
 				//Reduce the MIP Size.
 				u32MIPWidth=PVRT_MAX(1,u32MIPWidth>>1);
 				u32MIPHeight=PVRT_MAX(1,u32MIPHeight>>1);
-				if (psTempHeader->u32Depth>1)
-				{
-					u32MIPDepth=PVRT_MAX(1,u32MIPDepth>>1);
-				}
 			}
 
 			//Increase the texture target.
@@ -1242,15 +866,6 @@ EPVRTError PVRTTextureLoadFromPointer(	const void* pointer,
 			//Reset the current MIP dimensions.
 			u32MIPWidth=psTempHeader->u32Width;
 			u32MIPHeight=psTempHeader->u32Height;
-
-			if (psTempHeader->u32Depth>1)
-			{
-				u32MIPDepth=psTempHeader->u32Depth;
-			}
-			else
-			{
-				u32MIPDepth=psTempHeader->u32NumSurfaces; //2d arrays.
-			}
 
 			//Error check
 			if(glGetError())
@@ -1269,40 +884,19 @@ EPVRTError PVRTTextureLoadFromPointer(	const void* pointer,
 			uiCurrentMIPSize=PVRTGetTextureDataSize(*psTempHeader,uiMIPLevel,false,false);
 
 			GLint eTextureTarget=eTarget;
-			//Cubemaps are special.
-			if (eTextureTarget==GL_TEXTURE_CUBE_MAP)
-			{
-				eTextureTarget=GL_TEXTURE_CUBE_MAP_POSITIVE_X;
-			}
 
 			for (PVRTuint32 uiFace=0; uiFace<psTempHeader->u32NumFaces; ++uiFace)
 			{
 				if (uiMIPLevel>=nLoadFromLevel)
 				{
 					//Upload the texture
-					if (bUsesTexImage3D)
+					if (bIsCompressedFormat && bIsCompressedFormatSupported)
 					{
-						//Upload the texture
-						if (bIsCompressedFormat && bIsCompressedFormatSupported)
-						{
-							glCompressedTexImage3D(eTextureTarget,uiMIPLevel-nLoadFromLevel,eTextureInternalFormat,u32MIPWidth, u32MIPHeight, u32MIPDepth, 0, uiCurrentMIPSize, pTempData);
-						}
-						else
-						{
-							glTexImage3D(eTextureTarget,uiMIPLevel-nLoadFromLevel,eTextureInternalFormat, u32MIPWidth, u32MIPHeight, u32MIPDepth, 0, eTextureFormat, eTextureType, pTempData);
-						}
+						glCompressedTexImage2D(eTextureTarget,uiMIPLevel-nLoadFromLevel,eTextureInternalFormat,u32MIPWidth, u32MIPHeight, 0, uiCurrentMIPSize, pTempData);
 					}
 					else
 					{
-						//Upload the texture
-						if (bIsCompressedFormat && bIsCompressedFormatSupported)
-						{
-							glCompressedTexImage2D(eTextureTarget,uiMIPLevel-nLoadFromLevel,eTextureInternalFormat,u32MIPWidth, u32MIPHeight, 0, uiCurrentMIPSize, pTempData);
-						}
-						else
-						{
-							glTexImage2D(eTextureTarget,uiMIPLevel-nLoadFromLevel,eTextureInternalFormat, u32MIPWidth, u32MIPHeight, 0, eTextureFormat, eTextureType, pTempData);
-						}
+						glTexImage2D(eTextureTarget,uiMIPLevel-nLoadFromLevel,eTextureInternalFormat, u32MIPWidth, u32MIPHeight, 0, eTextureFormat, eTextureType, pTempData);
 					}
 				}
 				pTempData+=uiCurrentMIPSize;
@@ -1312,10 +906,6 @@ EPVRTError PVRTTextureLoadFromPointer(	const void* pointer,
 			//Reduce the MIP Size.
 			u32MIPWidth=PVRT_MAX(1,u32MIPWidth>>1);
 			u32MIPHeight=PVRT_MAX(1,u32MIPHeight>>1);
-			if (psTempHeader->u32Depth>1)
-			{
-				u32MIPDepth=PVRT_MAX(1,u32MIPDepth>>1); //Only reduce depth for 3D textures, not texture arrays.
-			}
 
 			//Error check
 			if(glGetError())
@@ -1329,6 +919,11 @@ EPVRTError PVRTTextureLoadFromPointer(	const void* pointer,
 
 	FREE(pDecompressedData);
 
+	if (eTarget!=GL_TEXTURE_2D)
+	{
+		eTarget=GL_TEXTURE_CUBE_MAP;
+	}
+
 	//Error check
 	if(glGetError())
 	{
@@ -1337,7 +932,7 @@ EPVRTError PVRTTextureLoadFromPointer(	const void* pointer,
 	}
 	
 	//Set Minification and Magnification filters according to whether MIP maps are present.
-	if(eTextureType==GL_FLOAT || eTextureType==GL_HALF_FLOAT)
+	if(eTextureType==GL_FLOAT || eTextureType==GL_HALF_FLOAT_OES)
 	{
 		if(sTextureHeader.u32MIPMapCount==1)
 		{	// Texture filter modes are limited to these for float textures
@@ -1393,18 +988,18 @@ EPVRTError PVRTTextureLoadFromPointer(	const void* pointer,
  @Function		PVRTTextureLoadFromPVR
  @Input			filename			Filename of the .PVR file to load the texture from
  @Modified		texName				the OpenGL ES texture name as returned by glBindTexture
- @Modified		psTextureHeader		Pointer to a PVR_Texture_Header struct. Modified to
+ @Modified		psTextureHeader		Pointer to a PVRTextureHeaderV3 struct. Modified to
 									contain the header data of the returned texture Ignored if NULL.
  @Input			bAllowDecompress	Allow decompression if PVRTC is not supported in hardware.
- @Input			nLoadFromLevel		Which mipmap level to start loading from (0=all)
+ @Input			nLoadFromLevel		Which mip map level to start loading from (0=all)
  @Modified		pMetaData			If a valid map is supplied, this will return any and all 
 									MetaDataBlocks stored in the texture, organised by DevFourCC
 									then identifier. Supplying NULL will ignore all MetaData.
  @Return		PVR_SUCCESS on success
  @Description	Allows textures to be stored in binary PVR files and loaded in. Can load parts of a
-				mipmaped texture (ie skipping the highest detailed levels).
+				mip mapped texture (i.e. skipping the highest detailed levels).
 				Sets the texture MIN/MAG filter to GL_LINEAR_MIPMAP_NEAREST/GL_LINEAR
-				if mipmaps are present, GL_LINEAR/GL_LINEAR otherwise.
+				if mip maps are present, GL_LINEAR/GL_LINEAR otherwise.
 *****************************************************************************/
 EPVRTError PVRTTextureLoadFromPVR(	const char * const filename,
 									GLuint * const texName,
@@ -1415,10 +1010,7 @@ EPVRTError PVRTTextureLoadFromPVR(	const char * const filename,
 {
 	//Attempt to open file.
 	BUFFER_DATA buffer;
-	if (!FileUtil::readFile(buffer, filename))
-	{
-		return PVR_FAIL;
-	}
+	if (!FileUtil::readFile(buffer, filename)) return PVR_FAIL;
 
 	//Header size.
 	PVRTuint32 u32HeaderSize=0;
@@ -1527,8 +1119,8 @@ EPVRTError PVRTTextureLoadFromPVR(	const char * const filename,
 				ui32VariableSize=1;
 				break;
 			}
-        default:
-            return PVR_FAIL;
+		default:
+			break;
 		}
 		
 		//If the size of the variable type is greater than 1, then we need to byte swap.
@@ -1549,6 +1141,40 @@ EPVRTError PVRTTextureLoadFromPVR(	const char * const filename,
 	}
 	
 	return PVRTTextureLoadFromPointer(buffer.data(), texName, psTextureHeader, bAllowDecompress, nLoadFromLevel, NULL, pMetaData);
+}
+
+/*!***************************************************************************
+ @Function			PVRTTextureFormatGetBPP
+ @Input				nFormat
+ @Input				nType
+ @Description		Returns the bits per pixel (BPP) of the format.
+*****************************************************************************/
+unsigned int PVRTTextureFormatGetBPP(const GLuint nFormat, const GLuint nType)
+{
+	switch(nFormat)
+	{
+	case GL_COMPRESSED_RGB_PVRTC_2BPPV1_IMG:
+	case GL_COMPRESSED_RGBA_PVRTC_2BPPV1_IMG:
+		return 2;
+	case GL_COMPRESSED_RGB_PVRTC_4BPPV1_IMG:
+	case GL_COMPRESSED_RGBA_PVRTC_4BPPV1_IMG:
+		return 4;
+	case GL_UNSIGNED_BYTE:
+		switch(nType)
+		{
+		case GL_RGBA:
+		case GL_BGRA:
+			return 32;
+		}
+	case GL_UNSIGNED_SHORT_5_5_5_1:
+		switch(nType)
+		{
+		case GL_RGBA:
+			return 16;
+		}
+	}
+
+	return 0xFFFFFFFF;
 }
 
 /*****************************************************************************

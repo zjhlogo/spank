@@ -22,15 +22,20 @@ LOCAL_SRC_FILES := utils/FileUtilAndroid.cpp \
                    ../../source/render/RenderTarget.cpp \
                    ../../source/render/Shader.cpp \
                    ../../source/render/Texture.cpp \
+                   ../../source/render/VertexAttributes.cpp \
+                   ../../source/utils/FileUtil.cpp \
+                   ../../source/utils/StringUtil.cpp \
                    ../../source/Framework.cpp \
                    ../../source/IApp.cpp \
 
 
-LOCAL_EXPORT_LDLIBS := -llog -lGLESv3 -lEGL -landroid
+LOCAL_EXPORT_LDLIBS := -llog -lGLESv2 -lEGL -landroid
 
 LOCAL_WHOLE_STATIC_LIBRARIES := pvr
+LOCAL_WHOLE_STATIC_LIBRARIES += tinyxml2
 
 
 include $(BUILD_STATIC_LIBRARY)
 
 $(call import-module,libPvr/proj.android/jni)
+$(call import-module,libTinyxml2/proj.android/jni)

@@ -14,7 +14,7 @@
     <ClCompile Include="..\source\PVRTDecompress.cpp" />
     <ClCompile Include="..\source\PVRTError.cpp" />
     <ClCompile Include="..\source\PVRTFixedPoint.cpp" />
-    <ClCompile Include="..\source\PVRTgles3Ext.cpp" />
+    <ClCompile Include="..\source\PVRTgles2Ext.cpp" />
     <ClCompile Include="..\source\PVRTMatrixF.cpp" />
     <ClCompile Include="..\source\PVRTMatrixX.cpp" />
     <ClCompile Include="..\source\PVRTMisc.cpp" />
@@ -28,7 +28,7 @@
     <ClInclude Include="..\source\PVRTDecompress.h" />
     <ClInclude Include="..\source\PVRTError.h" />
     <ClInclude Include="..\source\PVRTFixedPoint.h" />
-    <ClInclude Include="..\source\PVRTgles3Ext.h" />
+    <ClInclude Include="..\source\PVRTgles2Ext.h" />
     <ClInclude Include="..\source\PVRTGlobal.h" />
     <ClInclude Include="..\source\PVRTMap.h" />
     <ClInclude Include="..\source\PVRTMathTable.h" />
@@ -79,7 +79,7 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;BUILD_OGLES3;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;BUILD_OGLES2;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>../../PowerVR_SDK_3.3_R2/inc/;../../../source/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
@@ -95,7 +95,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;BUILD_OGLES3;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;BUILD_OGLES2;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>../../PowerVR_SDK_3.3_R2/inc/;../../../source/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>

@@ -124,7 +124,7 @@ bool DeviceWin32::createEglContext()
 	// setup context
 	EGLint contextAttributes[] =
 	{
-		EGL_CONTEXT_CLIENT_VERSION, 3,
+		EGL_CONTEXT_CLIENT_VERSION, 2,
 		EGL_NONE
 	};
 	EGLContext eglContext = eglCreateContext(m_eglDisplay, eglConfig, NULL, contextAttributes);

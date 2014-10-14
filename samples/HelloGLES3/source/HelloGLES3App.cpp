@@ -16,25 +16,20 @@ HelloGLES3App::HelloGLES3App()
 
 HelloGLES3App::~HelloGLES3App()
 {
-	SAFE_DELETE(m_pTexture);
-	SAFE_DELETE(m_pShader);
-	SAFE_DELETE(m_pRenderBuffer);
+
 }
 
 bool HelloGLES3App::initialize(Framework* pFramework)
 {
-	BUFFER_DATA buffer;
-	if (!FileUtil::readFile(buffer, "data/grid16.png")) return false;
-
 	IRenderer* pRenderer = getRenderer();
 
-	m_pShader = pRenderer->createShader("data/image.vsh", "data/image.fsh");
+	m_pShader = pRenderer->createShader("data/shaders/pos3_uv2.shader");
 	if (!m_pShader) return false;
 
 	m_pTexture = pRenderer->createTexture("data/image.pvr");
 	if (!m_pTexture) return false;
 
-	m_pRenderBuffer = pRenderer->createVMemRenderBuffer();
+	m_pRenderBuffer = pRenderer->createVMemRenderBuffer(m_pShader->getVertexAttributes());
 	if (!m_pRenderBuffer) return false;
 
 	GLfloat vertAttribs[] = { -0.4f, -0.4f, 0.0f, // Pos
@@ -50,7 +45,16 @@ bool HelloGLES3App::initialize(Framework* pFramework)
 
 void HelloGLES3App::terminate()
 {
-	// TODO: throw std::exception("The method or operation is not implemented.");
+	IRenderer* pRenderer = getRenderer();
+
+	pRenderer->releaseTexture(m_pTexture);
+	m_pTexture = nullptr;
+
+	pRenderer->releaseShader(m_pShader);
+	m_pShader = nullptr;
+
+	pRenderer->releaseVMemRenderBuffer(m_pRenderBuffer);
+	m_pRenderBuffer = nullptr;
 }
 
 void HelloGLES3App::update(float dt)
@@ -71,24 +75,8 @@ void HelloGLES3App::render()
 		0, 0, 0, 1
 	};
 
-	m_pShader->useShader();
-	m_pShader->setMatrix("myPMVMatrix", afIdentity);
-	m_pShader->setTexture("sampler2d", m_pTexture);
-
-	// Bind the VBO
-	glBindBuffer(GL_ARRAY_BUFFER, m_pRenderBuffer->getBufferId());
-
-	// Pass the vertex data
-	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 20, 0);
-
-	// Pass the texture coordinates data
-	glEnableVertexAttribArray(1);
-	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 20, (void*)(3 * sizeof(GLfloat)));
-
-	// Draws a non-indexed triangle array
-	glDrawArrays(GL_TRIANGLES, 0, 3);
-
-	// Unbind the VBO
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	m_pShader->useProgram();
+	m_pShader->setMatrix("u_matMVP", afIdentity);
+	m_pShader->setTexture("u_texture", m_pTexture);
+	m_pShader->drawArrays(m_pRenderBuffer, 0, 3);
 }

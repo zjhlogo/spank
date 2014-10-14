@@ -1,20 +1,20 @@
 /*!****************************************************************************
 
- @file         OGLES3/PVRTTextureAPI.h
- @ingroup      API_OGLES3
+ @file         OGLES2/PVRTTextureAPI.h
+ @ingroup      API_OGLES2
  @copyright    Copyright (c) Imagination Technologies Limited.
- @brief        OGLES3 texture loading.
+ @brief        OGLES2 texture loading.
 
 ******************************************************************************/
 #ifndef _PVRTTEXTUREAPI_H_
 #define _PVRTTEXTUREAPI_H_
 
-#include "PVRTError.h"
-
 /*!
- @addtogroup      API_OGLES3
+ @addtogroup API_OGLES2
  @{
 */
+
+#include "PVRTError.h"
 
 /****************************************************************************
 ** Functions
@@ -69,6 +69,14 @@ EPVRTError PVRTTextureLoadFromPVR(	const char * const filename,
 									bool bAllowDecompress = true,
 									const unsigned int nLoadFromLevel=0,
 									CPVRTMap<unsigned int, CPVRTMap<unsigned int, struct MetaDataBlock> > *pMetaData=NULL);
+
+/*!***************************************************************************
+ @brief      		Returns the bits per pixel (BPP) of the format.
+ @param[in]			nFormat
+ @param[in]			nType
+ @return            Unsigned integer representing the bits per pixel of the format
+*****************************************************************************/
+unsigned int PVRTTextureFormatGetBPP(const GLuint nFormat, const GLuint nType);
 
 /*! @} */
 

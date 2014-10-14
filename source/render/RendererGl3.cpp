@@ -7,6 +7,11 @@
  * 
  */
 #include "RendererGl3.h"
+#include "Texture.h"
+#include "Shader.h"
+#include "RenderBuffer.h"
+#include "VertexAttributes.h"
+#include "../utils/LogUtil.h"
 
 RendererGl3::RendererGl3()
 {

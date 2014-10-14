@@ -7,7 +7,27 @@
  * 
  */
 #include "Shader.h"
+#include "IRenderer.h"
+#include "Texture.h"
+#include "VertexAttributes.h"
+#include "RenderBuffer.h"
+
 #include "../utils/FileUtil.h"
+#include "../utils/StringUtil.h"
+#include "../utils/LogUtil.h"
+
+#include <libTinyxml2/source/tinyxml2.h>
+
+class AutoDeleteShaderObj
+{
+public:
+	AutoDeleteShaderObj(GLuint shaderId) :m_shaderId(shaderId) {};
+	~AutoDeleteShaderObj() { if (m_shaderId != 0) glDeleteShader(m_shaderId); };
+
+private:
+	GLuint m_shaderId;
+
+};
 
 Shader::Shader()
 {
@@ -16,85 +36,219 @@ Shader::Shader()
 
 Shader::~Shader()
 {
-	glDeleteProgram(m_program);
-	m_program = 0;
+	destroyProgram();
 
-	glDeleteShader(m_vertexShader);
-	m_vertexShader = 0;
-
-	glDeleteShader(m_fragShader);
-	m_fragShader = 0;
+	m_pRenderer->releaseVertexAttributes(m_pVertAttributes);
+	m_pVertAttributes = nullptr;
 }
 
-bool Shader::loadFromFile(const std::string& vertexShaderFile, const std::string& fragShaderFile)
+bool Shader::loadFromFile(const std::string& filePath, IRenderer* pRenderer)
 {
-	BUFFER_DATA fragShaderData;
-	if (!FileUtil::readFile(fragShaderData, fragShaderFile)) return false;
-	const char* pszFragShader = static_cast<const char*>(fragShaderData.data());
+	m_pRenderer = pRenderer;
 
-	// Create the fragment shader object
-	m_fragShader = glCreateShader(GL_FRAGMENT_SHADER);
+	std::string xmlData;
+	if (!FileUtil::readStringFile(xmlData, filePath)) return false;
 
-	// Load the source code into it
-	glShaderSource(m_fragShader, 1, &pszFragShader, NULL);
+	tinyxml2::XMLDocument doc;
+	if (doc.Parse(xmlData.data()) != tinyxml2::XML_SUCCESS) return false;
 
-	// Compile the source code
-	glCompileShader(m_fragShader);
+	tinyxml2::XMLElement* pXmlRoot = doc.RootElement();
+	if (!pXmlRoot) return false;
 
-	// TODO: Check if compilation succeeded
+	const char* pszAttrFile = pXmlRoot->Attribute("attributes");
+	const char* pszVertFile = pXmlRoot->Attribute("vertex_shader");
+	const char* pszFragFile = pXmlRoot->Attribute("fregment_shader");
+	if (!pszAttrFile || !pszVertFile || !pszFragFile) return false;
 
-	BUFFER_DATA vertexShaderData;
-	if (!FileUtil::readFile(vertexShaderData, vertexShaderFile)) return false;
-	const char* pszVertexShader = static_cast<const char*>(vertexShaderData.data());
+	std::string strDir = StringUtil::getFileDir(filePath);
 
-	// Create the fragment shader object
-	m_vertexShader = glCreateShader(GL_VERTEX_SHADER);
+	// create vertex attributes
+	m_pVertAttributes = m_pRenderer->createVertexAttributes(strDir + "/" + pszAttrFile);
+	if (!m_pVertAttributes) return false;
 
-	// Load the source code into it
-	glShaderSource(m_vertexShader, 1, &pszVertexShader, NULL);
+	// read vertex shader text
+	if (!FileUtil::readStringFile(m_vertexShaderData, strDir + "/" + pszVertFile)) return false;
 
-	// Compile the source code
-	glCompileShader(m_vertexShader);
+	// read fragment shader text
+	if (!FileUtil::readStringFile(m_fragShaderData, strDir + "/" + pszFragFile)) return false;
 
-	// TODO: Check if compilation succeeded
+	if (reload(true))
+	{
+		setId(filePath);
+		return true;
+	}
 
-	// Create the shader program
-	m_program = glCreateProgram();
+	return false;
+}
 
-	// Attach the fragment and vertex shaders to it
-	glAttachShader(m_program, m_fragShader);
-	glAttachShader(m_program, m_vertexShader);
+bool Shader::reload(bool freeOld)
+{
+	if (freeOld) destroyProgram();
 
-	// TODO: 
-	// Bind the custom vertex attribute "myVertex" to location VERTEX_ARRAY
-	glBindAttribLocation(m_program, 0, "myVertex");
-	// Bind the custom vertex attribute "myUV" to location TEXCOORD_ARRAY
-	glBindAttribLocation(m_program, 1, "myUV");
+	m_programId = glCreateProgram();
+	if (m_programId == 0) return false;
 
-	// Link the program
-	glLinkProgram(m_program);
+	// create vertex shader
+	GLuint vertexId = compileShader(GL_VERTEX_SHADER, m_vertexShaderData);
+	AutoDeleteShaderObj vertexShaderObj(vertexId);
+	if (vertexId == 0) return false;
+
+	// create fragment shader
+	GLuint fragmentId = compileShader(GL_FRAGMENT_SHADER, m_fragShaderData);
+	AutoDeleteShaderObj fragmentShaderObj(fragmentId);
+	if (fragmentId == 0) return false;
+
+	// attach shaders
+	glAttachShader(m_programId, vertexId);
+	glAttachShader(m_programId, fragmentId);
+
+	// link program
+	glLinkProgram(m_programId);
+	if (getProgramErrorLog(m_programId))
+	{
+		LOGE("Link program failed with error log %s", m_errorLog.c_str());
+		return false;
+	}
 
 	return true;
 }
 
-void Shader::useShader()
+void Shader::useProgram()
 {
-	glUseProgram(m_program);
+	glUseProgram(m_programId);
+	GL_ERROR_CHECK();
 }
 
 bool Shader::setMatrix(const char* pszName, const float* pMatrix)
 {
 	// First gets the location of that variable in the shader using its name
-	int i32Location = glGetUniformLocation(m_program, pszName);
+	int loc = glGetUniformLocation(m_programId, pszName);
+	GL_ERROR_CHECK();
 
 	// Then passes the matrix to that variable
-	glUniformMatrix4fv(i32Location, 1, GL_FALSE, pMatrix);
+	glUniformMatrix4fv(loc, 1, GL_FALSE, pMatrix);
+	GL_ERROR_CHECK();
 
 	return true;
 }
 
-bool Shader::setTexture(const char* pszName, Texture* pTexture)
+bool Shader::setTexture(const char* pszName, Texture* pTexture, int index /* = 0 */)
 {
-	glUniform1i(glGetUniformLocation(m_program, pszName), 0);
+	GLint loc = glGetUniformLocation(m_programId, pszName);
+	GL_ERROR_CHECK();
+
+	glUniform1i(loc, index);
+	GL_ERROR_CHECK();
+
+	glActiveTexture(GL_TEXTURE0 + index);
+	glBindTexture(GL_TEXTURE_2D, pTexture->getTextureId());
+	GL_ERROR_CHECK();
+
+	return true;
+}
+
+void Shader::drawArrays(VMemRenderBuffer* pRenderBuffer, int start, int numVerts)
+{
+	if (!pRenderBuffer) return;
+
+	uint bufferSize = pRenderBuffer->getBufferSize();
+	if (bufferSize == 0) return;
+
+	if (!m_pVertAttributes->isEqual(pRenderBuffer->getVertexAttributes())) return;
+
+	// Bind the VBO
+	glBindBuffer(GL_ARRAY_BUFFER, pRenderBuffer->getBufferId());
+	GL_ERROR_CHECK();
+
+	int numAttrs = m_pVertAttributes->getNumAttributeItems();
+	int stride = m_pVertAttributes->getStride();
+
+	for (int i = 0; i < numAttrs; ++i)
+	{
+		const VertexAttributes::ATTRIBUTE_ITEM* pAttrItem = m_pVertAttributes->getAttributeItem(i);
+
+		glEnableVertexAttribArray(i);
+		glVertexAttribPointer(i, pAttrItem->size, pAttrItem->eGlType, GL_FALSE, stride, (void*)pAttrItem->offset);
+	}
+
+	// Draws a non-indexed triangle array
+	glDrawArrays(GL_TRIANGLES, start, numVerts);
+	GL_ERROR_CHECK();
+
+	// Unbind the VBO
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+}
+
+void Shader::destroyProgram()
+{
+	if (m_programId != 0)
+	{
+		glDeleteProgram(m_programId);
+		m_programId = 0;
+	}
+}
+
+GLuint Shader::compileShader(GLuint shaderType, const std::string& shaderData)
+{
+	if (shaderData.length() <= 0) return 0;
+
+	int shaderId = glCreateShader(shaderType);
+	if (shaderId == 0) return 0;
+
+	const char* pszShader = shaderData.c_str();
+	glShaderSource(shaderId, 1, &pszShader, NULL);
+	glCompileShader(shaderId);
+
+	if (getShaderErrorLog(shaderId))
+	{
+		LOGE("Compile shader failed with error log %s", m_errorLog.c_str());
+		glDeleteShader(shaderId);
+		return 0;
+	}
+
+	return shaderId;
+}
+
+bool Shader::getShaderErrorLog(GLuint shaderId)
+{
+	GLint compileStatus = 0;
+	glGetShaderiv(shaderId, GL_COMPILE_STATUS, &compileStatus);
+	if (compileStatus == GL_TRUE) return false;
+
+	GLint infoLength = 0;
+	glGetShaderiv(shaderId, GL_INFO_LOG_LENGTH, &infoLength);
+	if (infoLength <= 1) return false;
+
+	BUFFER_DATA buffer;
+	buffer.resize(infoLength);
+
+	GLsizei charWritten = 0;
+	glGetShaderInfoLog(shaderId, infoLength, &charWritten, buffer.data());
+
+	m_errorLog.clear();
+	m_errorLog.append(buffer.data(), infoLength);
+
+	return true;
+}
+
+bool Shader::getProgramErrorLog(GLuint programId)
+{
+	GLint linkStatus = 0;
+	glGetProgramiv(programId, GL_LINK_STATUS, &linkStatus);
+	if (linkStatus == GL_TRUE) return false;
+
+	GLint infoLength = 0;
+	glGetProgramiv(programId, GL_INFO_LOG_LENGTH, &infoLength);
+	if (infoLength <= 1) return false;
+
+	BUFFER_DATA buffer;
+	buffer.resize(infoLength);
+
+	GLsizei charWritten = 0;
+	glGetProgramInfoLog(programId, infoLength, &charWritten, buffer.data());
+
+	m_errorLog.clear();
+	m_errorLog.append(buffer.data(), infoLength);
+
 	return true;
 }

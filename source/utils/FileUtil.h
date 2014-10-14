@@ -14,5 +14,5 @@ class FileUtil
 {
 public:
 	static bool readFile(BUFFER_DATA& bufferOut, const std::string& filePath);
-
+	static bool readStringFile(std::string& strOut, const std::string& filePath);
 };

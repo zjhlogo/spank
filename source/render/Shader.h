@@ -9,7 +9,13 @@
 #pragma once
 
 #include "RenderObject.h"
-#include "Texture.h"
+
+class IRenderer;
+class Texture;
+class RenderBuffer;
+class MemRenderBuffer;
+class VMemRenderBuffer;
+class VertexAttributes;
 
 class Shader : public RenderObject
 {
@@ -17,15 +23,31 @@ public:
 	Shader();
 	virtual ~Shader();
 
-	bool loadFromFile(const std::string& vertexShaderFile, const std::string& fragShaderFile);
+	bool loadFromFile(const std::string& filePath, IRenderer* pRenderer);
+	bool reload(bool freeOld);
 
-	void useShader();
+	void useProgram();
 	bool setMatrix(const char* pszName, const float* pMatrix);
-	bool setTexture(const char* pszName, Texture* pTexture);
+	bool setTexture(const char* pszName, Texture* pTexture, int index = 0);
+	void drawArrays(VMemRenderBuffer* pRenderBuffer, int start, int numVerts);
+
+	inline const VertexAttributes* getVertexAttributes() const { return m_pVertAttributes; };
+	inline GLuint getProgramId() const { return m_programId; };
 
 private:
-	GLuint m_vertexShader{ 0 };
-	GLuint m_fragShader{ 0 };
-	GLuint m_program{ 0 };
+	void destroyProgram();
+	GLuint compileShader(GLuint shaderType, const std::string& shaderData);
+	bool getShaderErrorLog(GLuint shaderId);
+	bool getProgramErrorLog(GLuint programId);
+
+private:
+	GLuint m_programId{ 0 };
+
+	IRenderer* m_pRenderer{ nullptr };
+	VertexAttributes* m_pVertAttributes{ nullptr };
+
+	std::string m_vertexShaderData;
+	std::string m_fragShaderData;
+	std::string m_errorLog;
 
 };

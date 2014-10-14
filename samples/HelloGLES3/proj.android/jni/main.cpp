@@ -7,6 +7,7 @@
  */
 #include "main.h"
 #include <HelloGLES3App.h>
+#include <utils/LogUtil.h>
 
 class FrameworkAndroid : public Framework {};
 FrameworkAndroid* g_pFrameworkAndroid = nullptr;
@@ -14,7 +15,13 @@ HelloGLES3App* g_pHelloGLES3App = nullptr;
 
 JNIEXPORT jboolean JNICALL Java_com_zjhlogo_libspank_GameEntry_initialize(JNIEnv* env, jobject obj)
 {
-	if (g_pFrameworkAndroid) return true;
+	LOGD("GameEntry initialize");
+
+	if (g_pFrameworkAndroid)
+	{
+		g_pFrameworkAndroid->getRenderer()->reload(false);
+		return true;
+	}
 
 	// initialize framework
 	g_pFrameworkAndroid = new FrameworkAndroid();
@@ -44,6 +51,8 @@ JNIEXPORT jboolean JNICALL Java_com_zjhlogo_libspank_GameEntry_initialize(JNIEnv
 
 JNIEXPORT void JNICALL Java_com_zjhlogo_libspank_GameEntry_terminate(JNIEnv* env, jobject obj)
 {
+	LOGD("GameEntry terminate");
+
 	g_pHelloGLES3App->terminate();
 	SAFE_DELETE(g_pHelloGLES3App);
 
@@ -53,7 +62,7 @@ JNIEXPORT void JNICALL Java_com_zjhlogo_libspank_GameEntry_terminate(JNIEnv* env
 
 JNIEXPORT void JNICALL Java_com_zjhlogo_libspank_GameEntry_resize(JNIEnv* env, jobject obj, jint width, jint height)
 {
-	// TODO: 
+	LOGD("GameEntry resize %dx%d", width, height);
 }
 
 JNIEXPORT void JNICALL Java_com_zjhlogo_libspank_GameEntry_step(JNIEnv* env, jobject obj)
