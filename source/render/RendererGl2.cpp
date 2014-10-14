@@ -41,6 +41,7 @@ void RendererGl2::terminate()
 	for (auto texture : m_textureMap)
 	{
 		Texture* pTexture = texture.second;
+		LOGE("Un-released texture %s", pTexture->getId().c_str());
 		SAFE_DELETE(pTexture);
 	}
 	m_textureMap.clear();
@@ -48,20 +49,23 @@ void RendererGl2::terminate()
 	for (auto shader : m_shaderMap)
 	{
 		Shader* pShader = shader.second;
+		LOGE("Un-released shader %s", pShader->getId().c_str());
 		SAFE_DELETE(pShader);
 	}
 	m_shaderMap.clear();
 
-	for (auto renderBuffer : m_vmemRenderBufferSet)
+	for (auto renderBuffer : m_renderBufferSet)
 	{
-		VMemRenderBuffer* pRenderBuffer = renderBuffer;
+		RenderBuffer* pRenderBuffer = renderBuffer;
+		LOGE("Un-released render buffer 0x%08x", pRenderBuffer);
 		SAFE_DELETE(pRenderBuffer);
 	}
-	m_vmemRenderBufferSet.clear();
+	m_renderBufferSet.clear();
 
 	for (auto vertAttr : m_vertexAttributeMap)
 	{
 		VertexAttributes* pVertAttr = vertAttr.second;
+		LOGE("Un-released vertex attribute 0x%08x", pVertAttr->getId().c_str());
 		SAFE_DELETE(pVertAttr);
 	}
 	m_vertexAttributeMap.clear();
@@ -80,7 +84,7 @@ void RendererGl2::reload(bool freeOld)
 		shader.second->reload(freeOld);
 	}
 
-	for (auto renderBuffer : m_vmemRenderBufferSet)
+	for (auto renderBuffer : m_renderBufferSet)
 	{
 		renderBuffer->reload(freeOld);
 	}
@@ -90,10 +94,14 @@ Texture* RendererGl2::createTexture(const std::string& filePath)
 {
 	// first, find from map
 	TM_TEXTURE::iterator it = m_textureMap.find(filePath);
-	if (it != m_textureMap.end()) return it->second;
+	if (it != m_textureMap.end())
+	{
+		it->second->incRef();
+		return it->second;
+	}
 
 	// second, create new one
-	Texture* pTexture = new Texture();
+	Texture* pTexture = new Texture(this);
 	if (!pTexture->loadFromFile(filePath))
 	{
 		SAFE_DELETE(pTexture);
@@ -106,32 +114,19 @@ Texture* RendererGl2::createTexture(const std::string& filePath)
 	return pTexture;
 }
 
-bool RendererGl2::releaseTexture(Texture* pTexture)
-{
-	if (!pTexture) return false;
-
-	TM_TEXTURE::iterator it = m_textureMap.find(pTexture->getId());
-	if (it == m_textureMap.end())
-	{
-		LOGE("can not find texture from map");
-		SAFE_DELETE(pTexture);
-		return true;
-	}
-
-	m_textureMap.erase(it);
-	SAFE_DELETE(pTexture);
-	return true;
-}
-
 Shader* RendererGl2::createShader(const std::string& filePath)
 {
 	// first, find shader from map
 	TM_SHADER::iterator it = m_shaderMap.find(filePath);
-	if (it != m_shaderMap.end()) return it->second;
+	if (it != m_shaderMap.end())
+	{
+		it->second->incRef();
+		return it->second;
+	}
 
 	// second, create new one
-	Shader* pShader = new Shader();
-	if (!pShader->loadFromFile(filePath, this))
+	Shader* pShader = new Shader(this);
+	if (!pShader->loadFromFile(filePath))
 	{
 		SAFE_DELETE(pShader);
 		return nullptr;
@@ -143,65 +138,44 @@ Shader* RendererGl2::createShader(const std::string& filePath)
 	return pShader;
 }
 
-bool RendererGl2::releaseShader(Shader* pShader)
+MemRenderBuffer* RendererGl2::createMemRenderBuffer(const VertexAttributes* pVertAttrs)
 {
-	if (!pShader) return false;
+	if (!pVertAttrs) return nullptr;
 
-	TM_SHADER::iterator it = m_shaderMap.find(pShader->getId());
-	if (it == m_shaderMap.end())
-	{
-		LOGE("can not find shader from map");
-		SAFE_DELETE(pShader);
-		return true;
-	}
+	// new one
+	MemRenderBuffer* pRenderBuffer = new MemRenderBuffer(this, pVertAttrs);
 
-	m_shaderMap.erase(it);
-	SAFE_DELETE(pShader);
-	return true;
+	// cache it
+	m_renderBufferSet.insert(pRenderBuffer);
+
+	return pRenderBuffer;
 }
 
 VMemRenderBuffer* RendererGl2::createVMemRenderBuffer(const VertexAttributes* pVertAttrs)
 {
 	if (!pVertAttrs) return nullptr;
 
-	VMemRenderBuffer* pRenderBuffer = new VMemRenderBuffer(pVertAttrs);
-	if (!pRenderBuffer->createBufferObject())
-	{
-		SAFE_DELETE(pRenderBuffer);
-		return nullptr;
-	}
+	// new one
+	VMemRenderBuffer* pRenderBuffer = new VMemRenderBuffer(this, pVertAttrs);
 
 	// cache it
-	m_vmemRenderBufferSet.insert(pRenderBuffer);
+	m_renderBufferSet.insert(pRenderBuffer);
 
 	return pRenderBuffer;
-}
-
-bool RendererGl2::releaseVMemRenderBuffer(VMemRenderBuffer* pBuffer)
-{
-	if (!pBuffer) return false;
-
-	TS_VMEM_RENDER_BUFFER::iterator it = m_vmemRenderBufferSet.find(pBuffer);
-	if (it == m_vmemRenderBufferSet.end())
-	{
-		LOGE("can not find VMem Render Buffer from map");
-		SAFE_DELETE(pBuffer);
-		return true;
-	}
-
-	m_vmemRenderBufferSet.erase(it);
-	SAFE_DELETE(pBuffer);
-	return true;
 }
 
 VertexAttributes* RendererGl2::createVertexAttributes(const std::string& filePath)
 {
 	// first, find shader from map
 	TM_VERTEX_ATTRIBUTE::iterator it = m_vertexAttributeMap.find(filePath);
-	if (it != m_vertexAttributeMap.end()) return it->second;
+	if (it != m_vertexAttributeMap.end())
+	{
+		it->second->incRef();
+		return it->second;
+	}
 
 	// second, create new one
-	VertexAttributes* pVertAttrs = new VertexAttributes();
+	VertexAttributes* pVertAttrs = new VertexAttributes(this);
 	if (!pVertAttrs->loadFromFile(filePath))
 	{
 		SAFE_DELETE(pVertAttrs);
@@ -214,19 +188,63 @@ VertexAttributes* RendererGl2::createVertexAttributes(const std::string& filePat
 	return pVertAttrs;
 }
 
-bool RendererGl2::releaseVertexAttributes(VertexAttributes* pVertAttrs)
+bool RendererGl2::removeTexture(Texture* pTexture)
+{
+	if (!pTexture) return false;
+
+	TM_TEXTURE::iterator it = m_textureMap.find(pTexture->getId());
+	if (it == m_textureMap.end())
+	{
+		LOGE("can not find texture %s from map", pTexture->getId().c_str());
+		return true;
+	}
+
+	m_textureMap.erase(it);
+	return true;
+}
+
+bool RendererGl2::removeShader(Shader* pShader)
+{
+	if (!pShader) return false;
+
+	TM_SHADER::iterator it = m_shaderMap.find(pShader->getId());
+	if (it == m_shaderMap.end())
+	{
+		LOGE("can not find shader %s from map", pShader->getId().c_str());
+		return true;
+	}
+
+	m_shaderMap.erase(it);
+	return true;
+}
+
+bool RendererGl2::removeRenderBuffer(RenderBuffer* pBuffer)
+{
+	if (!pBuffer) return false;
+
+	TS_RENDER_BUFFER::iterator it = m_renderBufferSet.find(pBuffer);
+	if (it == m_renderBufferSet.end())
+	{
+		LOGE("can not find VMem Render Buffer 0x%08x from map", pBuffer);
+		return true;
+	}
+
+	m_renderBufferSet.erase(it);
+	return true;
+}
+
+bool RendererGl2::removeVertexAttributes(VertexAttributes* pVertAttrs)
 {
 	if (!pVertAttrs) return false;
 
 	TM_VERTEX_ATTRIBUTE::iterator it = m_vertexAttributeMap.find(pVertAttrs->getId());
 	if (it == m_vertexAttributeMap.end())
 	{
-		LOGE("can not find Vertex Attributes from map");
-		SAFE_DELETE(pVertAttrs);
+		LOGE("can not find Vertex Attributes %s from map", pVertAttrs->getId().c_str());
 		return true;
 	}
 
-	// don't delete it untill terminate
+	m_vertexAttributeMap.erase(it);
 
 	return true;
 }

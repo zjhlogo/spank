@@ -29,7 +29,8 @@ private:
 
 };
 
-Shader::Shader()
+Shader::Shader(IRenderer* pRenderer)
+	:m_pRenderer(pRenderer)
 {
 
 }
@@ -37,15 +38,11 @@ Shader::Shader()
 Shader::~Shader()
 {
 	destroyProgram();
-
-	m_pRenderer->releaseVertexAttributes(m_pVertAttributes);
-	m_pVertAttributes = nullptr;
+	SAFE_RELEASE(m_pVertAttributes);
 }
 
-bool Shader::loadFromFile(const std::string& filePath, IRenderer* pRenderer)
+bool Shader::loadFromFile(const std::string& filePath)
 {
-	m_pRenderer = pRenderer;
-
 	std::string xmlData;
 	if (!FileUtil::readStringFile(xmlData, filePath)) return false;
 
@@ -145,6 +142,34 @@ bool Shader::setTexture(const char* pszName, Texture* pTexture, int index /* = 0
 	GL_ERROR_CHECK();
 
 	return true;
+}
+
+void Shader::drawArrays(MemRenderBuffer* pRenderBuffer, int start, int numVerts)
+{
+	if (!pRenderBuffer) return;
+
+	uint bufferSize = pRenderBuffer->getBufferSize();
+	if (bufferSize == 0) return;
+
+	if (!m_pVertAttributes->isEqual(pRenderBuffer->getVertexAttributes())) return;
+
+	// Unbind the VBO
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+	int numAttrs = m_pVertAttributes->getNumAttributeItems();
+	int stride = m_pVertAttributes->getStride();
+
+	for (int i = 0; i < numAttrs; ++i)
+	{
+		const VertexAttributes::ATTRIBUTE_ITEM* pAttrItem = m_pVertAttributes->getAttributeItem(i);
+
+		glEnableVertexAttribArray(i);
+		glVertexAttribPointer(i, pAttrItem->size, pAttrItem->eGlType, GL_FALSE, stride, (void*)(pRenderBuffer->getBufferMemAddr() + pAttrItem->offset));
+	}
+
+	// Draws a non-indexed triangle array
+	glDrawArrays(GL_TRIANGLES, start, numVerts);
+	GL_ERROR_CHECK();
 }
 
 void Shader::drawArrays(VMemRenderBuffer* pRenderBuffer, int start, int numVerts)
@@ -251,4 +276,9 @@ bool Shader::getProgramErrorLog(GLuint programId)
 	m_errorLog.append(buffer.data(), infoLength);
 
 	return true;
+}
+
+void Shader::preDelete()
+{
+	m_pRenderer->removeShader(this);
 }

@@ -6,18 +6,20 @@
  * \author zjhlogo (zjhlogo@gmail.com)
  */
 #include "VertexAttributes.h"
-#include <libTinyxml2/source/tinyxml2.h>
-#include <utils/FileUtil.h>
+#include "IRenderer.h"
+#include "../utils/FileUtil.h"
 
-VertexAttributes::VertexAttributes()
+#include <libTinyxml2/source/tinyxml2.h>
+
+VertexAttributes::VertexAttributes(IRenderer* pRenderer)
+	:m_pRenderer(pRenderer)
 {
 	// TODO: 
 }
 
-VertexAttributes::VertexAttributes(const ATTRIBUTE_ITEM* pAttrItems)
+VertexAttributes::VertexAttributes(IRenderer* pRenderer, const ATTRIBUTE_ITEM* pAttrItems)
+	:m_pRenderer(pRenderer)
 {
-	m_numItems = 0;
-	memset(m_attributeItems, 0, sizeof(m_attributeItems));
 	createVertexAttribute(pAttrItems);
 }
 
@@ -178,4 +180,9 @@ bool VertexAttributes::createVertexAttribute(const ATTRIBUTE_ITEM* pAttrItems)
 	m_attributeItems[m_numItems].szParamName[0] = '\0';
 
 	return true;
+}
+
+void VertexAttributes::preDelete()
+{
+	m_pRenderer->removeVertexAttributes(this);
 }

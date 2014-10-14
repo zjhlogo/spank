@@ -8,9 +8,11 @@
  */
 #include "RenderBuffer.h"
 #include "VertexAttributes.h"
+#include "IRenderer.h"
 #include "../utils/LogUtil.h"
 
-RenderBuffer::RenderBuffer()
+RenderBuffer::RenderBuffer(IRenderer* pRenderer)
+	:m_pRenderer(pRenderer)
 {
 
 }
@@ -20,7 +22,19 @@ RenderBuffer::~RenderBuffer()
 
 }
 
-MemRenderBuffer::MemRenderBuffer()
+bool RenderBuffer::reload(bool freeOld)
+{
+	return true;
+}
+
+void RenderBuffer::preDelete()
+{
+	m_pRenderer->removeRenderBuffer(this);
+}
+
+MemRenderBuffer::MemRenderBuffer(IRenderer* pRenderer, const VertexAttributes* pVertAttrs)
+	:RenderBuffer(pRenderer)
+	, m_pVertAttrs(pVertAttrs)
 {
 
 }
@@ -32,61 +46,39 @@ MemRenderBuffer::~MemRenderBuffer()
 
 bool MemRenderBuffer::uploadBuffer(const void* bufferData, uint bufferSize)
 {
-	// TODO: 
-	return false;
-}
+	if (!bufferData || bufferSize == 0) return false;
 
-bool MemRenderBuffer::reload(bool freeOld)
-{
-	// TODO: 
+	m_bufferData.resize(bufferSize);
+	memcpy(m_bufferData.data(), bufferData, bufferSize);
+
 	return true;
 }
 
-VMemRenderBuffer::VMemRenderBuffer(const VertexAttributes* pVertAttrs)
-	:m_pVertAttrs(pVertAttrs)
+VMemRenderBuffer::VMemRenderBuffer(IRenderer* pRenderer, const VertexAttributes* pVertAttrs)
+	:MemRenderBuffer(pRenderer, pVertAttrs)
 {
 
 }
 
 VMemRenderBuffer::~VMemRenderBuffer()
 {
-	destroyBuffer();
-}
-
-bool VMemRenderBuffer::createBufferObject()
-{
-	glGenBuffers(1, &m_bufferId);
-	GL_ERROR_CHECK();
-	if (m_bufferId == 0) return false;
-
-	return true;
+	destroyVBuffer();
 }
 
 bool VMemRenderBuffer::uploadBuffer(const void* bufferData, uint bufferSize)
 {
-	if (!bufferData || bufferSize == 0) return false;
-
-	m_bufferData.resize(bufferSize);
-	memcpy(m_bufferData.data(), bufferData, bufferSize);
-
-	updateData();
-
-	return true;
+	if (!MemRenderBuffer::uploadBuffer(bufferData, bufferSize)) return false;
+	return updateVBufferData();
 }
 
 bool VMemRenderBuffer::reload(bool freeOld)
 {
-	if (freeOld) destroyBuffer();
-
-	glGenBuffers(1, &m_bufferId);
-	if (m_bufferId == 0) return false;
-
-	updateData();
-
-	return true;
+	if (freeOld) destroyVBuffer();
+	m_bufferId = 0;
+	return updateVBufferData();
 }
 
-void VMemRenderBuffer::destroyBuffer()
+void VMemRenderBuffer::destroyVBuffer()
 {
 	if (m_bufferId != 0)
 	{
@@ -95,8 +87,16 @@ void VMemRenderBuffer::destroyBuffer()
 	}
 }
 
-bool VMemRenderBuffer::updateData()
+bool VMemRenderBuffer::updateVBufferData()
 {
+	// create buffer object
+	if (m_bufferId == 0)
+	{
+		glGenBuffers(1, &m_bufferId);
+		GL_ERROR_CHECK();
+		if (m_bufferId == 0) return false;
+	}
+
 	// Bind the VBO
 	glBindBuffer(GL_ARRAY_BUFFER, m_bufferId);
 	GL_ERROR_CHECK();

@@ -7,9 +7,11 @@
  * 
  */
 #include "Texture.h"
+#include "IRenderer.h"
 #include <libPvr/source/PVRTTextureAPI.h>
 
-Texture::Texture()
+Texture::Texture(IRenderer* pRenderer)
+	: m_pRenderer(pRenderer)
 {
 
 }
@@ -47,4 +49,9 @@ void Texture::destroyTexture()
 		glDeleteTextures(1, &m_textureId);
 		m_textureId = 0;
 	}
+}
+
+void Texture::preDelete()
+{
+	m_pRenderer->removeTexture(this);
 }

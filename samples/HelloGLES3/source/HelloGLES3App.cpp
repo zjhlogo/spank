@@ -29,8 +29,11 @@ bool HelloGLES3App::initialize(Framework* pFramework)
 	m_pTexture = pRenderer->createTexture("data/image.pvr");
 	if (!m_pTexture) return false;
 
-	m_pRenderBuffer = pRenderer->createVMemRenderBuffer(m_pShader->getVertexAttributes());
-	if (!m_pRenderBuffer) return false;
+	m_pRenderBufferMem = pRenderer->createMemRenderBuffer(m_pShader->getVertexAttributes());
+	if (!m_pRenderBufferMem) return false;
+
+	m_pRenderBufferVMem = pRenderer->createVMemRenderBuffer(m_pShader->getVertexAttributes());
+	if (!m_pRenderBufferVMem) return false;
 
 	GLfloat vertAttribs[] = { -0.4f, -0.4f, 0.0f, // Pos
 		0.0f, 0.0f,	  // UVs
@@ -38,23 +41,19 @@ bool HelloGLES3App::initialize(Framework* pFramework)
 		1.0f, 0.0f,
 		0.0f, 0.4f, 0.0f,
 		0.5f, 1.0f };
-	m_pRenderBuffer->uploadBuffer(vertAttribs, sizeof(vertAttribs));
+
+	m_pRenderBufferMem->uploadBuffer(vertAttribs, sizeof(vertAttribs));
+	m_pRenderBufferVMem->uploadBuffer(vertAttribs, sizeof(vertAttribs));
 
 	return true;
 }
 
 void HelloGLES3App::terminate()
 {
-	IRenderer* pRenderer = getRenderer();
-
-	pRenderer->releaseTexture(m_pTexture);
-	m_pTexture = nullptr;
-
-	pRenderer->releaseShader(m_pShader);
-	m_pShader = nullptr;
-
-	pRenderer->releaseVMemRenderBuffer(m_pRenderBuffer);
-	m_pRenderBuffer = nullptr;
+	SAFE_RELEASE(m_pTexture);
+	SAFE_RELEASE(m_pShader);
+	SAFE_RELEASE(m_pRenderBufferMem);
+	SAFE_RELEASE(m_pRenderBufferVMem);
 }
 
 void HelloGLES3App::update(float dt)
@@ -78,5 +77,5 @@ void HelloGLES3App::render()
 	m_pShader->useProgram();
 	m_pShader->setMatrix("u_matMVP", afIdentity);
 	m_pShader->setTexture("u_texture", m_pTexture);
-	m_pShader->drawArrays(m_pRenderBuffer, 0, 3);
+	m_pShader->drawArrays(m_pRenderBufferVMem, 0, 3);
 }

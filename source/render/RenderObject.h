@@ -20,7 +20,16 @@ public:
 	inline void setId(const std::string& strId) { m_strId = strId; };
 	inline const std::string getId() const { return m_strId; };
 
+	void release();
+
+protected:
+	inline int incRef() { return ++m_ref; };
+	inline int decRef() { return --m_ref; };
+
+	virtual void preDelete();
+
 private:
+	int m_ref{ 1 };
 	std::string m_strId;
 
 };

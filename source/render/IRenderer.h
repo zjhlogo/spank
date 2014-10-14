@@ -19,6 +19,11 @@ class VertexAttributes;
 
 class IRenderer : public IMgr
 {
+	friend class Texture;
+	friend class Shader;
+	friend class RenderBuffer;
+	friend class VertexAttributes;
+
 public:
 	IRenderer();
 	virtual ~IRenderer();
@@ -26,15 +31,15 @@ public:
 	virtual void reload(bool freeOld) = 0;
 
 	virtual Texture* createTexture(const std::string& filePath) = 0;
-	virtual bool releaseTexture(Texture* pTexture) = 0;
-
 	virtual Shader* createShader(const std::string& filePath) = 0;
-	virtual bool releaseShader(Shader* pShader) = 0;
-
+	virtual MemRenderBuffer* createMemRenderBuffer(const VertexAttributes* pVertAttrs) = 0;
 	virtual VMemRenderBuffer* createVMemRenderBuffer(const VertexAttributes* pVertAttrs) = 0;
-	virtual bool releaseVMemRenderBuffer(VMemRenderBuffer* pBuffer) = 0;
-
 	virtual VertexAttributes* createVertexAttributes(const std::string& filePath) = 0;
-	virtual bool releaseVertexAttributes(VertexAttributes* pVertAttrs) = 0;
+
+protected:
+	virtual bool removeTexture(Texture* pTexture) = 0;
+	virtual bool removeShader(Shader* pShader) = 0;
+	virtual bool removeRenderBuffer(RenderBuffer* pBuffer) = 0;
+	virtual bool removeVertexAttributes(VertexAttributes* pVertAttrs) = 0;
 
 };

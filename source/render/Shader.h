@@ -19,20 +19,27 @@ class VertexAttributes;
 
 class Shader : public RenderObject
 {
-public:
-	Shader();
-	virtual ~Shader();
+	friend class RendererGl2;
 
-	bool loadFromFile(const std::string& filePath, IRenderer* pRenderer);
+public:
+	bool loadFromFile(const std::string& filePath);
 	bool reload(bool freeOld);
 
 	void useProgram();
 	bool setMatrix(const char* pszName, const float* pMatrix);
 	bool setTexture(const char* pszName, Texture* pTexture, int index = 0);
+
+	void drawArrays(MemRenderBuffer* pRenderBuffer, int start, int numVerts);
 	void drawArrays(VMemRenderBuffer* pRenderBuffer, int start, int numVerts);
 
 	inline const VertexAttributes* getVertexAttributes() const { return m_pVertAttributes; };
 	inline GLuint getProgramId() const { return m_programId; };
+
+protected:
+	Shader(IRenderer* pRenderer);
+	virtual ~Shader();
+
+	virtual void preDelete() override;
 
 private:
 	void destroyProgram();

@@ -9,8 +9,12 @@
 
 #include "RenderObject.h"
 
+class IRenderer;
+
 class VertexAttributes : public RenderObject
 {
+	friend class RendererGl2;
+
 public:
 	enum CONST_DEFINE
 	{
@@ -33,18 +37,14 @@ public:
 
 	typedef struct ATTRIBUTE_ITEM_tag
 	{
-		GLuint size;
-		ATTRIBUTE_ITEM_TYPE eItemType;
-		GLenum eGlType;
-		GLuint offset;
-		char szParamName[MAX_ATTRIBUTE_NAME_LENGTH];
+		GLuint size{ 0 };
+		ATTRIBUTE_ITEM_TYPE eItemType{ AIT_UNKNOWN };
+		GLenum eGlType{ GL_FLOAT };
+		GLuint offset{ 0 };
+		char szParamName[MAX_ATTRIBUTE_NAME_LENGTH]{};
 	} ATTRIBUTE_ITEM;
 
 public:
-	VertexAttributes();
-	VertexAttributes(const ATTRIBUTE_ITEM* pAttrItems);
-	virtual ~VertexAttributes();
-
 	bool loadFromFile(const std::string& filePath);
 
 	inline uint getStride() const { return m_attributeItems[m_numItems].offset; };
@@ -52,6 +52,13 @@ public:
 
 	const ATTRIBUTE_ITEM* getAttributeItem(int nIndex) const;
 	bool isEqual(const VertexAttributes* pVertexAttrs) const;
+
+protected:
+	VertexAttributes(IRenderer* pRenderer);
+	VertexAttributes(IRenderer* pRenderer, const ATTRIBUTE_ITEM* pAttrItems);
+	virtual ~VertexAttributes();
+
+	virtual void preDelete() override;
 
 private:
 	static GLenum getGlType(ATTRIBUTE_ITEM_TYPE eType);
@@ -61,7 +68,8 @@ private:
 	bool createVertexAttribute(const ATTRIBUTE_ITEM* pAttrItems);
 
 private:
-	int m_numItems;
+	IRenderer* m_pRenderer{ nullptr };
+	int m_numItems{ 0 };
 	ATTRIBUTE_ITEM m_attributeItems[MAX_ATTRIBUTE_ITEMS + 1];
 
 };

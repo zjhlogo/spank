@@ -1,11 +1,19 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libSpank", "libSpank.vcxproj", "{A368B246-2128-4143-A03C-4E1CD9833D52}"
+	ProjectSection(ProjectDependencies) = postProject
+		{E666DBE5-8C95-4D4D-82F8-A1D038133242} = {E666DBE5-8C95-4D4D-82F8-A1D038133242}
+		{8F0A56FE-1D93-4719-8443-1197E95B5725} = {8F0A56FE-1D93-4719-8443-1197E95B5725}
+	EndProjectSection
 EndProject
 Project("{F088123C-0E9E-452A-89E6-6BA2F21D5CAC}") = "diagram", "diagram\diagram.modelproj", "{2B3556F6-A29C-47F9-960B-2C909879A30A}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libPvr", "..\vendor\libPvr\proj.win32\libPvr.vcxproj", "{8F0A56FE-1D93-4719-8443-1197E95B5725}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libTinyxml2", "..\vendor\libTinyxml2\proj.win32\libTinyxml2.vcxproj", "{E666DBE5-8C95-4D4D-82F8-A1D038133242}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,6 +45,26 @@ Global
 		{2B3556F6-A29C-47F9-960B-2C909879A30A}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{2B3556F6-A29C-47F9-960B-2C909879A30A}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{2B3556F6-A29C-47F9-960B-2C909879A30A}.Release|Win32.ActiveCfg = Release|Any CPU
+		{8F0A56FE-1D93-4719-8443-1197E95B5725}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{8F0A56FE-1D93-4719-8443-1197E95B5725}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{8F0A56FE-1D93-4719-8443-1197E95B5725}.Debug|Mixed Platforms.Build.0 = Debug|Win32
+		{8F0A56FE-1D93-4719-8443-1197E95B5725}.Debug|Win32.ActiveCfg = Debug|Win32
+		{8F0A56FE-1D93-4719-8443-1197E95B5725}.Debug|Win32.Build.0 = Debug|Win32
+		{8F0A56FE-1D93-4719-8443-1197E95B5725}.Release|Any CPU.ActiveCfg = Release|Win32
+		{8F0A56FE-1D93-4719-8443-1197E95B5725}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{8F0A56FE-1D93-4719-8443-1197E95B5725}.Release|Mixed Platforms.Build.0 = Release|Win32
+		{8F0A56FE-1D93-4719-8443-1197E95B5725}.Release|Win32.ActiveCfg = Release|Win32
+		{8F0A56FE-1D93-4719-8443-1197E95B5725}.Release|Win32.Build.0 = Release|Win32
+		{E666DBE5-8C95-4D4D-82F8-A1D038133242}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{E666DBE5-8C95-4D4D-82F8-A1D038133242}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{E666DBE5-8C95-4D4D-82F8-A1D038133242}.Debug|Mixed Platforms.Build.0 = Debug|Win32
+		{E666DBE5-8C95-4D4D-82F8-A1D038133242}.Debug|Win32.ActiveCfg = Debug|Win32
+		{E666DBE5-8C95-4D4D-82F8-A1D038133242}.Debug|Win32.Build.0 = Debug|Win32
+		{E666DBE5-8C95-4D4D-82F8-A1D038133242}.Release|Any CPU.ActiveCfg = Release|Win32
+		{E666DBE5-8C95-4D4D-82F8-A1D038133242}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{E666DBE5-8C95-4D4D-82F8-A1D038133242}.Release|Mixed Platforms.Build.0 = Release|Win32
+		{E666DBE5-8C95-4D4D-82F8-A1D038133242}.Release|Win32.ActiveCfg = Release|Win32
+		{E666DBE5-8C95-4D4D-82F8-A1D038133242}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

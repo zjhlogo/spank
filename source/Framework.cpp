@@ -6,7 +6,7 @@
  * \author zjhlogo (zjhlogo@gmail.com)
  */
 #include "Framework.h"
-#include "render/RendererGl3.h"
+#include "render/RendererGl2.h"
 
 Framework::Framework()
 {
@@ -20,7 +20,7 @@ Framework::~Framework()
 
 bool Framework::initialize()
 {
-	m_pRenderer = new RendererGl3();
+	m_pRenderer = new RendererGl2();
 	if (!m_pRenderer->initialize()) return false;
 
 	return true;

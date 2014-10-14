@@ -25,6 +25,7 @@ protected:
 private:
 	Texture* m_pTexture{ nullptr };
 	Shader* m_pShader{ nullptr };
-	VMemRenderBuffer* m_pRenderBuffer{ nullptr };
 
+	MemRenderBuffer* m_pRenderBufferMem{ nullptr };
+	VMemRenderBuffer* m_pRenderBufferVMem{ nullptr };
 };
