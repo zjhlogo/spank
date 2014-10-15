@@ -9,6 +9,9 @@
 
 #include "RenderObject.h"
 
+namespace spank
+{
+
 class IRenderer;
 
 class VertexAttributes : public RenderObject
@@ -19,7 +22,6 @@ public:
 	enum CONST_DEFINE
 	{
 		MAX_ATTR_SIZE = 128,
-		MAX_ATTRIBUTE_NAME_LENGTH = 32,
 		MAX_ATTRIBUTE_ITEMS = 8,
 	};
 
@@ -38,10 +40,10 @@ public:
 	typedef struct ATTRIBUTE_ITEM_tag
 	{
 		GLuint size{ 0 };
-		ATTRIBUTE_ITEM_TYPE eItemType{ AIT_UNKNOWN };
-		GLenum eGlType{ GL_FLOAT };
+		ATTRIBUTE_ITEM_TYPE attrType{ AIT_UNKNOWN };
+		GLenum glType{ GL_FLOAT };
 		GLuint offset{ 0 };
-		char szParamName[MAX_ATTRIBUTE_NAME_LENGTH]{};
+		std::string name;
 	} ATTRIBUTE_ITEM;
 
 public:
@@ -73,3 +75,5 @@ private:
 	ATTRIBUTE_ITEM m_attributeItems[MAX_ATTRIBUTE_ITEMS + 1];
 
 };
+
+}

@@ -8,6 +8,9 @@
 #include "Framework.h"
 #include "render/RendererGl2.h"
 
+namespace spank
+{
+
 Framework::Framework()
 {
 
@@ -30,4 +33,6 @@ void Framework::terminate()
 {
 	if (m_pRenderer) m_pRenderer->terminate();
 	SAFE_DELETE(m_pRenderer);
+}
+
 }

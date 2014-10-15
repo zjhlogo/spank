@@ -18,6 +18,9 @@
 
 #include <libTinyxml2/source/tinyxml2.h>
 
+namespace spank
+{
+
 class AutoDeleteShaderObj
 {
 public:
@@ -56,6 +59,21 @@ bool Shader::loadFromFile(const std::string& filePath)
 	const char* pszVertFile = pXmlRoot->Attribute("vertex_shader");
 	const char* pszFragFile = pXmlRoot->Attribute("fregment_shader");
 	if (!pszAttrFile || !pszVertFile || !pszFragFile) return false;
+
+	// get texture list
+	m_textureInfoMap.clear();
+	int index = 0;
+	for (tinyxml2::XMLElement* pXmlTexture = pXmlRoot->FirstChildElement("texture"); pXmlTexture != nullptr; pXmlTexture = pXmlTexture->NextSiblingElement("texture"))
+	{
+		const char* pszName = pXmlTexture->Attribute("name");
+		if (!pszName) return false;
+
+		TEXTURE_INFO textureInfo;
+		textureInfo.slotId = index++;
+		textureInfo.name = pszName;
+
+		m_textureInfoMap.insert(std::make_pair(textureInfo.slotId, textureInfo));
+	}
 
 	std::string strDir = StringUtil::getFileDir(filePath);
 
@@ -99,6 +117,14 @@ bool Shader::reload(bool freeOld)
 	glAttachShader(m_programId, vertexId);
 	glAttachShader(m_programId, fragmentId);
 
+	// bind attribute
+	int numAttrs = m_pVertAttributes->getNumAttributeItems();
+	for (int i = 0; i < numAttrs; ++i)
+	{
+		const VertexAttributes::ATTRIBUTE_ITEM* pAttrItem = m_pVertAttributes->getAttributeItem(i);
+		glBindAttribLocation(m_programId, i, pAttrItem->name.c_str());
+	}
+
 	// link program
 	glLinkProgram(m_programId);
 	if (getProgramErrorLog(m_programId))
@@ -106,6 +132,19 @@ bool Shader::reload(bool freeOld)
 		LOGE("Link program failed with error log %s", m_errorLog.c_str());
 		return false;
 	}
+
+	// bind texture slot
+	glUseProgram(m_programId);
+	for (auto textureInfo : m_textureInfoMap)
+	{
+		TEXTURE_INFO& info = textureInfo.second;
+		GLint loc = glGetUniformLocation(m_programId, info.name.c_str());
+		GL_ERROR_CHECK();
+
+		glUniform1i(loc, info.slotId);
+		GL_ERROR_CHECK();
+	}
+	glUseProgram(0);
 
 	return true;
 }
@@ -129,14 +168,8 @@ bool Shader::setMatrix(const char* pszName, const float* pMatrix)
 	return true;
 }
 
-bool Shader::setTexture(const char* pszName, Texture* pTexture, int index /* = 0 */)
+bool Shader::setTexture(Texture* pTexture, int index)
 {
-	GLint loc = glGetUniformLocation(m_programId, pszName);
-	GL_ERROR_CHECK();
-
-	glUniform1i(loc, index);
-	GL_ERROR_CHECK();
-
 	glActiveTexture(GL_TEXTURE0 + index);
 	glBindTexture(GL_TEXTURE_2D, pTexture->getTextureId());
 	GL_ERROR_CHECK();
@@ -164,7 +197,7 @@ void Shader::drawArrays(MemRenderBuffer* pRenderBuffer, int start, int numVerts)
 		const VertexAttributes::ATTRIBUTE_ITEM* pAttrItem = m_pVertAttributes->getAttributeItem(i);
 
 		glEnableVertexAttribArray(i);
-		glVertexAttribPointer(i, pAttrItem->size, pAttrItem->eGlType, GL_FALSE, stride, (void*)(pRenderBuffer->getBufferMemAddr() + pAttrItem->offset));
+		glVertexAttribPointer(i, pAttrItem->size, pAttrItem->glType, GL_FALSE, stride, (void*)(pRenderBuffer->getBufferMemAddr() + pAttrItem->offset));
 	}
 
 	// Draws a non-indexed triangle array
@@ -193,7 +226,7 @@ void Shader::drawArrays(VMemRenderBuffer* pRenderBuffer, int start, int numVerts
 		const VertexAttributes::ATTRIBUTE_ITEM* pAttrItem = m_pVertAttributes->getAttributeItem(i);
 
 		glEnableVertexAttribArray(i);
-		glVertexAttribPointer(i, pAttrItem->size, pAttrItem->eGlType, GL_FALSE, stride, (void*)pAttrItem->offset);
+		glVertexAttribPointer(i, pAttrItem->size, pAttrItem->glType, GL_FALSE, stride, (void*)pAttrItem->offset);
 	}
 
 	// Draws a non-indexed triangle array
@@ -281,4 +314,6 @@ bool Shader::getProgramErrorLog(GLuint programId)
 void Shader::preDelete()
 {
 	m_pRenderer->removeShader(this);
+}
+
 }

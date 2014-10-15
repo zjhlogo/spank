@@ -7,6 +7,9 @@
  */
 #include "DeviceWin32.h"
 
+namespace spank
+{
+
 static const char* WINDOW_CLASS_NAME = "OpenGLES3Test";
 static const char* WINDOW_TITLE_NAME = "OpenGL ES 3.0 Test";
 
@@ -164,4 +167,6 @@ LRESULT CALLBACK DeviceWin32::mainWndProc(HWND hWnd, UINT uMsg, WPARAM wParam, L
 	}
 
 	return 0;
+}
+
 }

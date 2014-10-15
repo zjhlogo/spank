@@ -11,6 +11,9 @@
 
 #include "RenderObject.h"
 
+namespace spank
+{
+
 class RenderTarget : public RenderObject
 {
 public:
@@ -18,3 +21,5 @@ public:
 	virtual ~RenderTarget();
 
 };
+
+}

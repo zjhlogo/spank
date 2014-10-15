@@ -13,6 +13,9 @@
 #include "VertexAttributes.h"
 #include "../utils/LogUtil.h"
 
+namespace spank
+{
+
 RendererGl3::RendererGl3()
 {
 
@@ -20,5 +23,7 @@ RendererGl3::RendererGl3()
 
 RendererGl3::~RendererGl3()
 {
+
+}
 
 }

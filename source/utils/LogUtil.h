@@ -9,6 +9,9 @@
 
 #include <mutex>
 
+namespace spank
+{
+
 class LogUtil
 {
 public:
@@ -25,6 +28,8 @@ public:
 
 };
 
-#define LOGI(...) (LogUtil::debug(__FILE__, __LINE__, LogUtil::LPRIO_INFO, __VA_ARGS__))
-#define LOGD(...) (LogUtil::debug(__FILE__, __LINE__, LogUtil::LPRIO_DEBUG, __VA_ARGS__))
-#define LOGE(...) (LogUtil::debug(__FILE__, __LINE__, LogUtil::LPRIO_ERROR, __VA_ARGS__))
+}
+
+#define LOGI(...) (spank::LogUtil::debug(__FILE__, __LINE__, spank::LogUtil::LPRIO_INFO, __VA_ARGS__))
+#define LOGD(...) (spank::LogUtil::debug(__FILE__, __LINE__, spank::LogUtil::LPRIO_DEBUG, __VA_ARGS__))
+#define LOGE(...) (spank::LogUtil::debug(__FILE__, __LINE__, spank::LogUtil::LPRIO_ERROR, __VA_ARGS__))

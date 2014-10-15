@@ -9,6 +9,9 @@
 #include "utils/TimeUtil.h"
 #include <algorithm>
 
+namespace spank
+{
+
 IApp::IApp()
 {
 	// TODO: 
@@ -27,4 +30,6 @@ void IApp::step()
 
 	update(m_frameTime);
 	render();
+}
+
 }

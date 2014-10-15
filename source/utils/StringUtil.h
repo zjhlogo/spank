@@ -9,9 +9,14 @@
 
 #include "../base/PlatformDefine.h"
 
+namespace spank
+{
+
 class StringUtil
 {
 public:
 	static std::string getFileDir(const std::string& strIn);
 
 };
+
+}

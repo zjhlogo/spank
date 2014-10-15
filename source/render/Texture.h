@@ -10,6 +10,9 @@
 
 #include "RenderObject.h"
 
+namespace spank
+{
+
 class IRenderer;
 
 class Texture : public RenderObject
@@ -36,3 +39,5 @@ private:
 	IRenderer* m_pRenderer{ nullptr };
 
 };
+
+}

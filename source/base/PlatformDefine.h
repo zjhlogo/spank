@@ -12,6 +12,9 @@
 #include <string>
 #include <cstdint>
 
+namespace spank
+{
+
 typedef int8_t      int8;
 typedef uint8_t     uint8;
 typedef int16_t     int16;
@@ -29,3 +32,5 @@ typedef std::vector<char> BUFFER_DATA;
 #define SAFE_DELETE_ARRAY(x) if (x) {delete[] x; x=nullptr;}
 
 #define SAFE_RELEASE(x) if (x) {x->release(); x=nullptr;}
+
+}

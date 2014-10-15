@@ -9,6 +9,9 @@
 #include <stdarg.h>
 #include <android/log.h>
 
+namespace spank
+{
+
 void LogUtil::debug(const char* location, int line, LOG_PRIORITY prio, const char* format, ...)
 {
 	static std::mutex s_mutex;
@@ -28,4 +31,6 @@ void LogUtil::debug(const char* location, int line, LOG_PRIORITY prio, const cha
 	va_end(marker);
 
 	s_mutex.unlock();
+}
+
 }

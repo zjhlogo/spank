@@ -10,6 +10,9 @@
 
 #include "RenderObject.h"
 
+namespace spank
+{
+
 class IRenderer;
 class VertexAttributes;
 
@@ -75,3 +78,5 @@ private:
 	GLuint m_bufferId{ 0 };
 
 };
+
+}

@@ -11,6 +11,9 @@
 #include "../base/PlatformDefine.h"
 #include <GLES2/gl2.h>
 
+namespace spank
+{
+
 class RenderObject
 {
 public:
@@ -34,4 +37,6 @@ private:
 
 };
 
-#define GL_ERROR_CHECK() {GLenum glErrCode = glGetError(); if (glErrCode != GL_NO_ERROR) LOGE("gl Error Code: 0x%x");}
+#define GL_ERROR_CHECK() {GLenum glErrCode = glGetError(); if (glErrCode != GL_NO_ERROR) LOGE("gl Error Code: 0x%04X", glErrCode);}
+
+}

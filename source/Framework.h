@@ -14,6 +14,9 @@
 #include "render/RenderBuffer.h"
 #include "render/VertexAttributes.h"
 
+namespace spank
+{
+
 class Framework : public IMgr
 {
 public:
@@ -30,3 +33,5 @@ private:
 	IRenderer* m_pRenderer{ nullptr };
 
 };
+
+}

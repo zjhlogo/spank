@@ -9,6 +9,9 @@
 #include "RenderObject.h"
 #include "../utils/LogUtil.h"
 
+namespace spank
+{
+
 RenderObject::RenderObject()
 {
 
@@ -33,4 +36,6 @@ void RenderObject::release()
 void RenderObject::preDelete()
 {
 	// TODO: 
+}
+
 }

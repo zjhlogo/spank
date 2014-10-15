@@ -22,6 +22,9 @@ JNIEXPORT void JNICALL Java_com_zjhlogo_libspank_SpankActivityBase_initNativeAss
 	g_pAssetMgr = AAssetManager_fromJava(env, assetManager);
 }
 
+namespace spank
+{
+
 bool FileUtil::readFile(BUFFER_DATA& bufferOut, const std::string& filePath)
 {
 	AAsset* pAsset = AAssetManager_open(g_pAssetMgr, filePath.c_str(), AASSET_MODE_UNKNOWN);
@@ -42,4 +45,6 @@ bool FileUtil::readFile(BUFFER_DATA& bufferOut, const std::string& filePath)
 	AAsset_close(pAsset);
 
 	return true;
+}
+
 }

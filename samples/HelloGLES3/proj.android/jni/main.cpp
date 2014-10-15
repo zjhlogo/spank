@@ -9,7 +9,7 @@
 #include <HelloGLES3App.h>
 #include <utils/LogUtil.h>
 
-class FrameworkAndroid : public Framework {};
+class FrameworkAndroid : public spank::Framework {};
 FrameworkAndroid* g_pFrameworkAndroid = nullptr;
 HelloGLES3App* g_pHelloGLES3App = nullptr;
 

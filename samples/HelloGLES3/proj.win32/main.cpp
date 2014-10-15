@@ -11,12 +11,12 @@
 #include <Framework.h>
 #include <HelloGLES3App.h>
 
-class FrameworkWin32 : public Framework {};
+class FrameworkWin32 : public spank::Framework {};
 
 int __stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
 	// initialize device
-	DeviceWin32 device;
+	spank::DeviceWin32 device;
 	if (!device.initialize(hInstance, 960, 640))
 	{
 		device.terminate();

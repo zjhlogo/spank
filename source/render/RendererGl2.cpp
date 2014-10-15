@@ -15,6 +15,9 @@
 
 #include <GLES2/gl2.h>
 
+namespace spank
+{
+
 RendererGl2::RendererGl2()
 {
 
@@ -247,4 +250,6 @@ bool RendererGl2::removeVertexAttributes(VertexAttributes* pVertAttrs)
 	m_vertexAttributeMap.erase(it);
 
 	return true;
+}
+
 }

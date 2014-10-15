@@ -12,6 +12,9 @@
 #include <map>
 #include <set>
 
+namespace spank
+{
+
 class RendererGl2 : public IRenderer
 {
 public:
@@ -47,3 +50,5 @@ private:
 	TM_VERTEX_ATTRIBUTE m_vertexAttributeMap;
 
 };
+
+}

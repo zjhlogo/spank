@@ -7,6 +7,9 @@
  */
 #include "StringUtil.h"
 
+namespace spank
+{
+
 std::string StringUtil::getFileDir(const std::string& strIn)
 {
 	std::string strDir;
@@ -15,4 +18,6 @@ std::string StringUtil::getFileDir(const std::string& strIn)
 	if (nPosEnd == std::string::npos) return strDir;
 
 	return strIn.substr(0, nPosEnd);
+}
+
 }

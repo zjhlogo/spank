@@ -10,6 +10,9 @@
 
 #include "RendererGl2.h"
 
+namespace spank
+{
+
 class RendererGl3 : public RendererGl2
 {
 public:
@@ -17,3 +20,5 @@ public:
 	virtual ~RendererGl3();
 
 };
+
+}

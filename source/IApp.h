@@ -9,6 +9,9 @@
 
 #include "Framework.h"
 
+namespace spank
+{
+
 class IApp
 {
 public:
@@ -35,3 +38,5 @@ private:
 	Framework* m_pFramework{ nullptr };
 
 };
+
+}

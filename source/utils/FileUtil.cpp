@@ -7,6 +7,9 @@
  */
 #include "FileUtil.h"
 
+namespace spank
+{
+
 bool FileUtil::readStringFile(std::string& strOut, const std::string& filePath)
 {
 	BUFFER_DATA buffer;
@@ -16,4 +19,6 @@ bool FileUtil::readStringFile(std::string& strOut, const std::string& filePath)
 	strOut.append(buffer.data(), buffer.size());
 
 	return true;
+}
+
 }

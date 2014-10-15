@@ -9,13 +9,13 @@
 
 #include <IApp.h>
 
-class HelloGLES3App : public IApp
+class HelloGLES3App : public spank::IApp
 {
 public:
 	HelloGLES3App();
 	virtual ~HelloGLES3App();
 
-	virtual bool initialize(Framework* pFramework) override;
+	virtual bool initialize(spank::Framework* pFramework) override;
 	virtual void terminate() override;
 
 protected:
@@ -23,9 +23,9 @@ protected:
 	virtual void render() override;
 
 private:
-	Texture* m_pTexture{ nullptr };
-	Shader* m_pShader{ nullptr };
+	spank::Texture* m_pTexture{ nullptr };
+	spank::Shader* m_pShader{ nullptr };
 
-	MemRenderBuffer* m_pRenderBufferMem{ nullptr };
-	VMemRenderBuffer* m_pRenderBufferVMem{ nullptr };
+	spank::MemRenderBuffer* m_pRenderBufferMem{ nullptr };
+	spank::VMemRenderBuffer* m_pRenderBufferVMem{ nullptr };
 };

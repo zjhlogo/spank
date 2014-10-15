@@ -9,6 +9,9 @@
 
 #include <EGL/egl.h>
 
+namespace spank
+{
+
 class DeviceWin32
 {
 public:
@@ -37,3 +40,5 @@ private:
 	EGLSurface m_eglSurface{ nullptr };
 
 };
+
+}

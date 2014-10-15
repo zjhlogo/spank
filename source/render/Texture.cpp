@@ -10,6 +10,9 @@
 #include "IRenderer.h"
 #include <libPvr/source/PVRTTextureAPI.h>
 
+namespace spank
+{
+
 Texture::Texture(IRenderer* pRenderer)
 	: m_pRenderer(pRenderer)
 {
@@ -54,4 +57,6 @@ void Texture::destroyTexture()
 void Texture::preDelete()
 {
 	m_pRenderer->removeTexture(this);
+}
+
 }

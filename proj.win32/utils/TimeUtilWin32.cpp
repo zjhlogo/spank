@@ -8,7 +8,12 @@
 #include <utils/TimeUtil.h>
 #include <windows.h>
 
+namespace spank
+{
+
 int TimeUtil::getNowTime()
 {
 	return timeGetTime();
+}
+
 }

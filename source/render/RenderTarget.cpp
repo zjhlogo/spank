@@ -8,6 +8,9 @@
  */
 #include "RenderTarget.h"
 
+namespace spank
+{
+
 RenderTarget::RenderTarget()
 {
 
@@ -15,5 +18,7 @@ RenderTarget::RenderTarget()
 
 RenderTarget::~RenderTarget()
 {
+
+}
 
 }

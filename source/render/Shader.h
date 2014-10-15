@@ -9,6 +9,10 @@
 #pragma once
 
 #include "RenderObject.h"
+#include <map>
+
+namespace spank
+{
 
 class IRenderer;
 class Texture;
@@ -19,7 +23,16 @@ class VertexAttributes;
 
 class Shader : public RenderObject
 {
+public:
 	friend class RendererGl2;
+
+	typedef struct TEXTURE_INFO_tag
+	{
+		int slotId{ 0 };
+		std::string name;
+	} TEXTURE_INFO;
+
+	typedef std::map<int, TEXTURE_INFO> TM_TEXTURE_INFO;
 
 public:
 	bool loadFromFile(const std::string& filePath);
@@ -27,7 +40,7 @@ public:
 
 	void useProgram();
 	bool setMatrix(const char* pszName, const float* pMatrix);
-	bool setTexture(const char* pszName, Texture* pTexture, int index = 0);
+	bool setTexture(Texture* pTexture, int index);
 
 	void drawArrays(MemRenderBuffer* pRenderBuffer, int start, int numVerts);
 	void drawArrays(VMemRenderBuffer* pRenderBuffer, int start, int numVerts);
@@ -57,4 +70,8 @@ private:
 	std::string m_fragShaderData;
 	std::string m_errorLog;
 
+	TM_TEXTURE_INFO m_textureInfoMap;
+
 };
+
+}

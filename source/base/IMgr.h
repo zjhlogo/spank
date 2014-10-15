@@ -10,6 +10,9 @@
 
 #include "PlatformDefine.h"
 
+namespace spank
+{
+
 class IMgr
 {
 public:
@@ -20,3 +23,5 @@ public:
 	virtual void terminate() = 0;
 
 };
+
+}

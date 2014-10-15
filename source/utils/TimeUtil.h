@@ -7,8 +7,13 @@
  */
 #pragma once
 
+namespace spank
+{
+
 class TimeUtil
 {
 public:
 	static int getNowTime();
 };
+
+}

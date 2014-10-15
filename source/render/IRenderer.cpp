@@ -12,6 +12,9 @@
 #include "RenderBuffer.h"
 #include "VertexAttributes.h"
 
+namespace spank
+{
+
 IRenderer::IRenderer()
 {
 
@@ -19,5 +22,7 @@ IRenderer::IRenderer()
 
 IRenderer::~IRenderer()
 {
+
+}
 
 }

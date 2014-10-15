@@ -10,6 +10,9 @@
 
 #include "../base/IMgr.h"
 
+namespace spank
+{
+
 class Texture;
 class Shader;
 class RenderBuffer;
@@ -43,3 +46,5 @@ protected:
 	virtual bool removeVertexAttributes(VertexAttributes* pVertAttrs) = 0;
 
 };
+
+}

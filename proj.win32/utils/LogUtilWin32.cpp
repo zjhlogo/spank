@@ -10,6 +10,9 @@
 #include <stdarg.h>
 #include <windows.h>
 
+namespace spank
+{
+
 void LogUtil::debug(const char* location, int line, LOG_PRIORITY prio, const char* format, ...)
 {
 	static std::mutex s_mutex;
@@ -35,4 +38,6 @@ void LogUtil::debug(const char* location, int line, LOG_PRIORITY prio, const cha
 	strStream << location << "(" << line << "): " << PRIORITY_MAP[prio] << ": " << g_szBuffer << std::endl;
 	OutputDebugString(strStream.str().c_str());
 	s_mutex.unlock();
+}
+
 }

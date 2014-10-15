@@ -8,9 +8,14 @@
 #include <utils/TimeUtil.h>
 #include <time.h>
 
+namespace spank
+{
+
 int TimeUtil::getNowTime()
 {
 	timespec res;
 	clock_gettime(CLOCK_REALTIME, &res);
 	return res.tv_sec * 1000 + res.tv_nsec / 1e6;
+}
+
 }

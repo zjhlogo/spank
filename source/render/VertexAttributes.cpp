@@ -11,6 +11,9 @@
 
 #include <libTinyxml2/source/tinyxml2.h>
 
+namespace spank
+{
+
 VertexAttributes::VertexAttributes(IRenderer* pRenderer)
 	:m_pRenderer(pRenderer)
 {
@@ -55,9 +58,9 @@ bool VertexAttributes::loadFromFile(const std::string& filePath)
 		if (!pszName) return false;
 
 		attrItems[attrIndex].size = size;
-		attrItems[attrIndex].eItemType = getAttributeItemType(pszType);
-		attrItems[attrIndex].eGlType = getGlType(attrItems[attrIndex].eItemType);
-		strncpy(attrItems[attrIndex].szParamName, pszType, MAX_ATTRIBUTE_NAME_LENGTH);
+		attrItems[attrIndex].attrType = getAttributeItemType(pszType);
+		attrItems[attrIndex].glType = getGlType(attrItems[attrIndex].attrType);
+		attrItems[attrIndex].name = pszName;
 
 		++attrIndex;
 	}
@@ -65,10 +68,10 @@ bool VertexAttributes::loadFromFile(const std::string& filePath)
 	if (attrIndex <= 0 || attrIndex > MAX_ATTRIBUTE_ITEMS) return false;
 
 	attrItems[attrIndex].size = 0;
-	attrItems[attrIndex].eItemType = AIT_UNKNOWN;
-	attrItems[attrIndex].eGlType = getGlType(attrItems[attrIndex].eItemType);
+	attrItems[attrIndex].attrType = AIT_UNKNOWN;
+	attrItems[attrIndex].glType = getGlType(attrItems[attrIndex].attrType);
 	attrItems[attrIndex].offset = 0;
-	attrItems[attrIndex].szParamName[0] = '\0';
+	attrItems[attrIndex].name.clear();
 
 	if (createVertexAttribute(attrItems))
 	{
@@ -96,8 +99,8 @@ bool VertexAttributes::isEqual(const VertexAttributes* pVertexAttrs) const
 		const ATTRIBUTE_ITEM* pAttrItem = pVertexAttrs->getAttributeItem(i);
 
 		if (m_attributeItems[i].size != pAttrItem->size) return false;
-		if (m_attributeItems[i].eItemType != pAttrItem->eItemType) return false;
-		if (strncmp(m_attributeItems[i].szParamName, pAttrItem->szParamName, MAX_ATTRIBUTE_NAME_LENGTH) != 0) return false;
+		if (m_attributeItems[i].attrType != pAttrItem->attrType) return false;
+		if (m_attributeItems[i].name != pAttrItem->name) return false;
 	}
 
 	return true;
@@ -153,7 +156,7 @@ bool VertexAttributes::createVertexAttribute(const ATTRIBUTE_ITEM* pAttrItems)
 {
 	int nNumItems = 0;
 	const ATTRIBUTE_ITEM* pCurrItem = pAttrItems;
-	while (pCurrItem && pCurrItem->eItemType != AIT_UNKNOWN)
+	while (pCurrItem && pCurrItem->attrType != AIT_UNKNOWN)
 	{
 		nNumItems++;
 		pCurrItem++;
@@ -162,22 +165,22 @@ bool VertexAttributes::createVertexAttribute(const ATTRIBUTE_ITEM* pAttrItems)
 	if (nNumItems <= 0 || nNumItems > MAX_ATTRIBUTE_ITEMS) return false;
 
 	m_numItems = nNumItems;
-	uint nOffset = 0;
+	uint currOffset = 0;
 	for (int i = 0; i < nNumItems; ++i)
 	{
 		m_attributeItems[i].size = pAttrItems[i].size;
-		m_attributeItems[i].eItemType = pAttrItems[i].eItemType;
-		m_attributeItems[i].eGlType = pAttrItems[i].eGlType;
-		m_attributeItems[i].offset = nOffset;
-		strncpy(m_attributeItems[i].szParamName, pAttrItems[i].szParamName, MAX_ATTRIBUTE_NAME_LENGTH);
-		nOffset += getAttributeItemSize(m_attributeItems[i].size, m_attributeItems[i].eItemType);
+		m_attributeItems[i].attrType = pAttrItems[i].attrType;
+		m_attributeItems[i].glType = pAttrItems[i].glType;
+		m_attributeItems[i].offset = currOffset;
+		m_attributeItems[i].name = pAttrItems[i].name;
+		currOffset += getAttributeItemSize(m_attributeItems[i].size, m_attributeItems[i].attrType);
 	}
 
 	m_attributeItems[m_numItems].size = 0;
-	m_attributeItems[m_numItems].eItemType = AIT_UNKNOWN;
-	m_attributeItems[m_numItems].eGlType = getGlType(AIT_UNKNOWN);
-	m_attributeItems[m_numItems].offset = nOffset;
-	m_attributeItems[m_numItems].szParamName[0] = '\0';
+	m_attributeItems[m_numItems].attrType = AIT_UNKNOWN;
+	m_attributeItems[m_numItems].glType = getGlType(AIT_UNKNOWN);
+	m_attributeItems[m_numItems].offset = currOffset;
+	m_attributeItems[m_numItems].name.clear();
 
 	return true;
 }
@@ -185,4 +188,6 @@ bool VertexAttributes::createVertexAttribute(const ATTRIBUTE_ITEM* pAttrItems)
 void VertexAttributes::preDelete()
 {
 	m_pRenderer->removeVertexAttributes(this);
+}
+
 }

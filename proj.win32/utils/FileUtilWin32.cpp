@@ -9,6 +9,9 @@
 #include <utils/FileUtil.h>
 #include <utils/LogUtil.h>
 
+namespace spank
+{
+
 bool FileUtil::readFile(BUFFER_DATA& bufferOut, const std::string& filePath)
 {
 	FILE* pFile = nullptr;
@@ -33,4 +36,6 @@ bool FileUtil::readFile(BUFFER_DATA& bufferOut, const std::string& filePath)
 	fclose(pFile);
 
 	return true;
+}
+
 }

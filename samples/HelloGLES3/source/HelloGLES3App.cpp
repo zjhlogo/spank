@@ -19,9 +19,9 @@ HelloGLES3App::~HelloGLES3App()
 
 }
 
-bool HelloGLES3App::initialize(Framework* pFramework)
+bool HelloGLES3App::initialize(spank::Framework* pFramework)
 {
-	IRenderer* pRenderer = getRenderer();
+	spank::IRenderer* pRenderer = getRenderer();
 
 	m_pShader = pRenderer->createShader("data/shaders/pos3_uv2.shader");
 	if (!m_pShader) return false;
@@ -76,6 +76,6 @@ void HelloGLES3App::render()
 
 	m_pShader->useProgram();
 	m_pShader->setMatrix("u_matMVP", afIdentity);
-	m_pShader->setTexture("u_texture", m_pTexture);
+	m_pShader->setTexture(m_pTexture, 0);
 	m_pShader->drawArrays(m_pRenderBufferVMem, 0, 3);
 }

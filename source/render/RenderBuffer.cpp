@@ -11,6 +11,9 @@
 #include "IRenderer.h"
 #include "../utils/LogUtil.h"
 
+namespace spank
+{
+
 RenderBuffer::RenderBuffer(IRenderer* pRenderer)
 	:m_pRenderer(pRenderer)
 {
@@ -109,4 +112,6 @@ bool VMemRenderBuffer::updateVBufferData()
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 
 	return true;
+}
+
 }

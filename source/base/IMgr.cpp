@@ -8,6 +8,9 @@
  */
 #include "IMgr.h"
 
+namespace spank
+{
+
 IMgr::IMgr()
 {
 
@@ -15,5 +18,7 @@ IMgr::IMgr()
 
 IMgr::~IMgr()
 {
+
+}
 
 }
