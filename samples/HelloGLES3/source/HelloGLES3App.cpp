@@ -9,6 +9,10 @@
 #include <utils/LogUtil.h>
 #include <utils/FileUtil.h>
 
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/quaternion.hpp>
+
 HelloGLES3App::HelloGLES3App()
 {
 	// TODO: 
@@ -58,7 +62,8 @@ void HelloGLES3App::terminate()
 
 void HelloGLES3App::update(float dt)
 {
-	// TODO: throw std::exception("The method or operation is not implemented.");
+	m_rot += dt;
+	if (m_rot > glm::pi<float>()*2.0f) m_rot -= glm::pi<float>()*2.0f;
 }
 
 void HelloGLES3App::render()
@@ -66,16 +71,11 @@ void HelloGLES3App::render()
 	glClearColor(0.6f, 0.8f, 1.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT);
 
-	// Matrix used for projection model view
-	float afIdentity[] = {
-		1, 0, 0, 0,
-		0, 1, 0, 0,
-		0, 0, 1, 0,
-		0, 0, 0, 1
-	};
+	glm::quat quaRot = glm::angleAxis(m_rot, glm::vec3(0.0f, 1.0f, 0.0f));
+	glm::mat4 matRot = glm::mat4_cast(quaRot);
 
 	m_pShader->useProgram();
-	m_pShader->setMatrix("u_matMVP", afIdentity);
+	m_pShader->setMatrix("u_matMVP", matRot);
 	m_pShader->setTexture(m_pTexture, 0);
 	m_pShader->drawArrays(m_pRenderBufferVMem, 0, 3);
 }

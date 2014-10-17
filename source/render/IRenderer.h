@@ -32,6 +32,7 @@ public:
 	virtual ~IRenderer();
 
 	virtual void reload(bool freeOld) = 0;
+	virtual void resize(int width, int height) = 0;
 
 	virtual Texture* createTexture(const std::string& filePath) = 0;
 	virtual Shader* createShader(const std::string& filePath) = 0;

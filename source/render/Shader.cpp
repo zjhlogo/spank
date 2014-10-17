@@ -155,14 +155,16 @@ void Shader::useProgram()
 	GL_ERROR_CHECK();
 }
 
-bool Shader::setMatrix(const char* pszName, const float* pMatrix)
+bool Shader::setMatrix(const char* pszName, const glm::mat4& mat4)
 {
 	// First gets the location of that variable in the shader using its name
 	int loc = glGetUniformLocation(m_programId, pszName);
 	GL_ERROR_CHECK();
 
+	const float* pValue = glm::value_ptr(mat4);
+
 	// Then passes the matrix to that variable
-	glUniformMatrix4fv(loc, 1, GL_FALSE, pMatrix);
+	glUniformMatrix4fv(loc, 1, GL_FALSE, pValue);
 	GL_ERROR_CHECK();
 
 	return true;

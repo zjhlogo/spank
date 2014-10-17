@@ -30,6 +30,7 @@ public:
 	virtual bool initialize() override;
 	virtual void terminate() override;
 	virtual void reload(bool freeOld) override;
+	virtual void resize(int width, int height) override;
 
 	virtual Texture* createTexture(const std::string& filePath) override;
 	virtual Shader* createShader(const std::string& filePath) override;

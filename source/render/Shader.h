@@ -9,6 +9,8 @@
 #pragma once
 
 #include "RenderObject.h"
+#include <glm/glm.hpp>
+#include <glm/gtc/type_ptr.hpp>
 #include <map>
 
 namespace spank
@@ -39,7 +41,7 @@ public:
 	bool reload(bool freeOld);
 
 	void useProgram();
-	bool setMatrix(const char* pszName, const float* pMatrix);
+	bool setMatrix(const char* pszName, const glm::mat4& mat4);
 	bool setTexture(Texture* pTexture, int index);
 
 	void drawArrays(MemRenderBuffer* pRenderBuffer, int start, int numVerts);

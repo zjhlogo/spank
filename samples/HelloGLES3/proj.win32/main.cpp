@@ -32,6 +32,7 @@ int __stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdL
 		return 0;
 	}
 	device.setFramework(&framework);
+	framework.getRenderer()->resize(device.getWidth(), device.getHeight());
 
 	// initialize app
 	HelloGLES3App app;
@@ -47,10 +48,15 @@ int __stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdL
 	// start message loop
 	MSG msg;
 	memset(&msg, 0, sizeof(msg));
-	while (GetMessage(&msg, NULL, 0, 0))
+	while (true)
 	{
-		TranslateMessage(&msg);
-		DispatchMessage(&msg);
+		while (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
+		{
+			TranslateMessage(&msg);
+			DispatchMessage(&msg);
+		}
+
+		if (msg.message == WM_QUIT) break;
 
 		app.step();
 

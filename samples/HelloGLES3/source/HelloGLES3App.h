@@ -28,4 +28,7 @@ private:
 
 	spank::MemRenderBuffer* m_pRenderBufferMem{ nullptr };
 	spank::VMemRenderBuffer* m_pRenderBufferVMem{ nullptr };
+
+	float m_rot{ 0.0f };
+
 };

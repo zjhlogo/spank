@@ -15,7 +15,7 @@ namespace spank
 
 IApp::IApp()
 {
-	// TODO: 
+	m_currTime = TimeUtil::getNowTime();
 }
 
 IApp::~IApp()

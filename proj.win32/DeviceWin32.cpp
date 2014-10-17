@@ -29,6 +29,9 @@ DeviceWin32::~DeviceWin32()
 bool DeviceWin32::initialize(HINSTANCE hInstance, int width, int height)
 {
 	if (!createWindow(hInstance, width, height)) return false;
+	m_width = width;
+	m_height = height;
+
 	if (!createEglContext()) return false;
 	return true;
 }

@@ -80,6 +80,8 @@
 #ifndef GLM_INCLUDED
 #define GLM_INCLUDED
 
+#define GLM_FORCE_RADIANS
+
 #include <cmath>
 #include <climits>
 #include <cfloat>

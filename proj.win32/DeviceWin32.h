@@ -29,6 +29,9 @@ public:
 	inline EGLDisplay getEglDisplay() const { return m_eglDisplay; };
 	inline EGLSurface getEglSurface() const { return m_eglSurface; };
 
+	inline int getWidth() const { return m_width; };
+	inline int getHeight() const { return m_height; };
+
 private:
 	bool createWindow(HINSTANCE hInstance, int width, int height);
 	void destroyWindow();
@@ -45,6 +48,9 @@ private:
 	EGLNativeDisplayType m_nativeDisplay{ nullptr };
 	EGLDisplay m_eglDisplay{ nullptr };
 	EGLSurface m_eglSurface{ nullptr };
+
+	int m_width{ 0 };
+	int m_height{ 0 };
 
 };
 
