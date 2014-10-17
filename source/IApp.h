@@ -7,17 +7,15 @@
  */
 #pragma once
 
+#include "base/IMgr.h"
 #include "Framework.h"
 
 namespace spank
 {
 
-class IApp
+class IApp : public IMgr
 {
 public:
-	virtual bool initialize(Framework* pFramework) = 0;
-	virtual void terminate() = 0;
-
 	void step();
 
 	inline void setFramework(Framework* pFramework) { m_pFramework = pFramework; };

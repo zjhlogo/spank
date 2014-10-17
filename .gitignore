@@ -19,6 +19,11 @@ bld/
 bin/*.exe
 bin/*.lib
 bin/*.dll
+bin/*.exp
+bin/*.js
+bin/*.html
+bin/*.bc
+bin/*.data
 gen/
 .settings/
 proj.android/bin/

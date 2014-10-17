@@ -10,6 +10,9 @@
     <Filter Include="utils">
       <UniqueIdentifier>{cb0838a1-e310-43ad-a51f-27c50d9e4217}</UniqueIdentifier>
     </Filter>
+    <Filter Include="input">
+      <UniqueIdentifier>{ad172f36-3920-4de5-ba6c-bc4252a9ce95}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\source\base\IMgr.cpp">
@@ -60,6 +63,21 @@
     <ClCompile Include="..\source\utils\StringUtil.cpp">
       <Filter>utils</Filter>
     </ClCompile>
+    <ClCompile Include="..\source\input\TouchDelegateMgr.cpp">
+      <Filter>input</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\utils\ImageUtil.cpp">
+      <Filter>utils</Filter>
+    </ClCompile>
+    <ClCompile Include="utils\ImageUtilWin32.cpp">
+      <Filter>utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\utils\StringBuilder.cpp">
+      <Filter>utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\utils\BufferStream.cpp">
+      <Filter>utils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\source\base\IMgr.h">
@@ -108,6 +126,18 @@
       <Filter>render</Filter>
     </ClInclude>
     <ClInclude Include="..\source\utils\StringUtil.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\input\TouchDelegateMgr.h">
+      <Filter>input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\utils\ImageUtil.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\utils\StringBuilder.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\utils\BufferStream.h">
       <Filter>utils</Filter>
     </ClInclude>
   </ItemGroup>

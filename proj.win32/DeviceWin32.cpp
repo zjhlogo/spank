@@ -6,10 +6,13 @@
  * \author zjhlogo (zjhlogo@gmail.com)
  */
 #include "DeviceWin32.h"
+#include <Framework.h>
+#include <glm/glm.hpp>
 
 namespace spank
 {
 
+Framework* DeviceWin32::s_pFramework{ nullptr };
 static const char* WINDOW_CLASS_NAME = "OpenGLES3Test";
 static const char* WINDOW_TITLE_NAME = "OpenGL ES 3.0 Test";
 
@@ -34,6 +37,16 @@ void DeviceWin32::terminate()
 {
 	destroyEglContext();
 	destroyWindow();
+}
+
+void DeviceWin32::setFramework(Framework* pFramework)
+{
+	s_pFramework = pFramework;
+}
+
+Framework* DeviceWin32::getFramework()
+{
+	return s_pFramework;
 }
 
 bool DeviceWin32::createWindow(HINSTANCE hInstance, int width, int height)
@@ -158,6 +171,30 @@ LRESULT CALLBACK DeviceWin32::mainWndProc(HWND hWnd, UINT uMsg, WPARAM wParam, L
 {
 	switch (uMsg)
 	{
+	case WM_LBUTTONDOWN:
+	{
+		int posx = (int)(short)LOWORD(lParam);
+		int posy = (int)(short)HIWORD(lParam);
+		glm::vec2 touchPos(posx, posy);
+		s_pFramework->getTouchDelegateMgr()->handleTouchBegin(touchPos);
+	}
+		break;
+	case WM_MOUSEMOVE:
+	{
+		int posx = (int)(short)LOWORD(lParam);
+		int posy = (int)(short)HIWORD(lParam);
+		glm::vec2 touchPos(posx, posy);
+		s_pFramework->getTouchDelegateMgr()->handleTouchMove(touchPos);
+	}
+		break;
+	case WM_LBUTTONUP:
+	{
+		int posx = (int)(short)LOWORD(lParam);
+		int posy = (int)(short)HIWORD(lParam);
+		glm::vec2 touchPos(posx, posy);
+		s_pFramework->getTouchDelegateMgr()->handleTouchEnd(touchPos);
+	}
+		break;
 	case WM_DESTROY:
 		PostQuitMessage(0);
 		break;

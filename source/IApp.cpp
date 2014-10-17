@@ -6,6 +6,7 @@
  * \author zjhlogo (zjhlogo@gmail.com)
  */
 #include "IApp.h"
+#include "Framework.h"
 #include "utils/TimeUtil.h"
 #include <algorithm>
 

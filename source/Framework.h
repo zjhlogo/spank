@@ -12,7 +12,7 @@
 #include "render/Texture.h"
 #include "render/Shader.h"
 #include "render/RenderBuffer.h"
-#include "render/VertexAttributes.h"
+#include "input/TouchDelegateMgr.h"
 
 namespace spank
 {
@@ -24,6 +24,7 @@ public:
 	virtual void terminate() override;
 
 	inline IRenderer* getRenderer() const { return m_pRenderer; };
+	inline TouchDelegateMgr* getTouchDelegateMgr() const { return m_pTouchDelegateMgr; };
 
 protected:
 	Framework();
@@ -31,6 +32,7 @@ protected:
 
 private:
 	IRenderer* m_pRenderer{ nullptr };
+	TouchDelegateMgr* m_pTouchDelegateMgr{ nullptr };
 
 };
 

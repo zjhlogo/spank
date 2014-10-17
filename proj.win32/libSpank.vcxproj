@@ -14,6 +14,7 @@
     <ClCompile Include="..\source\base\IMgr.cpp" />
     <ClCompile Include="..\source\Framework.cpp" />
     <ClCompile Include="..\source\IApp.cpp" />
+    <ClCompile Include="..\source\input\TouchDelegateMgr.cpp" />
     <ClCompile Include="..\source\render\IRenderer.cpp" />
     <ClCompile Include="..\source\render\RenderBuffer.cpp" />
     <ClCompile Include="..\source\render\RendererGl2.cpp" />
@@ -24,9 +25,13 @@
     <ClCompile Include="..\source\render\Texture.cpp" />
     <ClCompile Include="..\source\render\VertexAttributes.cpp" />
     <ClCompile Include="..\source\utils\FileUtil.cpp" />
+    <ClCompile Include="..\source\utils\ImageUtil.cpp" />
+    <ClCompile Include="..\source\utils\BufferStream.cpp" />
+    <ClCompile Include="..\source\utils\StringBuilder.cpp" />
     <ClCompile Include="..\source\utils\StringUtil.cpp" />
     <ClCompile Include="DeviceWin32.cpp" />
     <ClCompile Include="utils\FileUtilWin32.cpp" />
+    <ClCompile Include="utils\ImageUtilWin32.cpp" />
     <ClCompile Include="utils\LogUtilWin32.cpp" />
     <ClCompile Include="utils\TimeUtilWin32.cpp" />
   </ItemGroup>
@@ -35,6 +40,7 @@
     <ClInclude Include="..\source\base\PlatformDefine.h" />
     <ClInclude Include="..\source\Framework.h" />
     <ClInclude Include="..\source\IApp.h" />
+    <ClInclude Include="..\source\input\TouchDelegateMgr.h" />
     <ClInclude Include="..\source\render\IRenderer.h" />
     <ClInclude Include="..\source\render\RenderBuffer.h" />
     <ClInclude Include="..\source\render\RendererGl2.h" />
@@ -45,7 +51,10 @@
     <ClInclude Include="..\source\render\Texture.h" />
     <ClInclude Include="..\source\render\VertexAttributes.h" />
     <ClInclude Include="..\source\utils\FileUtil.h" />
+    <ClInclude Include="..\source\utils\ImageUtil.h" />
     <ClInclude Include="..\source\utils\LogUtil.h" />
+    <ClInclude Include="..\source\utils\BufferStream.h" />
+    <ClInclude Include="..\source\utils\StringBuilder.h" />
     <ClInclude Include="..\source\utils\StringUtil.h" />
     <ClInclude Include="..\source\utils\TimeUtil.h" />
     <ClInclude Include="DeviceWin32.h" />

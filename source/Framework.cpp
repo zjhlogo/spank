@@ -26,11 +26,17 @@ bool Framework::initialize()
 	m_pRenderer = new RendererGl2();
 	if (!m_pRenderer->initialize()) return false;
 
+	m_pTouchDelegateMgr = new TouchDelegateMgr();
+	if (!m_pTouchDelegateMgr->initialize()) return false;
+
 	return true;
 }
 
 void Framework::terminate()
 {
+	if (m_pTouchDelegateMgr) m_pTouchDelegateMgr->terminate();
+	SAFE_DELETE(m_pTouchDelegateMgr);
+
 	if (m_pRenderer) m_pRenderer->terminate();
 	SAFE_DELETE(m_pRenderer);
 }

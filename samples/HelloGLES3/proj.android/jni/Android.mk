@@ -7,6 +7,7 @@ LOCAL_CFLAGS    := -Werror
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../source \
                     $(LOCAL_PATH)/../../../../source \
+                    $(LOCAL_PATH)/../../../../vendor \
 
 
 LOCAL_SRC_FILES := main.cpp \

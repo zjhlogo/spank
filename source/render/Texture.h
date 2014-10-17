@@ -9,6 +9,7 @@
 #pragma once
 
 #include "RenderObject.h"
+#include "../utils/ImageUtil.h"
 
 namespace spank
 {
@@ -35,6 +36,7 @@ private:
 	void destroyTexture();
 
 private:
+	ImageUtil::IMAGE_FILE_TYPE m_eImageFileType{ ImageUtil::IFT_UNKNOWN };
 	GLuint m_textureId{ 0 };
 	IRenderer* m_pRenderer{ nullptr };
 

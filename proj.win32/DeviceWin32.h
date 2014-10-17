@@ -12,6 +12,8 @@
 namespace spank
 {
 
+class Framework;
+
 class DeviceWin32
 {
 public:
@@ -20,6 +22,9 @@ public:
 
 	bool initialize(HINSTANCE hInstance, int width, int height);
 	void terminate();
+
+	static void setFramework(Framework* pFramework);
+	static Framework* getFramework();
 
 	inline EGLDisplay getEglDisplay() const { return m_eglDisplay; };
 	inline EGLSurface getEglSurface() const { return m_eglSurface; };
@@ -34,6 +39,8 @@ private:
 	static LRESULT CALLBACK mainWndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
 private:
+	static Framework* s_pFramework;
+
 	EGLNativeWindowType m_nativeWindow{ nullptr };
 	EGLNativeDisplayType m_nativeDisplay{ nullptr };
 	EGLDisplay m_eglDisplay{ nullptr };

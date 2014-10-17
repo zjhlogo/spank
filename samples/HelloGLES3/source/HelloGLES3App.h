@@ -15,7 +15,7 @@ public:
 	HelloGLES3App();
 	virtual ~HelloGLES3App();
 
-	virtual bool initialize(spank::Framework* pFramework) override;
+	virtual bool initialize() override;
 	virtual void terminate() override;
 
 protected:

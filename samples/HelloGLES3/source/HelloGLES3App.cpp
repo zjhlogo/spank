@@ -19,14 +19,14 @@ HelloGLES3App::~HelloGLES3App()
 
 }
 
-bool HelloGLES3App::initialize(spank::Framework* pFramework)
+bool HelloGLES3App::initialize()
 {
 	spank::IRenderer* pRenderer = getRenderer();
 
 	m_pShader = pRenderer->createShader("data/shaders/pos3_uv2.shader");
 	if (!m_pShader) return false;
 
-	m_pTexture = pRenderer->createTexture("data/image.pvr");
+	m_pTexture = pRenderer->createTexture("data/test.png");
 	if (!m_pTexture) return false;
 
 	m_pRenderBufferMem = pRenderer->createMemRenderBuffer(m_pShader->getVertexAttributes());

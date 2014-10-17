@@ -14,9 +14,8 @@ namespace spank
 
 bool FileUtil::readFile(BUFFER_DATA& bufferOut, const std::string& filePath)
 {
-	FILE* pFile = nullptr;
-	int result = fopen_s(&pFile, filePath.c_str(), "rb");
-	if (result != 0)
+	FILE* pFile = fopen(filePath.c_str(), "rb");
+	if (!pFile)
 	{
 		LOGE("Open file failed %s", filePath.c_str());
 		return false;

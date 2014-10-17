@@ -35,6 +35,8 @@ bool RendererGl2::initialize()
 	LOGI("Renderer: %s", glGetString(GL_RENDERER));
 	LOGI("Extensions: %s", glGetString(GL_EXTENSIONS));
 
+	reload(false);
+
 	return true;
 }
 
@@ -76,6 +78,9 @@ void RendererGl2::terminate()
 
 void RendererGl2::reload(bool freeOld)
 {
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
 	// reload all objects
 	for (auto texture : m_textureMap)
 	{
