@@ -13,6 +13,7 @@
 #include "render/Shader.h"
 #include "render/RenderBuffer.h"
 #include "input/TouchDelegateMgr.h"
+#include "font/FontMgr.h"
 
 namespace spank
 {
@@ -25,6 +26,7 @@ public:
 
 	inline IRenderer* getRenderer() const { return m_pRenderer; };
 	inline TouchDelegateMgr* getTouchDelegateMgr() const { return m_pTouchDelegateMgr; };
+	inline FontMgr* getFontMgr() const { return m_pFontMgr; };
 
 protected:
 	Framework();
@@ -33,6 +35,7 @@ protected:
 private:
 	IRenderer* m_pRenderer{ nullptr };
 	TouchDelegateMgr* m_pTouchDelegateMgr{ nullptr };
+	FontMgr* m_pFontMgr{ nullptr };
 
 };
 

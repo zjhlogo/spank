@@ -16,8 +16,8 @@ namespace spank
 class Texture;
 class Shader;
 class RenderBuffer;
-class MemRenderBuffer;
-class VMemRenderBuffer;
+class MemVertexBuffer;
+class VMemVertexBuffer;
 class VertexAttributes;
 
 class IRenderer : public IMgr
@@ -36,8 +36,8 @@ public:
 
 	virtual Texture* createTexture(const std::string& filePath) = 0;
 	virtual Shader* createShader(const std::string& filePath) = 0;
-	virtual MemRenderBuffer* createMemRenderBuffer(const VertexAttributes* pVertAttrs) = 0;
-	virtual VMemRenderBuffer* createVMemRenderBuffer(const VertexAttributes* pVertAttrs) = 0;
+	virtual MemVertexBuffer* createMemVertexBuffer(const VertexAttributes* pVertAttrs) = 0;
+	virtual VMemVertexBuffer* createVMemVertexBuffer(const VertexAttributes* pVertAttrs) = 0;
 	virtual VertexAttributes* createVertexAttributes(const std::string& filePath) = 0;
 
 protected:

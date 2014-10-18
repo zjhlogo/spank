@@ -34,8 +34,8 @@ public:
 
 	virtual Texture* createTexture(const std::string& filePath) override;
 	virtual Shader* createShader(const std::string& filePath) override;
-	virtual MemRenderBuffer* createMemRenderBuffer(const VertexAttributes* pVertAttrs) override;
-	virtual VMemRenderBuffer* createVMemRenderBuffer(const VertexAttributes* pVertAttrs) override;
+	virtual MemVertexBuffer* createMemVertexBuffer(const VertexAttributes* pVertAttrs) override;
+	virtual VMemVertexBuffer* createVMemVertexBuffer(const VertexAttributes* pVertAttrs) override;
 	virtual VertexAttributes* createVertexAttributes(const std::string& filePath) override;
 
 protected:

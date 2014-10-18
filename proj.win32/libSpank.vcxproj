@@ -12,6 +12,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\source\base\IMgr.cpp" />
+    <ClCompile Include="..\source\font\BitmapFont.cpp" />
+    <ClCompile Include="..\source\font\FontMgr.cpp" />
+    <ClCompile Include="..\source\font\IFont.cpp" />
     <ClCompile Include="..\source\Framework.cpp" />
     <ClCompile Include="..\source\IApp.cpp" />
     <ClCompile Include="..\source\input\TouchDelegateMgr.cpp" />
@@ -24,6 +27,7 @@
     <ClCompile Include="..\source\render\Shader.cpp" />
     <ClCompile Include="..\source\render\Texture.cpp" />
     <ClCompile Include="..\source\render\VertexAttributes.cpp" />
+    <ClCompile Include="..\source\ui\Label.cpp" />
     <ClCompile Include="..\source\utils\FileUtil.cpp" />
     <ClCompile Include="..\source\utils\ImageUtil.cpp" />
     <ClCompile Include="..\source\utils\BufferStream.cpp" />
@@ -38,6 +42,9 @@
   <ItemGroup>
     <ClInclude Include="..\source\base\IMgr.h" />
     <ClInclude Include="..\source\base\PlatformDefine.h" />
+    <ClInclude Include="..\source\font\BitmapFont.h" />
+    <ClInclude Include="..\source\font\FontMgr.h" />
+    <ClInclude Include="..\source\font\IFont.h" />
     <ClInclude Include="..\source\Framework.h" />
     <ClInclude Include="..\source\IApp.h" />
     <ClInclude Include="..\source\input\TouchDelegateMgr.h" />
@@ -50,6 +57,7 @@
     <ClInclude Include="..\source\render\Shader.h" />
     <ClInclude Include="..\source\render\Texture.h" />
     <ClInclude Include="..\source\render\VertexAttributes.h" />
+    <ClInclude Include="..\source\ui\Label.h" />
     <ClInclude Include="..\source\utils\FileUtil.h" />
     <ClInclude Include="..\source\utils\ImageUtil.h" />
     <ClInclude Include="..\source\utils\LogUtil.h" />

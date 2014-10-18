@@ -26,8 +26,8 @@ private:
 	spank::Texture* m_pTexture{ nullptr };
 	spank::Shader* m_pShader{ nullptr };
 
-	spank::MemRenderBuffer* m_pRenderBufferMem{ nullptr };
-	spank::VMemRenderBuffer* m_pRenderBufferVMem{ nullptr };
+	spank::MemVertexBuffer* m_pMemVertexBuffer{ nullptr };
+	spank::VMemVertexBuffer* m_pVMemVertexBuffer{ nullptr };
 
 	float m_rot{ 0.0f };
 

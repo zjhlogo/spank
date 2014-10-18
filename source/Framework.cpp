@@ -29,11 +29,18 @@ bool Framework::initialize()
 	m_pTouchDelegateMgr = new TouchDelegateMgr();
 	if (!m_pTouchDelegateMgr->initialize()) return false;
 
+	m_pFontMgr = new FontMgr();
+	if (!m_pFontMgr->initialize()) return false;
+	m_pFontMgr->setRenderer(m_pRenderer);
+
 	return true;
 }
 
 void Framework::terminate()
 {
+	if (m_pFontMgr) m_pFontMgr->terminate();
+	SAFE_DELETE(m_pFontMgr);
+
 	if (m_pTouchDelegateMgr) m_pTouchDelegateMgr->terminate();
 	SAFE_DELETE(m_pTouchDelegateMgr);
 

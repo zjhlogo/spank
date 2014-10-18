@@ -35,7 +35,7 @@ protected:
 
 };
 
-class MemRenderBuffer : public RenderBuffer
+class MemVertexBuffer : public RenderBuffer
 {
 	friend class RendererGl2;
 
@@ -47,8 +47,8 @@ public:
 	inline const VertexAttributes* getVertexAttributes() const { return m_pVertAttrs; };
 
 protected:
-	MemRenderBuffer(IRenderer* pRenderer, const VertexAttributes* pVertAttrs);
-	virtual ~MemRenderBuffer();
+	MemVertexBuffer(IRenderer* pRenderer, const VertexAttributes* pVertAttrs);
+	virtual ~MemVertexBuffer();
 
 protected:
 	const VertexAttributes* m_pVertAttrs{ nullptr };
@@ -56,7 +56,7 @@ protected:
 
 };
 
-class VMemRenderBuffer : public MemRenderBuffer
+class VMemVertexBuffer : public MemVertexBuffer
 {
 	friend class RendererGl2;
 
@@ -67,8 +67,8 @@ public:
 	inline GLuint getBufferId() const { return m_bufferId; };
 
 protected:
-	VMemRenderBuffer(IRenderer* pRenderer, const VertexAttributes* pVertAttrs);
-	virtual ~VMemRenderBuffer();
+	VMemVertexBuffer(IRenderer* pRenderer, const VertexAttributes* pVertAttrs);
+	virtual ~VMemVertexBuffer();
 
 private:
 	void destroyVBuffer();
@@ -77,6 +77,16 @@ private:
 private:
 	GLuint m_bufferId{ 0 };
 
+};
+
+class MemIndexBuffer : public RenderBuffer
+{
+	// TODO: 
+};
+
+class VMemIndexBuffer : public RenderBuffer
+{
+	// TODO: 
 };
 
 }

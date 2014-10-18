@@ -35,19 +35,19 @@ void RenderBuffer::preDelete()
 	m_pRenderer->removeRenderBuffer(this);
 }
 
-MemRenderBuffer::MemRenderBuffer(IRenderer* pRenderer, const VertexAttributes* pVertAttrs)
+MemVertexBuffer::MemVertexBuffer(IRenderer* pRenderer, const VertexAttributes* pVertAttrs)
 	:RenderBuffer(pRenderer)
 	, m_pVertAttrs(pVertAttrs)
 {
 
 }
 
-MemRenderBuffer::~MemRenderBuffer()
+MemVertexBuffer::~MemVertexBuffer()
 {
 
 }
 
-bool MemRenderBuffer::uploadBuffer(const void* bufferData, uint bufferSize)
+bool MemVertexBuffer::uploadBuffer(const void* bufferData, uint bufferSize)
 {
 	if (!bufferData || bufferSize == 0) return false;
 
@@ -57,31 +57,31 @@ bool MemRenderBuffer::uploadBuffer(const void* bufferData, uint bufferSize)
 	return true;
 }
 
-VMemRenderBuffer::VMemRenderBuffer(IRenderer* pRenderer, const VertexAttributes* pVertAttrs)
-	:MemRenderBuffer(pRenderer, pVertAttrs)
+VMemVertexBuffer::VMemVertexBuffer(IRenderer* pRenderer, const VertexAttributes* pVertAttrs)
+	:MemVertexBuffer(pRenderer, pVertAttrs)
 {
 
 }
 
-VMemRenderBuffer::~VMemRenderBuffer()
+VMemVertexBuffer::~VMemVertexBuffer()
 {
 	destroyVBuffer();
 }
 
-bool VMemRenderBuffer::uploadBuffer(const void* bufferData, uint bufferSize)
+bool VMemVertexBuffer::uploadBuffer(const void* bufferData, uint bufferSize)
 {
-	if (!MemRenderBuffer::uploadBuffer(bufferData, bufferSize)) return false;
+	if (!MemVertexBuffer::uploadBuffer(bufferData, bufferSize)) return false;
 	return updateVBufferData();
 }
 
-bool VMemRenderBuffer::reload(bool freeOld)
+bool VMemVertexBuffer::reload(bool freeOld)
 {
 	if (freeOld) destroyVBuffer();
 	m_bufferId = 0;
 	return updateVBufferData();
 }
 
-void VMemRenderBuffer::destroyVBuffer()
+void VMemVertexBuffer::destroyVBuffer()
 {
 	if (m_bufferId != 0)
 	{
@@ -90,7 +90,7 @@ void VMemRenderBuffer::destroyVBuffer()
 	}
 }
 
-bool VMemRenderBuffer::updateVBufferData()
+bool VMemVertexBuffer::updateVBufferData()
 {
 	// create buffer object
 	if (m_bufferId == 0)

@@ -151,12 +151,12 @@ Shader* RendererGl2::createShader(const std::string& filePath)
 	return pShader;
 }
 
-MemRenderBuffer* RendererGl2::createMemRenderBuffer(const VertexAttributes* pVertAttrs)
+MemVertexBuffer* RendererGl2::createMemVertexBuffer(const VertexAttributes* pVertAttrs)
 {
 	if (!pVertAttrs) return nullptr;
 
 	// new one
-	MemRenderBuffer* pRenderBuffer = new MemRenderBuffer(this, pVertAttrs);
+	MemVertexBuffer* pRenderBuffer = new MemVertexBuffer(this, pVertAttrs);
 
 	// cache it
 	m_renderBufferSet.insert(pRenderBuffer);
@@ -164,12 +164,12 @@ MemRenderBuffer* RendererGl2::createMemRenderBuffer(const VertexAttributes* pVer
 	return pRenderBuffer;
 }
 
-VMemRenderBuffer* RendererGl2::createVMemRenderBuffer(const VertexAttributes* pVertAttrs)
+VMemVertexBuffer* RendererGl2::createVMemVertexBuffer(const VertexAttributes* pVertAttrs)
 {
 	if (!pVertAttrs) return nullptr;
 
 	// new one
-	VMemRenderBuffer* pRenderBuffer = new VMemRenderBuffer(this, pVertAttrs);
+	VMemVertexBuffer* pRenderBuffer = new VMemVertexBuffer(this, pVertAttrs);
 
 	// cache it
 	m_renderBufferSet.insert(pRenderBuffer);

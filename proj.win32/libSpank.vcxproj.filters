@@ -13,6 +13,12 @@
     <Filter Include="input">
       <UniqueIdentifier>{ad172f36-3920-4de5-ba6c-bc4252a9ce95}</UniqueIdentifier>
     </Filter>
+    <Filter Include="font">
+      <UniqueIdentifier>{d3542057-380c-4a0f-81d4-3e45f4aae009}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ui">
+      <UniqueIdentifier>{287864e5-1b2e-4415-8218-95a8a6d86042}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\source\base\IMgr.cpp">
@@ -78,6 +84,18 @@
     <ClCompile Include="..\source\utils\BufferStream.cpp">
       <Filter>utils</Filter>
     </ClCompile>
+    <ClCompile Include="..\source\font\BitmapFont.cpp">
+      <Filter>font</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\font\FontMgr.cpp">
+      <Filter>font</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\font\IFont.cpp">
+      <Filter>font</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\ui\Label.cpp">
+      <Filter>ui</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\source\base\IMgr.h">
@@ -139,6 +157,18 @@
     </ClInclude>
     <ClInclude Include="..\source\utils\BufferStream.h">
       <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\font\BitmapFont.h">
+      <Filter>font</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\font\FontMgr.h">
+      <Filter>font</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\font\IFont.h">
+      <Filter>font</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\ui\Label.h">
+      <Filter>ui</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

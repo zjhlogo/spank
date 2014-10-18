@@ -179,7 +179,7 @@ bool Shader::setTexture(Texture* pTexture, int index)
 	return true;
 }
 
-void Shader::drawArrays(MemRenderBuffer* pRenderBuffer, int start, int numVerts)
+void Shader::drawArrays(MemVertexBuffer* pRenderBuffer, int start, int numVerts)
 {
 	if (!pRenderBuffer) return;
 
@@ -207,7 +207,7 @@ void Shader::drawArrays(MemRenderBuffer* pRenderBuffer, int start, int numVerts)
 	GL_ERROR_CHECK();
 }
 
-void Shader::drawArrays(VMemRenderBuffer* pRenderBuffer, int start, int numVerts)
+void Shader::drawArrays(VMemVertexBuffer* pRenderBuffer, int start, int numVerts)
 {
 	if (!pRenderBuffer) return;
 

@@ -19,8 +19,8 @@ namespace spank
 class IRenderer;
 class Texture;
 class RenderBuffer;
-class MemRenderBuffer;
-class VMemRenderBuffer;
+class MemVertexBuffer;
+class VMemVertexBuffer;
 class VertexAttributes;
 
 class Shader : public RenderObject
@@ -44,8 +44,8 @@ public:
 	bool setMatrix(const char* pszName, const glm::mat4& mat4);
 	bool setTexture(Texture* pTexture, int index);
 
-	void drawArrays(MemRenderBuffer* pRenderBuffer, int start, int numVerts);
-	void drawArrays(VMemRenderBuffer* pRenderBuffer, int start, int numVerts);
+	void drawArrays(MemVertexBuffer* pRenderBuffer, int start, int numVerts);
+	void drawArrays(VMemVertexBuffer* pRenderBuffer, int start, int numVerts);
 
 	inline const VertexAttributes* getVertexAttributes() const { return m_pVertAttributes; };
 	inline GLuint getProgramId() const { return m_programId; };
