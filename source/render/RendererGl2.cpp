@@ -120,12 +120,19 @@ void RendererGl2::resize(int width, int height)
 	m_surfaceSize.x = static_cast<float>(width);
 	m_surfaceSize.y = static_cast<float>(height);
 
-	m_matOrtho = glm::ortho(-width*0.5f, width*0.5f, -height*0.5f, height*0.5f);
+	m_matOrtho = glm::ortho<float>(-width*0.5f, width*0.5f, -height*0.5f, height*0.5f);
+	m_matPerspective = glm::perspectiveFov<float>(glm::quarter_pi<float>(), m_surfaceSize.x, m_surfaceSize.y, 1.0f, 1000.0f);
 
 	glViewport(0, 0, width, height);
 
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+// 	glEnable(GL_CULL_FACE);
+// 	glCullFace(GL_FRONT);
+
+	glEnable(GL_DEPTH_TEST);
+	glDepthFunc(GL_LEQUAL);
 }
 
 const glm::vec2& RendererGl2::getSurfaceSize() const
@@ -136,6 +143,11 @@ const glm::vec2& RendererGl2::getSurfaceSize() const
 const glm::mat4& RendererGl2::getOrthoMatrix() const
 {
 	return m_matOrtho;
+}
+
+const glm::mat4& RendererGl2::getPerspectiveMatrix() const
+{
+	return m_matPerspective;
 }
 
 Texture* RendererGl2::createTexture(const std::string& filePath)

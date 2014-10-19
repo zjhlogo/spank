@@ -23,12 +23,13 @@ protected:
 	virtual void update(float dt) override;
 	virtual void render() override;
 
+	void createRenderBuffer(spank::IRenderer* pRenderer);
+
 private:
 	spank::Texture* m_pTexture{ nullptr };
 	spank::Shader* m_pShader{ nullptr };
-	spank::Label* m_pLabel{ nullptr };
+	spank::Label* m_pLblFPS{ nullptr };
 
-	spank::MemVertexBuffer* m_pMemVertexBuffer{ nullptr };
 	spank::VMemVertexBuffer* m_pVMemVertexBuffer{ nullptr };
 
 	float m_rot{ 0.0f };

@@ -34,6 +34,7 @@ public:
 	virtual void resize(int width, int height) override;
 	virtual const glm::vec2& getSurfaceSize() const override;
 	virtual const glm::mat4& getOrthoMatrix() const override;
+	virtual const glm::mat4& getPerspectiveMatrix() const override;
 
 	virtual Texture* createTexture(const std::string& filePath) override;
 	virtual Shader* createShader(const std::string& filePath) override;
@@ -55,6 +56,7 @@ protected:
 private:
 	glm::vec2 m_surfaceSize;
 	glm::mat4 m_matOrtho;
+	glm::mat4 m_matPerspective;
 
 	TM_TEXTURE m_textureMap;
 	TM_SHADER m_shaderMap;

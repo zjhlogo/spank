@@ -39,6 +39,7 @@ public:
 
 	virtual const glm::vec2& getSurfaceSize() const = 0;
 	virtual const glm::mat4& getOrthoMatrix() const = 0;
+	virtual const glm::mat4& getPerspectiveMatrix() const = 0;
 
 	virtual Texture* createTexture(const std::string& filePath) = 0;
 	virtual Shader* createShader(const std::string& filePath) = 0;

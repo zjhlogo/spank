@@ -9,6 +9,7 @@
 #include <utils/LogUtil.h>
 #include <utils/FileUtil.h>
 #include <utils/StringBuilder.h>
+#include <render/VertexAttributes.h>
 
 HelloGLES3App::HelloGLES3App()
 {
@@ -34,25 +35,11 @@ bool HelloGLES3App::initialize()
 	spank::IFont* pFont = pFontMgr->createFont("data/12px_Tahoma.xml");
 	if (!pFont) return false;
 
-	m_pLabel = new spank::Label(pRenderer, pFont);
-	if (!m_pLabel) return false;
-	m_pLabel->setPos(-pRenderer->getSurfaceSize()*0.5f);
+	m_pLblFPS = new spank::Label(pRenderer, pFont);
+	if (!m_pLblFPS) return false;
+	m_pLblFPS->setPos(-pRenderer->getSurfaceSize()*0.5f);
 
-	m_pMemVertexBuffer = pRenderer->createMemVertexBuffer(m_pShader->getVertexAttributes());
-	if (!m_pMemVertexBuffer) return false;
-
-	m_pVMemVertexBuffer = pRenderer->createVMemVertexBuffer(m_pShader->getVertexAttributes());
-	if (!m_pVMemVertexBuffer) return false;
-
-	GLfloat vertAttribs[] = { -0.4f, -0.4f, 0.0f, // Pos
-		0.0f, 0.0f,	  // UVs
-		0.4f, -0.4f, 0.0f,
-		1.0f, 0.0f,
-		0.0f, 0.4f, 0.0f,
-		0.5f, 1.0f };
-
-	m_pMemVertexBuffer->uploadBuffer(vertAttribs, sizeof(vertAttribs));
-	m_pVMemVertexBuffer->uploadBuffer(vertAttribs, sizeof(vertAttribs));
+	createRenderBuffer(pRenderer);
 
 	return true;
 }
@@ -60,8 +47,7 @@ bool HelloGLES3App::initialize()
 void HelloGLES3App::terminate()
 {
 	SAFE_RELEASE(m_pVMemVertexBuffer);
-	SAFE_RELEASE(m_pMemVertexBuffer);
-	SAFE_DELETE(m_pLabel);
+	SAFE_DELETE(m_pLblFPS);
 	SAFE_RELEASE(m_pTexture);
 	SAFE_RELEASE(m_pShader);
 }
@@ -72,7 +58,7 @@ void HelloGLES3App::update(float dt)
 	if (m_elapseTime > 1.0f)
 	{
 		m_elapseTime -= 1.0f;
-		m_pLabel->setText(spank::StringBuilder::format("FPS: #0").add(m_fps).build());
+		m_pLblFPS->setText(spank::StringBuilder::format("FPS: #0").add(m_fps).build());
 		m_fps = 0;
 	}
 
@@ -84,15 +70,83 @@ void HelloGLES3App::update(float dt)
 void HelloGLES3App::render()
 {
 	glClearColor(0.6f, 0.8f, 1.0f, 1.0f);
-	glClear(GL_COLOR_BUFFER_BIT);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	glm::quat quaRot = glm::angleAxis(m_rot, glm::vec3(0.0f, 1.0f, 0.0f));
+	glm::quat quaRot = glm::angleAxis(m_rot, glm::normalize(glm::vec3(0.3f, 1.0f, 0.7f)));
 	glm::mat4 matRot = glm::mat4_cast(quaRot);
+	glm::mat4 matView = glm::lookAt(glm::vec3(0.0f, 0.0f, 10.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+
+	glm::mat4 matMVP = getRenderer()->getPerspectiveMatrix() * matView * matRot;
 
 	m_pShader->useProgram();
-	m_pShader->setMatrix("u_matMVP", matRot);
+	m_pShader->setMatrix("u_matMVP", matMVP);
 	m_pShader->setTexture(m_pTexture, 0);
-	m_pShader->drawBuffer(m_pVMemVertexBuffer, 0, 3);
+	m_pShader->drawBuffer(m_pVMemVertexBuffer, 0, 36);
 
-	m_pLabel->render();
+	m_pLblFPS->render();
+}
+
+void HelloGLES3App::createRenderBuffer(spank::IRenderer* pRenderer)
+{
+	m_pVMemVertexBuffer = pRenderer->createVMemVertexBuffer(m_pShader->getVertexAttributes());
+	if (!m_pVMemVertexBuffer) return;
+
+	spank::VERT_ATTR_POS3_UV2 verts[] =
+	{
+		 // front
+		-1.0f, -1.0f,  1.0f, 0.0f, 0.0f,
+		-1.0f,  1.0f,  1.0f, 0.0f, 1.0f,
+		 1.0f, -1.0f,  1.0f, 1.0f, 0.0f,
+
+		-1.0f,  1.0f,  1.0f, 0.0f, 1.0f,
+		 1.0f,  1.0f,  1.0f, 1.0f, 1.0f,
+		 1.0f, -1.0f,  1.0f, 1.0f, 0.0f,
+
+		 // top
+		-1.0f,  1.0f,  1.0f, 0.0f, 0.0f,
+		-1.0f,  1.0f, -1.0f, 0.0f, 1.0f,
+		 1.0f,  1.0f,  1.0f, 1.0f, 0.0f,
+
+		-1.0f,  1.0f, -1.0f, 0.0f, 1.0f,
+		 1.0f,  1.0f, -1.0f, 1.0f, 1.0f,
+		 1.0f,  1.0f,  1.0f, 1.0f, 0.0f,
+
+		 // back
+		-1.0f,  1.0f, -1.0f, 0.0f, 0.0f,
+		-1.0f, -1.0f, -1.0f, 0.0f, 1.0f,
+		 1.0f,  1.0f, -1.0f, 1.0f, 0.0f,
+
+		-1.0f, -1.0f, -1.0f, 0.0f, 1.0f,
+		 1.0f, -1.0f, -1.0f, 1.0f, 1.0f,
+		 1.0f,  1.0f, -1.0f, 1.0f, 0.0f,
+
+		 // bottom
+		-1.0f, -1.0f, -1.0f, 0.0f, 0.0f,
+		-1.0f, -1.0f,  1.0f, 0.0f, 1.0f,
+		 1.0f, -1.0f, -1.0f, 1.0f, 0.0f,
+
+		-1.0f, -1.0f,  1.0f, 0.0f, 1.0f,
+		 1.0f, -1.0f,  1.0f, 1.0f, 1.0f,
+		 1.0f, -1.0f, -1.0f, 1.0f, 0.0f,
+
+		 // left
+		-1.0f, -1.0f, -1.0f, 0.0f, 0.0f,
+		-1.0f,  1.0f, -1.0f, 0.0f, 1.0f,
+		-1.0f, -1.0f,  1.0f, 1.0f, 0.0f,
+
+		-1.0f,  1.0f, -1.0f, 0.0f, 1.0f,
+		-1.0f,  1.0f,  1.0f, 1.0f, 1.0f,
+		-1.0f, -1.0f,  1.0f, 1.0f, 0.0f,
+
+		 // right
+		 1.0f, -1.0f,  1.0f, 0.0f, 0.0f,
+		 1.0f,  1.0f,  1.0f, 0.0f, 1.0f,
+		 1.0f, -1.0f, -1.0f, 1.0f, 0.0f,
+
+		 1.0f,  1.0f,  1.0f, 0.0f, 1.0f,
+		 1.0f,  1.0f, -1.0f, 1.0f, 1.0f,
+		 1.0f, -1.0f, -1.0f, 1.0f, 0.0f,
+	};
+
+	m_pVMemVertexBuffer->uploadBuffer(verts, sizeof(verts));
 }
