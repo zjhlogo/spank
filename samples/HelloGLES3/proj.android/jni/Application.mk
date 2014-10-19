@@ -1,4 +1,4 @@
-APP_ABI := all
+APP_ABI := armeabi
 
 NDK_TOOLCHAIN_VERSION := 4.8
 # APP_STL := stlport_shared  --> does not seem to contain C++11 features

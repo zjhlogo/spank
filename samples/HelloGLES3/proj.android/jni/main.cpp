@@ -13,10 +13,8 @@ class FrameworkAndroid : public spank::Framework {};
 FrameworkAndroid* g_pFrameworkAndroid = nullptr;
 HelloGLES3App* g_pHelloGLES3App = nullptr;
 
-JNIEXPORT jboolean JNICALL Java_com_zjhlogo_libspank_GameEntry_initialize(JNIEnv* env, jobject obj)
+JNIEXPORT jboolean JNICALL Java_com_zjhlogo_libspank_GameEntry_initialize(JNIEnv* env, jobject obj, jint width, jint height)
 {
-	LOGD("GameEntry initialize");
-
 	if (g_pFrameworkAndroid)
 	{
 		g_pFrameworkAndroid->getRenderer()->reload(false);
@@ -31,6 +29,7 @@ JNIEXPORT jboolean JNICALL Java_com_zjhlogo_libspank_GameEntry_initialize(JNIEnv
 		SAFE_DELETE(g_pFrameworkAndroid);
 		return false;
 	}
+	g_pFrameworkAndroid->getRenderer()->resize(width, height);
 
 	// initialize app
 	g_pHelloGLES3App = new HelloGLES3App();

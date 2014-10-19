@@ -55,9 +55,11 @@ protected:
 private:
 	glm::vec2 m_surfaceSize;
 	glm::mat4 m_matOrtho;
+
 	TM_TEXTURE m_textureMap;
 	TM_SHADER m_shaderMap;
 	TS_RENDER_BUFFER m_renderBufferSet;
+
 	TM_VERTEX_ATTRIBUTE m_vertexAttributeMap;
 
 };

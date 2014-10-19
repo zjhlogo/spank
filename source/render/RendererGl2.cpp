@@ -12,7 +12,6 @@
 #include "RenderBuffer.h"
 #include "VertexAttributes.h"
 #include "../utils/LogUtil.h"
-
 #include <GLES2/gl2.h>
 
 namespace spank
@@ -79,17 +78,38 @@ void RendererGl2::reload(bool freeOld)
 	// reload all objects
 	for (auto texture : m_textureMap)
 	{
-		texture.second->reload(freeOld);
+		if (texture.second->reload(freeOld))
+		{
+			LOGI("Reload texture success %s", texture.second->getId().c_str());
+		}
+		else
+		{
+			LOGE("Reload texture failed %s", texture.second->getId().c_str());
+		}
 	}
 
 	for (auto shader : m_shaderMap)
 	{
-		shader.second->reload(freeOld);
+		if (shader.second->reload(freeOld))
+		{
+			LOGI("Reload shader success %s", shader.second->getId().c_str());
+		}
+		else
+		{
+			LOGE("Reload shader failed %s", shader.second->getId().c_str());
+		}
 	}
 
 	for (auto renderBuffer : m_renderBufferSet)
 	{
-		renderBuffer->reload(freeOld);
+		if (renderBuffer->reload(freeOld))
+		{
+			LOGI("Reload render buffer success %x", renderBuffer);
+		}
+		else
+		{
+			LOGI("Reload render buffer success %x", renderBuffer);
+		}
 	}
 }
 

@@ -53,13 +53,8 @@ bool Texture::reload(bool freeOld)
 
 	const std::string& filePath = getId();
 	m_textureId = ImageUtil::decodeImage(m_eImageFileType, filePath);
-	if (m_textureId != 0)
-	{
-		LOGI("Reload texture success %s", filePath.c_str());
-		return true;
-	}
+	if (m_textureId != 0) return true;
 
-	LOGE("Reload texture failed %s", filePath.c_str());
 	return false;
 }
 

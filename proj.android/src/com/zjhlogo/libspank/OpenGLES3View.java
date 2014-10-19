@@ -15,16 +15,24 @@ public class OpenGLES3View extends GLSurfaceView {
 		setRenderer(new Renderer());
 	}
 
-	private static class Renderer implements GLSurfaceView.Renderer {
+	private class Renderer implements GLSurfaceView.Renderer {
+
+		boolean mRequestInitialize = false;
 
 		@Override
 		public void onDrawFrame(GL10 gl) {
+			if (mRequestInitialize) return;
 			// step
 			GameEntry.step();
 		}
 
 		@Override
 		public void onSurfaceChanged(GL10 gl, int width, int height) {
+			if (mRequestInitialize) {
+				mRequestInitialize = false;
+				GameEntry.initialize(width, height);
+			}
+			
 			// resize
 			GameEntry.resize(width, height);
 		}
@@ -32,7 +40,7 @@ public class OpenGLES3View extends GLSurfaceView {
 		@Override
 		public void onSurfaceCreated(GL10 gl, EGLConfig config) {
 			// initialize
-			GameEntry.initialize();
+			mRequestInitialize = true;
 		}
 		
 	}
