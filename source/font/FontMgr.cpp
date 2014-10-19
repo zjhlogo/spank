@@ -45,7 +45,7 @@ IFont* FontMgr::createFont(const std::string& filePath)
 
 	// create new one
 	BitmapFont* pBitmapFont = new BitmapFont(filePath, m_pRenderer);
-	if (!pBitmapFont->loadFont(filePath)) return false;
+	if (!pBitmapFont->loadFont(filePath)) return nullptr;
 
 	// cache font into map
 	m_fontMap.insert(std::make_pair(filePath, pBitmapFont));

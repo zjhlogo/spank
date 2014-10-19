@@ -10,6 +10,9 @@ utils/ImageUtilHtml5.cpp ^
 utils/LogUtilHtml5.cpp ^
 utils/TimeUtilHtml5.cpp ^
 ../source/base/IMgr.cpp ^
+../source/font/BitmapFont.cpp ^
+../source/font/FontMgr.cpp ^
+../source/font/IFont.cpp ^
 ../source/input/TouchDelegateMgr.cpp ^
 ../source/render/IRenderer.cpp ^
 ../source/render/RenderBuffer.cpp ^
@@ -20,6 +23,7 @@ utils/TimeUtilHtml5.cpp ^
 ../source/render/Shader.cpp ^
 ../source/render/Texture.cpp ^
 ../source/render/VertexAttributes.cpp ^
+../source/ui/Label.cpp ^
 ../source/utils/BufferStream.cpp ^
 ../source/utils/FileUtil.cpp ^
 ../source/utils/ImageUtil.cpp ^

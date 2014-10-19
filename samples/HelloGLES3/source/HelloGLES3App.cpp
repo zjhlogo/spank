@@ -8,10 +8,7 @@
 #include "HelloGLES3App.h"
 #include <utils/LogUtil.h>
 #include <utils/FileUtil.h>
-
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
-#include <glm/gtc/quaternion.hpp>
+#include <utils/StringBuilder.h>
 
 HelloGLES3App::HelloGLES3App()
 {
@@ -32,6 +29,14 @@ bool HelloGLES3App::initialize()
 
 	m_pTexture = pRenderer->createTexture("data/test.png");
 	if (!m_pTexture) return false;
+
+	spank::FontMgr* pFontMgr = getFramework()->getFontMgr();
+	spank::IFont* pFont = pFontMgr->createFont("data/12px_Tahoma.xml");
+	if (!pFont) return false;
+
+	m_pLabel = new spank::Label(pRenderer, pFont);
+	if (!m_pLabel) return false;
+	m_pLabel->setPos(-pRenderer->getSurfaceSize()*0.5f);
 
 	m_pMemVertexBuffer = pRenderer->createMemVertexBuffer(m_pShader->getVertexAttributes());
 	if (!m_pMemVertexBuffer) return false;
@@ -54,14 +59,24 @@ bool HelloGLES3App::initialize()
 
 void HelloGLES3App::terminate()
 {
+	SAFE_RELEASE(m_pVMemVertexBuffer);
+	SAFE_RELEASE(m_pMemVertexBuffer);
+	SAFE_DELETE(m_pLabel);
 	SAFE_RELEASE(m_pTexture);
 	SAFE_RELEASE(m_pShader);
-	SAFE_RELEASE(m_pMemVertexBuffer);
-	SAFE_RELEASE(m_pVMemVertexBuffer);
 }
 
 void HelloGLES3App::update(float dt)
 {
+	m_elapseTime += dt;
+	if (m_elapseTime > 1.0f)
+	{
+		m_elapseTime -= 1.0f;
+		m_pLabel->setText(spank::StringBuilder::format("FPS: #0").add(m_fps).build());
+		m_fps = 0;
+	}
+
+	++m_fps;
 	m_rot += dt;
 	if (m_rot > glm::pi<float>()*2.0f) m_rot -= glm::pi<float>()*2.0f;
 }
@@ -77,5 +92,7 @@ void HelloGLES3App::render()
 	m_pShader->useProgram();
 	m_pShader->setMatrix("u_matMVP", matRot);
 	m_pShader->setTexture(m_pTexture, 0);
-	m_pShader->drawArrays(m_pVMemVertexBuffer, 0, 3);
+	m_pShader->drawBuffer(m_pVMemVertexBuffer, 0, 3);
+
+	m_pLabel->render();
 }

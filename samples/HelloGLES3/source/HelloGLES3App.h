@@ -8,6 +8,7 @@
 #pragma once
 
 #include <IApp.h>
+#include <ui/Label.h>
 
 class HelloGLES3App : public spank::IApp
 {
@@ -25,10 +26,14 @@ protected:
 private:
 	spank::Texture* m_pTexture{ nullptr };
 	spank::Shader* m_pShader{ nullptr };
+	spank::Label* m_pLabel{ nullptr };
 
 	spank::MemVertexBuffer* m_pMemVertexBuffer{ nullptr };
 	spank::VMemVertexBuffer* m_pVMemVertexBuffer{ nullptr };
 
 	float m_rot{ 0.0f };
+
+	int m_fps{ 0 };
+	float m_elapseTime{ 0.0f };
 
 };

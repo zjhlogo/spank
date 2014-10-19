@@ -7,6 +7,8 @@
  */
 #include "BitmapFont.h"
 #include "../render/IRenderer.h"
+#include "../render/VertexAttributes.h"
+#include "../render/Texture.h"
 #include "../utils/FileUtil.h"
 #include "../utils/LogUtil.h"
 #include "../utils/StringUtil.h"
@@ -20,11 +22,13 @@ BitmapFont::BitmapFont(const std::string& strId, IRenderer* pRenderer)
 	:IFont(strId)
 	, m_pRenderer(pRenderer)
 {
-
+	m_pVertAttrs = m_pRenderer->createVertexAttributes("data/shaders/pos3_uv2.attrs");
 }
 
 BitmapFont::~BitmapFont()
 {
+	SAFE_RELEASE(m_pVertAttrs);
+
 	for (auto pTexture : m_textureList)
 	{
 		SAFE_RELEASE(pTexture);
@@ -32,11 +36,13 @@ BitmapFont::~BitmapFont()
 	m_textureList.clear();
 }
 
-const IFont::CHAR_INFO* BitmapFont::getCharInfo(uint charId)
+const IFont::CHAR_INFO& BitmapFont::getCharInfo(uint charId)
 {
+	static const CHAR_INFO s_charInfo;
+
 	TM_CHAR_INFO::iterator it = m_charInfoMap.find(charId);
-	if (it == m_charInfoMap.end()) return NULL;
-	return &(it->second);
+	if (it == m_charInfoMap.end()) return s_charInfo;
+	return it->second;
 }
 
 bool BitmapFont::loadFont(const std::string& filePath)
@@ -66,7 +72,9 @@ bool BitmapFont::loadFont(const std::string& filePath)
 	tinyxml2::XMLElement* pXmlCommon = pXmlFont->FirstChildElement("common");
 	if (!pXmlCommon) return false;
 
-	pXmlInfo->QueryIntAttribute("size", &m_nFontSize);
+	pXmlCommon->QueryIntAttribute("lineHeight", &m_lineHeight);
+	pXmlCommon->QueryIntAttribute("base", &m_lineBase);
+	int lineBaseInv = m_lineHeight - m_lineBase;
 
 	float texWidth = 1.0f;
 	float texHeight = 1.0f;
@@ -110,13 +118,14 @@ bool BitmapFont::loadFont(const std::string& filePath)
 		pXmlChar->QueryFloatAttribute("y", &charInfo.uv.y);
 
 		charInfo.uv.x /= texWidth;
-		charInfo.uv.y /= texHeight;
+		charInfo.uv.y = 1.0f - (charInfo.uv.y + charInfo.size.y) / texHeight;
 
 		charInfo.duv.x = charInfo.size.x / texWidth;
 		charInfo.duv.y = charInfo.size.y / texHeight;
 
 		pXmlChar->QueryFloatAttribute("xoffset", &charInfo.offset.x);
 		pXmlChar->QueryFloatAttribute("yoffset", &charInfo.offset.y);
+		charInfo.offset.y = m_lineHeight - charInfo.size.y - charInfo.offset.y + lineBaseInv;
 		pXmlChar->QueryFloatAttribute("xadvance", &charInfo.xadvance);
 		charInfo.pTexture = m_textureList[pageIndex];
 		charInfo.pFont = this;

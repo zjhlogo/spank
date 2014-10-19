@@ -97,10 +97,25 @@ void RendererGl2::resize(int width, int height)
 {
 	LOGD("Renderer resized %dx%d", width, height);
 
+	m_surfaceSize.x = static_cast<float>(width);
+	m_surfaceSize.y = static_cast<float>(height);
+
+	m_matOrtho = glm::ortho(-width*0.5f, width*0.5f, -height*0.5f, height*0.5f);
+
 	glViewport(0, 0, width, height);
 
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+}
+
+const glm::vec2& RendererGl2::getSurfaceSize() const
+{
+	return m_surfaceSize;
+}
+
+const glm::mat4& RendererGl2::getOrthoMatrix() const
+{
+	return m_matOrtho;
 }
 
 Texture* RendererGl2::createTexture(const std::string& filePath)
@@ -170,6 +185,28 @@ VMemVertexBuffer* RendererGl2::createVMemVertexBuffer(const VertexAttributes* pV
 
 	// new one
 	VMemVertexBuffer* pRenderBuffer = new VMemVertexBuffer(this, pVertAttrs);
+
+	// cache it
+	m_renderBufferSet.insert(pRenderBuffer);
+
+	return pRenderBuffer;
+}
+
+MemIndexBuffer* RendererGl2::createMemIndexBuffer()
+{
+	// new one
+	MemIndexBuffer* pRenderBuffer = new MemIndexBuffer(this);
+
+	// cache it
+	m_renderBufferSet.insert(pRenderBuffer);
+
+	return pRenderBuffer;
+}
+
+VMemIndexBuffer* RendererGl2::createVMemIndexBuffer()
+{
+	// new one
+	VMemIndexBuffer* pRenderBuffer = new VMemIndexBuffer(this);
 
 	// cache it
 	m_renderBufferSet.insert(pRenderBuffer);

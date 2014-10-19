@@ -7,12 +7,15 @@
  */
 #pragma once
 
-#include "../render/Texture.h"
+#include "../base/PlatformDefine.h"
 #include <glm/glm.hpp>
 #include <map>
 
 namespace spank
 {
+
+class Texture;
+class VertexAttributes;
 
 class IFont
 {
@@ -41,8 +44,12 @@ public:
 	virtual ~IFont();
 
 	inline const std::string& getFontId() const { return m_strFontId; };
-	virtual int getFontSize() const = 0;
-	virtual const CHAR_INFO* getCharInfo(uint charId) = 0;
+
+	virtual int getLineHeight() const = 0;
+	virtual int getLineBase() const = 0;
+
+	virtual const CHAR_INFO& getCharInfo(uint charId) = 0;
+	virtual VertexAttributes* getVertexAttributes() { return nullptr; };
 
 	bool setFontState(int state, bool set);
 	inline bool checkFontState(int state) const { return ((m_nFontState & state) == state); };

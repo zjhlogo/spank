@@ -26,12 +26,18 @@ public:
 
 	bool loadFont(const std::string& filePath);
 
-	virtual int getFontSize() const override { return m_nFontSize; };
-	virtual const CHAR_INFO* getCharInfo(uint charId) override;
+	virtual int getLineHeight() const override { return m_lineHeight; };
+	virtual int getLineBase() const override { return m_lineBase; };
+
+	virtual const CHAR_INFO& getCharInfo(uint charId) override;
+	virtual VertexAttributes* getVertexAttributes() override { return m_pVertAttrs; };
 
 private:
-	int m_nFontSize{ 0 };
+	int m_lineHeight{ 0 };
+	int m_lineBase{ 0 };
+
 	IRenderer* m_pRenderer{ nullptr };
+	VertexAttributes* m_pVertAttrs{ nullptr };
 
 	TV_TEXTURE m_textureList;
 	TM_CHAR_INFO m_charInfoMap;

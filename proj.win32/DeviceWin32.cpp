@@ -7,7 +7,6 @@
  */
 #include "DeviceWin32.h"
 #include <Framework.h>
-#include <glm/glm.hpp>
 
 namespace spank
 {
@@ -63,7 +62,8 @@ bool DeviceWin32::createWindow(HINSTANCE hInstance, int width, int height)
 	winClass.hInstance = hInstance;
 	winClass.hIcon = LoadIcon(NULL, IDI_WINLOGO);
 	winClass.hCursor = LoadCursor(NULL, IDC_ARROW);
-	winClass.hbrBackground = (HBRUSH)GetStockObject(WHITE_BRUSH);
+	winClass.hbrBackground = (HBRUSH)GetStockObject(WHITE_BRUSH);
+
 	winClass.lpszMenuName = NULL;
 	winClass.lpszClassName = WINDOW_CLASS_NAME;
 	RegisterClass(&winClass);

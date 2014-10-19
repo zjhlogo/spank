@@ -29,13 +29,21 @@ public:
 
 	virtual bool initialize() override;
 	virtual void terminate() override;
+
 	virtual void reload(bool freeOld) override;
 	virtual void resize(int width, int height) override;
+	virtual const glm::vec2& getSurfaceSize() const override;
+	virtual const glm::mat4& getOrthoMatrix() const override;
 
 	virtual Texture* createTexture(const std::string& filePath) override;
 	virtual Shader* createShader(const std::string& filePath) override;
+
 	virtual MemVertexBuffer* createMemVertexBuffer(const VertexAttributes* pVertAttrs) override;
 	virtual VMemVertexBuffer* createVMemVertexBuffer(const VertexAttributes* pVertAttrs) override;
+
+	virtual MemIndexBuffer* createMemIndexBuffer() override;
+	virtual VMemIndexBuffer* createVMemIndexBuffer() override;
+
 	virtual VertexAttributes* createVertexAttributes(const std::string& filePath) override;
 
 protected:
@@ -45,6 +53,8 @@ protected:
 	virtual bool removeVertexAttributes(VertexAttributes* pVertAttrs) override;
 
 private:
+	glm::vec2 m_surfaceSize;
+	glm::mat4 m_matOrtho;
 	TM_TEXTURE m_textureMap;
 	TM_SHADER m_shaderMap;
 	TS_RENDER_BUFFER m_renderBufferSet;

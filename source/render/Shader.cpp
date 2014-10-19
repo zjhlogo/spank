@@ -179,14 +179,14 @@ bool Shader::setTexture(Texture* pTexture, int index)
 	return true;
 }
 
-void Shader::drawArrays(MemVertexBuffer* pRenderBuffer, int start, int numVerts)
+void Shader::drawBuffer(MemVertexBuffer* pVertexBuffer, int start, int numVerts)
 {
-	if (!pRenderBuffer) return;
+	if (!pVertexBuffer) return;
 
-	uint bufferSize = pRenderBuffer->getBufferSize();
+	uint bufferSize = pVertexBuffer->getBufferSize();
 	if (bufferSize == 0) return;
 
-	if (!m_pVertAttributes->isEqual(pRenderBuffer->getVertexAttributes())) return;
+	if (!m_pVertAttributes->isEqual(pVertexBuffer->getVertexAttributes())) return;
 
 	// Unbind the VBO
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -199,7 +199,7 @@ void Shader::drawArrays(MemVertexBuffer* pRenderBuffer, int start, int numVerts)
 		const VertexAttributes::ATTRIBUTE_ITEM* pAttrItem = m_pVertAttributes->getAttributeItem(i);
 
 		glEnableVertexAttribArray(i);
-		glVertexAttribPointer(i, pAttrItem->size, pAttrItem->glType, GL_FALSE, stride, (void*)(pRenderBuffer->getBufferMemAddr() + pAttrItem->offset));
+		glVertexAttribPointer(i, pAttrItem->size, pAttrItem->glType, GL_FALSE, stride, (void*)(pVertexBuffer->getBufferMemAddr() + pAttrItem->offset));
 	}
 
 	// Draws a non-indexed triangle array
@@ -207,17 +207,17 @@ void Shader::drawArrays(MemVertexBuffer* pRenderBuffer, int start, int numVerts)
 	GL_ERROR_CHECK();
 }
 
-void Shader::drawArrays(VMemVertexBuffer* pRenderBuffer, int start, int numVerts)
+void Shader::drawBuffer(VMemVertexBuffer* pVertexBuffer, int start, int numVerts)
 {
-	if (!pRenderBuffer) return;
+	if (!pVertexBuffer) return;
 
-	uint bufferSize = pRenderBuffer->getBufferSize();
+	uint bufferSize = pVertexBuffer->getBufferSize();
 	if (bufferSize == 0) return;
 
-	if (!m_pVertAttributes->isEqual(pRenderBuffer->getVertexAttributes())) return;
+	if (!m_pVertAttributes->isEqual(pVertexBuffer->getVertexAttributes())) return;
 
 	// Bind the VBO
-	glBindBuffer(GL_ARRAY_BUFFER, pRenderBuffer->getBufferId());
+	glBindBuffer(GL_ARRAY_BUFFER, pVertexBuffer->getBufferId());
 	GL_ERROR_CHECK();
 
 	int numAttrs = m_pVertAttributes->getNumAttributeItems();
@@ -234,6 +234,79 @@ void Shader::drawArrays(VMemVertexBuffer* pRenderBuffer, int start, int numVerts
 	// Draws a non-indexed triangle array
 	glDrawArrays(GL_TRIANGLES, start, numVerts);
 	GL_ERROR_CHECK();
+
+	// Unbind the VBO
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+}
+
+void Shader::drawBuffer(MemVertexBuffer* pVertexBuffer, MemIndexBuffer* pIndexBuffer)
+{
+	if (!pVertexBuffer || !pIndexBuffer) return;
+
+	uint vertBufferSize = pVertexBuffer->getBufferSize();
+	if (vertBufferSize == 0) return;
+
+	uint indsBufferSize = pIndexBuffer->getBufferSize();
+	if (indsBufferSize == 0) return;
+
+	if (!m_pVertAttributes->isEqual(pVertexBuffer->getVertexAttributes())) return;
+
+	// Unbind the VBO
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+	int numAttrs = m_pVertAttributes->getNumAttributeItems();
+	int stride = m_pVertAttributes->getStride();
+
+	for (int i = 0; i < numAttrs; ++i)
+	{
+		const VertexAttributes::ATTRIBUTE_ITEM* pAttrItem = m_pVertAttributes->getAttributeItem(i);
+
+		glEnableVertexAttribArray(i);
+		glVertexAttribPointer(i, pAttrItem->size, pAttrItem->glType, GL_FALSE, stride, (void*)(pVertexBuffer->getBufferMemAddr() + pAttrItem->offset));
+	}
+
+	// Draws a non-indexed triangle array
+	glDrawElements(GL_TRIANGLES, pIndexBuffer->getBufferSize() / sizeof(uint16), GL_UNSIGNED_SHORT, pIndexBuffer->getBufferMemAddr());
+	GL_ERROR_CHECK();
+}
+
+void Shader::drawBuffer(VMemVertexBuffer* pVertexBuffer, VMemIndexBuffer* pIndexBuffer)
+{
+	if (!pVertexBuffer || !pIndexBuffer) return;
+
+	uint vertBufferSize = pVertexBuffer->getBufferSize();
+	if (vertBufferSize == 0) return;
+
+	uint indsBufferSize = pIndexBuffer->getBufferSize();
+	if (indsBufferSize == 0) return;
+
+	if (!m_pVertAttributes->isEqual(pVertexBuffer->getVertexAttributes())) return;
+
+	// Bind the VBO
+	glBindBuffer(GL_ARRAY_BUFFER, pVertexBuffer->getBufferId());
+	GL_ERROR_CHECK();
+
+	int numAttrs = m_pVertAttributes->getNumAttributeItems();
+	int stride = m_pVertAttributes->getStride();
+
+	for (int i = 0; i < numAttrs; ++i)
+	{
+		const VertexAttributes::ATTRIBUTE_ITEM* pAttrItem = m_pVertAttributes->getAttributeItem(i);
+
+		glEnableVertexAttribArray(i);
+		glVertexAttribPointer(i, pAttrItem->size, pAttrItem->glType, GL_FALSE, stride, (void*)(pAttrItem->offset));
+	}
+
+	// Bind the IBO
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, pIndexBuffer->getBufferId());
+	GL_ERROR_CHECK();
+
+	// Draws a non-indexed triangle array
+	glDrawElements(GL_TRIANGLES, pIndexBuffer->getBufferSize() / sizeof(uint16), GL_UNSIGNED_SHORT, 0);
+	GL_ERROR_CHECK();
+
+	// Unbind the IBO
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
 	// Unbind the VBO
 	glBindBuffer(GL_ARRAY_BUFFER, 0);

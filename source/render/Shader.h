@@ -9,8 +9,6 @@
 #pragma once
 
 #include "RenderObject.h"
-#include <glm/glm.hpp>
-#include <glm/gtc/type_ptr.hpp>
 #include <map>
 
 namespace spank
@@ -21,6 +19,8 @@ class Texture;
 class RenderBuffer;
 class MemVertexBuffer;
 class VMemVertexBuffer;
+class MemIndexBuffer;
+class VMemIndexBuffer;
 class VertexAttributes;
 
 class Shader : public RenderObject
@@ -44,8 +44,10 @@ public:
 	bool setMatrix(const char* pszName, const glm::mat4& mat4);
 	bool setTexture(Texture* pTexture, int index);
 
-	void drawArrays(MemVertexBuffer* pRenderBuffer, int start, int numVerts);
-	void drawArrays(VMemVertexBuffer* pRenderBuffer, int start, int numVerts);
+	void drawBuffer(MemVertexBuffer* pVertexBuffer, int start, int numVerts);
+	void drawBuffer(VMemVertexBuffer* pVertexBuffer, int start, int numVerts);
+	void drawBuffer(MemVertexBuffer* pVertexBuffer, MemIndexBuffer* pIndexBuffer);
+	void drawBuffer(VMemVertexBuffer* pVertexBuffer, VMemIndexBuffer* pIndexBuffer);
 
 	inline const VertexAttributes* getVertexAttributes() const { return m_pVertAttributes; };
 	inline GLuint getProgramId() const { return m_programId; };

@@ -81,12 +81,44 @@ private:
 
 class MemIndexBuffer : public RenderBuffer
 {
-	// TODO: 
+	friend class RendererGl2;
+
+public:
+	virtual bool uploadBuffer(const void* bufferData, uint bufferSize) override;
+
+	inline const char* getBufferMemAddr() const { return m_bufferData.data(); };
+	inline uint getBufferSize() const { return m_bufferData.size(); };
+
+protected:
+	MemIndexBuffer(IRenderer* pRenderer);
+	virtual ~MemIndexBuffer();
+
+protected:
+	BUFFER_DATA m_bufferData;
+
 };
 
-class VMemIndexBuffer : public RenderBuffer
+class VMemIndexBuffer : public MemIndexBuffer
 {
-	// TODO: 
+	friend class RendererGl2;
+
+public:
+	virtual bool uploadBuffer(const void* bufferData, uint bufferSize) override;
+	virtual bool reload(bool freeOld) override;
+
+	inline GLuint getBufferId() const { return m_bufferId; };
+
+protected:
+	VMemIndexBuffer(IRenderer* pRenderer);
+	virtual ~VMemIndexBuffer();
+
+private:
+	void destroyVBuffer();
+	bool updateVBufferData();
+
+private:
+	GLuint m_bufferId{ 0 };
+
 };
 
 }

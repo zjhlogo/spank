@@ -116,4 +116,8 @@
 #include "vector_relational.hpp"
 #include "integer.hpp"
 
+#include "gtc/matrix_transform.hpp"
+#include "gtc/quaternion.hpp"
+#include "gtc/type_ptr.hpp"
+
 #endif//GLM_INCLUDED

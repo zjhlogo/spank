@@ -8,6 +8,9 @@
 #include "Label.h"
 #include "../font/IFont.h"
 #include "../render/RenderBuffer.h"
+#include "../render/IRenderer.h"
+#include "../render/Shader.h"
+#include "../render/VertexAttributes.h"
 
 namespace spank
 {
@@ -16,12 +19,14 @@ Label::Label(IRenderer* pRenderer, IFont* pFont)
 	:m_pRenderer(pRenderer)
 	, m_pFont(pFont)
 {
-	// TODO: 
+	m_pShader = m_pRenderer->createShader("data/shaders/pos3_uv2.shader");
 }
 
 Label::~Label()
 {
-	// TODO: 
+	SAFE_RELEASE(m_pShader);
+	SAFE_RELEASE(m_vertexBuffer);
+	clearBuffer();
 }
 
 void Label::setText(const std::string& text)
@@ -30,97 +35,139 @@ void Label::setText(const std::string& text)
 	m_text = text;
 
 	// 
-	createElement(m_text);
+	createBuffer(m_text);
 }
 
-void Label::clearElement()
+void Label::render()
 {
-	// TODO: 
+	if (m_indexBufferInfoMap.empty()) return;
+
+	m_pShader->useProgram();
+
+	glm::mat4 matTran;
+	matTran = glm::translate(matTran, glm::vec3(m_pos, 0.0f));
+
+	glm::mat4 matMVP = m_pRenderer->getOrthoMatrix() * matTran;
+	m_pShader->setMatrix("u_matMVP", matMVP);
+
+	for (auto it : m_indexBufferInfoMap)
+	{
+		INDEX_BUFFER_INFO* pBufferInfo = it.second;
+		m_pShader->setTexture(pBufferInfo->pTexture, 0);
+		m_pShader->drawBuffer(m_vertexBuffer, pBufferInfo->pIndexBuffer);
+	}
 }
 
-bool Label::createElement(const std::string& text)
+void Label::clearBuffer()
 {
-// 	clearElement();
-// 
-// 	if (!m_vertexBuffer)
-// 	{
-// 		m_vertexBuffer = m_pRenderer->createVMemRenderBuffer(m_pFont->getVertexAttribute());
-// 		if (!m_vertexBuffer) return false;
-// 	}
-// 
-// 	if (!m_indexBuffer)
-// 	{
-// 		m_indexBuffer = m_pRenderer->createVMemRenderBuffer(m_pFont->getVertexAttribute());
-// 		if (!m_vertexBuffer) return false;
-// 	}
-// 
-// 	glm::vec2 currPos;
-// 	for (const auto& charId : text)
-// 	{
-// 		const IFont::CHAR_INFO* pCharInfo = m_pFont->getCharInfo(charId);
-// 		if (!pCharInfo) continue;
-// 
-// 		CharElement* pCharElement = new CharElement();
-// 		if (!pCharElement->initialize(m_strFontId, charId, fontSize, NULL))
-// 		{
-// 			SAFE_DELETE(pCharElement);
-// 		}
-// 		else
-// 		{
-// 			m_vRootElements.push_back(pCharElement);
-// 		}
-// 	}
-// 
-// 	for (TV_CHAR_INFO::const_iterator it = m_vCharInfo.begin(); it != m_vCharInfo.end(); ++it)
-// 	{
-// 		const CHAR_INFO* pCharInfo = (*it);
-// 
-// 		if (pCharInfo->nID == '\n')
-// 		{
-// 			fBasePosY += m_pFont->GetLineHeight();
-// 			fBasePosX = pos.x;
-// 			continue;
-// 		}
-// 
-// 		QUAD_VERT_POS_UV quad;
-// 
-// 		float fCharPosX = fBasePosX + pCharInfo->offsetx;
-// 		float fCharPosY = fBasePosY + pCharInfo->offsety;
-// 
-// 		quad.verts[0].x = fCharPosX;
-// 		quad.verts[0].y = fCharPosY + pCharInfo->height;
-// 		quad.verts[0].z = 0.0f;
-// 		quad.verts[0].u = pCharInfo->u;
-// 		quad.verts[0].v = pCharInfo->v;
-// 
-// 		quad.verts[1].x = fCharPosX;
-// 		quad.verts[1].y = fCharPosY;
-// 		quad.verts[1].z = 0.0f;
-// 		quad.verts[1].u = pCharInfo->u;
-// 		quad.verts[1].v = pCharInfo->v + pCharInfo->dv;
-// 
-// 		quad.verts[2].x = fCharPosX + pCharInfo->width;
-// 		quad.verts[2].y = fCharPosY + pCharInfo->height;
-// 		quad.verts[2].z = 0.0f;
-// 		quad.verts[2].u = pCharInfo->u + pCharInfo->du;
-// 		quad.verts[2].v = pCharInfo->v;
-// 
-// 		quad.verts[3].x = fCharPosX + pCharInfo->width;
-// 		quad.verts[3].y = fCharPosY;
-// 		quad.verts[3].z = 0.0f;
-// 		quad.verts[3].u = pCharInfo->u + pCharInfo->du;
-// 		quad.verts[3].v = pCharInfo->v + pCharInfo->dv;
-// 
-// 		if (IRendererUI::GetInstance().ClipRect(quad, clipRectPos, clipRectSize))
-// 		{
-// 			IRendererUI::GetInstance().SetTexture(pCharInfo->pTexture);
-// 			IRendererUI::GetInstance().DrawRect(quad);
-// 		}
-// 
-// 		fBasePosX += pCharInfo->advance;
-// 	}
+	for (auto it : m_indexBufferInfoMap)
+	{
+		INDEX_BUFFER_INFO* pBufferInfo = it.second;
+		SAFE_RELEASE(pBufferInfo->pIndexBuffer);
+		SAFE_DELETE(pBufferInfo);
+	}
+	m_indexBufferInfoMap.clear();
+}
 
-	return false;
+bool Label::createBuffer(const std::string& text)
+{
+	clearBuffer();
+
+	if (!m_vertexBuffer)
+	{
+		m_vertexBuffer = m_pRenderer->createVMemVertexBuffer(m_pFont->getVertexAttributes());
+		if (!m_vertexBuffer) return false;
+	}
+
+	glm::vec2 currPos;
+
+	std::vector<VERT_ATTR_POS3_UV2> vVerts;
+
+	for (const auto& charId : text)
+	{
+		const IFont::CHAR_INFO& charInfo = m_pFont->getCharInfo(charId);
+		if (charInfo.charId == 0) continue;
+
+		if (charInfo.charId == '\n')
+		{
+			currPos.y += m_pFont->getLineHeight();
+			currPos.x = 0.0f;
+			continue;
+		}
+
+		INDEX_BUFFER_INFO* pBufferInfo = findIndexBuffer(charInfo.pTexture);
+		if (!pBufferInfo) continue;
+
+		glm::vec2 charPos = currPos + charInfo.offset;
+
+		uint16 baseVertIndex = static_cast<uint16>(vVerts.size());
+
+		VERT_ATTR_POS3_UV2 vert;
+		vert.x = charPos.x;
+		vert.y = charPos.y;
+		vert.z = 0.0f;
+		vert.u = charInfo.uv.x;
+		vert.v = charInfo.uv.y;
+		vVerts.push_back(vert);
+
+		vert.x = charPos.x;
+		vert.y = charPos.y + charInfo.size.y;
+		vert.z = 0.0f;
+		vert.u = charInfo.uv.x;
+		vert.v = charInfo.uv.y + charInfo.duv.y;
+		vVerts.push_back(vert);
+
+		vert.x = charPos.x + charInfo.size.x;
+		vert.y = charPos.y + charInfo.size.y;
+		vert.z = 0.0f;
+		vert.u = charInfo.uv.x + charInfo.duv.x;
+		vert.v = charInfo.uv.y + charInfo.duv.y;
+		vVerts.push_back(vert);
+
+		vert.x = charPos.x + charInfo.size.x;
+		vert.y = charPos.y;
+		vert.z = 0.0f;
+		vert.u = charInfo.uv.x + charInfo.duv.x;
+		vert.v = charInfo.uv.y;
+		vVerts.push_back(vert);
+
+		pBufferInfo->vIndis.push_back(baseVertIndex + 0);
+		pBufferInfo->vIndis.push_back(baseVertIndex + 1);
+		pBufferInfo->vIndis.push_back(baseVertIndex + 3);
+		pBufferInfo->vIndis.push_back(baseVertIndex + 1);
+		pBufferInfo->vIndis.push_back(baseVertIndex + 2);
+		pBufferInfo->vIndis.push_back(baseVertIndex + 3);
+
+		currPos.x += charInfo.xadvance;
+	}
+
+	m_vertexBuffer->uploadBuffer(vVerts.data(), vVerts.size()*sizeof(VERT_ATTR_POS3_UV2));
+
+	// upload index buffer
+	for (auto it : m_indexBufferInfoMap)
+	{
+		INDEX_BUFFER_INFO* pBufferInfo = it.second;
+		pBufferInfo->pIndexBuffer->uploadBuffer(pBufferInfo->vIndis.data(), pBufferInfo->vIndis.size()*sizeof(uint16));
+		pBufferInfo->vIndis.clear();
+	}
+
+	return true;
+}
+
+Label::INDEX_BUFFER_INFO* Label::findIndexBuffer(Texture* pTexture)
+{
+	auto it = m_indexBufferInfoMap.find(pTexture);
+	if (it != m_indexBufferInfoMap.end()) return it->second;
+
+	VMemIndexBuffer* pVMemIndexBuffer = m_pRenderer->createVMemIndexBuffer();
+	if (!pVMemIndexBuffer) return nullptr;
+
+	INDEX_BUFFER_INFO* pBufferInfo = new INDEX_BUFFER_INFO();
+	pBufferInfo->pTexture = pTexture;
+	pBufferInfo->pIndexBuffer = pVMemIndexBuffer;
+	m_indexBufferInfoMap.insert(std::make_pair(pTexture, pBufferInfo));
+
+	return pBufferInfo;
 }
 
 }

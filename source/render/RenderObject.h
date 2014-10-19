@@ -9,6 +9,7 @@
 #pragma once
 
 #include "../base/PlatformDefine.h"
+#include <glm/glm.hpp>
 #include <GLES2/gl2.h>
 
 namespace spank
