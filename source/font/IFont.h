@@ -22,6 +22,8 @@ class IFont
 public:
 	typedef struct CHAR_INFO_tag
 	{
+		CHAR_INFO_tag() {};
+
 		uint charId{ 0 };
 		glm::vec2 size;
 		glm::vec2 uv;

@@ -4,7 +4,7 @@
  * \author zjhlogo
  * \date 2014/10/02
  *
- * 
+ *
  */
 #include "RendererGl2.h"
 #include "Texture.h"
@@ -13,6 +13,13 @@
 #include "VertexAttributes.h"
 #include "../utils/LogUtil.h"
 #include <GLES2/gl2.h>
+
+#define LOG_GL_INT_CAPACITY(x) \
+{ \
+	GLint value = 0; \
+	glGetIntegerv(x, &value); \
+	LOGI("Gl Capacity %s=%d", #x, value); \
+}
 
 namespace spank
 {
@@ -33,6 +40,21 @@ bool RendererGl2::initialize()
 	LOGI("Vendor: %s", glGetString(GL_VENDOR));
 	LOGI("Renderer: %s", glGetString(GL_RENDERER));
 	LOGI("Extensions: %s", glGetString(GL_EXTENSIONS));
+
+	LOG_GL_INT_CAPACITY(GL_DEPTH_BITS);
+	LOG_GL_INT_CAPACITY(GL_STENCIL_BITS);
+
+	LOG_GL_INT_CAPACITY(GL_MAX_VERTEX_ATTRIBS);					// The value must be at least 8
+	LOG_GL_INT_CAPACITY(GL_MAX_VERTEX_UNIFORM_VECTORS);			// The value must be at least 128
+	LOG_GL_INT_CAPACITY(GL_MAX_FRAGMENT_UNIFORM_VECTORS);		// The value must be at least 16
+	LOG_GL_INT_CAPACITY(GL_MAX_VARYING_VECTORS);				// The value must be at least 8
+	LOG_GL_INT_CAPACITY(GL_MAX_VERTEX_TEXTURE_IMAGE_UNITS);		// The value may be 0
+	LOG_GL_INT_CAPACITY(GL_MAX_TEXTURE_IMAGE_UNITS);			// The value must be at least 8
+
+	LOG_GL_INT_CAPACITY(GL_MAX_TEXTURE_SIZE);					// The value must be at least 64
+	LOG_GL_INT_CAPACITY(GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS);	// The value must be at least 8
+	LOG_GL_INT_CAPACITY(GL_MAX_CUBE_MAP_TEXTURE_SIZE);			// The value must be at least 16
+	LOG_GL_INT_CAPACITY(GL_MAX_RENDERBUFFER_SIZE);				// The value must be at least 1
 
 	return true;
 }

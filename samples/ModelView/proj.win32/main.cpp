@@ -9,7 +9,7 @@
 #include "main.h"
 #include "DeviceWin32.h"
 #include <Framework.h>
-#include <HelloGLES3App.h>
+#include <ModelViewApp.h>
 
 class FrameworkWin32 : public spank::Framework {};
 
@@ -17,7 +17,7 @@ int __stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdL
 {
 	// initialize device
 	spank::DeviceWin32 device;
-	if (!device.initialize(hInstance, 960, 640, "HELLO_GLES3", "Hello OpenGL ES 3.0"))
+	if (!device.initialize(hInstance, 960, 640, "MODEL_VIEW", "Model View"))
 	{
 		device.terminate();
 		return 0;
@@ -35,7 +35,7 @@ int __stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdL
 	framework.getRenderer()->resize(device.getWidth(), device.getHeight());
 
 	// initialize app
-	HelloGLES3App app;
+	ModelViewApp app;
 	app.setFramework(&framework);
 	if (!app.initialize())
 	{

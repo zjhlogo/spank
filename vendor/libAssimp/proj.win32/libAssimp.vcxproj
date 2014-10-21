@@ -1,0 +1,180 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\source\Assimp.cpp" />
+    <ClCompile Include="..\source\AssimpPCH.cpp" />
+    <ClCompile Include="..\source\BaseImporter.cpp" />
+    <ClCompile Include="..\source\BaseProcess.cpp" />
+    <ClCompile Include="..\source\Bitmap.cpp" />
+    <ClCompile Include="..\source\DefaultIOStream.cpp" />
+    <ClCompile Include="..\source\DefaultIOSystem.cpp" />
+    <ClCompile Include="..\source\DefaultLogger.cpp" />
+    <ClCompile Include="..\source\Importer.cpp" />
+    <ClCompile Include="..\source\ImporterRegistry.cpp" />
+    <ClCompile Include="..\source\MaterialSystem.cpp" />
+    <ClCompile Include="..\source\md5\MD5Loader.cpp" />
+    <ClCompile Include="..\source\md5\MD5Parser.cpp" />
+    <ClCompile Include="..\source\PostStepRegistry.cpp" />
+    <ClCompile Include="..\source\ProcessHelper.cpp" />
+    <ClCompile Include="..\source\RemoveComments.cpp" />
+    <ClCompile Include="..\source\SceneCombiner.cpp" />
+    <ClCompile Include="..\source\ScenePreprocessor.cpp" />
+    <ClCompile Include="..\source\SGSpatialSort.cpp" />
+    <ClCompile Include="..\source\SkeletonMeshBuilder.cpp" />
+    <ClCompile Include="..\source\SpatialSort.cpp" />
+    <ClCompile Include="..\source\SplitByBoneCountProcess.cpp" />
+    <ClCompile Include="..\source\StandardShapes.cpp" />
+    <ClCompile Include="..\source\Subdivision.cpp" />
+    <ClCompile Include="..\source\TargetAnimation.cpp" />
+    <ClCompile Include="..\source\ValidateDataStructure.cpp" />
+    <ClCompile Include="..\source\VertexTriangleAdjacency.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\source\AssimpPCH.h" />
+    <ClInclude Include="..\source\BaseImporter.h" />
+    <ClInclude Include="..\source\BaseProcess.h" />
+    <ClInclude Include="..\source\Bitmap.h" />
+    <ClInclude Include="..\source\boost\foreach.hpp" />
+    <ClInclude Include="..\source\boost\format.hpp" />
+    <ClInclude Include="..\source\boost\lexical_cast.hpp" />
+    <ClInclude Include="..\source\boost\make_shared.hpp" />
+    <ClInclude Include="..\source\boost\math\common_factor_rt.hpp" />
+    <ClInclude Include="..\source\boost\noncopyable.hpp" />
+    <ClInclude Include="..\source\boost\pointer_cast.hpp" />
+    <ClInclude Include="..\source\boost\scoped_array.hpp" />
+    <ClInclude Include="..\source\boost\scoped_ptr.hpp" />
+    <ClInclude Include="..\source\boost\shared_array.hpp" />
+    <ClInclude Include="..\source\boost\shared_ptr.hpp" />
+    <ClInclude Include="..\source\boost\static_assert.hpp" />
+    <ClInclude Include="..\source\boost\timer.hpp" />
+    <ClInclude Include="..\source\boost\tuple\tuple.hpp" />
+    <ClInclude Include="..\source\ByteSwap.h" />
+    <ClInclude Include="..\source\CInterfaceIOWrapper.h" />
+    <ClInclude Include="..\source\DefaultIOStream.h" />
+    <ClInclude Include="..\source\DefaultIOSystem.h" />
+    <ClInclude Include="..\source\DefaultProgressHandler.h" />
+    <ClInclude Include="..\source\Exceptional.h" />
+    <ClInclude Include="..\source\fast_atof.h" />
+    <ClInclude Include="..\source\FileLogStream.h" />
+    <ClInclude Include="..\source\FileSystemFilter.h" />
+    <ClInclude Include="..\source\GenericProperty.h" />
+    <ClInclude Include="..\source\Hash.h" />
+    <ClInclude Include="..\source\IFF.h" />
+    <ClInclude Include="..\source\Importer.h" />
+    <ClInclude Include="..\source\LineSplitter.h" />
+    <ClInclude Include="..\source\LogAux.h" />
+    <ClInclude Include="..\source\MaterialSystem.h" />
+    <ClInclude Include="..\source\md5\MD5Loader.h" />
+    <ClInclude Include="..\source\md5\MD5Parser.h" />
+    <ClInclude Include="..\source\MemoryIOWrapper.h" />
+    <ClInclude Include="..\source\ParsingUtils.h" />
+    <ClInclude Include="..\source\ProcessHelper.h" />
+    <ClInclude Include="..\source\Profiler.h" />
+    <ClInclude Include="..\source\qnan.h" />
+    <ClInclude Include="..\source\RemoveComments.h" />
+    <ClInclude Include="..\source\revision.h" />
+    <ClInclude Include="..\source\SceneCombiner.h" />
+    <ClInclude Include="..\source\ScenePreprocessor.h" />
+    <ClInclude Include="..\source\ScenePrivate.h" />
+    <ClInclude Include="..\source\SGSpatialSort.h" />
+    <ClInclude Include="..\source\SkeletonMeshBuilder.h" />
+    <ClInclude Include="..\source\SmoothingGroups.h" />
+    <ClInclude Include="..\source\SpatialSort.h" />
+    <ClInclude Include="..\source\SplitByBoneCountProcess.h" />
+    <ClInclude Include="..\source\StandardShapes.h" />
+    <ClInclude Include="..\source\StdOStreamLogStream.h" />
+    <ClInclude Include="..\source\StreamReader.h" />
+    <ClInclude Include="..\source\StringComparison.h" />
+    <ClInclude Include="..\source\Subdivision.h" />
+    <ClInclude Include="..\source\TargetAnimation.h" />
+    <ClInclude Include="..\source\TinyFormatter.h" />
+    <ClInclude Include="..\source\ValidateDataStructure.h" />
+    <ClInclude Include="..\source\Vertex.h" />
+    <ClInclude Include="..\source\VertexTriangleAdjacency.h" />
+    <ClInclude Include="..\source\Win32DebugLogStream.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\source\SmoothingGroups.inl" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{0E7B5A8B-A9AA-42A3-A056-F08739FA8181}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>libAssimp</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <TargetName>$(ProjectName)_D</TargetName>
+    <OutDir>../../../bin/</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>../../../bin/</OutDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_SCL_SECURE_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../source/;../../</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;_SCL_SECURE_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../source/;../../</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

@@ -1,0 +1,149 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="..\source\BaseImporter.cpp" />
+    <ClCompile Include="..\source\BaseProcess.cpp" />
+    <ClCompile Include="..\source\Bitmap.cpp" />
+    <ClCompile Include="..\source\DefaultIOStream.cpp" />
+    <ClCompile Include="..\source\DefaultIOSystem.cpp" />
+    <ClCompile Include="..\source\Importer.cpp" />
+    <ClCompile Include="..\source\ImporterRegistry.cpp" />
+    <ClCompile Include="..\source\PostStepRegistry.cpp" />
+    <ClCompile Include="..\source\RemoveComments.cpp" />
+    <ClCompile Include="..\source\SceneCombiner.cpp" />
+    <ClCompile Include="..\source\ScenePreprocessor.cpp" />
+    <ClCompile Include="..\source\SGSpatialSort.cpp" />
+    <ClCompile Include="..\source\SkeletonMeshBuilder.cpp" />
+    <ClCompile Include="..\source\SpatialSort.cpp" />
+    <ClCompile Include="..\source\SplitByBoneCountProcess.cpp" />
+    <ClCompile Include="..\source\StandardShapes.cpp" />
+    <ClCompile Include="..\source\Subdivision.cpp" />
+    <ClCompile Include="..\source\TargetAnimation.cpp" />
+    <ClCompile Include="..\source\VertexTriangleAdjacency.cpp" />
+    <ClCompile Include="..\source\AssimpPCH.cpp" />
+    <ClCompile Include="..\source\ProcessHelper.cpp" />
+    <ClCompile Include="..\source\ValidateDataStructure.cpp" />
+    <ClCompile Include="..\source\md5\MD5Loader.cpp">
+      <Filter>md5</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\md5\MD5Parser.cpp">
+      <Filter>md5</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\MaterialSystem.cpp" />
+    <ClCompile Include="..\source\Assimp.cpp" />
+    <ClCompile Include="..\source\DefaultLogger.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\source\BaseImporter.h" />
+    <ClInclude Include="..\source\BaseProcess.h" />
+    <ClInclude Include="..\source\Bitmap.h" />
+    <ClInclude Include="..\source\ByteSwap.h" />
+    <ClInclude Include="..\source\CInterfaceIOWrapper.h" />
+    <ClInclude Include="..\source\DefaultIOStream.h" />
+    <ClInclude Include="..\source\DefaultIOSystem.h" />
+    <ClInclude Include="..\source\DefaultProgressHandler.h" />
+    <ClInclude Include="..\source\fast_atof.h" />
+    <ClInclude Include="..\source\GenericProperty.h" />
+    <ClInclude Include="..\source\Hash.h" />
+    <ClInclude Include="..\source\IFF.h" />
+    <ClInclude Include="..\source\Importer.h" />
+    <ClInclude Include="..\source\LineSplitter.h" />
+    <ClInclude Include="..\source\LogAux.h" />
+    <ClInclude Include="..\source\MemoryIOWrapper.h" />
+    <ClInclude Include="..\source\ParsingUtils.h" />
+    <ClInclude Include="..\source\Profiler.h" />
+    <ClInclude Include="..\source\qnan.h" />
+    <ClInclude Include="..\source\RemoveComments.h" />
+    <ClInclude Include="..\source\SceneCombiner.h" />
+    <ClInclude Include="..\source\ScenePreprocessor.h" />
+    <ClInclude Include="..\source\ScenePrivate.h" />
+    <ClInclude Include="..\source\SGSpatialSort.h" />
+    <ClInclude Include="..\source\SkeletonMeshBuilder.h" />
+    <ClInclude Include="..\source\SmoothingGroups.h" />
+    <ClInclude Include="..\source\SpatialSort.h" />
+    <ClInclude Include="..\source\SplitByBoneCountProcess.h" />
+    <ClInclude Include="..\source\StandardShapes.h" />
+    <ClInclude Include="..\source\StreamReader.h" />
+    <ClInclude Include="..\source\StringComparison.h" />
+    <ClInclude Include="..\source\Subdivision.h" />
+    <ClInclude Include="..\source\TargetAnimation.h" />
+    <ClInclude Include="..\source\TinyFormatter.h" />
+    <ClInclude Include="..\source\Vertex.h" />
+    <ClInclude Include="..\source\VertexTriangleAdjacency.h" />
+    <ClInclude Include="..\source\AssimpPCH.h" />
+    <ClInclude Include="..\source\boost\foreach.hpp">
+      <Filter>boost</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\boost\format.hpp">
+      <Filter>boost</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\boost\lexical_cast.hpp">
+      <Filter>boost</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\boost\make_shared.hpp">
+      <Filter>boost</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\boost\noncopyable.hpp">
+      <Filter>boost</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\boost\pointer_cast.hpp">
+      <Filter>boost</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\boost\scoped_array.hpp">
+      <Filter>boost</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\boost\scoped_ptr.hpp">
+      <Filter>boost</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\boost\shared_array.hpp">
+      <Filter>boost</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\boost\shared_ptr.hpp">
+      <Filter>boost</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\boost\static_assert.hpp">
+      <Filter>boost</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\boost\timer.hpp">
+      <Filter>boost</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\boost\math\common_factor_rt.hpp">
+      <Filter>boost\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\boost\tuple\tuple.hpp">
+      <Filter>boost\tuple</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\Exceptional.h" />
+    <ClInclude Include="..\source\ProcessHelper.h" />
+    <ClInclude Include="..\source\ValidateDataStructure.h" />
+    <ClInclude Include="..\source\md5\MD5Loader.h">
+      <Filter>md5</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\md5\MD5Parser.h">
+      <Filter>md5</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\FileSystemFilter.h" />
+    <ClInclude Include="..\source\MaterialSystem.h" />
+    <ClInclude Include="..\source\revision.h" />
+    <ClInclude Include="..\source\FileLogStream.h" />
+    <ClInclude Include="..\source\StdOStreamLogStream.h" />
+    <ClInclude Include="..\source\Win32DebugLogStream.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\source\SmoothingGroups.inl" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="boost">
+      <UniqueIdentifier>{a4c1a17c-a787-4762-ae8a-b6b87801ef88}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="boost\math">
+      <UniqueIdentifier>{ab06cee9-1c14-4ba9-98fe-63c6a058dc4c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="boost\tuple">
+      <UniqueIdentifier>{4ead182f-a4a3-483e-b3e8-a315c9e59334}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="md5">
+      <UniqueIdentifier>{5f55a3f9-b994-403d-9456-cc2743e4c933}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

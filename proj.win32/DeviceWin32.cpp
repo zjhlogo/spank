@@ -12,8 +12,6 @@ namespace spank
 {
 
 Framework* DeviceWin32::s_pFramework{ nullptr };
-static const char* WINDOW_CLASS_NAME = "OpenGLES3Test";
-static const char* WINDOW_TITLE_NAME = "OpenGL ES 3.0 Test";
 
 DeviceWin32::DeviceWin32()
 {
@@ -25,9 +23,9 @@ DeviceWin32::~DeviceWin32()
 	// TODO: 
 }
 
-bool DeviceWin32::initialize(HINSTANCE hInstance, int width, int height)
+bool DeviceWin32::initialize(HINSTANCE hInstance, int width, int height, const char* pszClassName, const char* pszWindowTitle)
 {
-	if (!createWindow(hInstance, width, height)) return false;
+	if (!createWindow(hInstance, width, height, pszClassName, pszWindowTitle)) return false;
 	m_width = width;
 	m_height = height;
 
@@ -51,7 +49,7 @@ Framework* DeviceWin32::getFramework()
 	return s_pFramework;
 }
 
-bool DeviceWin32::createWindow(HINSTANCE hInstance, int width, int height)
+bool DeviceWin32::createWindow(HINSTANCE hInstance, int width, int height, const char* pszClassName, const char* pszWindowTitle)
 {
 	WNDCLASS winClass;
 	memset(&winClass, 0, sizeof(winClass));
@@ -65,7 +63,7 @@ bool DeviceWin32::createWindow(HINSTANCE hInstance, int width, int height)
 	winClass.hbrBackground = (HBRUSH)GetStockObject(WHITE_BRUSH);
 
 	winClass.lpszMenuName = NULL;
-	winClass.lpszClassName = WINDOW_CLASS_NAME;
+	winClass.lpszClassName = pszClassName;
 	RegisterClass(&winClass);
 
 	// screen width, height
@@ -80,12 +78,12 @@ bool DeviceWin32::createWindow(HINSTANCE hInstance, int width, int height)
 	int nAdjustHeight = rc.bottom - rc.top;
 
 	// create the window
-	m_nativeWindow = CreateWindow(WINDOW_CLASS_NAME,
-								   WINDOW_TITLE_NAME,
-								   dwStyle,
-								   (nScreenWidth - nAdjustWidth) / 2, (nScreenHeight - nAdjustHeight) / 2,
-								   nAdjustWidth, nAdjustHeight,
-								   NULL, NULL, hInstance, NULL);
+	m_nativeWindow = CreateWindow(pszClassName,
+								  pszWindowTitle,
+								  dwStyle,
+								  (nScreenWidth - nAdjustWidth) / 2, (nScreenHeight - nAdjustHeight) / 2,
+								  nAdjustWidth, nAdjustHeight,
+								  NULL, NULL, hInstance, NULL);
 
 	// Get the associated device context from the window
 	m_nativeDisplay = GetDC(m_nativeWindow);

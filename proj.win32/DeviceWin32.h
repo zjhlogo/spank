@@ -20,7 +20,7 @@ public:
 	DeviceWin32();
 	virtual ~DeviceWin32();
 
-	bool initialize(HINSTANCE hInstance, int width, int height);
+	bool initialize(HINSTANCE hInstance, int width, int height, const char* pszClassName, const char* pszWindowTitle);
 	void terminate();
 
 	static void setFramework(Framework* pFramework);
@@ -33,7 +33,7 @@ public:
 	inline int getHeight() const { return m_height; };
 
 private:
-	bool createWindow(HINSTANCE hInstance, int width, int height);
+	bool createWindow(HINSTANCE hInstance, int width, int height, const char* pszClassName, const char* pszWindowTitle);
 	void destroyWindow();
 
 	bool createEglContext();
