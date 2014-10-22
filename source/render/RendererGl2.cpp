@@ -151,7 +151,7 @@ void RendererGl2::resize(int width, int height)
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 // 	glEnable(GL_CULL_FACE);
-// 	glCullFace(GL_FRONT);
+// 	glCullFace(GL_BACK);
 
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LEQUAL);
@@ -300,7 +300,7 @@ bool RendererGl2::removeTexture(Texture* pTexture)
 	if (it == m_textureMap.end())
 	{
 		LOGE("can not find texture %s from map", pTexture->getId().c_str());
-		return true;
+		return false;
 	}
 
 	m_textureMap.erase(it);
@@ -315,7 +315,7 @@ bool RendererGl2::removeShader(Shader* pShader)
 	if (it == m_shaderMap.end())
 	{
 		LOGE("can not find shader %s from map", pShader->getId().c_str());
-		return true;
+		return false;
 	}
 
 	m_shaderMap.erase(it);
@@ -330,7 +330,7 @@ bool RendererGl2::removeRenderBuffer(RenderBuffer* pBuffer)
 	if (it == m_renderBufferSet.end())
 	{
 		LOGE("can not find VMem Render Buffer 0x%08x from map", pBuffer);
-		return true;
+		return false;
 	}
 
 	m_renderBufferSet.erase(it);
@@ -345,7 +345,7 @@ bool RendererGl2::removeVertexAttributes(VertexAttributes* pVertAttrs)
 	if (it == m_vertexAttributeMap.end())
 	{
 		LOGE("can not find Vertex Attributes %s from map", pVertAttrs->getId().c_str());
-		return true;
+		return false;
 	}
 
 	m_vertexAttributeMap.erase(it);

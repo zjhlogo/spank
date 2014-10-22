@@ -32,6 +32,28 @@
     <ClCompile Include="..\source\MaterialSystem.cpp" />
     <ClCompile Include="..\source\Assimp.cpp" />
     <ClCompile Include="..\source\DefaultLogger.cpp" />
+    <ClCompile Include="..\source\CalcTangentsProcess.cpp" />
+    <ClCompile Include="..\source\ComputeUVMappingProcess.cpp" />
+    <ClCompile Include="..\source\ConvertToLHProcess.cpp" />
+    <ClCompile Include="..\source\DeboneProcess.cpp" />
+    <ClCompile Include="..\source\FindDegenerates.cpp" />
+    <ClCompile Include="..\source\FindInstancesProcess.cpp" />
+    <ClCompile Include="..\source\FindInvalidDataProcess.cpp" />
+    <ClCompile Include="..\source\FixNormalsStep.cpp" />
+    <ClCompile Include="..\source\GenFaceNormalsProcess.cpp" />
+    <ClCompile Include="..\source\ImproveCacheLocality.cpp" />
+    <ClCompile Include="..\source\JoinVerticesProcess.cpp" />
+    <ClCompile Include="..\source\LimitBoneWeightsProcess.cpp" />
+    <ClCompile Include="..\source\OptimizeGraph.cpp" />
+    <ClCompile Include="..\source\OptimizeMeshes.cpp" />
+    <ClCompile Include="..\source\PretransformVertices.cpp" />
+    <ClCompile Include="..\source\RemoveRedundantMaterials.cpp" />
+    <ClCompile Include="..\source\RemoveVCProcess.cpp" />
+    <ClCompile Include="..\source\SortByPTypeProcess.cpp" />
+    <ClCompile Include="..\source\SplitLargeMeshes.cpp" />
+    <ClCompile Include="..\source\TextureTransform.cpp" />
+    <ClCompile Include="..\source\TriangulateProcess.cpp" />
+    <ClCompile Include="..\source\GenVertexNormalsProcess.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\source\BaseImporter.h" />
@@ -128,6 +150,29 @@
     <ClInclude Include="..\source\FileLogStream.h" />
     <ClInclude Include="..\source\StdOStreamLogStream.h" />
     <ClInclude Include="..\source\Win32DebugLogStream.h" />
+    <ClInclude Include="..\source\CalcTangentsProcess.h" />
+    <ClInclude Include="..\source\ComputeUVMappingProcess.h" />
+    <ClInclude Include="..\source\ConvertToLHProcess.h" />
+    <ClInclude Include="..\source\DeboneProcess.h" />
+    <ClInclude Include="..\source\FindDegenerates.h" />
+    <ClInclude Include="..\source\FindInstancesProcess.h" />
+    <ClInclude Include="..\source\FindInvalidDataProcess.h" />
+    <ClInclude Include="..\source\FixNormalsStep.h" />
+    <ClInclude Include="..\source\GenFaceNormalsProcess.h" />
+    <ClInclude Include="..\source\ImproveCacheLocality.h" />
+    <ClInclude Include="..\source\JoinVerticesProcess.h" />
+    <ClInclude Include="..\source\LimitBoneWeightsProcess.h" />
+    <ClInclude Include="..\source\OptimizeGraph.h" />
+    <ClInclude Include="..\source\OptimizeMeshes.h" />
+    <ClInclude Include="..\source\PretransformVertices.h" />
+    <ClInclude Include="..\source\RemoveRedundantMaterials.h" />
+    <ClInclude Include="..\source\RemoveVCProcess.h" />
+    <ClInclude Include="..\source\SortByPTypeProcess.h" />
+    <ClInclude Include="..\source\SplitLargeMeshes.h" />
+    <ClInclude Include="..\source\TextureTransform.h" />
+    <ClInclude Include="..\source\TriangulateProcess.h" />
+    <ClInclude Include="..\source\GenVertexNormalsProcess.h" />
+    <ClInclude Include="..\source\PolyTools.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\source\SmoothingGroups.inl" />

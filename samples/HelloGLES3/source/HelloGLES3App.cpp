@@ -23,6 +23,8 @@ HelloGLES3App::~HelloGLES3App()
 
 bool HelloGLES3App::initialize()
 {
+	if (!BaseApp::initialize()) return false;
+
 	spank::IRenderer* pRenderer = getRenderer();
 
 	m_pShader = pRenderer->createShader("data/shaders/pos3_uv2.shader");
@@ -30,14 +32,6 @@ bool HelloGLES3App::initialize()
 
 	m_pTexture = pRenderer->createTexture("data/test.png");
 	if (!m_pTexture) return false;
-
-	spank::FontMgr* pFontMgr = getFramework()->getFontMgr();
-	spank::IFont* pFont = pFontMgr->createFont("data/12px_Tahoma.xml");
-	if (!pFont) return false;
-
-	m_pLblFPS = new spank::Label(pRenderer, pFont);
-	if (!m_pLblFPS) return false;
-	m_pLblFPS->setPos(-pRenderer->getSurfaceSize()*0.5f);
 
 	createRenderBuffer(pRenderer);
 
@@ -47,22 +41,15 @@ bool HelloGLES3App::initialize()
 void HelloGLES3App::terminate()
 {
 	SAFE_RELEASE(m_pVMemVertexBuffer);
-	SAFE_DELETE(m_pLblFPS);
 	SAFE_RELEASE(m_pTexture);
 	SAFE_RELEASE(m_pShader);
+	BaseApp::terminate();
 }
 
 void HelloGLES3App::update(float dt)
 {
-	m_elapseTime += dt;
-	if (m_elapseTime > 1.0f)
-	{
-		m_elapseTime -= 1.0f;
-		m_pLblFPS->setText(spank::StringBuilder::format("FPS: #0").add(m_fps).build());
-		m_fps = 0;
-	}
+	updateFPS(dt);
 
-	++m_fps;
 	m_rot += dt;
 	if (m_rot > glm::pi<float>()*2.0f) m_rot -= glm::pi<float>()*2.0f;
 }
@@ -83,7 +70,7 @@ void HelloGLES3App::render()
 	m_pShader->setTexture(m_pTexture, 0);
 	m_pShader->drawBuffer(m_pVMemVertexBuffer, 0, 36);
 
-	m_pLblFPS->render();
+	renderFPS();
 }
 
 void HelloGLES3App::createRenderBuffer(spank::IRenderer* pRenderer)

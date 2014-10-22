@@ -14,6 +14,7 @@
 #include "render/RenderBuffer.h"
 #include "input/TouchDelegateMgr.h"
 #include "font/FontMgr.h"
+#include "model/ModelMgr.h"
 
 namespace spank
 {
@@ -25,6 +26,7 @@ public:
 	virtual void terminate() override;
 
 	inline IRenderer* getRenderer() const { return m_pRenderer; };
+	inline ModelMgr* getModelMgr() const { return m_pModelMgr; };
 	inline TouchDelegateMgr* getTouchDelegateMgr() const { return m_pTouchDelegateMgr; };
 	inline FontMgr* getFontMgr() const { return m_pFontMgr; };
 
@@ -34,6 +36,7 @@ protected:
 
 private:
 	IRenderer* m_pRenderer{ nullptr };
+	ModelMgr* m_pModelMgr{ nullptr };
 	TouchDelegateMgr* m_pTouchDelegateMgr{ nullptr };
 	FontMgr* m_pFontMgr{ nullptr };
 

@@ -11,7 +11,8 @@
 namespace spank
 {
 
-FontMgr::FontMgr()
+FontMgr::FontMgr(IRenderer* pRenderer)
+	:m_pRenderer(pRenderer)
 {
 	// TODO: 
 }

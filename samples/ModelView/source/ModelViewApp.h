@@ -7,14 +7,9 @@
  */
 #pragma once
 
-#include <IApp.h>
-#include <ui/Label.h>
+#include <BaseApp.h>
 
-#include <libAssimp/include/assimp/cimport.h>
-#include <libAssimp/include/assimp/scene.h>
-#include <libAssimp/include/assimp/postprocess.h>
-
-class ModelViewApp : public spank::IApp
+class ModelViewApp : public BaseApp
 {
 public:
 	ModelViewApp();
@@ -27,18 +22,11 @@ protected:
 	virtual void update(float dt) override;
 	virtual void render() override;
 
-	void createRenderBuffer(spank::IRenderer* pRenderer);
-
 private:
-	spank::Texture* m_pTexture{ nullptr };
 	spank::Shader* m_pShader{ nullptr };
-	spank::Label* m_pLblFPS{ nullptr };
-
-	spank::VMemVertexBuffer* m_pVMemVertexBuffer{ nullptr };
+	spank::Texture* m_pTexture{ nullptr };
+	spank::MeshData* m_pMeshData{ nullptr };
 
 	float m_rot{ 0.0f };
-
-	int m_fps{ 0 };
-	float m_elapseTime{ 0.0f };
 
 };

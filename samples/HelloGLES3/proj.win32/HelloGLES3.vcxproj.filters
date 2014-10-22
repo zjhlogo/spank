@@ -3,9 +3,11 @@
   <ItemGroup>
     <ClInclude Include="main.h" />
     <ClInclude Include="..\source\HelloGLES3App.h" />
+    <ClInclude Include="..\..\common\BaseApp.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="..\source\HelloGLES3App.cpp" />
+    <ClCompile Include="..\..\common\BaseApp.cpp" />
   </ItemGroup>
 </Project>

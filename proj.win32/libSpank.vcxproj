@@ -18,6 +18,8 @@
     <ClCompile Include="..\source\Framework.cpp" />
     <ClCompile Include="..\source\IApp.cpp" />
     <ClCompile Include="..\source\input\TouchDelegateMgr.cpp" />
+    <ClCompile Include="..\source\model\MeshData.cpp" />
+    <ClCompile Include="..\source\model\ModelMgr.cpp" />
     <ClCompile Include="..\source\render\IRenderer.cpp" />
     <ClCompile Include="..\source\render\RenderBuffer.cpp" />
     <ClCompile Include="..\source\render\RendererGl2.cpp" />
@@ -48,6 +50,9 @@
     <ClInclude Include="..\source\Framework.h" />
     <ClInclude Include="..\source\IApp.h" />
     <ClInclude Include="..\source\input\TouchDelegateMgr.h" />
+    <ClInclude Include="..\source\model\MeshData.h" />
+    <ClInclude Include="..\source\model\MeshFileFormat.h" />
+    <ClInclude Include="..\source\model\ModelMgr.h" />
     <ClInclude Include="..\source\render\IRenderer.h" />
     <ClInclude Include="..\source\render\RenderBuffer.h" />
     <ClInclude Include="..\source\render\RendererGl2.h" />

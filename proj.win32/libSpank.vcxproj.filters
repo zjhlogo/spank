@@ -19,6 +19,9 @@
     <Filter Include="ui">
       <UniqueIdentifier>{287864e5-1b2e-4415-8218-95a8a6d86042}</UniqueIdentifier>
     </Filter>
+    <Filter Include="model">
+      <UniqueIdentifier>{f13e668d-f14d-4dc9-8cef-006196437c09}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\source\base\IMgr.cpp">
@@ -96,6 +99,12 @@
     <ClCompile Include="..\source\ui\Label.cpp">
       <Filter>ui</Filter>
     </ClCompile>
+    <ClCompile Include="..\source\model\MeshData.cpp">
+      <Filter>model</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\model\ModelMgr.cpp">
+      <Filter>model</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\source\base\IMgr.h">
@@ -169,6 +178,15 @@
     </ClInclude>
     <ClInclude Include="..\source\ui\Label.h">
       <Filter>ui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\model\MeshFileFormat.h">
+      <Filter>model</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\model\MeshData.h">
+      <Filter>model</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\model\ModelMgr.h">
+      <Filter>model</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

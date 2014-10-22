@@ -55,7 +55,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>../source;../../../source;../../../proj.win32;../../../vendor/PowerVR_SDK_3.3_R2/inc;../../../vendor;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../source;../../../source;../../../proj.win32;../../../vendor/PowerVR_SDK_3.3_R2/inc;../../../vendor;../../common;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>4351</DisableSpecificWarnings>
     </ClCompile>
     <Link>
@@ -75,7 +75,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>../source;../../../source;../../../proj.win32;../../../vendor/PowerVR_SDK_3.3_R2/inc;../../../vendor;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../source;../../../source;../../../proj.win32;../../../vendor/PowerVR_SDK_3.3_R2/inc;../../../vendor;../../common;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>4351</DisableSpecificWarnings>
     </ClCompile>
     <Link>
@@ -89,10 +89,12 @@
     <ProjectReference />
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\common\BaseApp.cpp" />
     <ClCompile Include="..\source\HelloGLES3App.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\common\BaseApp.h" />
     <ClInclude Include="..\source\HelloGLES3App.h" />
     <ClInclude Include="main.h" />
   </ItemGroup>

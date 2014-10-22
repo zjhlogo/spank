@@ -22,13 +22,11 @@ public:
 	typedef std::map<std::string, IFont*> TM_FONT;
 
 public:
-	FontMgr();
+	FontMgr(IRenderer* pRenderer);
 	~FontMgr();
 
 	virtual bool initialize() override;
 	virtual void terminate() override;
-
-	void setRenderer(IRenderer* pRenderer) { m_pRenderer = pRenderer; };
 
 	IFont* createFont(const std::string& filePath);
 
