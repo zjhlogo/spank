@@ -19,6 +19,8 @@ LOCAL_SRC_FILES := utils/FileUtilAndroid.cpp \
                    ../../source/font/FontMgr.cpp \
                    ../../source/font/IFont.cpp \
                    ../../source/input/TouchDelegateMgr.cpp \
+                   ../../source/model/MeshData.cpp \
+                   ../../source/model/ModelMgr.cpp \
                    ../../source/render/IRenderer.cpp \
                    ../../source/render/RenderBuffer.cpp \
                    ../../source/render/RendererGl2.cpp \

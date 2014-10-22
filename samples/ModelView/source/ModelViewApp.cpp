@@ -41,6 +41,7 @@ bool ModelViewApp::initialize()
 
 void ModelViewApp::terminate()
 {
+	SAFE_RELEASE(m_pMeshData);
 	SAFE_RELEASE(m_pTexture);
 	SAFE_RELEASE(m_pShader);
 	BaseApp::terminate();

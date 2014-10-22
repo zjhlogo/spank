@@ -63,6 +63,7 @@ GLuint ImageUtil::decodePngImage(const std::string& filePath)
 	// can be PNG_COLOR_TYPE_RGB, PNG_COLOR_TYPE_PALETTE, ...
 	png_byte nColorType = png_get_color_type(pPngStruct, pPngInfo);
 	int bpp = png_get_bit_depth(pPngStruct, pPngInfo);
+	int channels = png_get_channels(pPngStruct, pPngInfo);
 
 	// convert stuff to appropriate formats!
 	if (nColorType == PNG_COLOR_TYPE_PALETTE)
@@ -81,31 +82,48 @@ GLuint ImageUtil::decodePngImage(const std::string& filePath)
 	if (png_get_valid(pPngStruct, pPngInfo, PNG_INFO_tRNS)) png_set_tRNS_to_alpha(pPngStruct);
 
 	BUFFER_DATA imagePixel;
-	imagePixel.resize(width * height * 4);
+	imagePixel.resize(width * height * channels);
 
 	// read image data into pRowPointers
 	std::vector<char*> rowPointer;
 	rowPointer.resize(height);
 	for (int y = 0; y < height; y++)
 	{
-		rowPointer[y] = imagePixel.data() + (height - y - 1) * width * 4;		//each pixel(RGBA) has 4 bytes
+		rowPointer[y] = imagePixel.data() + (height - y - 1) * width * channels;		//each pixel(RGBA) has 4 bytes
 	}
 	png_read_image(pPngStruct, (png_bytepp)rowPointer.data());
 
 	// free the stream object and png structure
 	png_destroy_read_struct(&pPngStruct, &pPngInfo, NULL);
 
-	return createTextureFromRawData(width, height, imagePixel);
+	return createTextureFromRawData(width, height, channels, imagePixel);
 }
 
-GLuint ImageUtil::createTextureFromRawData(int width, int height, const BUFFER_DATA& bufferData)
+GLuint ImageUtil::createTextureFromRawData(int width, int height, int channels, const BUFFER_DATA& bufferData)
 {
+	GLint glFormat = GL_ALPHA;
+	switch (channels)
+	{
+	case 1:
+		glFormat = GL_ALPHA;
+		break;
+	case 3:
+		glFormat = GL_RGB;
+		break;
+	case 4:
+		glFormat = GL_RGBA;
+		break;
+	default:
+		return 0;
+		break;
+	}
+
 	GLuint textureId = 0;
 	glGenTextures(1, &textureId);
 	if (textureId == 0) return 0;
 
 	glBindTexture(GL_TEXTURE_2D, textureId);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, bufferData.data());
+	glTexImage2D(GL_TEXTURE_2D, 0, glFormat, width, height, 0, glFormat, GL_UNSIGNED_BYTE, bufferData.data());
 
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);

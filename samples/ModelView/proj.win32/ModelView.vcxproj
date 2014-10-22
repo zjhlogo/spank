@@ -62,7 +62,7 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>../../../bin/;../../../vendor/PowerVR_SDK_3.3_R2/lib/;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>libEGL.lib;libGLESv2.lib;winmm.lib;libSpank_D.lib;libPvr_D.lib;libTinyxml2_D.lib;libPng_D.lib;libZlib_D.lib;libConvertUtf_D.lib;libAssimp_D.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>libEGL.lib;libGLESv2.lib;winmm.lib;libSpank_D.lib;libPvr_D.lib;libTinyxml2_D.lib;libPng_D.lib;libZlib_D.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -83,7 +83,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>../../../bin/;../../../vendor/PowerVR_SDK_3.3_R2/lib/;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>libEGL.lib;libGLESv2.lib;winmm.lib;libSpank.lib;libPvr.lib;libTinyxml2.lib;libConvertUtf.lib;libAssimp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>libEGL.lib;libGLESv2.lib;winmm.lib;libSpank.lib;libPvr.lib;libTinyxml2.lib;libPng.lib;libZlib.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>

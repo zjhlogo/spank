@@ -26,7 +26,7 @@ public:
 public:
 	static IMAGE_FILE_TYPE getImageFileType(const std::string& filePath);
 	static GLuint decodeImage(IMAGE_FILE_TYPE eImageFileType, const std::string& filePath);
-	static GLuint createTextureFromRawData(int width, int height, const BUFFER_DATA& bufferData);
+	static GLuint createTextureFromRawData(int width, int height, int channels, const BUFFER_DATA& bufferData);
 
 private:
 	static GLuint decodePngImage(const std::string& filePath);
