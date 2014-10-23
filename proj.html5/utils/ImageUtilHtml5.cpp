@@ -35,9 +35,29 @@ static GLuint decodeImageBySdl(const std::string& filePath)
 
 	int w = pSdlSurface->w;
 	int h = pSdlSurface->h;
+	int bpp = pSdlSurface->format->BytesPerPixel;
+	LOGI("Image %s decode info w=%d, h=%d, bpp=%d", filePath.c_str(), w, h, bpp);
+
+	GLint glFormat = GL_ALPHA;
+	switch (bpp)
+	{
+	case 1:
+		glFormat = GL_ALPHA;
+		break;
+	case 3:
+		glFormat = GL_RGB;
+		break;
+	case 4:
+		glFormat = GL_RGBA;
+		break;
+	default:
+		SDL_FreeSurface(pSdlSurface);
+		return 0;
+		break;
+	}
 
 	BUFFER_DATA bufferData;
-	flipVertical(bufferData, (const char*)pSdlSurface->pixels, w, h, 4);
+	flipVertical(bufferData, (const char*)pSdlSurface->pixels, w, h, bpp);
 	SDL_FreeSurface(pSdlSurface);
 
 	GLuint textureId = 0;
@@ -51,7 +71,7 @@ static GLuint decodeImageBySdl(const std::string& filePath)
 
 	glBindTexture(GL_TEXTURE_2D, textureId);
 
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, w, h, 0, GL_RGBA, GL_UNSIGNED_BYTE, bufferData.data());
+	glTexImage2D(GL_TEXTURE_2D, 0, glFormat, w, h, 0, glFormat, GL_UNSIGNED_BYTE, bufferData.data());
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glBindTexture(GL_TEXTURE_2D, 0);

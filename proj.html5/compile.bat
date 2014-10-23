@@ -13,6 +13,8 @@ utils/TimeUtilHtml5.cpp ^
 ../source/font/BitmapFont.cpp ^
 ../source/font/FontMgr.cpp ^
 ../source/font/IFont.cpp ^
+../source/model/MeshData.cpp ^
+../source/model/ModelMgr.cpp ^
 ../source/input/TouchDelegateMgr.cpp ^
 ../source/render/IRenderer.cpp ^
 ../source/render/RenderBuffer.cpp ^

@@ -6,7 +6,7 @@ set LOCAL_C_INCLUDES=-I ../source/ -I ../../common/ -I ../../../source/ -I ../..
 
 set LOCAL_SRC_FILES=main.cpp ^
 ../../common/BaseApp.cpp ^
-../source/HelloGLES3App.cpp
+../source/ModelViewApp.cpp
 
 
-emcc %LOCAL_CFLAGS% %LOCAL_C_INCLUDES% %LOCAL_SRC_FILES% -o ../../../bin/libHelloGLES3.bc
+emcc %LOCAL_CFLAGS% %LOCAL_C_INCLUDES% %LOCAL_SRC_FILES% -o ../../../bin/libModelView.bc
