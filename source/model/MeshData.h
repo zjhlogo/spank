@@ -31,6 +31,14 @@ class MeshData : public RenderObject
 public:
 	friend class ModelMgr;
 
+	typedef struct MATERIAL_ITEM_tag
+	{
+		MeshFileFormat::MATERIAL_INFO materialInfo;
+		std::string texDiffuseFullPath;
+		Texture* pTexDiffuse{ nullptr };
+	} MATERIAL_ITEM;
+	typedef std::vector<MATERIAL_ITEM> TV_MATERIAL_ITEM;
+
 	typedef struct RENDER_PIECE_INFO_tag
 	{
 		MeshFileFormat::PIECE_INFO pieceInfo;
@@ -38,7 +46,6 @@ public:
 		VMemVertexBuffer* pVertexBuffer{ nullptr };
 		VMemIndexBuffer* pIndexBuffer{ nullptr };
 	} RENDER_PIECE_INFO;
-
 	typedef std::vector<RENDER_PIECE_INFO*> TV_RENDER_PIECE_INFO;
 
 public:
@@ -48,6 +55,8 @@ public:
 	 * \return return true if success, otherwise return false
 	 */
 	bool loadFromFile(const std::string& filePath);
+
+	Texture* getMaterialTexDiffuse(int materialId);
 
 protected:
 	MeshData(ModelMgr* pModelMgr, IRenderer* pRenderer);
@@ -61,13 +70,13 @@ private:
 	 * \param pReader the stream of mesh file
 	 * \return return true if parse success, otherwise return false
 	 */
-	bool parseMeshFile(BufferStream* pStream);
+	bool parseMeshFile(BufferStream* pStream, const std::string& baseDir);
 
 	/*!
-	 * \brief destroy all buffers
+	 * \brief destroy all resources
 	 * \return 
 	 */
-	void destroyBuffers();
+	void destroy();
 
 public:
 	MeshFileFormat::FILE_HEADER header;
@@ -76,6 +85,7 @@ public:
 private:
 	IRenderer* m_pRenderer{ nullptr };
 	ModelMgr* m_pModelMgr{ nullptr };
+	TV_MATERIAL_ITEM m_materialItemList;
 
 };
 

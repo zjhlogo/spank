@@ -27,11 +27,8 @@ bool ModelViewApp::initialize()
 	if (!BaseApp::initialize()) return false;
 
 	spank::IRenderer* pRenderer = getRenderer();
-	m_pShader = pRenderer->createShader("data/shaders/pos3_uv2_normal.shader");
+	m_pShader = pRenderer->createShader("data/shaders/pos3_uv2_normal_bone.shader");
 	if (!m_pShader) return false;
-
-	m_pTexture = pRenderer->createTexture("data/md5/guard1_body.png");
-	if (!m_pTexture) return false;
 
 	m_pMeshData = getFramework()->getModelMgr()->createMeshData("data/md5/Bob.mesh");
 	if (!m_pMeshData) return false;
@@ -42,7 +39,6 @@ bool ModelViewApp::initialize()
 void ModelViewApp::terminate()
 {
 	SAFE_RELEASE(m_pMeshData);
-	SAFE_RELEASE(m_pTexture);
 	SAFE_RELEASE(m_pShader);
 	BaseApp::terminate();
 }
@@ -68,10 +64,10 @@ void ModelViewApp::render()
 
 	m_pShader->useProgram();
 	m_pShader->setMatrix("u_matMVP", matMVP);
-	m_pShader->setTexture(m_pTexture, 0);
 
 	for (const auto& renderPieceInfo : m_pMeshData->renderPieceInfoList)
 	{
+		m_pShader->setTexture(m_pMeshData->getMaterialTexDiffuse(renderPieceInfo->pieceInfo.nMaterialId), 0);
 		m_pShader->drawBuffer(renderPieceInfo->pVertexBuffer, renderPieceInfo->pIndexBuffer);
 	}
 

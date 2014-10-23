@@ -3,4 +3,6 @@
 	<attribute size="3" type="AIT_FLOAT" name="a_position" />
 	<attribute size="2" type="AIT_FLOAT" name="a_texCoord" />
 	<attribute size="3" type="AIT_FLOAT" name="a_normal" />
+	<attribute size="4" type="AIT_FLOAT" name="a_boneIndex" />
+	<attribute size="4" type="AIT_FLOAT" name="a_boneWeight" />
 </attributes>

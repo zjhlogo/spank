@@ -24,7 +24,6 @@ protected:
 
 private:
 	spank::Shader* m_pShader{ nullptr };
-	spank::Texture* m_pTexture{ nullptr };
 	spank::MeshData* m_pMeshData{ nullptr };
 
 	float m_rot{ 0.0f };

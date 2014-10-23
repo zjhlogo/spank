@@ -20,6 +20,7 @@ public:
 		MAGIC_NUMBER = 0x4853454D,		// file magic number ('MESH')
 		CURRENT_VERSION = 120,
 		PIECE_NAME_SIZE = 32,
+		MAX_TEX_FILE_PATH = 64,
 		MAX_NUMBER_OF_PIECE = 256,
 		MAX_TEX_COORDS = 8,
 	};
@@ -60,10 +61,19 @@ public:
 		float fBoundingBoxMin[3]{};
 		float fBoundingBoxMax[3]{};
 
+		int nNumMaterials{ 0 };
 		int nNumPieces{ 0 };
 	} FILE_HEADER;
 
-	// 2, the nNumPieces of PIECE_INFO
+	// 2, the nNumMaterials of MATERIAL_INFO
+	typedef struct MATERIAL_INFO_tag
+	{
+		int id{ -1 };
+		char szTexDiffuse[MAX_TEX_FILE_PATH];
+	} MATERIAL_INFO;
+	typedef std::vector<MATERIAL_INFO> TV_MATERIAL_INFO;
+
+	// 3, the nNumPieces of PIECE_INFO
 	typedef struct PIECE_INFO_tag
 	{
 		char szName[PIECE_NAME_SIZE] {};

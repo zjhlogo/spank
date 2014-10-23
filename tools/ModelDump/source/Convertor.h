@@ -22,6 +22,13 @@ namespace spank
 class Convertor
 {
 public:
+	typedef struct BONE_INFO_tag
+	{
+		int boneId{ -1 };
+		float weight{ 0.0f };
+	} BONE_INFO;
+	typedef std::vector<BONE_INFO> TV_BONE_INFO;
+
 	typedef struct FULL_VERT_ATTRS_tag
 	{
 		glm::vec3 pos;
@@ -29,16 +36,24 @@ public:
 		glm::vec3 normal;
 		glm::vec3 tangent;
 		glm::vec3 binormal;
+		TV_BONE_INFO boneInfoList;
 	} FULL_VERT_ATTRS;
 	typedef std::vector<FULL_VERT_ATTRS> TV_FULL_VERT_ATTRS;
 
 	typedef std::vector<uint16> TV_UINT16;
 
+	typedef struct MATERIAL_tag
+	{
+		int id;
+		std::string texDiffuse;
+	} MATERIAL;
+	typedef std::vector<MATERIAL> TV_MATERIAL;
+
 	typedef struct MESH_tag
 	{
 		std::string name;					// piece name
+		const MATERIAL* pMaterial{ nullptr };
 		uint vertAttrFlag{ 0 };				// see MeshFileFormat::VERTEX_ATTRIBUTES
-
 		TV_FULL_VERT_ATTRS verts;
 		TV_UINT16 indis;
 	} MESH;
@@ -53,12 +68,13 @@ public:
 	void reset();
 
 private:
-	bool collectPieceInfo(const aiScene* pScene, const aiNode* pNode);
+	bool collectPieceInfo(const aiScene* pScene);
 
 	bool copyVertexPos(MESH* pPieceInfo, const aiVector3D* pPos, uint numVerts);
 	bool copyVertexUv(MESH* pPieceInfo, int channel, const aiVector3D* pUv, uint numVerts);
 	bool copyVertexNormal(MESH* pPieceInfo, const aiVector3D* pNormal, uint numVerts);
 	bool copyVertexTangentAndBinormal(MESH* pPieceInfo, const aiVector3D* pTangent, const aiVector3D* pBinormal, uint numVerts);
+	bool copyBoneInfo(MESH* pPieceInfo, aiBone**const pBones, uint numBones);
 	bool copyFaceIndex(MESH* pPieceInfo, const aiFace* pFace, uint numFace);
 	uint calculateStride(uint vertAttrs);
 
@@ -87,6 +103,8 @@ private:
 	};
 
 	const aiScene* m_pScene{ nullptr };
+
+	TV_MATERIAL m_materialList;
 	TV_MESH m_meshList;
 
 };

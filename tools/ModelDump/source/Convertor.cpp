@@ -27,7 +27,7 @@ bool Convertor::openModelFile(const char* pszFilePath)
 	m_pScene = aiImportFile(pszFilePath, m_processFlag);
 	if (!m_pScene) return false;
 
-	collectPieceInfo(m_pScene, m_pScene->mRootNode);
+	collectPieceInfo(m_pScene);
 
 	return true;
 }
@@ -41,8 +41,18 @@ bool Convertor::saveFile(const char* pszFilePath)
 
 	// wirte file header
 	MeshFileFormat::FILE_HEADER fileHeader;
+	fileHeader.nNumMaterials = (int)m_materialList.size();
 	fileHeader.nNumPieces = (int)m_meshList.size();
 	fwrite(&fileHeader, sizeof(fileHeader), 1, pFile);
+
+	// write material list
+	for (const auto& material : m_materialList)
+	{
+		MeshFileFormat::MATERIAL_INFO materialInfo;
+		materialInfo.id = material.id;
+		strncpy(materialInfo.szTexDiffuse, material.texDiffuse.data(), MeshFileFormat::MAX_TEX_FILE_PATH);
+		fwrite(&materialInfo, sizeof(materialInfo), 1, pFile);
+	}
 
 	// write piece list
 	long pieceListAddr = ftell(pFile);
@@ -56,6 +66,7 @@ bool Convertor::saveFile(const char* pszFilePath)
 
 		// copy piece info
 		strncpy(pieceList[i].szName, pMesh->name.c_str(), MeshFileFormat::PIECE_NAME_SIZE);
+		pieceList[i].nMaterialId = pMesh->pMaterial->id;
 		pieceList[i].nVertexAttributes = pMesh->vertAttrFlag;
 		pieceList[i].nNumVerts = pMesh->verts.size();
 		pieceList[i].nOffVerts = ftell(pFile);
@@ -99,6 +110,20 @@ bool Convertor::saveFile(const char* pszFilePath)
 				fwrite(&vert.binormal.y, sizeof(float), 1, pFile);
 				fwrite(&vert.binormal.z, sizeof(float), 1, pFile);
 			}
+
+			if ((pMesh->vertAttrFlag & MeshFileFormat::VA_SKELETON) == MeshFileFormat::VA_SKELETON)
+			{
+				float boneIndex[4]{0.0f, 0.0f, 0.0f, 0.0f};
+				float boneWeight[4]{0.0f, 0.0f, 0.0f, 0.0f};
+				int numBones = (int)vert.boneInfoList.size();
+				for (int i = 0; i < numBones && i < 4; ++i)
+				{
+					boneIndex[i] = (float)vert.boneInfoList[i].boneId;
+					boneWeight[i] = (float)vert.boneInfoList[i].weight;
+				}
+				fwrite(&boneIndex, sizeof(boneIndex), 1, pFile);
+				fwrite(&boneWeight, sizeof(boneWeight), 1, pFile);
+			}
 		}
 
 		pieceList[i].nNumIndis = pMesh->indis.size();
@@ -128,23 +153,40 @@ void Convertor::reset()
 		SAFE_DELETE(pieceInfo);
 	}
 	m_meshList.clear();
+	m_materialList.clear();
 }
 
-bool Convertor::collectPieceInfo(const aiScene* pScene, const aiNode* pNode)
+bool Convertor::collectPieceInfo(const aiScene* pScene)
 {
-	// collect mesh
-	for (uint i = 0; i < pNode->mNumMeshes; ++i)
+	for (uint i = 0; i < pScene->mNumMaterials; ++i)
 	{
-		const aiMesh* pMesh = pScene->mMeshes[pNode->mMeshes[i]];
+		const aiMaterial* pMaterial = pScene->mMaterials[i];
 
-		MESH* pPieceInfo = new MESH();
-		pPieceInfo->name = pMesh->mName.C_Str();
+		MATERIAL material;
+		material.id = i;
+
+		aiString texPath;
+		pMaterial->GetTexture(aiTextureType_DIFFUSE, 0, &texPath);
+		material.texDiffuse = texPath.C_Str();
+
+		m_materialList.push_back(material);
+	}
+
+	// collect mesh
+	for (uint i = 0; i < pScene->mNumMeshes; ++i)
+	{
+		const aiMesh* pMesh = pScene->mMeshes[i];
+		if (!pMesh) return false;
+
+		MESH* pMeshInfo = new MESH();
+		pMeshInfo->name = pMesh->mName.C_Str();
+		pMeshInfo->pMaterial = &m_materialList[pMesh->mMaterialIndex];
 
 		// copy verts pos
 		if (pMesh->HasPositions())
 		{
-			pPieceInfo->vertAttrFlag |= MeshFileFormat::VA_POSITION;
-			copyVertexPos(pPieceInfo, pMesh->mVertices, pMesh->mNumVertices);
+			pMeshInfo->vertAttrFlag |= MeshFileFormat::VA_POSITION;
+			copyVertexPos(pMeshInfo, pMesh->mVertices, pMesh->mNumVertices);
 		}
 
 		// copy verts uv
@@ -152,43 +194,39 @@ bool Convertor::collectPieceInfo(const aiScene* pScene, const aiNode* pNode)
 		{
 			if (pMesh->HasTextureCoords(uvChannel))
 			{
-				pPieceInfo->vertAttrFlag |= (MeshFileFormat::VA_TEXCOORD0 << uvChannel);
-				copyVertexUv(pPieceInfo, uvChannel, pMesh->mTextureCoords[uvChannel], pMesh->mNumVertices);
+				pMeshInfo->vertAttrFlag |= (MeshFileFormat::VA_TEXCOORD0 << uvChannel);
+				copyVertexUv(pMeshInfo, uvChannel, pMesh->mTextureCoords[uvChannel], pMesh->mNumVertices);
 			}
 		}
 
 		// copy normal
 		if (pMesh->HasNormals())
 		{
-			pPieceInfo->vertAttrFlag |= MeshFileFormat::VA_NORMAL;
-			copyVertexNormal(pPieceInfo, pMesh->mNormals, pMesh->mNumVertices);
+			pMeshInfo->vertAttrFlag |= MeshFileFormat::VA_NORMAL;
+			copyVertexNormal(pMeshInfo, pMesh->mNormals, pMesh->mNumVertices);
 		}
 
 		// copy tangent and binotmal
 		if (pMesh->HasTangentsAndBitangents())
 		{
-			pPieceInfo->vertAttrFlag |= (MeshFileFormat::VA_TANGENT | MeshFileFormat::VA_BINORMAL);
-			copyVertexTangentAndBinormal(pPieceInfo, pMesh->mTangents, pMesh->mBitangents, pMesh->mNumVertices);
+			pMeshInfo->vertAttrFlag |= (MeshFileFormat::VA_TANGENT | MeshFileFormat::VA_BINORMAL);
+			copyVertexTangentAndBinormal(pMeshInfo, pMesh->mTangents, pMesh->mBitangents, pMesh->mNumVertices);
 		}
 
-		// TODO: copy skelecton
-// 		if (pMesh->HasBones())
-// 		{
-// 			pPieceInfo->vertAttrFlag |= VA_SKELETON;
-// 		}
+		// copy skelecton
+		if (pMesh->HasBones())
+		{
+			pMeshInfo->vertAttrFlag |= MeshFileFormat::VA_SKELETON;
+			copyBoneInfo(pMeshInfo, pMesh->mBones, pMesh->mNumBones);
+		}
 
 		// collect face index
 		if (pMesh->HasFaces())
 		{
-			copyFaceIndex(pPieceInfo, pMesh->mFaces, pMesh->mNumFaces);
+			copyFaceIndex(pMeshInfo, pMesh->mFaces, pMesh->mNumFaces);
 		}
 
-		m_meshList.push_back(pPieceInfo);
-	}
-
-	for (uint i = 0; i < pNode->mNumChildren; ++i)
-	{
-		collectPieceInfo(pScene, pNode->mChildren[i]);
+		m_meshList.push_back(pMeshInfo);
 	}
 
 	return true;
@@ -248,6 +286,24 @@ bool Convertor::copyVertexTangentAndBinormal(MESH* pPieceInfo, const aiVector3D*
 		pPieceInfo->verts[i].binormal.x = pBinormal[i].x;
 		pPieceInfo->verts[i].binormal.y = pBinormal[i].y;
 		pPieceInfo->verts[i].binormal.z = pBinormal[i].z;
+	}
+
+	return true;
+}
+
+bool Convertor::copyBoneInfo(MESH* pPieceInfo, aiBone**const pBones, uint numBones)
+{
+	for (uint i = 0; i < numBones; ++i)
+	{
+		const aiBone* pBone = pBones[i];
+		for (uint j = 0; j < pBone->mNumWeights; ++j)
+		{
+			BONE_INFO boneInfo;
+			boneInfo.boneId = i;
+			boneInfo.weight = pBone->mWeights[j].mWeight;
+
+			pPieceInfo->verts[pBone->mWeights[j].mVertexId].boneInfoList.push_back(boneInfo);
+		}
 	}
 
 	return true;
