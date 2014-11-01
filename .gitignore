@@ -24,6 +24,7 @@ bin/*.js
 bin/*.html
 bin/*.bc
 bin/*.data
+bin/*.map
 gen/
 .settings/
 proj.android/bin/
@@ -208,7 +209,8 @@ FakesAssemblies/
 .LSOverride
 
 # Icon must end with two \r
-Icon
+Icon
+
 
 # Thumbnails
 ._*

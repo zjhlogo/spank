@@ -1,0 +1,45 @@
+CC=emcc
+
+SOURCES=utils/esUtil.cpp \
+utils/FileUtilHtml5.cpp \
+utils/ImageUtilHtml5.cpp \
+utils/LogUtilHtml5.cpp \
+utils/TimeUtilHtml5.cpp \
+../source/base/IMgr.cpp \
+../source/font/BitmapFont.cpp \
+../source/font/FontMgr.cpp \
+../source/font/IFont.cpp \
+../source/model/MeshData.cpp \
+../source/model/ModelMgr.cpp \
+../source/input/TouchDelegateMgr.cpp \
+../source/render/IRenderer.cpp \
+../source/render/RenderBuffer.cpp \
+../source/render/RendererGl2.cpp \
+../source/render/RendererGl3.cpp \
+../source/render/RenderObject.cpp \
+../source/render/RenderTarget.cpp \
+../source/render/Shader.cpp \
+../source/render/Texture.cpp \
+../source/render/VertexAttributes.cpp \
+../source/ui/Label.cpp \
+../source/utils/BufferStream.cpp \
+../source/utils/FileUtil.cpp \
+../source/utils/ImageUtil.cpp \
+../source/utils/StringBuilder.cpp \
+../source/utils/StringUtil.cpp \
+../source/Framework.cpp \
+../source/IApp.cpp
+
+EXPORTS_FILE=makefile_exprots.txt
+
+LOCAL_C_FLAGS=-Werror -std=c++11 -DEMSCRIPTEN_BUILD
+
+LOCAL_C_INCLUDES=-I ../source/ -I ../vendor/
+
+OUTPUT=libSpank.bc
+
+all: $(SOURCES) $(OUTPUT)
+
+$(OUTPUT): $(SOURCES)
+	$(CC) $(SOURCES) -s EXPORTED_FUNCTIONS=@$(EXPORTS_FILE) $(LOCAL_C_FLAGS) $(LOCAL_C_INCLUDES) -o ../bin/$(OUTPUT)
+
