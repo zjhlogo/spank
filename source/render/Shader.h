@@ -41,7 +41,10 @@ public:
 	bool reload(bool freeOld);
 
 	void useProgram();
-	bool setMatrix(const char* pszName, const glm::mat4& mat4);
+	bool setUniform(const char* pszName, float value);
+	bool setUniform(const char* pszName, const glm::vec2& v);
+	bool setUniform(const char* pszName, const glm::vec3& v);
+	bool setUniform(const char* pszName, const glm::mat4& mat4);
 	bool setTexture(Texture* pTexture, int index);
 
 	void drawBuffer(MemVertexBuffer* pVertexBuffer, int start, int numVerts);

@@ -77,6 +77,11 @@ private:
 };
 
 // pre-define vertex attributes
+typedef struct VERT_ATTR_POS3_tag
+{
+	float x, y, z;		// pos3
+} VERT_ATTR_POS3;
+
 typedef struct VERT_ATTR_POS3_UV2_tag
 {
 	float x, y, z;		// pos3

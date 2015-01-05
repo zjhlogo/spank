@@ -48,7 +48,7 @@ void Label::render()
 	matTran = glm::translate(matTran, glm::vec3(m_pos, 0.0f));
 
 	glm::mat4 matMVP = m_pRenderer->getOrthoMatrix() * matTran;
-	m_pShader->setMatrix("u_matMVP", matMVP);
+	m_pShader->setUniform("u_matMVP", matMVP);
 
 	for (auto it : m_indexBufferInfoMap)
 	{

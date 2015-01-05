@@ -155,7 +155,46 @@ void Shader::useProgram()
 	GL_ERROR_CHECK();
 }
 
-bool Shader::setMatrix(const char* pszName, const glm::mat4& mat4)
+bool Shader::setUniform(const char* pszName, float value)
+{
+	// First gets the location of that variable in the shader using its name
+	int loc = glGetUniformLocation(m_programId, pszName);
+	GL_ERROR_CHECK();
+
+	// Then passes the matrix to that variable
+	glUniform1f(loc, value);
+	GL_ERROR_CHECK();
+
+	return true;
+}
+
+bool Shader::setUniform(const char* pszName, const glm::vec2& v)
+{
+	// First gets the location of that variable in the shader using its name
+	int loc = glGetUniformLocation(m_programId, pszName);
+	GL_ERROR_CHECK();
+
+	// Then passes the matrix to that variable
+	glUniform2f(loc, v.x, v.y);
+	GL_ERROR_CHECK();
+
+	return true;
+}
+
+bool Shader::setUniform(const char* pszName, const glm::vec3& v)
+{
+	// First gets the location of that variable in the shader using its name
+	int loc = glGetUniformLocation(m_programId, pszName);
+	GL_ERROR_CHECK();
+
+	// Then passes the matrix to that variable
+	glUniform3f(loc, v.x, v.y, v.z);
+	GL_ERROR_CHECK();
+
+	return true;
+}
+
+bool Shader::setUniform(const char* pszName, const glm::mat4& mat4)
 {
 	// First gets the location of that variable in the shader using its name
 	int loc = glGetUniformLocation(m_programId, pszName);
