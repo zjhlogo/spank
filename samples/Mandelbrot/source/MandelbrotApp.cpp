@@ -32,6 +32,14 @@ bool MandelbrotApp::initialize()
 
 	createRenderBuffer(pRenderer);
 
+	spank::FontMgr* pFontMgr = getFramework()->getFontMgr();
+	spank::IFont* pFont = pFontMgr->createFont("data/12px_Tahoma.xml");
+	if (!pFont) return false;
+
+	m_pLblInfo = new spank::Label(pRenderer, pFont);
+	if (!m_pLblInfo) return false;
+	updateInfo();
+
 	return true;
 }
 
@@ -57,12 +65,13 @@ void MandelbrotApp::render()
 
 	m_pShader->useProgram();
 	m_pShader->setUniform("u_matMVP", matMVP);
-	m_pShader->setUniform("u_maxIterations", 32.0f);
+	m_pShader->setUniform("u_maxIterations", m_fMaxIteration);
 	m_pShader->setUniform("u_zoom", m_fZoom);
 	m_pShader->setUniform("u_centerPos", m_centerPos);
 
 	m_pShader->drawBuffer(m_pVMemVertexBuffer, m_pVMemIndexBuffer);
 
+	renderInfo();
 	renderFPS();
 }
 
@@ -115,9 +124,28 @@ void MandelbrotApp::onTouchEvent(spank::ITouchDelegate::ACTION_TYPE_ID eActionTy
 	}
 		break;
 	}
+
+	updateInfo();
 }
 
 void MandelbrotApp::onZoomEvent(float zoom)
 {
 	m_fZoom *= zoom;
+	updateInfo();
+}
+
+void MandelbrotApp::updateInfo()
+{
+	std::string text = spank::StringBuilder::format("Touch to move, Pinch to zoom\nMAX ITERATIONS: #0\nZOOM: #1\nCENTER POS: #2, #3").add((int)m_fMaxIteration).add(m_fZoom).add(m_centerPos.x).add(m_centerPos.y).build();
+	m_pLblInfo->setText(text);
+
+	glm::vec2 textSize = m_pLblInfo->calcTextSize();
+	const glm::vec2& surfaceSize = getRenderer()->getSurfaceSize();
+
+	m_pLblInfo->setPos(glm::vec2(-surfaceSize.x*0.5f, surfaceSize.y*0.5f - textSize.y));
+}
+
+void MandelbrotApp::renderInfo()
+{
+	m_pLblInfo->render();
 }

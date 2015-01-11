@@ -28,13 +28,19 @@ protected:
 private:
 	void createRenderBuffer(spank::IRenderer* pRenderer);
 
+	void updateInfo();
+	void renderInfo();
+
 private:
 	spank::Shader* m_pShader{ nullptr };
 
 	spank::VMemVertexBuffer* m_pVMemVertexBuffer{ nullptr };
 	spank::VMemIndexBuffer* m_pVMemIndexBuffer{ nullptr };
 
+	spank::Label* m_pLblInfo{ nullptr };
+
 	float m_fZoom{ 0.005f };
+	float m_fMaxIteration{ 32.0f };
 	glm::vec2 m_centerPos;
 	glm::vec2 m_lastTouchPos;
 

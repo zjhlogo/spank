@@ -46,6 +46,8 @@ public:
 	inline void setPos(const glm::vec2& pos) { m_pos = pos; };
 	inline const glm::vec2& getPos() const { return m_pos; };
 
+	glm::vec2 calcTextSize();
+
 	void render();
 
 private:
