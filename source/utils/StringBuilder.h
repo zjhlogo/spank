@@ -35,6 +35,7 @@ public:
 	StringBuilder& add(uint64 nValue, const char* pszFormat = NULL);
 
 	StringBuilder& add(float fValue, const char* pszFormat = NULL);
+	StringBuilder& add(double dValue, const char* pszFormat = NULL);
 	StringBuilder& add(const std::string& strValue);
 
 	std::string build();

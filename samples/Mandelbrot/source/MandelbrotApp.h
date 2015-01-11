@@ -39,9 +39,12 @@ private:
 
 	spank::Label* m_pLblInfo{ nullptr };
 
-	float m_fZoom{ 0.005f };
-	float m_fMaxIteration{ 32.0f };
-	glm::vec2 m_centerPos;
+	float m_fZoom{ 0.0025f };
+	float m_fMaxIteration{ 18.0f };
+	float m_fEscapeRadius{ 4.0f };
+	glm::vec2 m_centerPos{ -0.64f, 0.0f };
+	glm::vec3 m_colorScale{ 0.025f, 0.08f, 0.12f };
+
 	glm::vec2 m_lastTouchPos;
 
 };
