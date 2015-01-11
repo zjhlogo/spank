@@ -63,7 +63,7 @@ void ModelViewApp::render()
 	glm::mat4 matMVP = getRenderer()->getPerspectiveMatrix() * matView * matRot;
 
 	m_pShader->useProgram();
-	m_pShader->setMatrix("u_matMVP", matMVP);
+	m_pShader->setUniform("u_matMVP", matMVP);
 
 	for (const auto& renderPieceInfo : m_pMeshData->renderPieceInfoList)
 	{

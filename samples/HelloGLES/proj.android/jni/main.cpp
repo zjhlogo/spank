@@ -6,12 +6,12 @@
  * \author zjhlogo (zjhlogo@gmail.com)
  */
 #include "main.h"
-#include <ModelViewApp.h>
+#include <HelloGLESApp.h>
 #include <utils/LogUtil.h>
 
 class FrameworkAndroid : public spank::Framework {};
 FrameworkAndroid* g_pFrameworkAndroid = nullptr;
-ModelViewApp* g_pModelViewApp = nullptr;
+HelloGLESApp* g_pHelloGLESApp = nullptr;
 
 JNIEXPORT jboolean JNICALL Java_com_zjhlogo_libspank_GameEntry_initialize(JNIEnv* env, jobject obj, jint width, jint height)
 {
@@ -32,12 +32,12 @@ JNIEXPORT jboolean JNICALL Java_com_zjhlogo_libspank_GameEntry_initialize(JNIEnv
 	g_pFrameworkAndroid->getRenderer()->resize(width, height);
 
 	// initialize app
-	g_pModelViewApp = new ModelViewApp();
-	g_pModelViewApp->setFramework(g_pFrameworkAndroid);
-	if (!g_pModelViewApp->initialize())
+	g_pHelloGLESApp = new HelloGLESApp();
+	g_pHelloGLESApp->setFramework(g_pFrameworkAndroid);
+	if (!g_pHelloGLESApp->initialize())
 	{
-		g_pModelViewApp->terminate();
-		SAFE_DELETE(g_pModelViewApp);
+		g_pHelloGLESApp->terminate();
+		SAFE_DELETE(g_pHelloGLESApp);
 
 		g_pFrameworkAndroid->terminate();
 		SAFE_DELETE(g_pFrameworkAndroid);
@@ -52,8 +52,8 @@ JNIEXPORT void JNICALL Java_com_zjhlogo_libspank_GameEntry_terminate(JNIEnv* env
 {
 	LOGD("GameEntry terminate");
 
-	g_pModelViewApp->terminate();
-	SAFE_DELETE(g_pModelViewApp);
+	g_pHelloGLESApp->terminate();
+	SAFE_DELETE(g_pHelloGLESApp);
 
 	g_pFrameworkAndroid->terminate();
 	SAFE_DELETE(g_pFrameworkAndroid);
@@ -66,7 +66,7 @@ JNIEXPORT void JNICALL Java_com_zjhlogo_libspank_GameEntry_resize(JNIEnv* env, j
 
 JNIEXPORT void JNICALL Java_com_zjhlogo_libspank_GameEntry_step(JNIEnv* env, jobject obj)
 {
-	g_pModelViewApp->step();
+	g_pHelloGLESApp->step();
 }
 
 JNIEXPORT void JNICALL Java_com_zjhlogo_libspank_GameEntry_touchEvent(JNIEnv* env, jobject obj, jint actionType, jfloat x, jfloat y)
