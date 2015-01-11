@@ -170,30 +170,45 @@ void DeviceWin32::destroyEglContext()
 
 LRESULT CALLBACK DeviceWin32::mainWndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
+	static bool s_bLButtonDown = false;
+
 	switch (uMsg)
 	{
 	case WM_LBUTTONDOWN:
 	{
+		s_bLButtonDown = true;
 		int posx = (int)(short)LOWORD(lParam);
 		int posy = (int)(short)HIWORD(lParam);
 		glm::vec2 touchPos(posx, posy);
-		s_pFramework->getTouchDelegateMgr()->handleTouchBegin(touchPos);
+		s_pFramework->getTouchDelegateMgr()->handleTouchEvent(ITouchDelegate::TOUCH_BEGIN, touchPos);
 	}
 		break;
 	case WM_MOUSEMOVE:
 	{
-		int posx = (int)(short)LOWORD(lParam);
-		int posy = (int)(short)HIWORD(lParam);
-		glm::vec2 touchPos(posx, posy);
-		s_pFramework->getTouchDelegateMgr()->handleTouchMove(touchPos);
+		if (s_bLButtonDown)
+		{
+			int posx = (int)(short)LOWORD(lParam);
+			int posy = (int)(short)HIWORD(lParam);
+			glm::vec2 touchPos(posx, posy);
+			s_pFramework->getTouchDelegateMgr()->handleTouchEvent(ITouchDelegate::TOUCH_MOVE, touchPos);
+		}
 	}
 		break;
 	case WM_LBUTTONUP:
 	{
+		s_bLButtonDown = false;
 		int posx = (int)(short)LOWORD(lParam);
 		int posy = (int)(short)HIWORD(lParam);
 		glm::vec2 touchPos(posx, posy);
-		s_pFramework->getTouchDelegateMgr()->handleTouchEnd(touchPos);
+		s_pFramework->getTouchDelegateMgr()->handleTouchEvent(ITouchDelegate::TOUCH_END, touchPos);
+	}
+		break;
+	case WM_MOUSEWHEEL:
+	{
+		short wheel = HIWORD(wParam);
+		float zoom = 0.5f;
+		if (wheel < 0) zoom = 2.0f;
+		s_pFramework->getTouchDelegateMgr()->handleZoomEvent(zoom);
 	}
 		break;
 	case WM_DESTROY:

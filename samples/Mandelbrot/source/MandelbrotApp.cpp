@@ -57,9 +57,9 @@ void MandelbrotApp::render()
 
 	m_pShader->useProgram();
 	m_pShader->setUniform("u_matMVP", matMVP);
-	m_pShader->setUniform("u_maxIterations", 128.0f);
-	m_pShader->setUniform("u_zoom", 0.005f);
-	m_pShader->setUniform("u_centerPos", glm::vec2(0.0, 0.0));
+	m_pShader->setUniform("u_maxIterations", 32.0f);
+	m_pShader->setUniform("u_zoom", m_fZoom);
+	m_pShader->setUniform("u_centerPos", m_centerPos);
 
 	m_pShader->drawBuffer(m_pVMemVertexBuffer, m_pVMemIndexBuffer);
 
@@ -88,4 +88,36 @@ void MandelbrotApp::createRenderBuffer(spank::IRenderer* pRenderer)
 
 	glm::uint16 indis[] = { 0, 1, 3, 1, 2, 3 };
 	m_pVMemIndexBuffer->uploadBuffer(indis,  sizeof(indis));
+}
+
+void MandelbrotApp::onTouchEvent(spank::ITouchDelegate::ACTION_TYPE_ID eActionType, const glm::vec2& touchPos)
+{
+	switch (eActionType)
+	{
+	case spank::ITouchDelegate::TOUCH_BEGIN:
+	{
+		m_lastTouchPos = touchPos;
+	}
+		break;
+	case spank::ITouchDelegate::TOUCH_END:
+	{
+		// TODO: 
+	}
+		break;
+	case spank::ITouchDelegate::TOUCH_MOVE:
+	{
+		glm::vec2 offset = touchPos - m_lastTouchPos;
+		m_lastTouchPos = touchPos;
+		const glm::vec2& surfaceSize = getRenderer()->getSurfaceSize();
+
+		m_centerPos.x -= (offset.x * m_fZoom);
+		m_centerPos.y += (offset.y * m_fZoom);
+	}
+		break;
+	}
+}
+
+void MandelbrotApp::onZoomEvent(float zoom)
+{
+	m_fZoom *= zoom;
 }

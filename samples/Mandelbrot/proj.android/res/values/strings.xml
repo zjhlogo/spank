@@ -1,5 +1,5 @@
 <resources>
 
-    <string name="app_name">Hello GLES 3</string>
+    <string name="app_name">Mandelbrot</string>
 
 </resources>

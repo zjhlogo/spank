@@ -2,4 +2,4 @@
 
 set NDK_MODULE_PATH=../../..;../../../vendor
 echo %NDK_MODULE_PATH%
-ndk-build.cmd -C .
+ndk-build.cmd -j4 -C .

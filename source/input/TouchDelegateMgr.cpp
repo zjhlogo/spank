@@ -6,6 +6,8 @@
  * \author zjhlogo (zjhlogo@gmail.com)
  */
 #include "TouchDelegateMgr.h"
+#include <algorithm>
+#include "../utils/LogUtil.h"
 
 namespace spank
 {
@@ -22,28 +24,53 @@ TouchDelegateMgr::~TouchDelegateMgr()
 
 bool TouchDelegateMgr::initialize()
 {
-	// TODO: throw std::exception("The method or operation is not implemented.");
 	return true;
 }
 
 void TouchDelegateMgr::terminate()
 {
-	// TODO: throw std::exception("The method or operation is not implemented.");
+
 }
 
-void TouchDelegateMgr::handleTouchBegin(const glm::vec2& touchPos)
+bool TouchDelegateMgr::addDelegate(ITouchDelegate* pDelegate)
 {
-	// TODO: 
+	auto it = std::find(m_vTouchDelegate.begin(), m_vTouchDelegate.end(), pDelegate);
+	if (it != m_vTouchDelegate.end()) return false;
+
+	m_vTouchDelegate.push_back(pDelegate);
+	return true;
 }
 
-void TouchDelegateMgr::handleTouchMove(const glm::vec2& touchPos)
+bool TouchDelegateMgr::removeDelegate(ITouchDelegate* pDelegate)
 {
-	// TODO: 
+	auto it = std::find(m_vTouchDelegate.begin(), m_vTouchDelegate.end(), pDelegate);
+	if (it != m_vTouchDelegate.end())
+	{
+		m_vTouchDelegate.erase(it);
+		return true;
+	}
+
+	return false;
 }
 
-void TouchDelegateMgr::handleTouchEnd(const glm::vec2& touchPos)
+void TouchDelegateMgr::handleTouchEvent(ITouchDelegate::ACTION_TYPE_ID eActionType, const glm::vec2& touchPos)
 {
-	// TODO: 
+	LOGI("touch, type=%d, (%f,%f)", eActionType, touchPos.x, touchPos.y);
+
+	for (auto delegate : m_vTouchDelegate)
+	{
+		delegate->onTouchEvent(eActionType, touchPos);
+	}
+}
+
+void TouchDelegateMgr::handleZoomEvent(float zoom)
+{
+	LOGI("zoom, %f", zoom);
+
+	for (auto delegate : m_vTouchDelegate)
+	{
+		delegate->onZoomEvent(zoom);
+	}
 }
 
 }

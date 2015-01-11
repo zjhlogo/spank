@@ -13,8 +13,32 @@
 namespace spank
 {
 
+class ITouchDelegate
+{
+public:
+	enum ACTION_TYPE_ID
+	{
+		TOUCH_UNKNOWN = 0,
+		TOUCH_BEGIN,
+		TOUCH_END,
+		TOUCH_MOVE,
+		TOUCH_CANCEL,
+	};
+
+public:
+	ITouchDelegate() {};
+	virtual ~ITouchDelegate() {};
+
+	virtual void onTouchEvent(ACTION_TYPE_ID eActionType, const glm::vec2& touchPos) = 0;
+	virtual void onZoomEvent(float zoom) = 0;
+
+};
+
 class TouchDelegateMgr : public IMgr
 {
+public:
+	typedef std::vector<ITouchDelegate*> TV_TOUCH_DELEGATE;
+
 public:
 	TouchDelegateMgr();
 	virtual ~TouchDelegateMgr();
@@ -22,9 +46,14 @@ public:
 	virtual bool initialize() override;
 	virtual void terminate() override;
 
-	void handleTouchBegin(const glm::vec2& touchPos);
-	void handleTouchMove(const glm::vec2& touchPos);
-	void handleTouchEnd(const glm::vec2& touchPos);
+	bool addDelegate(ITouchDelegate* pDelegate);
+	bool removeDelegate(ITouchDelegate* pDelegate);
+
+	void handleTouchEvent(ITouchDelegate::ACTION_TYPE_ID eActionType, const glm::vec2& touchPos);
+	void handleZoomEvent(float zoom);
+
+private:
+	TV_TOUCH_DELEGATE m_vTouchDelegate;
 
 };
 

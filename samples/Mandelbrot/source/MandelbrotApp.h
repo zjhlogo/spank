@@ -22,6 +22,10 @@ protected:
 	virtual void update(float dt) override;
 	virtual void render() override;
 
+	virtual void onTouchEvent(spank::ITouchDelegate::ACTION_TYPE_ID eActionType, const glm::vec2& touchPos) override;
+	virtual void onZoomEvent(float zoom) override;
+
+private:
 	void createRenderBuffer(spank::IRenderer* pRenderer);
 
 private:
@@ -29,5 +33,9 @@ private:
 
 	spank::VMemVertexBuffer* m_pVMemVertexBuffer{ nullptr };
 	spank::VMemIndexBuffer* m_pVMemIndexBuffer{ nullptr };
+
+	float m_fZoom{ 0.005f };
+	glm::vec2 m_centerPos;
+	glm::vec2 m_lastTouchPos;
 
 };

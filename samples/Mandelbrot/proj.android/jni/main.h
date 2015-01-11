@@ -16,5 +16,9 @@ extern "C"
 	JNIEXPORT void JNICALL Java_com_zjhlogo_libspank_GameEntry_terminate(JNIEnv* env, jobject obj);
 	JNIEXPORT void JNICALL Java_com_zjhlogo_libspank_GameEntry_resize(JNIEnv* env, jobject obj, jint width, jint height);
 	JNIEXPORT void JNICALL Java_com_zjhlogo_libspank_GameEntry_step(JNIEnv* env, jobject obj);
+
+	JNIEXPORT void JNICALL Java_com_zjhlogo_libspank_GameEntry_touchEvent(JNIEnv* env, jobject obj, jint actionType, jfloat x, jfloat y);
+	JNIEXPORT void JNICALL Java_com_zjhlogo_libspank_GameEntry_zoom(JNIEnv* env, jobject obj, jfloat zoom);
+
 };
 
