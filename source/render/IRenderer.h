@@ -52,11 +52,17 @@ public:
 
 	virtual VertexAttributes* createVertexAttributes(const std::string& filePath) = 0;
 
+	inline void setShaderBaseDir(const std::string& shaderBaseDir) { m_shaderBaseDir = shaderBaseDir; };
+	inline const std::string& getShaderBaseDir() const { return m_shaderBaseDir; };
+
 protected:
 	virtual bool removeTexture(Texture* pTexture) = 0;
 	virtual bool removeShader(Shader* pShader) = 0;
 	virtual bool removeRenderBuffer(RenderBuffer* pBuffer) = 0;
 	virtual bool removeVertexAttributes(VertexAttributes* pVertAttrs) = 0;
+
+private:
+	std::string m_shaderBaseDir;
 
 };
 

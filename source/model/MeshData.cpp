@@ -11,9 +11,11 @@
 #include "../render/VertexAttributes.h"
 #include "../render/IRenderer.h"
 #include "../render/Texture.h"
+#include "../render/Shader.h"
 #include "../utils/BufferStream.h"
 #include "../utils/FileUtil.h"
 #include "../utils/StringUtil.h"
+#include "../utils/LogUtil.h"
 
 namespace spank
 {
@@ -99,6 +101,15 @@ bool MeshData::parseMeshFile(BufferStream* pStream, const std::string& baseDir)
 	// 4, for each piece read the vertex attributes into piece info
 	for (const auto& pieceInfo : pieceInfoList)
 	{
+		// create shader for piece
+		std::string shaderFullPath = m_pRenderer->getShaderBaseDir() + "/" + pieceInfo.szShader;
+		Shader* pShader = m_pRenderer->createShader(shaderFullPath);
+		if (!pShader)
+		{
+			LOGE("Get piece shader failed, shader file=%s", shaderFullPath.data());
+			return false;
+		}
+
 		RENDER_PIECE_INFO* pRenderPieceInfo = new RENDER_PIECE_INFO();
 		pRenderPieceInfo->pieceInfo = pieceInfo;
 
@@ -111,8 +122,8 @@ bool MeshData::parseMeshFile(BufferStream* pStream, const std::string& baseDir)
 		pStream->read(indis.data(), pieceInfo.nSizeOfIndis);
 
 		// create vertex buffer object
-		pRenderPieceInfo->pVertAttrs = m_pRenderer->createVertexAttributes("data/shaders/pos3_uv2_normal_bone.attrs");
-		pRenderPieceInfo->pVertexBuffer = m_pRenderer->createVMemVertexBuffer(pRenderPieceInfo->pVertAttrs);
+		pRenderPieceInfo->pShader = pShader;
+		pRenderPieceInfo->pVertexBuffer = m_pRenderer->createVMemVertexBuffer(pShader->getVertexAttributes());
 		pRenderPieceInfo->pVertexBuffer->uploadBuffer(verts.data(), verts.size());
 
 		// create index buffer object
@@ -129,7 +140,7 @@ void MeshData::destroy()
 {
 	for (auto& renderPieceInfo : renderPieceInfoList)
 	{
-		SAFE_RELEASE(renderPieceInfo->pVertAttrs);
+		SAFE_RELEASE(renderPieceInfo->pShader);
 		SAFE_RELEASE(renderPieceInfo->pVertexBuffer);
 		SAFE_RELEASE(renderPieceInfo->pIndexBuffer);
 		SAFE_DELETE(renderPieceInfo);

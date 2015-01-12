@@ -16,6 +16,7 @@
 
 #include <string>
 #include <set>
+#include <map>
 
 namespace spank
 {
@@ -46,6 +47,7 @@ public:
 	{
 		int id;
 		std::string texDiffuse;
+		std::string shaderFile;
 	} MATERIAL;
 	typedef std::vector<MATERIAL> TV_MATERIAL;
 
@@ -53,11 +55,23 @@ public:
 	{
 		std::string name;					// piece name
 		const MATERIAL* pMaterial{ nullptr };
+		std::string shaderFile;
 		uint vertAttrFlag{ 0 };				// see MeshFileFormat::VERTEX_ATTRIBUTES
 		TV_FULL_VERT_ATTRS verts;
 		TV_UINT16 indis;
 	} MESH;
 	typedef std::vector<MESH*> TV_MESH;
+
+	typedef struct SKELECTON_tag
+	{
+		std::string name;
+		aiMatrix4x4 matTransform;
+		const aiNode* pNode{ nullptr };
+		const aiNode* pParent{ nullptr };
+		int parentIndex{ -1 };
+	} SKELECTON;
+	typedef std::vector<SKELECTON> TV_SKELECTON;
+	typedef std::map<const aiNode*, int> TM_NODE_INDEX;
 
 public:
 	Convertor();
@@ -68,7 +82,9 @@ public:
 	void reset();
 
 private:
-	bool collectPieceInfo(const aiScene* pScene);
+	bool collectMaterialInfo(const aiScene* pScene);
+	bool collectMeshInfo(const aiScene* pScene);
+	bool collectSkelectonInfo(const aiNode* pNode, const aiNode* pParent);
 
 	bool copyVertexPos(MESH* pPieceInfo, const aiVector3D* pPos, uint numVerts);
 	bool copyVertexUv(MESH* pPieceInfo, int channel, const aiVector3D* pUv, uint numVerts);
@@ -106,6 +122,8 @@ private:
 
 	TV_MATERIAL m_materialList;
 	TV_MESH m_meshList;
+	TV_SKELECTON m_skelectonList;
+	TM_NODE_INDEX m_nodeIndexMap;
 
 };
 

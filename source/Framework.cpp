@@ -24,6 +24,7 @@ Framework::~Framework()
 bool Framework::initialize()
 {
 	m_pRenderer = new RendererGl2();
+	m_pRenderer->setShaderBaseDir("data/shaders");
 	if (!m_pRenderer->initialize()) return false;
 
 	m_pModelMgr = new ModelMgr(m_pRenderer);

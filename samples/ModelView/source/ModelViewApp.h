@@ -23,7 +23,6 @@ protected:
 	virtual void render() override;
 
 private:
-	spank::Shader* m_pShader{ nullptr };
 	spank::MeshData* m_pMeshData{ nullptr };
 
 	float m_rot{ 0.0f };

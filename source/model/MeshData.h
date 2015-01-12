@@ -19,6 +19,7 @@ class VertexAttributes;
 class VMemVertexBuffer;
 class VMemIndexBuffer;
 class Texture;
+class Shader;
 class IRenderer;
 class ModelMgr;
 
@@ -42,7 +43,7 @@ public:
 	typedef struct RENDER_PIECE_INFO_tag
 	{
 		MeshFileFormat::PIECE_INFO pieceInfo;
-		VertexAttributes* pVertAttrs{ nullptr };
+		Shader* pShader{ nullptr };
 		VMemVertexBuffer* pVertexBuffer{ nullptr };
 		VMemIndexBuffer* pIndexBuffer{ nullptr };
 	} RENDER_PIECE_INFO;

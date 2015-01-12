@@ -27,7 +27,9 @@ bool Convertor::openModelFile(const char* pszFilePath)
 	m_pScene = aiImportFile(pszFilePath, m_processFlag);
 	if (!m_pScene) return false;
 
-	collectPieceInfo(m_pScene);
+	collectMaterialInfo(m_pScene);
+	collectMeshInfo(m_pScene);
+	collectSkelectonInfo(m_pScene->mRootNode, nullptr);
 
 	return true;
 }
@@ -50,8 +52,14 @@ bool Convertor::saveFile(const char* pszFilePath)
 	{
 		MeshFileFormat::MATERIAL_INFO materialInfo;
 		materialInfo.id = material.id;
-		strncpy(materialInfo.szTexDiffuse, material.texDiffuse.data(), MeshFileFormat::MAX_TEX_FILE_PATH);
+		strncpy(materialInfo.szTexDiffuse, material.texDiffuse.data(), MeshFileFormat::MAX_FILE_LENGTH);
 		fwrite(&materialInfo, sizeof(materialInfo), 1, pFile);
+	}
+
+	// write skelecton
+	for (const auto& skelecton : m_skelectonList)
+	{
+
 	}
 
 	// write piece list
@@ -60,6 +68,7 @@ bool Convertor::saveFile(const char* pszFilePath)
 	pieceList.resize(fileHeader.nNumPieces);
 	fwrite(pieceList.data(), sizeof(MeshFileFormat::PIECE_INFO), pieceList.size(), pFile);
 
+	// write vertex and index datas
 	for (int i = 0; i < fileHeader.nNumPieces; ++i)
 	{
 		const MESH* pMesh = m_meshList[i];
@@ -67,6 +76,7 @@ bool Convertor::saveFile(const char* pszFilePath)
 		// copy piece info
 		strncpy(pieceList[i].szName, pMesh->name.c_str(), MeshFileFormat::PIECE_NAME_SIZE);
 		pieceList[i].nMaterialId = pMesh->pMaterial->id;
+		strncpy(pieceList[i].szShader, pMesh->shaderFile.data(), MeshFileFormat::MAX_FILE_LENGTH);
 		pieceList[i].nVertexAttributes = pMesh->vertAttrFlag;
 		pieceList[i].nNumVerts = pMesh->verts.size();
 		pieceList[i].nOffVerts = ftell(pFile);
@@ -156,8 +166,9 @@ void Convertor::reset()
 	m_materialList.clear();
 }
 
-bool Convertor::collectPieceInfo(const aiScene* pScene)
+bool Convertor::collectMaterialInfo(const aiScene* pScene)
 {
+	// collect material
 	for (uint i = 0; i < pScene->mNumMaterials; ++i)
 	{
 		const aiMaterial* pMaterial = pScene->mMaterials[i];
@@ -168,10 +179,14 @@ bool Convertor::collectPieceInfo(const aiScene* pScene)
 		aiString texPath;
 		pMaterial->GetTexture(aiTextureType_DIFFUSE, 0, &texPath);
 		material.texDiffuse = texPath.C_Str();
-
 		m_materialList.push_back(material);
 	}
 
+	return true;
+}
+
+bool Convertor::collectMeshInfo(const aiScene* pScene)
+{
 	// collect mesh
 	for (uint i = 0; i < pScene->mNumMeshes; ++i)
 	{
@@ -181,6 +196,7 @@ bool Convertor::collectPieceInfo(const aiScene* pScene)
 		MESH* pMeshInfo = new MESH();
 		pMeshInfo->name = pMesh->mName.C_Str();
 		pMeshInfo->pMaterial = &m_materialList[pMesh->mMaterialIndex];
+		pMeshInfo->shaderFile = "pos3_uv2_normal_bone.shader";
 
 		// copy verts pos
 		if (pMesh->HasPositions())
@@ -227,6 +243,27 @@ bool Convertor::collectPieceInfo(const aiScene* pScene)
 		}
 
 		m_meshList.push_back(pMeshInfo);
+	}
+
+	return true;
+}
+
+bool Convertor::collectSkelectonInfo(const aiNode* pNode, const aiNode* pParent)
+{
+	if (!pNode) return false;
+
+	SKELECTON skelecton;
+	skelecton.name = pNode->mName.C_Str();
+	skelecton.pNode = pNode;
+	skelecton.pParent = pParent;
+	skelecton.matTransform = pNode->mTransformation;
+
+	m_nodeIndexMap[pNode] = m_skelectonList.size();
+	m_skelectonList.push_back(skelecton);
+
+	for (uint i = 0; i < pNode->mNumChildren; ++i)
+	{
+		collectSkelectonInfo(pNode->mChildren[i], pNode);
 	}
 
 	return true;
