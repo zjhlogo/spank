@@ -8,7 +8,7 @@ import android.view.View;
 
 public class SpankActivityBase extends Activity {
 
-	OpenGLES3View mView;
+	OpenGLESView mView;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -16,7 +16,7 @@ public class SpankActivityBase extends Activity {
 		
 		initNativeAssetManager(getApplication().getAssets());
 		
-		mView = new OpenGLES3View(getApplication());
+		mView = new OpenGLESView(getApplication());
 		setContentView(mView);
 
         // The UI options currently enabled are represented by a bitfield.

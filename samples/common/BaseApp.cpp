@@ -8,6 +8,16 @@
 #include "BaseApp.h"
 #include <utils/StringBuilder.h>
 
+void BaseAppTouchDelegate::onTouchEvent(spank::ITouchDelegate::ACTION_TYPE_ID eActionType, const glm::vec2& touchPos)
+{
+	m_pBaseApp->onTouchEvent(eActionType, touchPos);
+}
+
+void BaseAppTouchDelegate::onZoomEvent(float zoom)
+{
+	m_pBaseApp->onZoomEvent(zoom);
+}
+
 BaseApp::BaseApp()
 {
 	// TODO: 
@@ -28,13 +38,18 @@ bool BaseApp::initialize()
 
 	m_pLblFPS = new spank::Label(pRenderer, pFont);
 	if (!m_pLblFPS) return false;
-	m_pLblFPS->setPos(-pRenderer->getSurfaceSize()*0.5f);
+	m_pLblFPS->setPos(-pRenderer->getSurfaceSize()*0.5f+glm::vec2(10.0f, 0.0f));
+
+	m_pBaseAppTouchDelegate = new BaseAppTouchDelegate(this);
+	if (!getFramework()->getTouchDelegateMgr()->addDelegate(m_pBaseAppTouchDelegate)) return false;
 
 	return true;
 }
 
 void BaseApp::terminate()
 {
+	getFramework()->getTouchDelegateMgr()->removeDelegate(m_pBaseAppTouchDelegate);
+	SAFE_DELETE(m_pBaseAppTouchDelegate);
 	SAFE_DELETE(m_pLblFPS);
 }
 

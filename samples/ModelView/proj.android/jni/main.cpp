@@ -68,3 +68,14 @@ JNIEXPORT void JNICALL Java_com_zjhlogo_libspank_GameEntry_step(JNIEnv* env, job
 {
 	g_pModelViewApp->step();
 }
+
+JNIEXPORT void JNICALL Java_com_zjhlogo_libspank_GameEntry_touchEvent(JNIEnv* env, jobject obj, jint actionType, jfloat x, jfloat y)
+{
+	glm::vec2 touchPos(x, y);
+	g_pFrameworkAndroid->getTouchDelegateMgr()->handleTouchEvent((spank::ITouchDelegate::ACTION_TYPE_ID)actionType, touchPos);
+}
+
+JNIEXPORT void JNICALL Java_com_zjhlogo_libspank_GameEntry_zoom(JNIEnv* env, jobject obj, jfloat zoom)
+{
+	g_pFrameworkAndroid->getTouchDelegateMgr()->handleZoomEvent(zoom);
+}

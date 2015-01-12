@@ -38,6 +38,43 @@ void Label::setText(const std::string& text)
 	createBuffer(m_text);
 }
 
+glm::vec2 Label::calcTextSize()
+{
+	// calculate the number of lines
+	int numLines = 1;
+	for (const auto& charId : m_text)
+	{
+		if (charId == '\n') ++numLines;
+	}
+
+	// adjust the start position base on number of lines
+	glm::vec2 textSize;
+	textSize.y = (float)(numLines * m_pFont->getLineHeight());
+
+	glm::vec2 currPos;
+	currPos.y += (numLines - 1)*m_pFont->getLineHeight();
+
+	for (const auto& charId : m_text)
+	{
+		if (charId == '\n')
+		{
+			currPos.y -= m_pFont->getLineHeight();
+			currPos.x = 0.0f;
+			continue;
+		}
+
+		const IFont::CHAR_INFO& charInfo = m_pFont->getCharInfo(charId);
+		if (charInfo.charId == 0) continue;
+
+		glm::vec2 charPos = currPos + charInfo.offset;
+		currPos.x += charInfo.xadvance;
+
+		if (textSize.x < currPos.x) textSize.x = currPos.x;
+	}
+
+	return textSize;
+}
+
 void Label::render()
 {
 	if (m_indexBufferInfoMap.empty()) return;
@@ -79,21 +116,30 @@ bool Label::createBuffer(const std::string& text)
 		if (!m_vertexBuffer) return false;
 	}
 
+	// calculate the number of lines
+	int numLines = 1;
+	for (const auto& charId : text)
+	{
+		if (charId == '\n') ++numLines;
+	}
+
+	// adjust the start position base on number of lines
 	glm::vec2 currPos;
+	currPos.y += (numLines - 1)*m_pFont->getLineHeight();
 
 	std::vector<VERT_ATTR_POS3_UV2> vVerts;
 
 	for (const auto& charId : text)
 	{
-		const IFont::CHAR_INFO& charInfo = m_pFont->getCharInfo(charId);
-		if (charInfo.charId == 0) continue;
-
-		if (charInfo.charId == '\n')
+		if (charId == '\n')
 		{
-			currPos.y += m_pFont->getLineHeight();
+			currPos.y -= m_pFont->getLineHeight();
 			currPos.x = 0.0f;
 			continue;
 		}
+
+		const IFont::CHAR_INFO& charInfo = m_pFont->getCharInfo(charId);
+		if (charInfo.charId == 0) continue;
 
 		INDEX_BUFFER_INFO* pBufferInfo = findIndexBuffer(charInfo.pTexture);
 		if (!pBufferInfo) continue;

@@ -74,6 +74,21 @@ std::string StringUtil::float2str(float value)
 	return strValue;
 }
 
+double StringUtil::str2double(const char* pstrIn)
+{
+	return _tstof(pstrIn);
+}
+
+std::string StringUtil::double2str(double value)
+{
+	static char s_strBuffer[1024];
+
+	std::string strValue;
+	_sntprintf(s_strBuffer, 1024, "%lf", value);
+	strValue.append(s_strBuffer);
+	return strValue;
+}
+
 std::string StringUtil::getFileDir(const std::string& strIn)
 {
 	std::string strDir;

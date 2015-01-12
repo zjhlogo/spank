@@ -91,6 +91,16 @@ StringBuilder& StringBuilder::add(float fValue, const char* pszFormat /*= NULL*/
 	return (*this);
 }
 
+StringBuilder& StringBuilder::add(double dValue, const char* pszFormat /*= NULL*/)
+{
+	std::string strValue;
+	if (!pszFormat) strValue = StringUtil::double2str(dValue);
+	else strformat(strValue, pszFormat, dValue);
+
+	m_vReplacement.push_back(strValue);
+	return (*this);
+}
+
 StringBuilder& StringBuilder::add(const std::string& strValue)
 {
 	m_vReplacement.push_back(strValue);

@@ -24,6 +24,9 @@ public:
 	static float str2float(const char* pstrIn);
 	static std::string float2str(float value);
 
+	static double str2double(const char* pstrIn);
+	static std::string double2str(double value);
+
 	static std::string getFileDir(const std::string& strIn);
 	static std::string getFileExt(const std::string& strIn);
 
