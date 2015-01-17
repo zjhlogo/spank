@@ -1,10 +1,10 @@
-* add user input system
 * add camera system
 * add ui system
 * add model system
 * add particles system
 * add sprite system
 
+done, add user input system
 done, add math library
 
 python -m SimpleHTTPServer 8080
