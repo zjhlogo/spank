@@ -32,6 +32,7 @@ proj.android/libs/
 samples/**/bin/
 samples/**/libs/
 samples/**/assets/
+tools/**/bin/
 
 # Roslyn cache directories
 *.ide/
