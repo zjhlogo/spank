@@ -981,6 +981,147 @@
                 <string name="proxy-Platform">"&lt;Any platform&gt;"</string>
               </document>
               <document>
+                <string name="title">"&amp;Duplicate Windows...: IDM_EDIT_DUPLICATE_WINDOWS"</string>
+                <string name="type">"dialog-control-document"</string>
+                <string name="filename">""</string>
+                <string name="icon-name">"menuitem"</string>
+                <long name="is-transient">0</long>
+                <long name="owns-file">1</long>
+                <long name="title-mode">0</long>
+                <long name="locked">0</long>
+                <string name="proxy-type">"wbMenuItemProxy"</string>
+                <string name="proxy-Id name">"IDM_EDIT_DUPLICATE_WINDOWS"</string>
+                <long name="proxy-Id value">10003</long>
+                <string name="proxy-Label">"&amp;Duplicate Windows..."</string>
+                <string name="proxy-Kind">"Normal"</string>
+                <bool name="proxy-Checked">0</bool>
+                <bool name="proxy-Enabled">1</bool>
+                <string name="proxy-Help text">""</string>
+                <string name="proxy-Bitmap">""</string>
+                <string name="proxy-Bitmap unchecked">""</string>
+                <string name="proxy-Platform">"&lt;Any platform&gt;"</string>
+              </document>
+              <document>
+                <string name="title">"&amp;Rename selections...: IDM_EDIT_RENAME_SELECTIONS"</string>
+                <string name="type">"dialog-control-document"</string>
+                <string name="filename">""</string>
+                <string name="icon-name">"menuitem"</string>
+                <long name="is-transient">0</long>
+                <long name="owns-file">1</long>
+                <long name="title-mode">0</long>
+                <long name="locked">0</long>
+                <string name="proxy-type">"wbMenuItemProxy"</string>
+                <string name="proxy-Id name">"IDM_EDIT_RENAME_SELECTIONS"</string>
+                <long name="proxy-Id value">10061</long>
+                <string name="proxy-Label">"&amp;Rename selections..."</string>
+                <string name="proxy-Kind">"Normal"</string>
+                <bool name="proxy-Checked">0</bool>
+                <bool name="proxy-Enabled">1</bool>
+                <string name="proxy-Help text">""</string>
+                <string name="proxy-Bitmap">""</string>
+                <string name="proxy-Bitmap unchecked">""</string>
+                <string name="proxy-Platform">"&lt;Any platform&gt;"</string>
+              </document>
+            </document>
+            <document>
+              <string name="title">"Elements"</string>
+              <string name="type">"dialog-control-document"</string>
+              <string name="filename">""</string>
+              <string name="icon-name">"menu"</string>
+              <long name="is-transient">0</long>
+              <long name="owns-file">1</long>
+              <long name="title-mode">0</long>
+              <long name="locked">0</long>
+              <string name="proxy-type">"wbMenuProxy"</string>
+              <string name="proxy-Label">"E&amp;lements"</string>
+              <bool name="proxy-Enabled">1</bool>
+              <string name="proxy-Member variable name">""</string>
+              <string name="proxy-Platform">"&lt;Any platform&gt;"</string>
+              <document>
+                <string name="title">"&amp;Add Dialog...: IDM_ELEMENTS_ADD_DIALOG"</string>
+                <string name="type">"dialog-control-document"</string>
+                <string name="filename">""</string>
+                <string name="icon-name">"menuitem"</string>
+                <long name="is-transient">0</long>
+                <long name="owns-file">1</long>
+                <long name="title-mode">0</long>
+                <long name="locked">0</long>
+                <string name="proxy-type">"wbMenuItemProxy"</string>
+                <string name="proxy-Id name">"IDM_ELEMENTS_ADD_DIALOG"</string>
+                <long name="proxy-Id value">10011</long>
+                <string name="proxy-Label">"&amp;Add Dialog..."</string>
+                <string name="proxy-Kind">"Normal"</string>
+                <bool name="proxy-Checked">0</bool>
+                <bool name="proxy-Enabled">1</bool>
+                <string name="proxy-Help text">""</string>
+                <string name="proxy-Bitmap">""</string>
+                <string name="proxy-Bitmap unchecked">""</string>
+                <string name="proxy-Platform">"&lt;Any platform&gt;"</string>
+              </document>
+              <document>
+                <string name="title">"&amp;Remove Dialog: IDM_ELEMENTS_REMOVE_DIALOG"</string>
+                <string name="type">"dialog-control-document"</string>
+                <string name="filename">""</string>
+                <string name="icon-name">"menuitem"</string>
+                <long name="is-transient">0</long>
+                <long name="owns-file">1</long>
+                <long name="title-mode">0</long>
+                <long name="locked">0</long>
+                <string name="proxy-type">"wbMenuItemProxy"</string>
+                <string name="proxy-Id name">"IDM_ELEMENTS_REMOVE_DIALOG"</string>
+                <long name="proxy-Id value">10014</long>
+                <string name="proxy-Label">"&amp;Remove Dialog"</string>
+                <string name="proxy-Kind">"Normal"</string>
+                <bool name="proxy-Checked">0</bool>
+                <bool name="proxy-Enabled">1</bool>
+                <string name="proxy-Help text">""</string>
+                <string name="proxy-Bitmap">""</string>
+                <string name="proxy-Bitmap unchecked">""</string>
+                <string name="proxy-Platform">"&lt;Any platform&gt;"</string>
+              </document>
+              <document>
+                <string name="title">"Re&amp;name Dialog...: IDM_ELEMENTS_RENAME_DIALOG"</string>
+                <string name="type">"dialog-control-document"</string>
+                <string name="filename">""</string>
+                <string name="icon-name">"menuitem"</string>
+                <long name="is-transient">0</long>
+                <long name="owns-file">1</long>
+                <long name="title-mode">0</long>
+                <long name="locked">0</long>
+                <string name="proxy-type">"wbMenuItemProxy"</string>
+                <string name="proxy-Id name">"IDM_ELEMENTS_RENAME_DIALOG"</string>
+                <long name="proxy-Id value">10015</long>
+                <string name="proxy-Label">"Re&amp;name Dialog..."</string>
+                <string name="proxy-Kind">"Normal"</string>
+                <bool name="proxy-Checked">0</bool>
+                <bool name="proxy-Enabled">1</bool>
+                <string name="proxy-Help text">""</string>
+                <string name="proxy-Bitmap">""</string>
+                <string name="proxy-Bitmap unchecked">""</string>
+                <string name="proxy-Platform">"&lt;Any platform&gt;"</string>
+              </document>
+              <document>
+                <string name="title">"&amp;Comment Dialog...\tAlt+C: IDM_ELEMENTS_COMMENT_DIALOG"</string>
+                <string name="type">"dialog-control-document"</string>
+                <string name="filename">""</string>
+                <string name="icon-name">"menuitem"</string>
+                <long name="is-transient">0</long>
+                <long name="owns-file">1</long>
+                <long name="title-mode">0</long>
+                <long name="locked">0</long>
+                <string name="proxy-type">"wbMenuItemProxy"</string>
+                <string name="proxy-Id name">"IDM_ELEMENTS_COMMENT_DIALOG"</string>
+                <long name="proxy-Id value">10051</long>
+                <string name="proxy-Label">"&amp;Comment Dialog...\tAlt+C"</string>
+                <string name="proxy-Kind">"Normal"</string>
+                <bool name="proxy-Checked">0</bool>
+                <bool name="proxy-Enabled">1</bool>
+                <string name="proxy-Help text">""</string>
+                <string name="proxy-Bitmap">""</string>
+                <string name="proxy-Bitmap unchecked">""</string>
+                <string name="proxy-Platform">"&lt;Any platform&gt;"</string>
+              </document>
+              <document>
                 <string name="title">"------------"</string>
                 <string name="type">"dialog-control-document"</string>
                 <string name="filename">""</string>
@@ -993,395 +1134,7 @@
                 <string name="proxy-Platform">"&lt;Any platform&gt;"</string>
               </document>
               <document>
-                <string name="title">"Align: IDM_ALIGN"</string>
-                <string name="type">"dialog-control-document"</string>
-                <string name="filename">""</string>
-                <string name="icon-name">"menu"</string>
-                <long name="is-transient">0</long>
-                <long name="owns-file">1</long>
-                <long name="title-mode">0</long>
-                <long name="locked">0</long>
-                <string name="proxy-type">"wbSubmenuProxy"</string>
-                <string name="proxy-Id name">"IDM_ALIGN"</string>
-                <long name="proxy-Id value">10022</long>
-                <string name="proxy-Label">"&amp;Align"</string>
-                <string name="proxy-Help text">""</string>
-                <bool name="proxy-Enabled">1</bool>
-                <string name="proxy-Platform">"&lt;Any platform&gt;"</string>
-                <document>
-                  <string name="title">"Left: IDM_ALIGN_LEFT"</string>
-                  <string name="type">"dialog-control-document"</string>
-                  <string name="filename">""</string>
-                  <string name="icon-name">"menuitem"</string>
-                  <long name="is-transient">0</long>
-                  <long name="owns-file">1</long>
-                  <long name="title-mode">0</long>
-                  <long name="locked">0</long>
-                  <string name="proxy-type">"wbMenuItemProxy"</string>
-                  <string name="proxy-Id name">"IDM_ALIGN_LEFT"</string>
-                  <long name="proxy-Id value">10026</long>
-                  <string name="proxy-Label">"Left"</string>
-                  <string name="proxy-Kind">"Normal"</string>
-                  <bool name="proxy-Checked">0</bool>
-                  <bool name="proxy-Enabled">1</bool>
-                  <string name="proxy-Help text">""</string>
-                  <string name="proxy-Bitmap">"..\source\images\align_left.xpm"</string>
-                  <string name="proxy-Bitmap unchecked">""</string>
-                  <string name="proxy-Platform">"&lt;Any platform&gt;"</string>
-                </document>
-                <document>
-                  <string name="title">"Center: IDM_ALIGN_CENTER"</string>
-                  <string name="type">"dialog-control-document"</string>
-                  <string name="filename">""</string>
-                  <string name="icon-name">"menuitem"</string>
-                  <long name="is-transient">0</long>
-                  <long name="owns-file">1</long>
-                  <long name="title-mode">0</long>
-                  <long name="locked">0</long>
-                  <string name="proxy-type">"wbMenuItemProxy"</string>
-                  <string name="proxy-Id name">"IDM_ALIGN_CENTER"</string>
-                  <long name="proxy-Id value">10012</long>
-                  <string name="proxy-Label">"Center"</string>
-                  <string name="proxy-Kind">"Normal"</string>
-                  <bool name="proxy-Checked">0</bool>
-                  <bool name="proxy-Enabled">1</bool>
-                  <string name="proxy-Help text">""</string>
-                  <string name="proxy-Bitmap">"..\source\images\align_center.xpm"</string>
-                  <string name="proxy-Bitmap unchecked">""</string>
-                  <string name="proxy-Platform">"&lt;Any platform&gt;"</string>
-                </document>
-                <document>
-                  <string name="title">"Right: IDM_ALIGN_RIGHT"</string>
-                  <string name="type">"dialog-control-document"</string>
-                  <string name="filename">""</string>
-                  <string name="icon-name">"menuitem"</string>
-                  <long name="is-transient">0</long>
-                  <long name="owns-file">1</long>
-                  <long name="title-mode">0</long>
-                  <long name="locked">0</long>
-                  <string name="proxy-type">"wbMenuItemProxy"</string>
-                  <string name="proxy-Id name">"IDM_ALIGN_RIGHT"</string>
-                  <long name="proxy-Id value">10030</long>
-                  <string name="proxy-Label">"Right"</string>
-                  <string name="proxy-Kind">"Normal"</string>
-                  <bool name="proxy-Checked">0</bool>
-                  <bool name="proxy-Enabled">1</bool>
-                  <string name="proxy-Help text">""</string>
-                  <string name="proxy-Bitmap">"..\source\images\align_right.xpm"</string>
-                  <string name="proxy-Bitmap unchecked">""</string>
-                  <string name="proxy-Platform">"&lt;Any platform&gt;"</string>
-                </document>
-                <document>
-                  <string name="title">"Top: IDM_ALIGN_TOP"</string>
-                  <string name="type">"dialog-control-document"</string>
-                  <string name="filename">""</string>
-                  <string name="icon-name">"menuitem"</string>
-                  <long name="is-transient">0</long>
-                  <long name="owns-file">1</long>
-                  <long name="title-mode">0</long>
-                  <long name="locked">0</long>
-                  <string name="proxy-type">"wbMenuItemProxy"</string>
-                  <string name="proxy-Id name">"IDM_ALIGN_TOP"</string>
-                  <long name="proxy-Id value">10031</long>
-                  <string name="proxy-Label">"Top"</string>
-                  <string name="proxy-Kind">"Normal"</string>
-                  <bool name="proxy-Checked">0</bool>
-                  <bool name="proxy-Enabled">1</bool>
-                  <string name="proxy-Help text">""</string>
-                  <string name="proxy-Bitmap">"..\source\images\align_top.xpm"</string>
-                  <string name="proxy-Bitmap unchecked">""</string>
-                  <string name="proxy-Platform">"&lt;Any platform&gt;"</string>
-                </document>
-                <document>
-                  <string name="title">"Middle: IDM_ALIGN_MIDDLE"</string>
-                  <string name="type">"dialog-control-document"</string>
-                  <string name="filename">""</string>
-                  <string name="icon-name">"menuitem"</string>
-                  <long name="is-transient">0</long>
-                  <long name="owns-file">1</long>
-                  <long name="title-mode">0</long>
-                  <long name="locked">0</long>
-                  <string name="proxy-type">"wbMenuItemProxy"</string>
-                  <string name="proxy-Id name">"IDM_ALIGN_MIDDLE"</string>
-                  <long name="proxy-Id value">10013</long>
-                  <string name="proxy-Label">"Middle"</string>
-                  <string name="proxy-Kind">"Normal"</string>
-                  <bool name="proxy-Checked">0</bool>
-                  <bool name="proxy-Enabled">1</bool>
-                  <string name="proxy-Help text">""</string>
-                  <string name="proxy-Bitmap">"..\source\images\align_middle.xpm"</string>
-                  <string name="proxy-Bitmap unchecked">""</string>
-                  <string name="proxy-Platform">"&lt;Any platform&gt;"</string>
-                </document>
-                <document>
-                  <string name="title">"Bottom: IDM_ALIGN_BOTTOM"</string>
-                  <string name="type">"dialog-control-document"</string>
-                  <string name="filename">""</string>
-                  <string name="icon-name">"menuitem"</string>
-                  <long name="is-transient">0</long>
-                  <long name="owns-file">1</long>
-                  <long name="title-mode">0</long>
-                  <long name="locked">0</long>
-                  <string name="proxy-type">"wbMenuItemProxy"</string>
-                  <string name="proxy-Id name">"IDM_ALIGN_BOTTOM"</string>
-                  <long name="proxy-Id value">10032</long>
-                  <string name="proxy-Label">"Bottom"</string>
-                  <string name="proxy-Kind">"Normal"</string>
-                  <bool name="proxy-Checked">0</bool>
-                  <bool name="proxy-Enabled">1</bool>
-                  <string name="proxy-Help text">""</string>
-                  <string name="proxy-Bitmap">"..\source\images\align_bottom.xpm"</string>
-                  <string name="proxy-Bitmap unchecked">""</string>
-                  <string name="proxy-Platform">"&lt;Any platform&gt;"</string>
-                </document>
-                <document>
-                  <string name="title">"------------"</string>
-                  <string name="type">"dialog-control-document"</string>
-                  <string name="filename">""</string>
-                  <string name="icon-name">"menuitem"</string>
-                  <long name="is-transient">0</long>
-                  <long name="owns-file">1</long>
-                  <long name="title-mode">0</long>
-                  <long name="locked">0</long>
-                  <string name="proxy-type">"wbMenuSeparatorProxy"</string>
-                  <string name="proxy-Platform">"&lt;Any platform&gt;"</string>
-                </document>
-                <document>
-                  <string name="title">"Average Gap Horizontal: IDM_ALIGN_GAP_HORIZONTAL"</string>
-                  <string name="type">"dialog-control-document"</string>
-                  <string name="filename">""</string>
-                  <string name="icon-name">"menuitem"</string>
-                  <long name="is-transient">0</long>
-                  <long name="owns-file">1</long>
-                  <long name="title-mode">0</long>
-                  <long name="locked">0</long>
-                  <string name="proxy-type">"wbMenuItemProxy"</string>
-                  <string name="proxy-Id name">"IDM_ALIGN_GAP_HORIZONTAL"</string>
-                  <long name="proxy-Id value">10033</long>
-                  <string name="proxy-Label">"Average Gap Horizontal"</string>
-                  <string name="proxy-Kind">"Normal"</string>
-                  <bool name="proxy-Checked">0</bool>
-                  <bool name="proxy-Enabled">1</bool>
-                  <string name="proxy-Help text">""</string>
-                  <string name="proxy-Bitmap">"..\source\images\gap_horizontal.xpm"</string>
-                  <string name="proxy-Bitmap unchecked">""</string>
-                  <string name="proxy-Platform">"&lt;Any platform&gt;"</string>
-                </document>
-                <document>
-                  <string name="title">"Average Gap Vertical: IDM_ALIGN_GAP_VERTICAL"</string>
-                  <string name="type">"dialog-control-document"</string>
-                  <string name="filename">""</string>
-                  <string name="icon-name">"menuitem"</string>
-                  <long name="is-transient">0</long>
-                  <long name="owns-file">1</long>
-                  <long name="title-mode">0</long>
-                  <long name="locked">0</long>
-                  <string name="proxy-type">"wbMenuItemProxy"</string>
-                  <string name="proxy-Id name">"IDM_ALIGN_GAP_VERTICAL"</string>
-                  <long name="proxy-Id value">10034</long>
-                  <string name="proxy-Label">"Average Gap Vertical"</string>
-                  <string name="proxy-Kind">"Normal"</string>
-                  <bool name="proxy-Checked">0</bool>
-                  <bool name="proxy-Enabled">1</bool>
-                  <string name="proxy-Help text">""</string>
-                  <string name="proxy-Bitmap">"..\source\images\gap_vertical.xpm"</string>
-                  <string name="proxy-Bitmap unchecked">""</string>
-                  <string name="proxy-Platform">"&lt;Any platform&gt;"</string>
-                </document>
-                <document>
-                  <string name="title">"------------"</string>
-                  <string name="type">"dialog-control-document"</string>
-                  <string name="filename">""</string>
-                  <string name="icon-name">"menuitem"</string>
-                  <long name="is-transient">0</long>
-                  <long name="owns-file">1</long>
-                  <long name="title-mode">0</long>
-                  <long name="locked">0</long>
-                  <string name="proxy-type">"wbMenuSeparatorProxy"</string>
-                  <string name="proxy-Platform">"&lt;Any platform&gt;"</string>
-                </document>
-                <document>
-                  <string name="title">"Make Same Width: IDM_ALIGN_SAME_WIDTH"</string>
-                  <string name="type">"dialog-control-document"</string>
-                  <string name="filename">""</string>
-                  <string name="icon-name">"menuitem"</string>
-                  <long name="is-transient">0</long>
-                  <long name="owns-file">1</long>
-                  <long name="title-mode">0</long>
-                  <long name="locked">0</long>
-                  <string name="proxy-type">"wbMenuItemProxy"</string>
-                  <string name="proxy-Id name">"IDM_ALIGN_SAME_WIDTH"</string>
-                  <long name="proxy-Id value">10035</long>
-                  <string name="proxy-Label">"Make Same Width"</string>
-                  <string name="proxy-Kind">"Normal"</string>
-                  <bool name="proxy-Checked">0</bool>
-                  <bool name="proxy-Enabled">1</bool>
-                  <string name="proxy-Help text">""</string>
-                  <string name="proxy-Bitmap">"..\source\images\size_width.xpm"</string>
-                  <string name="proxy-Bitmap unchecked">""</string>
-                  <string name="proxy-Platform">"&lt;Any platform&gt;"</string>
-                </document>
-                <document>
-                  <string name="title">"Make Same Height: IDM_ALIGN_SAME_HEIGHT"</string>
-                  <string name="type">"dialog-control-document"</string>
-                  <string name="filename">""</string>
-                  <string name="icon-name">"menuitem"</string>
-                  <long name="is-transient">0</long>
-                  <long name="owns-file">1</long>
-                  <long name="title-mode">0</long>
-                  <long name="locked">0</long>
-                  <string name="proxy-type">"wbMenuItemProxy"</string>
-                  <string name="proxy-Id name">"IDM_ALIGN_SAME_HEIGHT"</string>
-                  <long name="proxy-Id value">10036</long>
-                  <string name="proxy-Label">"Make Same Height"</string>
-                  <string name="proxy-Kind">"Normal"</string>
-                  <bool name="proxy-Checked">0</bool>
-                  <bool name="proxy-Enabled">1</bool>
-                  <string name="proxy-Help text">""</string>
-                  <string name="proxy-Bitmap">"..\source\images\size_height.xpm"</string>
-                  <string name="proxy-Bitmap unchecked">""</string>
-                  <string name="proxy-Platform">"&lt;Any platform&gt;"</string>
-                </document>
-                <document>
-                  <string name="title">"Make Same Size: IDM_ALIGN_SAME_SIZE"</string>
-                  <string name="type">"dialog-control-document"</string>
-                  <string name="filename">""</string>
-                  <string name="icon-name">"menuitem"</string>
-                  <long name="is-transient">0</long>
-                  <long name="owns-file">1</long>
-                  <long name="title-mode">0</long>
-                  <long name="locked">0</long>
-                  <string name="proxy-type">"wbMenuItemProxy"</string>
-                  <string name="proxy-Id name">"IDM_ALIGN_SAME_SIZE"</string>
-                  <long name="proxy-Id value">10037</long>
-                  <string name="proxy-Label">"Make Same Size"</string>
-                  <string name="proxy-Kind">"Normal"</string>
-                  <bool name="proxy-Checked">0</bool>
-                  <bool name="proxy-Enabled">1</bool>
-                  <string name="proxy-Help text">""</string>
-                  <string name="proxy-Bitmap">"..\source\images\size_width_and_height.xpm"</string>
-                  <string name="proxy-Bitmap unchecked">""</string>
-                  <string name="proxy-Platform">"&lt;Any platform&gt;"</string>
-                </document>
-              </document>
-              <document>
-                <string name="title">"Layer: IDM_LAYER"</string>
-                <string name="type">"dialog-control-document"</string>
-                <string name="filename">""</string>
-                <string name="icon-name">"menu"</string>
-                <long name="is-transient">0</long>
-                <long name="owns-file">1</long>
-                <long name="title-mode">0</long>
-                <long name="locked">0</long>
-                <string name="proxy-type">"wbSubmenuProxy"</string>
-                <string name="proxy-Id name">"IDM_LAYER"</string>
-                <long name="proxy-Id value">10008</long>
-                <string name="proxy-Label">"&amp;Layer"</string>
-                <string name="proxy-Help text">""</string>
-                <bool name="proxy-Enabled">1</bool>
-                <string name="proxy-Platform">"&lt;Any platform&gt;"</string>
-                <document>
-                  <string name="title">"Layer Up\tCtrl+Up: IDM_LAYER_UP"</string>
-                  <string name="type">"dialog-control-document"</string>
-                  <string name="filename">""</string>
-                  <string name="icon-name">"menuitem"</string>
-                  <long name="is-transient">0</long>
-                  <long name="owns-file">1</long>
-                  <long name="title-mode">0</long>
-                  <long name="locked">0</long>
-                  <string name="proxy-type">"wbMenuItemProxy"</string>
-                  <string name="proxy-Id name">"IDM_LAYER_UP"</string>
-                  <long name="proxy-Id value">10009</long>
-                  <string name="proxy-Label">"Layer Up\tCtrl+Up"</string>
-                  <string name="proxy-Kind">"Normal"</string>
-                  <bool name="proxy-Checked">0</bool>
-                  <bool name="proxy-Enabled">1</bool>
-                  <string name="proxy-Help text">""</string>
-                  <string name="proxy-Bitmap">""</string>
-                  <string name="proxy-Bitmap unchecked">""</string>
-                  <string name="proxy-Platform">"&lt;Any platform&gt;"</string>
-                </document>
-                <document>
-                  <string name="title">"Layer Down\tCtrl+Down: IDM_LAYER_DOWN"</string>
-                  <string name="type">"dialog-control-document"</string>
-                  <string name="filename">""</string>
-                  <string name="icon-name">"menuitem"</string>
-                  <long name="is-transient">0</long>
-                  <long name="owns-file">1</long>
-                  <long name="title-mode">0</long>
-                  <long name="locked">0</long>
-                  <string name="proxy-type">"wbMenuItemProxy"</string>
-                  <string name="proxy-Id name">"IDM_LAYER_DOWN"</string>
-                  <long name="proxy-Id value">10018</long>
-                  <string name="proxy-Label">"Layer Down\tCtrl+Down"</string>
-                  <string name="proxy-Kind">"Normal"</string>
-                  <bool name="proxy-Checked">0</bool>
-                  <bool name="proxy-Enabled">1</bool>
-                  <string name="proxy-Help text">""</string>
-                  <string name="proxy-Bitmap">""</string>
-                  <string name="proxy-Bitmap unchecked">""</string>
-                  <string name="proxy-Platform">"&lt;Any platform&gt;"</string>
-                </document>
-                <document>
-                  <string name="title">"Layer In\tCtrl+Right: IDM_LAYER_IN"</string>
-                  <string name="type">"dialog-control-document"</string>
-                  <string name="filename">""</string>
-                  <string name="icon-name">"menuitem"</string>
-                  <long name="is-transient">0</long>
-                  <long name="owns-file">1</long>
-                  <long name="title-mode">0</long>
-                  <long name="locked">0</long>
-                  <string name="proxy-type">"wbMenuItemProxy"</string>
-                  <string name="proxy-Id name">"IDM_LAYER_IN"</string>
-                  <long name="proxy-Id value">10020</long>
-                  <string name="proxy-Label">"Layer In\tCtrl+Right"</string>
-                  <string name="proxy-Kind">"Normal"</string>
-                  <bool name="proxy-Checked">0</bool>
-                  <bool name="proxy-Enabled">1</bool>
-                  <string name="proxy-Help text">""</string>
-                  <string name="proxy-Bitmap">""</string>
-                  <string name="proxy-Bitmap unchecked">""</string>
-                  <string name="proxy-Platform">"&lt;Any platform&gt;"</string>
-                </document>
-                <document>
-                  <string name="title">"Layer Out\tCtrl+Left: IDM_LAYER_OUT"</string>
-                  <string name="type">"dialog-control-document"</string>
-                  <string name="filename">""</string>
-                  <string name="icon-name">"menuitem"</string>
-                  <long name="is-transient">0</long>
-                  <long name="owns-file">1</long>
-                  <long name="title-mode">0</long>
-                  <long name="locked">0</long>
-                  <string name="proxy-type">"wbMenuItemProxy"</string>
-                  <string name="proxy-Id name">"IDM_LAYER_OUT"</string>
-                  <long name="proxy-Id value">10021</long>
-                  <string name="proxy-Label">"Layer Out\tCtrl+Left"</string>
-                  <string name="proxy-Kind">"Normal"</string>
-                  <bool name="proxy-Checked">0</bool>
-                  <bool name="proxy-Enabled">1</bool>
-                  <string name="proxy-Help text">""</string>
-                  <string name="proxy-Bitmap">""</string>
-                  <string name="proxy-Bitmap unchecked">""</string>
-                  <string name="proxy-Platform">"&lt;Any platform&gt;"</string>
-                </document>
-              </document>
-            </document>
-            <document>
-              <string name="title">"Dialogs"</string>
-              <string name="type">"dialog-control-document"</string>
-              <string name="filename">""</string>
-              <string name="icon-name">"menu"</string>
-              <long name="is-transient">0</long>
-              <long name="owns-file">1</long>
-              <long name="title-mode">0</long>
-              <long name="locked">0</long>
-              <string name="proxy-type">"wbMenuProxy"</string>
-              <string name="proxy-Label">"&amp;Dialogs"</string>
-              <bool name="proxy-Enabled">1</bool>
-              <string name="proxy-Member variable name">""</string>
-              <string name="proxy-Platform">"&lt;Any platform&gt;"</string>
-              <document>
-                <string name="title">"&amp;Add Dialog...: IDM_DIALOGS_ADD_DIALOG"</string>
+                <string name="title">"Add Attribute...: IDM_ELEMENTS_ADD_ATTRIBUTE"</string>
                 <string name="type">"dialog-control-document"</string>
                 <string name="filename">""</string>
                 <string name="icon-name">"menuitem"</string>
@@ -1390,108 +1143,9 @@
                 <long name="title-mode">0</long>
                 <long name="locked">0</long>
                 <string name="proxy-type">"wbMenuItemProxy"</string>
-                <string name="proxy-Id name">"IDM_DIALOGS_ADD_DIALOG"</string>
-                <long name="proxy-Id value">10011</long>
-                <string name="proxy-Label">"&amp;Add Dialog..."</string>
-                <string name="proxy-Kind">"Normal"</string>
-                <bool name="proxy-Checked">0</bool>
-                <bool name="proxy-Enabled">1</bool>
-                <string name="proxy-Help text">""</string>
-                <string name="proxy-Bitmap">""</string>
-                <string name="proxy-Bitmap unchecked">""</string>
-                <string name="proxy-Platform">"&lt;Any platform&gt;"</string>
-              </document>
-              <document>
-                <string name="title">"&amp;Remove Dialog: IDM_DIALOGS_REMOVE_DIALOG"</string>
-                <string name="type">"dialog-control-document"</string>
-                <string name="filename">""</string>
-                <string name="icon-name">"menuitem"</string>
-                <long name="is-transient">0</long>
-                <long name="owns-file">1</long>
-                <long name="title-mode">0</long>
-                <long name="locked">0</long>
-                <string name="proxy-type">"wbMenuItemProxy"</string>
-                <string name="proxy-Id name">"IDM_DIALOGS_REMOVE_DIALOG"</string>
-                <long name="proxy-Id value">10014</long>
-                <string name="proxy-Label">"&amp;Remove Dialog"</string>
-                <string name="proxy-Kind">"Normal"</string>
-                <bool name="proxy-Checked">0</bool>
-                <bool name="proxy-Enabled">1</bool>
-                <string name="proxy-Help text">""</string>
-                <string name="proxy-Bitmap">""</string>
-                <string name="proxy-Bitmap unchecked">""</string>
-                <string name="proxy-Platform">"&lt;Any platform&gt;"</string>
-              </document>
-              <document>
-                <string name="title">"Re&amp;name Dialog...: IDM_DIALOGS_RENAME_DIALOG"</string>
-                <string name="type">"dialog-control-document"</string>
-                <string name="filename">""</string>
-                <string name="icon-name">"menuitem"</string>
-                <long name="is-transient">0</long>
-                <long name="owns-file">1</long>
-                <long name="title-mode">0</long>
-                <long name="locked">0</long>
-                <string name="proxy-type">"wbMenuItemProxy"</string>
-                <string name="proxy-Id name">"IDM_DIALOGS_RENAME_DIALOG"</string>
-                <long name="proxy-Id value">10015</long>
-                <string name="proxy-Label">"Re&amp;name Dialog..."</string>
-                <string name="proxy-Kind">"Normal"</string>
-                <bool name="proxy-Checked">0</bool>
-                <bool name="proxy-Enabled">1</bool>
-                <string name="proxy-Help text">""</string>
-                <string name="proxy-Bitmap">""</string>
-                <string name="proxy-Bitmap unchecked">""</string>
-                <string name="proxy-Platform">"&lt;Any platform&gt;"</string>
-              </document>
-              <document>
-                <string name="title">"&amp;Comment Dialog...\tAlt+C: IDM_DIALOGS_COMMENT_DIALOG"</string>
-                <string name="type">"dialog-control-document"</string>
-                <string name="filename">""</string>
-                <string name="icon-name">"menuitem"</string>
-                <long name="is-transient">0</long>
-                <long name="owns-file">1</long>
-                <long name="title-mode">0</long>
-                <long name="locked">0</long>
-                <string name="proxy-type">"wbMenuItemProxy"</string>
-                <string name="proxy-Id name">"IDM_DIALOGS_COMMENT_DIALOG"</string>
-                <long name="proxy-Id value">10051</long>
-                <string name="proxy-Label">"&amp;Comment Dialog...\tAlt+C"</string>
-                <string name="proxy-Kind">"Normal"</string>
-                <bool name="proxy-Checked">0</bool>
-                <bool name="proxy-Enabled">1</bool>
-                <string name="proxy-Help text">""</string>
-                <string name="proxy-Bitmap">""</string>
-                <string name="proxy-Bitmap unchecked">""</string>
-                <string name="proxy-Platform">"&lt;Any platform&gt;"</string>
-              </document>
-            </document>
-            <document>
-              <string name="title">"Attribute"</string>
-              <string name="type">"dialog-control-document"</string>
-              <string name="filename">""</string>
-              <string name="icon-name">"menu"</string>
-              <long name="is-transient">0</long>
-              <long name="owns-file">1</long>
-              <long name="title-mode">0</long>
-              <long name="locked">0</long>
-              <string name="proxy-type">"wbMenuProxy"</string>
-              <string name="proxy-Label">"&amp;Attribute"</string>
-              <bool name="proxy-Enabled">1</bool>
-              <string name="proxy-Member variable name">""</string>
-              <string name="proxy-Platform">"&lt;Any platform&gt;"</string>
-              <document>
-                <string name="title">"Add Attribute: IDM_ATTRIBUTE_ADD"</string>
-                <string name="type">"dialog-control-document"</string>
-                <string name="filename">""</string>
-                <string name="icon-name">"menuitem"</string>
-                <long name="is-transient">0</long>
-                <long name="owns-file">1</long>
-                <long name="title-mode">0</long>
-                <long name="locked">0</long>
-                <string name="proxy-type">"wbMenuItemProxy"</string>
-                <string name="proxy-Id name">"IDM_ATTRIBUTE_ADD"</string>
+                <string name="proxy-Id name">"IDM_ELEMENTS_ADD_ATTRIBUTE"</string>
                 <long name="proxy-Id value">10027</long>
-                <string name="proxy-Label">"Add Attribute"</string>
+                <string name="proxy-Label">"Add Attribute..."</string>
                 <string name="proxy-Kind">"Normal"</string>
                 <bool name="proxy-Checked">0</bool>
                 <bool name="proxy-Enabled">1</bool>
@@ -1501,7 +1155,7 @@
                 <string name="proxy-Platform">"&lt;Any platform&gt;"</string>
               </document>
               <document>
-                <string name="title">"Remove Attribute: IDM_ATTRIBUTE_REMOVE"</string>
+                <string name="title">"Remove Attribute: IDM_ELEMENTS_REMOVE_ATTRIBUTE"</string>
                 <string name="type">"dialog-control-document"</string>
                 <string name="filename">""</string>
                 <string name="icon-name">"menuitem"</string>
@@ -1510,9 +1164,375 @@
                 <long name="title-mode">0</long>
                 <long name="locked">0</long>
                 <string name="proxy-type">"wbMenuItemProxy"</string>
-                <string name="proxy-Id name">"IDM_ATTRIBUTE_REMOVE"</string>
+                <string name="proxy-Id name">"IDM_ELEMENTS_REMOVE_ATTRIBUTE"</string>
                 <long name="proxy-Id value">10028</long>
                 <string name="proxy-Label">"Remove Attribute"</string>
+                <string name="proxy-Kind">"Normal"</string>
+                <bool name="proxy-Checked">0</bool>
+                <bool name="proxy-Enabled">1</bool>
+                <string name="proxy-Help text">""</string>
+                <string name="proxy-Bitmap">""</string>
+                <string name="proxy-Bitmap unchecked">""</string>
+                <string name="proxy-Platform">"&lt;Any platform&gt;"</string>
+              </document>
+            </document>
+            <document>
+              <string name="title">"Align"</string>
+              <string name="type">"dialog-control-document"</string>
+              <string name="filename">""</string>
+              <string name="icon-name">"menu"</string>
+              <long name="is-transient">0</long>
+              <long name="owns-file">1</long>
+              <long name="title-mode">0</long>
+              <long name="locked">0</long>
+              <string name="proxy-type">"wbMenuProxy"</string>
+              <string name="proxy-Label">"&amp;Align"</string>
+              <bool name="proxy-Enabled">1</bool>
+              <string name="proxy-Member variable name">""</string>
+              <string name="proxy-Platform">"&lt;Any platform&gt;"</string>
+              <document>
+                <string name="title">"Left: IDM_ALIGN_LEFT"</string>
+                <string name="type">"dialog-control-document"</string>
+                <string name="filename">""</string>
+                <string name="icon-name">"menuitem"</string>
+                <long name="is-transient">0</long>
+                <long name="owns-file">1</long>
+                <long name="title-mode">0</long>
+                <long name="locked">0</long>
+                <string name="proxy-type">"wbMenuItemProxy"</string>
+                <string name="proxy-Id name">"IDM_ALIGN_LEFT"</string>
+                <long name="proxy-Id value">10026</long>
+                <string name="proxy-Label">"Left"</string>
+                <string name="proxy-Kind">"Normal"</string>
+                <bool name="proxy-Checked">0</bool>
+                <bool name="proxy-Enabled">1</bool>
+                <string name="proxy-Help text">""</string>
+                <string name="proxy-Bitmap">"..\source\images\align_left.xpm"</string>
+                <string name="proxy-Bitmap unchecked">""</string>
+                <string name="proxy-Platform">"&lt;Any platform&gt;"</string>
+              </document>
+              <document>
+                <string name="title">"Center: IDM_ALIGN_CENTER"</string>
+                <string name="type">"dialog-control-document"</string>
+                <string name="filename">""</string>
+                <string name="icon-name">"menuitem"</string>
+                <long name="is-transient">0</long>
+                <long name="owns-file">1</long>
+                <long name="title-mode">0</long>
+                <long name="locked">0</long>
+                <string name="proxy-type">"wbMenuItemProxy"</string>
+                <string name="proxy-Id name">"IDM_ALIGN_CENTER"</string>
+                <long name="proxy-Id value">10012</long>
+                <string name="proxy-Label">"Center"</string>
+                <string name="proxy-Kind">"Normal"</string>
+                <bool name="proxy-Checked">0</bool>
+                <bool name="proxy-Enabled">1</bool>
+                <string name="proxy-Help text">""</string>
+                <string name="proxy-Bitmap">"..\source\images\align_center.xpm"</string>
+                <string name="proxy-Bitmap unchecked">""</string>
+                <string name="proxy-Platform">"&lt;Any platform&gt;"</string>
+              </document>
+              <document>
+                <string name="title">"Right: IDM_ALIGN_RIGHT"</string>
+                <string name="type">"dialog-control-document"</string>
+                <string name="filename">""</string>
+                <string name="icon-name">"menuitem"</string>
+                <long name="is-transient">0</long>
+                <long name="owns-file">1</long>
+                <long name="title-mode">0</long>
+                <long name="locked">0</long>
+                <string name="proxy-type">"wbMenuItemProxy"</string>
+                <string name="proxy-Id name">"IDM_ALIGN_RIGHT"</string>
+                <long name="proxy-Id value">10030</long>
+                <string name="proxy-Label">"Right"</string>
+                <string name="proxy-Kind">"Normal"</string>
+                <bool name="proxy-Checked">0</bool>
+                <bool name="proxy-Enabled">1</bool>
+                <string name="proxy-Help text">""</string>
+                <string name="proxy-Bitmap">"..\source\images\align_right.xpm"</string>
+                <string name="proxy-Bitmap unchecked">""</string>
+                <string name="proxy-Platform">"&lt;Any platform&gt;"</string>
+              </document>
+              <document>
+                <string name="title">"Top: IDM_ALIGN_TOP"</string>
+                <string name="type">"dialog-control-document"</string>
+                <string name="filename">""</string>
+                <string name="icon-name">"menuitem"</string>
+                <long name="is-transient">0</long>
+                <long name="owns-file">1</long>
+                <long name="title-mode">0</long>
+                <long name="locked">0</long>
+                <string name="proxy-type">"wbMenuItemProxy"</string>
+                <string name="proxy-Id name">"IDM_ALIGN_TOP"</string>
+                <long name="proxy-Id value">10031</long>
+                <string name="proxy-Label">"Top"</string>
+                <string name="proxy-Kind">"Normal"</string>
+                <bool name="proxy-Checked">0</bool>
+                <bool name="proxy-Enabled">1</bool>
+                <string name="proxy-Help text">""</string>
+                <string name="proxy-Bitmap">"..\source\images\align_top.xpm"</string>
+                <string name="proxy-Bitmap unchecked">""</string>
+                <string name="proxy-Platform">"&lt;Any platform&gt;"</string>
+              </document>
+              <document>
+                <string name="title">"Middle: IDM_ALIGN_MIDDLE"</string>
+                <string name="type">"dialog-control-document"</string>
+                <string name="filename">""</string>
+                <string name="icon-name">"menuitem"</string>
+                <long name="is-transient">0</long>
+                <long name="owns-file">1</long>
+                <long name="title-mode">0</long>
+                <long name="locked">0</long>
+                <string name="proxy-type">"wbMenuItemProxy"</string>
+                <string name="proxy-Id name">"IDM_ALIGN_MIDDLE"</string>
+                <long name="proxy-Id value">10013</long>
+                <string name="proxy-Label">"Middle"</string>
+                <string name="proxy-Kind">"Normal"</string>
+                <bool name="proxy-Checked">0</bool>
+                <bool name="proxy-Enabled">1</bool>
+                <string name="proxy-Help text">""</string>
+                <string name="proxy-Bitmap">"..\source\images\align_middle.xpm"</string>
+                <string name="proxy-Bitmap unchecked">""</string>
+                <string name="proxy-Platform">"&lt;Any platform&gt;"</string>
+              </document>
+              <document>
+                <string name="title">"Bottom: IDM_ALIGN_BOTTOM"</string>
+                <string name="type">"dialog-control-document"</string>
+                <string name="filename">""</string>
+                <string name="icon-name">"menuitem"</string>
+                <long name="is-transient">0</long>
+                <long name="owns-file">1</long>
+                <long name="title-mode">0</long>
+                <long name="locked">0</long>
+                <string name="proxy-type">"wbMenuItemProxy"</string>
+                <string name="proxy-Id name">"IDM_ALIGN_BOTTOM"</string>
+                <long name="proxy-Id value">10032</long>
+                <string name="proxy-Label">"Bottom"</string>
+                <string name="proxy-Kind">"Normal"</string>
+                <bool name="proxy-Checked">0</bool>
+                <bool name="proxy-Enabled">1</bool>
+                <string name="proxy-Help text">""</string>
+                <string name="proxy-Bitmap">"..\source\images\align_bottom.xpm"</string>
+                <string name="proxy-Bitmap unchecked">""</string>
+                <string name="proxy-Platform">"&lt;Any platform&gt;"</string>
+              </document>
+              <document>
+                <string name="title">"------------"</string>
+                <string name="type">"dialog-control-document"</string>
+                <string name="filename">""</string>
+                <string name="icon-name">"menuitem"</string>
+                <long name="is-transient">0</long>
+                <long name="owns-file">1</long>
+                <long name="title-mode">0</long>
+                <long name="locked">0</long>
+                <string name="proxy-type">"wbMenuSeparatorProxy"</string>
+                <string name="proxy-Platform">"&lt;Any platform&gt;"</string>
+              </document>
+              <document>
+                <string name="title">"Average Gap Horizontal: IDM_ALIGN_GAP_HORIZONTAL"</string>
+                <string name="type">"dialog-control-document"</string>
+                <string name="filename">""</string>
+                <string name="icon-name">"menuitem"</string>
+                <long name="is-transient">0</long>
+                <long name="owns-file">1</long>
+                <long name="title-mode">0</long>
+                <long name="locked">0</long>
+                <string name="proxy-type">"wbMenuItemProxy"</string>
+                <string name="proxy-Id name">"IDM_ALIGN_GAP_HORIZONTAL"</string>
+                <long name="proxy-Id value">10033</long>
+                <string name="proxy-Label">"Average Gap Horizontal"</string>
+                <string name="proxy-Kind">"Normal"</string>
+                <bool name="proxy-Checked">0</bool>
+                <bool name="proxy-Enabled">1</bool>
+                <string name="proxy-Help text">""</string>
+                <string name="proxy-Bitmap">"..\source\images\gap_horizontal.xpm"</string>
+                <string name="proxy-Bitmap unchecked">""</string>
+                <string name="proxy-Platform">"&lt;Any platform&gt;"</string>
+              </document>
+              <document>
+                <string name="title">"Average Gap Vertical: IDM_ALIGN_GAP_VERTICAL"</string>
+                <string name="type">"dialog-control-document"</string>
+                <string name="filename">""</string>
+                <string name="icon-name">"menuitem"</string>
+                <long name="is-transient">0</long>
+                <long name="owns-file">1</long>
+                <long name="title-mode">0</long>
+                <long name="locked">0</long>
+                <string name="proxy-type">"wbMenuItemProxy"</string>
+                <string name="proxy-Id name">"IDM_ALIGN_GAP_VERTICAL"</string>
+                <long name="proxy-Id value">10034</long>
+                <string name="proxy-Label">"Average Gap Vertical"</string>
+                <string name="proxy-Kind">"Normal"</string>
+                <bool name="proxy-Checked">0</bool>
+                <bool name="proxy-Enabled">1</bool>
+                <string name="proxy-Help text">""</string>
+                <string name="proxy-Bitmap">"..\source\images\gap_vertical.xpm"</string>
+                <string name="proxy-Bitmap unchecked">""</string>
+                <string name="proxy-Platform">"&lt;Any platform&gt;"</string>
+              </document>
+              <document>
+                <string name="title">"------------"</string>
+                <string name="type">"dialog-control-document"</string>
+                <string name="filename">""</string>
+                <string name="icon-name">"menuitem"</string>
+                <long name="is-transient">0</long>
+                <long name="owns-file">1</long>
+                <long name="title-mode">0</long>
+                <long name="locked">0</long>
+                <string name="proxy-type">"wbMenuSeparatorProxy"</string>
+                <string name="proxy-Platform">"&lt;Any platform&gt;"</string>
+              </document>
+              <document>
+                <string name="title">"Make Same Width: IDM_ALIGN_MAKE_SAME_WIDTH"</string>
+                <string name="type">"dialog-control-document"</string>
+                <string name="filename">""</string>
+                <string name="icon-name">"menuitem"</string>
+                <long name="is-transient">0</long>
+                <long name="owns-file">1</long>
+                <long name="title-mode">0</long>
+                <long name="locked">0</long>
+                <string name="proxy-type">"wbMenuItemProxy"</string>
+                <string name="proxy-Id name">"IDM_ALIGN_MAKE_SAME_WIDTH"</string>
+                <long name="proxy-Id value">10029</long>
+                <string name="proxy-Label">"Make Same Width"</string>
+                <string name="proxy-Kind">"Normal"</string>
+                <bool name="proxy-Checked">0</bool>
+                <bool name="proxy-Enabled">1</bool>
+                <string name="proxy-Help text">""</string>
+                <string name="proxy-Bitmap">"..\source\images\size_width.xpm"</string>
+                <string name="proxy-Bitmap unchecked">""</string>
+                <string name="proxy-Platform">"&lt;Any platform&gt;"</string>
+              </document>
+              <document>
+                <string name="title">"Make Same Height: IDM_ALIGN_MAKE_SAME_HEIGHT"</string>
+                <string name="type">"dialog-control-document"</string>
+                <string name="filename">""</string>
+                <string name="icon-name">"menuitem"</string>
+                <long name="is-transient">0</long>
+                <long name="owns-file">1</long>
+                <long name="title-mode">0</long>
+                <long name="locked">0</long>
+                <string name="proxy-type">"wbMenuItemProxy"</string>
+                <string name="proxy-Id name">"IDM_ALIGN_MAKE_SAME_HEIGHT"</string>
+                <long name="proxy-Id value">10039</long>
+                <string name="proxy-Label">"Make Same Height"</string>
+                <string name="proxy-Kind">"Normal"</string>
+                <bool name="proxy-Checked">0</bool>
+                <bool name="proxy-Enabled">1</bool>
+                <string name="proxy-Help text">""</string>
+                <string name="proxy-Bitmap">"..\source\images\size_height.xpm"</string>
+                <string name="proxy-Bitmap unchecked">""</string>
+                <string name="proxy-Platform">"&lt;Any platform&gt;"</string>
+              </document>
+              <document>
+                <string name="title">"Make Same Size: IDM_ALIGN_MAKE_SAME_SIZE"</string>
+                <string name="type">"dialog-control-document"</string>
+                <string name="filename">""</string>
+                <string name="icon-name">"menuitem"</string>
+                <long name="is-transient">0</long>
+                <long name="owns-file">1</long>
+                <long name="title-mode">0</long>
+                <long name="locked">0</long>
+                <string name="proxy-type">"wbMenuItemProxy"</string>
+                <string name="proxy-Id name">"IDM_ALIGN_MAKE_SAME_SIZE"</string>
+                <long name="proxy-Id value">10040</long>
+                <string name="proxy-Label">"Make Same Size"</string>
+                <string name="proxy-Kind">"Normal"</string>
+                <bool name="proxy-Checked">0</bool>
+                <bool name="proxy-Enabled">1</bool>
+                <string name="proxy-Help text">""</string>
+                <string name="proxy-Bitmap">"..\source\images\size_width_and_height.xpm"</string>
+                <string name="proxy-Bitmap unchecked">""</string>
+                <string name="proxy-Platform">"&lt;Any platform&gt;"</string>
+              </document>
+              <document>
+                <string name="title">"------------"</string>
+                <string name="type">"dialog-control-document"</string>
+                <string name="filename">""</string>
+                <string name="icon-name">"menuitem"</string>
+                <long name="is-transient">0</long>
+                <long name="owns-file">1</long>
+                <long name="title-mode">0</long>
+                <long name="locked">0</long>
+                <string name="proxy-type">"wbMenuSeparatorProxy"</string>
+                <string name="proxy-Platform">"&lt;Any platform&gt;"</string>
+              </document>
+              <document>
+                <string name="title">"Layer Up\tCtrl+Up: IDM_LAYER_UP"</string>
+                <string name="type">"dialog-control-document"</string>
+                <string name="filename">""</string>
+                <string name="icon-name">"menuitem"</string>
+                <long name="is-transient">0</long>
+                <long name="owns-file">1</long>
+                <long name="title-mode">0</long>
+                <long name="locked">0</long>
+                <string name="proxy-type">"wbMenuItemProxy"</string>
+                <string name="proxy-Id name">"IDM_LAYER_UP"</string>
+                <long name="proxy-Id value">10009</long>
+                <string name="proxy-Label">"Layer Up\tCtrl+Up"</string>
+                <string name="proxy-Kind">"Normal"</string>
+                <bool name="proxy-Checked">0</bool>
+                <bool name="proxy-Enabled">1</bool>
+                <string name="proxy-Help text">""</string>
+                <string name="proxy-Bitmap">""</string>
+                <string name="proxy-Bitmap unchecked">""</string>
+                <string name="proxy-Platform">"&lt;Any platform&gt;"</string>
+              </document>
+              <document>
+                <string name="title">"Layer Down\tCtrl+Down: IDM_LAYER_DOWN"</string>
+                <string name="type">"dialog-control-document"</string>
+                <string name="filename">""</string>
+                <string name="icon-name">"menuitem"</string>
+                <long name="is-transient">0</long>
+                <long name="owns-file">1</long>
+                <long name="title-mode">0</long>
+                <long name="locked">0</long>
+                <string name="proxy-type">"wbMenuItemProxy"</string>
+                <string name="proxy-Id name">"IDM_LAYER_DOWN"</string>
+                <long name="proxy-Id value">10018</long>
+                <string name="proxy-Label">"Layer Down\tCtrl+Down"</string>
+                <string name="proxy-Kind">"Normal"</string>
+                <bool name="proxy-Checked">0</bool>
+                <bool name="proxy-Enabled">1</bool>
+                <string name="proxy-Help text">""</string>
+                <string name="proxy-Bitmap">""</string>
+                <string name="proxy-Bitmap unchecked">""</string>
+                <string name="proxy-Platform">"&lt;Any platform&gt;"</string>
+              </document>
+              <document>
+                <string name="title">"Layer In\tCtrl+Right: IDM_LAYER_IN"</string>
+                <string name="type">"dialog-control-document"</string>
+                <string name="filename">""</string>
+                <string name="icon-name">"menuitem"</string>
+                <long name="is-transient">0</long>
+                <long name="owns-file">1</long>
+                <long name="title-mode">0</long>
+                <long name="locked">0</long>
+                <string name="proxy-type">"wbMenuItemProxy"</string>
+                <string name="proxy-Id name">"IDM_LAYER_IN"</string>
+                <long name="proxy-Id value">10020</long>
+                <string name="proxy-Label">"Layer In\tCtrl+Right"</string>
+                <string name="proxy-Kind">"Normal"</string>
+                <bool name="proxy-Checked">0</bool>
+                <bool name="proxy-Enabled">1</bool>
+                <string name="proxy-Help text">""</string>
+                <string name="proxy-Bitmap">""</string>
+                <string name="proxy-Bitmap unchecked">""</string>
+                <string name="proxy-Platform">"&lt;Any platform&gt;"</string>
+              </document>
+              <document>
+                <string name="title">"Layer Out\tCtrl+Left: IDM_LAYER_OUT"</string>
+                <string name="type">"dialog-control-document"</string>
+                <string name="filename">""</string>
+                <string name="icon-name">"menuitem"</string>
+                <long name="is-transient">0</long>
+                <long name="owns-file">1</long>
+                <long name="title-mode">0</long>
+                <long name="locked">0</long>
+                <string name="proxy-type">"wbMenuItemProxy"</string>
+                <string name="proxy-Id name">"IDM_LAYER_OUT"</string>
+                <long name="proxy-Id value">10021</long>
+                <string name="proxy-Label">"Layer Out\tCtrl+Left"</string>
                 <string name="proxy-Kind">"Normal"</string>
                 <bool name="proxy-Checked">0</bool>
                 <bool name="proxy-Enabled">1</bool>
@@ -1536,6 +1556,110 @@
               <bool name="proxy-Enabled">1</bool>
               <string name="proxy-Member variable name">""</string>
               <string name="proxy-Platform">"&lt;Any platform&gt;"</string>
+              <document>
+                <string name="title">"&amp;Preview...\tF5: IDM_VIEW_PREVIEW"</string>
+                <string name="type">"dialog-control-document"</string>
+                <string name="filename">""</string>
+                <string name="icon-name">"menuitem"</string>
+                <long name="is-transient">0</long>
+                <long name="owns-file">1</long>
+                <long name="title-mode">0</long>
+                <long name="locked">0</long>
+                <string name="proxy-type">"wbMenuItemProxy"</string>
+                <string name="proxy-Id name">"IDM_VIEW_PREVIEW"</string>
+                <long name="proxy-Id value">10038</long>
+                <string name="proxy-Label">"&amp;Preview...\tF5"</string>
+                <string name="proxy-Kind">"Check"</string>
+                <bool name="proxy-Checked">0</bool>
+                <bool name="proxy-Enabled">1</bool>
+                <string name="proxy-Help text">""</string>
+                <string name="proxy-Bitmap">""</string>
+                <string name="proxy-Bitmap unchecked">""</string>
+                <string name="proxy-Platform">"&lt;Any platform&gt;"</string>
+              </document>
+              <document>
+                <string name="title">"Language: IDM_VIEW_LANGUAGES"</string>
+                <string name="type">"dialog-control-document"</string>
+                <string name="filename">""</string>
+                <string name="icon-name">"menu"</string>
+                <long name="is-transient">0</long>
+                <long name="owns-file">1</long>
+                <long name="title-mode">0</long>
+                <long name="locked">0</long>
+                <string name="proxy-type">"wbSubmenuProxy"</string>
+                <string name="proxy-Id name">"IDM_VIEW_LANGUAGES"</string>
+                <long name="proxy-Id value">10017</long>
+                <string name="proxy-Label">"&amp;Language"</string>
+                <string name="proxy-Help text">""</string>
+                <bool name="proxy-Enabled">1</bool>
+                <string name="proxy-Platform">"&lt;Any platform&gt;"</string>
+              </document>
+              <document>
+                <string name="title">"------------"</string>
+                <string name="type">"dialog-control-document"</string>
+                <string name="filename">""</string>
+                <string name="icon-name">"menuitem"</string>
+                <long name="is-transient">0</long>
+                <long name="owns-file">1</long>
+                <long name="title-mode">0</long>
+                <long name="locked">0</long>
+                <string name="proxy-type">"wbMenuSeparatorProxy"</string>
+                <string name="proxy-Platform">"&lt;Any platform&gt;"</string>
+              </document>
+              <document>
+                <string name="title">"Show &amp;Selection\tCtrl+H: IDM_VIEW_SHOW_SELECTION"</string>
+                <string name="type">"dialog-control-document"</string>
+                <string name="filename">""</string>
+                <string name="icon-name">"menuitem"</string>
+                <long name="is-transient">0</long>
+                <long name="owns-file">1</long>
+                <long name="title-mode">0</long>
+                <long name="locked">0</long>
+                <string name="proxy-type">"wbMenuItemProxy"</string>
+                <string name="proxy-Id name">"IDM_VIEW_SHOW_SELECTION"</string>
+                <long name="proxy-Id value">10024</long>
+                <string name="proxy-Label">"Show &amp;Selection\tCtrl+H"</string>
+                <string name="proxy-Kind">"Check"</string>
+                <bool name="proxy-Checked">1</bool>
+                <bool name="proxy-Enabled">1</bool>
+                <string name="proxy-Help text">""</string>
+                <string name="proxy-Bitmap">""</string>
+                <string name="proxy-Bitmap unchecked">""</string>
+                <string name="proxy-Platform">"&lt;Any platform&gt;"</string>
+              </document>
+              <document>
+                <string name="title">"Show &amp;Current Using Textures\tCtrl+U: IDM_VIEW_CURRENT_USING_TEX"</string>
+                <string name="type">"dialog-control-document"</string>
+                <string name="filename">""</string>
+                <string name="icon-name">"menuitem"</string>
+                <long name="is-transient">0</long>
+                <long name="owns-file">1</long>
+                <long name="title-mode">0</long>
+                <long name="locked">0</long>
+                <string name="proxy-type">"wbMenuItemProxy"</string>
+                <string name="proxy-Id name">"IDM_VIEW_CURRENT_USING_TEX"</string>
+                <long name="proxy-Id value">10050</long>
+                <string name="proxy-Label">"Show &amp;Current Using Textures\tCtrl+U"</string>
+                <string name="proxy-Kind">"Normal"</string>
+                <bool name="proxy-Checked">0</bool>
+                <bool name="proxy-Enabled">1</bool>
+                <string name="proxy-Help text">""</string>
+                <string name="proxy-Bitmap">""</string>
+                <string name="proxy-Bitmap unchecked">""</string>
+                <string name="proxy-Platform">"&lt;Any platform&gt;"</string>
+              </document>
+              <document>
+                <string name="title">"------------"</string>
+                <string name="type">"dialog-control-document"</string>
+                <string name="filename">""</string>
+                <string name="icon-name">"menuitem"</string>
+                <long name="is-transient">0</long>
+                <long name="owns-file">1</long>
+                <long name="title-mode">0</long>
+                <long name="locked">0</long>
+                <string name="proxy-type">"wbMenuSeparatorProxy"</string>
+                <string name="proxy-Platform">"&lt;Any platform&gt;"</string>
+              </document>
               <document>
                 <string name="title">"Zoom In\tCtrl++: wxID_ZOOM_IN"</string>
                 <string name="type">"dialog-control-document"</string>
@@ -1668,140 +1792,6 @@
               <bool name="proxy-Enabled">1</bool>
               <string name="proxy-Member variable name">"m_toolMenu"</string>
               <string name="proxy-Platform">"&lt;Any platform&gt;"</string>
-              <document>
-                <string name="title">"&amp;Preview...\tF5: IDM_TOOLS_PREVIEW"</string>
-                <string name="type">"dialog-control-document"</string>
-                <string name="filename">""</string>
-                <string name="icon-name">"menuitem"</string>
-                <long name="is-transient">0</long>
-                <long name="owns-file">1</long>
-                <long name="title-mode">0</long>
-                <long name="locked">0</long>
-                <string name="proxy-type">"wbMenuItemProxy"</string>
-                <string name="proxy-Id name">"IDM_TOOLS_PREVIEW"</string>
-                <long name="proxy-Id value">10038</long>
-                <string name="proxy-Label">"&amp;Preview...\tF5"</string>
-                <string name="proxy-Kind">"Check"</string>
-                <bool name="proxy-Checked">0</bool>
-                <bool name="proxy-Enabled">1</bool>
-                <string name="proxy-Help text">""</string>
-                <string name="proxy-Bitmap">""</string>
-                <string name="proxy-Bitmap unchecked">""</string>
-                <string name="proxy-Platform">"&lt;Any platform&gt;"</string>
-              </document>
-              <document>
-                <string name="title">"Language: IDM_TOOLS_LANGUAGES"</string>
-                <string name="type">"dialog-control-document"</string>
-                <string name="filename">""</string>
-                <string name="icon-name">"menu"</string>
-                <long name="is-transient">0</long>
-                <long name="owns-file">1</long>
-                <long name="title-mode">0</long>
-                <long name="locked">0</long>
-                <string name="proxy-type">"wbSubmenuProxy"</string>
-                <string name="proxy-Id name">"IDM_TOOLS_LANGUAGES"</string>
-                <long name="proxy-Id value">10017</long>
-                <string name="proxy-Label">"&amp;Language"</string>
-                <string name="proxy-Help text">""</string>
-                <bool name="proxy-Enabled">1</bool>
-                <string name="proxy-Platform">"&lt;Any platform&gt;"</string>
-              </document>
-              <document>
-                <string name="title">"Show &amp;Selection\tCtrl+H: IDM_TOOLS_SHOW_SELECTION"</string>
-                <string name="type">"dialog-control-document"</string>
-                <string name="filename">""</string>
-                <string name="icon-name">"menuitem"</string>
-                <long name="is-transient">0</long>
-                <long name="owns-file">1</long>
-                <long name="title-mode">0</long>
-                <long name="locked">0</long>
-                <string name="proxy-type">"wbMenuItemProxy"</string>
-                <string name="proxy-Id name">"IDM_TOOLS_SHOW_SELECTION"</string>
-                <long name="proxy-Id value">10024</long>
-                <string name="proxy-Label">"Show &amp;Selection\tCtrl+H"</string>
-                <string name="proxy-Kind">"Check"</string>
-                <bool name="proxy-Checked">1</bool>
-                <bool name="proxy-Enabled">1</bool>
-                <string name="proxy-Help text">""</string>
-                <string name="proxy-Bitmap">""</string>
-                <string name="proxy-Bitmap unchecked">""</string>
-                <string name="proxy-Platform">"&lt;Any platform&gt;"</string>
-              </document>
-              <document>
-                <string name="title">"Show &amp;Current Using Textures\tCtrl+U: IDM_TOOLS_CURRENT_USING_TEX"</string>
-                <string name="type">"dialog-control-document"</string>
-                <string name="filename">""</string>
-                <string name="icon-name">"menuitem"</string>
-                <long name="is-transient">0</long>
-                <long name="owns-file">1</long>
-                <long name="title-mode">0</long>
-                <long name="locked">0</long>
-                <string name="proxy-type">"wbMenuItemProxy"</string>
-                <string name="proxy-Id name">"IDM_TOOLS_CURRENT_USING_TEX"</string>
-                <long name="proxy-Id value">10050</long>
-                <string name="proxy-Label">"Show &amp;Current Using Textures\tCtrl+U"</string>
-                <string name="proxy-Kind">"Normal"</string>
-                <bool name="proxy-Checked">0</bool>
-                <bool name="proxy-Enabled">1</bool>
-                <string name="proxy-Help text">""</string>
-                <string name="proxy-Bitmap">""</string>
-                <string name="proxy-Bitmap unchecked">""</string>
-                <string name="proxy-Platform">"&lt;Any platform&gt;"</string>
-              </document>
-              <document>
-                <string name="title">"&amp;Duplicate Windows...: IDM_TOOLS_DUPLICATE_WINDOWS"</string>
-                <string name="type">"dialog-control-document"</string>
-                <string name="filename">""</string>
-                <string name="icon-name">"menuitem"</string>
-                <long name="is-transient">0</long>
-                <long name="owns-file">1</long>
-                <long name="title-mode">0</long>
-                <long name="locked">0</long>
-                <string name="proxy-type">"wbMenuItemProxy"</string>
-                <string name="proxy-Id name">"IDM_TOOLS_DUPLICATE_WINDOWS"</string>
-                <long name="proxy-Id value">10003</long>
-                <string name="proxy-Label">"&amp;Duplicate Windows..."</string>
-                <string name="proxy-Kind">"Normal"</string>
-                <bool name="proxy-Checked">0</bool>
-                <bool name="proxy-Enabled">1</bool>
-                <string name="proxy-Help text">""</string>
-                <string name="proxy-Bitmap">""</string>
-                <string name="proxy-Bitmap unchecked">""</string>
-                <string name="proxy-Platform">"&lt;Any platform&gt;"</string>
-              </document>
-              <document>
-                <string name="title">"&amp;Rename selections...: IDM_TOOLS_RENAME_SELECTIONS"</string>
-                <string name="type">"dialog-control-document"</string>
-                <string name="filename">""</string>
-                <string name="icon-name">"menuitem"</string>
-                <long name="is-transient">0</long>
-                <long name="owns-file">1</long>
-                <long name="title-mode">0</long>
-                <long name="locked">0</long>
-                <string name="proxy-type">"wbMenuItemProxy"</string>
-                <string name="proxy-Id name">"IDM_TOOLS_RENAME_SELECTIONS"</string>
-                <long name="proxy-Id value">10061</long>
-                <string name="proxy-Label">"&amp;Rename selections..."</string>
-                <string name="proxy-Kind">"Normal"</string>
-                <bool name="proxy-Checked">0</bool>
-                <bool name="proxy-Enabled">1</bool>
-                <string name="proxy-Help text">""</string>
-                <string name="proxy-Bitmap">""</string>
-                <string name="proxy-Bitmap unchecked">""</string>
-                <string name="proxy-Platform">"&lt;Any platform&gt;"</string>
-              </document>
-              <document>
-                <string name="title">"------------"</string>
-                <string name="type">"dialog-control-document"</string>
-                <string name="filename">""</string>
-                <string name="icon-name">"menuitem"</string>
-                <long name="is-transient">0</long>
-                <long name="owns-file">1</long>
-                <long name="title-mode">0</long>
-                <long name="locked">0</long>
-                <string name="proxy-type">"wbMenuSeparatorProxy"</string>
-                <string name="proxy-Platform">"&lt;Any platform&gt;"</string>
-              </document>
               <document>
                 <string name="title">"Generate Binding Code C++...\tCtrl+G: IDM_TOOLS_GEN_BINDING_CODE_CPP"</string>
                 <string name="type">"dialog-control-document"</string>
