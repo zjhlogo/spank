@@ -38,27 +38,28 @@ void Label::setText(const std::string& text)
 	createBuffer(m_text);
 }
 
-glm::vec2 Label::calcTextSize()
+glm::vec2 Label::calcTextSize(const std::string& text)
 {
 	// calculate the number of lines
 	int numLines = 1;
-	for (const auto& charId : m_text)
+	for (const auto& charId : text)
 	{
 		if (charId == '\n') ++numLines;
 	}
 
+	int lineHeight = m_pFont->getLineHeight();
 	// adjust the start position base on number of lines
 	glm::vec2 textSize;
-	textSize.y = (float)(numLines * m_pFont->getLineHeight());
+	textSize.y = (float)(numLines * lineHeight);
 
 	glm::vec2 currPos;
-	currPos.y += (numLines - 1)*m_pFont->getLineHeight();
+	currPos.y += (numLines - 1) * lineHeight;
 
-	for (const auto& charId : m_text)
+	for (const auto& charId : text)
 	{
 		if (charId == '\n')
 		{
-			currPos.y -= m_pFont->getLineHeight();
+			currPos.y -= lineHeight;
 			currPos.x = 0.0f;
 			continue;
 		}
