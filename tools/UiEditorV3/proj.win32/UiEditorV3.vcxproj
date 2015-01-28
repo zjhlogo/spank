@@ -55,13 +55,13 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;WXUSINGDLL;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\..\vendor\wxWidgets-3.0.2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\vendor\wxWidgets-3.0.2\include;..\..\..\vendor\PowerVR_SDK_3.3_R2\inc;..\..\..\vendor;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>wxbase30ud.lib;wxbase30ud_net.lib;wxbase30ud_xml.lib;wxexpatd.lib;wxjpegd.lib;wxmsw30ud_adv.lib;wxmsw30ud_aui.lib;wxmsw30ud_core.lib;wxmsw30ud_gl.lib;wxmsw30ud_html.lib;wxmsw30ud_media.lib;wxmsw30ud_propgrid.lib;wxmsw30ud_qa.lib;wxmsw30ud_ribbon.lib;wxmsw30ud_richtext.lib;wxmsw30ud_stc.lib;wxmsw30ud_webview.lib;wxmsw30ud_xrc.lib;wxpngd.lib;wxregexud.lib;wxscintillad.lib;wxtiffd.lib;wxzlibd.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>..\..\..\vendor\wxWidgets-3.0.2\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>winmm.lib;libEGL.lib;libGLESv2.lib;wxbase30ud.lib;wxbase30ud_net.lib;wxbase30ud_xml.lib;wxexpatd.lib;wxjpegd.lib;wxmsw30ud_adv.lib;wxmsw30ud_aui.lib;wxmsw30ud_core.lib;wxmsw30ud_gl.lib;wxmsw30ud_html.lib;wxmsw30ud_media.lib;wxmsw30ud_propgrid.lib;wxmsw30ud_qa.lib;wxmsw30ud_ribbon.lib;wxmsw30ud_richtext.lib;wxmsw30ud_stc.lib;wxmsw30ud_webview.lib;wxmsw30ud_xrc.lib;wxpngd.lib;wxregexud.lib;wxscintillad.lib;wxtiffd.lib;wxzlibd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\..\..\vendor\wxWidgets-3.0.2\lib;..\..\..\vendor\PowerVR_SDK_3.3_R2\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -73,23 +73,25 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;WXUSINGDLL;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\..\vendor\wxWidgets-3.0.2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\vendor\wxWidgets-3.0.2\include;..\..\..\vendor\PowerVR_SDK_3.3_R2\inc;..\..\..\vendor;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>wxbase30u.lib;wxbase30u_net.lib;wxbase30u_xml.lib;wxexpat.lib;wxjpeg.lib;wxmsw30u_adv.lib;wxmsw30u_aui.lib;wxmsw30u_core.lib;wxmsw30u_gl.lib;wxmsw30u_html.lib;wxmsw30u_media.lib;wxmsw30u_propgrid.lib;wxmsw30u_qa.lib;wxmsw30u_ribbon.lib;wxmsw30u_richtext.lib;wxmsw30u_stc.lib;wxmsw30u_webview.lib;wxmsw30u_xrc.lib;wxpng.lib;wxregexu.lib;wxscintilla.lib;wxtiff.lib;wxzlib.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>..\..\..\vendor\wxWidgets-3.0.2\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>winmm.lib;libEGL.lib;libGLESv2.lib;wxbase30u.lib;wxbase30u_net.lib;wxbase30u_xml.lib;wxexpat.lib;wxjpeg.lib;wxmsw30u_adv.lib;wxmsw30u_aui.lib;wxmsw30u_core.lib;wxmsw30u_gl.lib;wxmsw30u_html.lib;wxmsw30u_media.lib;wxmsw30u_propgrid.lib;wxmsw30u_qa.lib;wxmsw30u_ribbon.lib;wxmsw30u_richtext.lib;wxmsw30u_stc.lib;wxmsw30u_webview.lib;wxmsw30u_xrc.lib;wxpng.lib;wxregexu.lib;wxscintilla.lib;wxtiff.lib;wxzlib.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\..\..\vendor\wxWidgets-3.0.2\lib;..\..\..\vendor\PowerVR_SDK_3.3_R2\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\source\controls\OpenGLView.cpp" />
     <ClCompile Include="..\source\UiEditorV3App.cpp" />
     <ClCompile Include="..\source\UiEditorV3Frame.cpp" />
     <ClCompile Include="..\source\UiEditorV3Frame_Ui.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\source\controls\OpenGLView.h" />
     <ClInclude Include="..\source\UiEditorV3App.h" />
     <ClInclude Include="..\source\UiEditorV3Frame.h" />
     <ClInclude Include="..\source\UiEditorV3Frame_Ui.h" />

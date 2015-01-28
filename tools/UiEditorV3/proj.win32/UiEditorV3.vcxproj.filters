@@ -4,10 +4,21 @@
     <ClCompile Include="..\source\UiEditorV3App.cpp" />
     <ClCompile Include="..\source\UiEditorV3Frame.cpp" />
     <ClCompile Include="..\source\UiEditorV3Frame_Ui.cpp" />
+    <ClCompile Include="..\source\controls\OpenGLView.cpp">
+      <Filter>controls</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\source\UiEditorV3App.h" />
     <ClInclude Include="..\source\UiEditorV3Frame.h" />
     <ClInclude Include="..\source\UiEditorV3Frame_Ui.h" />
+    <ClInclude Include="..\source\controls\OpenGLView.h">
+      <Filter>controls</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="controls">
+      <UniqueIdentifier>{599d89ec-d7a6-4a1f-a031-ff7ba2257463}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>

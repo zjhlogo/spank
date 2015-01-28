@@ -23,6 +23,11 @@
 #include "wx/aui/framemanager.h"
 #include "wx/frame.h"
 #include "wx/toolbar.h"
+#include "wx/notebook.h"
+#include "wx/treectrl.h"
+#include "wx/glcanvas.h"
+#include "wx/scrolbar.h"
+#include "wx/statusbr.h"
 ////@end includes
 
 /*!
@@ -31,6 +36,9 @@
 
 ////@begin forward declarations
 class wxMenu;
+class wxTreeCtrl;
+class wxPropertyGrid;
+class OpenGLView;
 ////@end forward declarations
 
 /*!
@@ -95,6 +103,11 @@ public:
 	wxMenu* m_editMenu;
 	wxMenu* m_toolMenu;
 	wxToolBar* m_toolBar;
+	wxTreeCtrl* m_treeProjects;
+	wxPropertyGrid* m_properties;
+	OpenGLView* m_glView;
+	wxScrollBar* m_scrollV;
+	wxScrollBar* m_scrollH;
 	/// Control identifiers
 	enum {
 		ID_UI_EDITOR_FRAME = 10000,
@@ -135,7 +148,17 @@ public:
 		IDT_MAIN_TOOLBAR = 10010,
 		IDM_ALIGN_SAME_WIDTH = 10035,
 		IDM_ALIGN_SAME_HEIGHT = 10036,
-		IDM_ALIGN_SAME_SIZE = 10037
+		IDM_ALIGN_SAME_SIZE = 10037,
+		ID_NOTEBOOK_LAYOUT_LEFT = 10001,
+		ID_TREECTRL_PROJECTS = 10016,
+		ID_NOTEBOOK_LAYOUT_RIGHT = 10004,
+		ID_PROPERTIES = 10019,
+		ID_NOTEBOOK_LAYOUT_CENTER = 10005,
+		ID_PANEL = 10006,
+		ID_GLCANVAS = 10007,
+		ID_SCROLLBAR_V = 10008,
+		ID_SCROLLBAR_H = 10022,
+		ID_STATUSBAR = 10023
 	};
 ////@end UiEditorV3Frame_Ui member variables
 };

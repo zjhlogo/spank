@@ -721,7 +721,7 @@ private:
 // window creation helper class: before creating a new HWND, instantiate an
 // object of this class on stack - this allows to process the messages sent to
 // the window even before CreateWindow() returns
-class wxWindowCreationHook
+class WXDLLIMPEXP_CORE wxWindowCreationHook
 {
 public:
     wxWindowCreationHook(wxWindowMSW *winBeingCreated);

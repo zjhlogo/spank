@@ -23,6 +23,9 @@
 #endif
 
 ////@begin includes
+#include "wx/imaglist.h"
+#include "wx/propgrid/propgrid.h"
+#include "controls/OpenGLView.h"
 ////@end includes
 
 #include "UiEditorV3Frame_Ui.h"
@@ -118,6 +121,11 @@ void UiEditorV3Frame_Ui::Init()
 	m_editMenu = NULL;
 	m_toolMenu = NULL;
 	m_toolBar = NULL;
+	m_treeProjects = NULL;
+	m_properties = NULL;
+	m_glView = NULL;
+	m_scrollV = NULL;
+	m_scrollH = NULL;
 ////@end UiEditorV3Frame_Ui member initialisation
 }
 
@@ -161,178 +169,234 @@ void UiEditorV3Frame_Ui::CreateControls()
 	itemMenu22->Append(IDM_ELEMENTS_ADD_DIALOG, _("&Add Dialog..."), wxEmptyString, wxITEM_NORMAL);
 	itemMenu22->Append(IDM_ELEMENTS_REMOVE_DIALOG, _("&Remove Dialog"), wxEmptyString, wxITEM_NORMAL);
 	itemMenu22->Append(IDM_ELEMENTS_RENAME_DIALOG, _("Re&name Dialog..."), wxEmptyString, wxITEM_NORMAL);
-	itemMenu22->Append(IDM_ELEMENTS_COMMENT_DIALOG, _("&Comment Dialog..."), wxEmptyString, wxITEM_NORMAL);
+	itemMenu22->Append(IDM_ELEMENTS_COMMENT_DIALOG, _("&Comment Dialog...\tAlt+C"), wxEmptyString, wxITEM_NORMAL);
 	itemMenu22->AppendSeparator();
 	itemMenu22->Append(IDM_ELEMENTS_ADD_ATTRIBUTE, _("Add Attribute..."), wxEmptyString, wxITEM_NORMAL);
 	itemMenu22->Append(IDM_ELEMENTS_REMOVE_ATTRIBUTE, _("Remove Attribute"), wxEmptyString, wxITEM_NORMAL);
-	itemMenu22->AppendSeparator();
 	menuBar->Append(itemMenu22, _("E&lements"));
-	wxMenu* itemMenu31 = new wxMenu;
+	wxMenu* itemMenu30 = new wxMenu;
 	{
-		wxMenuItem* menuItem = new wxMenuItem(itemMenu31, IDM_ALIGN_LEFT, _("Left"), wxEmptyString, wxITEM_NORMAL);
+		wxMenuItem* menuItem = new wxMenuItem(itemMenu30, IDM_ALIGN_LEFT, _("Left"), wxEmptyString, wxITEM_NORMAL);
 		wxBitmap bitmap(itemFrame1->GetBitmapResource(wxT("../source/images/align_left.xpm")));
 		menuItem->SetBitmap(bitmap);
-		itemMenu31->Append(menuItem);
+		itemMenu30->Append(menuItem);
 	}
 	{
-		wxMenuItem* menuItem = new wxMenuItem(itemMenu31, IDM_ALIGN_CENTER, _("Center"), wxEmptyString, wxITEM_NORMAL);
+		wxMenuItem* menuItem = new wxMenuItem(itemMenu30, IDM_ALIGN_CENTER, _("Center"), wxEmptyString, wxITEM_NORMAL);
 		wxBitmap bitmap(itemFrame1->GetBitmapResource(wxT("../source/images/align_center.xpm")));
 		menuItem->SetBitmap(bitmap);
-		itemMenu31->Append(menuItem);
+		itemMenu30->Append(menuItem);
 	}
 	{
-		wxMenuItem* menuItem = new wxMenuItem(itemMenu31, IDM_ALIGN_RIGHT, _("Right"), wxEmptyString, wxITEM_NORMAL);
+		wxMenuItem* menuItem = new wxMenuItem(itemMenu30, IDM_ALIGN_RIGHT, _("Right"), wxEmptyString, wxITEM_NORMAL);
 		wxBitmap bitmap(itemFrame1->GetBitmapResource(wxT("../source/images/align_right.xpm")));
 		menuItem->SetBitmap(bitmap);
-		itemMenu31->Append(menuItem);
+		itemMenu30->Append(menuItem);
 	}
 	{
-		wxMenuItem* menuItem = new wxMenuItem(itemMenu31, IDM_ALIGN_TOP, _("Top"), wxEmptyString, wxITEM_NORMAL);
+		wxMenuItem* menuItem = new wxMenuItem(itemMenu30, IDM_ALIGN_TOP, _("Top"), wxEmptyString, wxITEM_NORMAL);
 		wxBitmap bitmap(itemFrame1->GetBitmapResource(wxT("../source/images/align_top.xpm")));
 		menuItem->SetBitmap(bitmap);
-		itemMenu31->Append(menuItem);
+		itemMenu30->Append(menuItem);
 	}
 	{
-		wxMenuItem* menuItem = new wxMenuItem(itemMenu31, IDM_ALIGN_MIDDLE, _("Middle"), wxEmptyString, wxITEM_NORMAL);
+		wxMenuItem* menuItem = new wxMenuItem(itemMenu30, IDM_ALIGN_MIDDLE, _("Middle"), wxEmptyString, wxITEM_NORMAL);
 		wxBitmap bitmap(itemFrame1->GetBitmapResource(wxT("../source/images/align_middle.xpm")));
 		menuItem->SetBitmap(bitmap);
-		itemMenu31->Append(menuItem);
+		itemMenu30->Append(menuItem);
 	}
 	{
-		wxMenuItem* menuItem = new wxMenuItem(itemMenu31, IDM_ALIGN_BOTTOM, _("Bottom"), wxEmptyString, wxITEM_NORMAL);
+		wxMenuItem* menuItem = new wxMenuItem(itemMenu30, IDM_ALIGN_BOTTOM, _("Bottom"), wxEmptyString, wxITEM_NORMAL);
 		wxBitmap bitmap(itemFrame1->GetBitmapResource(wxT("../source/images/align_bottom.xpm")));
 		menuItem->SetBitmap(bitmap);
-		itemMenu31->Append(menuItem);
+		itemMenu30->Append(menuItem);
 	}
-	itemMenu31->AppendSeparator();
+	itemMenu30->AppendSeparator();
 	{
-		wxMenuItem* menuItem = new wxMenuItem(itemMenu31, IDM_ALIGN_GAP_HORIZONTAL, _("Average Gap Horizontal"), wxEmptyString, wxITEM_NORMAL);
+		wxMenuItem* menuItem = new wxMenuItem(itemMenu30, IDM_ALIGN_GAP_HORIZONTAL, _("Average Gap Horizontal"), wxEmptyString, wxITEM_NORMAL);
 		wxBitmap bitmap(itemFrame1->GetBitmapResource(wxT("../source/images/gap_horizontal.xpm")));
 		menuItem->SetBitmap(bitmap);
-		itemMenu31->Append(menuItem);
+		itemMenu30->Append(menuItem);
 	}
 	{
-		wxMenuItem* menuItem = new wxMenuItem(itemMenu31, IDM_ALIGN_GAP_VERTICAL, _("Average Gap Vertical"), wxEmptyString, wxITEM_NORMAL);
+		wxMenuItem* menuItem = new wxMenuItem(itemMenu30, IDM_ALIGN_GAP_VERTICAL, _("Average Gap Vertical"), wxEmptyString, wxITEM_NORMAL);
 		wxBitmap bitmap(itemFrame1->GetBitmapResource(wxT("../source/images/gap_vertical.xpm")));
 		menuItem->SetBitmap(bitmap);
-		itemMenu31->Append(menuItem);
+		itemMenu30->Append(menuItem);
 	}
-	itemMenu31->AppendSeparator();
+	itemMenu30->AppendSeparator();
 	{
-		wxMenuItem* menuItem = new wxMenuItem(itemMenu31, IDM_ALIGN_MAKE_SAME_WIDTH, _("Make Same Width"), wxEmptyString, wxITEM_NORMAL);
+		wxMenuItem* menuItem = new wxMenuItem(itemMenu30, IDM_ALIGN_MAKE_SAME_WIDTH, _("Make Same Width"), wxEmptyString, wxITEM_NORMAL);
 		wxBitmap bitmap(itemFrame1->GetBitmapResource(wxT("../source/images/size_width.xpm")));
 		menuItem->SetBitmap(bitmap);
-		itemMenu31->Append(menuItem);
+		itemMenu30->Append(menuItem);
 	}
 	{
-		wxMenuItem* menuItem = new wxMenuItem(itemMenu31, IDM_ALIGN_MAKE_SAME_HEIGHT, _("Make Same Height"), wxEmptyString, wxITEM_NORMAL);
+		wxMenuItem* menuItem = new wxMenuItem(itemMenu30, IDM_ALIGN_MAKE_SAME_HEIGHT, _("Make Same Height"), wxEmptyString, wxITEM_NORMAL);
 		wxBitmap bitmap(itemFrame1->GetBitmapResource(wxT("../source/images/size_height.xpm")));
 		menuItem->SetBitmap(bitmap);
-		itemMenu31->Append(menuItem);
+		itemMenu30->Append(menuItem);
 	}
 	{
-		wxMenuItem* menuItem = new wxMenuItem(itemMenu31, IDM_ALIGN_MAKE_SAME_SIZE, _("Make Same Size"), wxEmptyString, wxITEM_NORMAL);
+		wxMenuItem* menuItem = new wxMenuItem(itemMenu30, IDM_ALIGN_MAKE_SAME_SIZE, _("Make Same Size"), wxEmptyString, wxITEM_NORMAL);
 		wxBitmap bitmap(itemFrame1->GetBitmapResource(wxT("../source/images/size_width_and_height.xpm")));
 		menuItem->SetBitmap(bitmap);
-		itemMenu31->Append(menuItem);
+		itemMenu30->Append(menuItem);
 	}
-	itemMenu31->AppendSeparator();
-	itemMenu31->Append(IDM_LAYER_UP, _("Layer Up\tCtrl+Up"), wxEmptyString, wxITEM_NORMAL);
-	itemMenu31->Append(IDM_LAYER_DOWN, _("Layer Down\tCtrl+Down"), wxEmptyString, wxITEM_NORMAL);
-	itemMenu31->Append(IDM_LAYER_IN, _("Layer In\tCtrl+Right"), wxEmptyString, wxITEM_NORMAL);
-	itemMenu31->Append(IDM_LAYER_OUT, _("Layer Out\tCtrl+Left"), wxEmptyString, wxITEM_NORMAL);
-	menuBar->Append(itemMenu31, _("&Align"));
-	wxMenu* itemMenu50 = new wxMenu;
-	itemMenu50->Append(IDM_VIEW_PREVIEW, _("&Preview...\tF5"), wxEmptyString, wxITEM_CHECK);
-	wxMenu* itemMenu52 = new wxMenu;
-	itemMenu50->Append(IDM_VIEW_LANGUAGES, _("&Language"), itemMenu52);
-	itemMenu50->AppendSeparator();
-	itemMenu50->Append(IDM_VIEW_SHOW_SELECTION, _("Show &Selection\tCtrl+H"), wxEmptyString, wxITEM_CHECK);
-	itemMenu50->Check(IDM_VIEW_SHOW_SELECTION, true);
-	itemMenu50->Append(IDM_VIEW_CURRENT_USING_TEX, _("Show &Current Using Textures\tCtrl+U"), wxEmptyString, wxITEM_NORMAL);
-	itemMenu50->AppendSeparator();
+	itemMenu30->AppendSeparator();
+	itemMenu30->Append(IDM_LAYER_UP, _("Layer Up\tCtrl+Up"), wxEmptyString, wxITEM_NORMAL);
+	itemMenu30->Append(IDM_LAYER_DOWN, _("Layer Down\tCtrl+Down"), wxEmptyString, wxITEM_NORMAL);
+	itemMenu30->Append(IDM_LAYER_IN, _("Layer In\tCtrl+Right"), wxEmptyString, wxITEM_NORMAL);
+	itemMenu30->Append(IDM_LAYER_OUT, _("Layer Out\tCtrl+Left"), wxEmptyString, wxITEM_NORMAL);
+	menuBar->Append(itemMenu30, _("&Align"));
+	wxMenu* itemMenu49 = new wxMenu;
+	itemMenu49->Append(IDM_VIEW_PREVIEW, _("&Preview...\tF5"), wxEmptyString, wxITEM_CHECK);
+	wxMenu* itemMenu51 = new wxMenu;
+	itemMenu49->Append(IDM_VIEW_LANGUAGES, _("&Language"), itemMenu51);
+	itemMenu49->AppendSeparator();
+	itemMenu49->Append(IDM_VIEW_SHOW_SELECTION, _("Show &Selection\tCtrl+H"), wxEmptyString, wxITEM_CHECK);
+	itemMenu49->Check(IDM_VIEW_SHOW_SELECTION, true);
+	itemMenu49->Append(IDM_VIEW_CURRENT_USING_TEX, _("Show &Current Using Textures\tCtrl+U"), wxEmptyString, wxITEM_NORMAL);
+	itemMenu49->AppendSeparator();
 	{
-		wxMenuItem* menuItem = new wxMenuItem(itemMenu50, wxID_ZOOM_IN, _("Zoom In\tCtrl++"), wxEmptyString, wxITEM_NORMAL);
+		wxMenuItem* menuItem = new wxMenuItem(itemMenu49, wxID_ZOOM_IN, _("Zoom In\tCtrl++"), wxEmptyString, wxITEM_NORMAL);
 		wxBitmap bitmap(itemFrame1->GetBitmapResource(wxT("../source/images/zoom_in.xpm")));
 		menuItem->SetBitmap(bitmap);
-		itemMenu50->Append(menuItem);
+		itemMenu49->Append(menuItem);
 	}
 	{
-		wxMenuItem* menuItem = new wxMenuItem(itemMenu50, wxID_ZOOM_OUT, _("Zoom Out\tCtrl+-"), wxEmptyString, wxITEM_NORMAL);
+		wxMenuItem* menuItem = new wxMenuItem(itemMenu49, wxID_ZOOM_OUT, _("Zoom Out\tCtrl+-"), wxEmptyString, wxITEM_NORMAL);
 		wxBitmap bitmap(itemFrame1->GetBitmapResource(wxT("../source/images/zoom_out.xpm")));
 		menuItem->SetBitmap(bitmap);
-		itemMenu50->Append(menuItem);
+		itemMenu49->Append(menuItem);
 	}
 	{
-		wxMenuItem* menuItem = new wxMenuItem(itemMenu50, wxID_ZOOM_100, _("Zoom 100\tCtrl+0"), wxEmptyString, wxITEM_NORMAL);
+		wxMenuItem* menuItem = new wxMenuItem(itemMenu49, wxID_ZOOM_100, _("Zoom 100\tCtrl+0"), wxEmptyString, wxITEM_NORMAL);
 		wxBitmap bitmap(itemFrame1->GetBitmapResource(wxT("../source/images/zoom_100.xpm")));
 		menuItem->SetBitmap(bitmap);
-		itemMenu50->Append(menuItem);
+		itemMenu49->Append(menuItem);
 	}
-	itemMenu50->AppendSeparator();
-	itemMenu50->Append(IDM_VIEW_SET_BG, _("Set Background"), wxEmptyString, wxITEM_NORMAL);
-	itemMenu50->Append(IDM_VIEW_CLEAR_BG, _("Clear Background"), wxEmptyString, wxITEM_NORMAL);
-	menuBar->Append(itemMenu50, _("&View"));
+	itemMenu49->AppendSeparator();
+	itemMenu49->Append(IDM_VIEW_SET_BG, _("Set Background"), wxEmptyString, wxITEM_NORMAL);
+	itemMenu49->Append(IDM_VIEW_CLEAR_BG, _("Clear Background"), wxEmptyString, wxITEM_NORMAL);
+	menuBar->Append(itemMenu49, _("&View"));
 	m_toolMenu = new wxMenu;
 	m_toolMenu->Append(IDM_TOOLS_GEN_BINDING_CODE_CPP, _("Generate Binding Code C++...\tCtrl+G"), wxEmptyString, wxITEM_NORMAL);
 	m_toolMenu->Append(IDM_TOOLS_GET_CONTROL_PATH, _("Get Control Path\tCtrl+Shift+G"), wxEmptyString, wxITEM_NORMAL);
 	m_toolMenu->Append(IDM_TOOLS_GEN_CHARSET, _("Generate Charset..."), wxEmptyString, wxITEM_NORMAL);
 	menuBar->Append(m_toolMenu, _("&Tools"));
-	wxMenu* itemMenu67 = new wxMenu;
-	itemMenu67->Append(wxID_ABOUT, _("&About\tF1"), wxEmptyString, wxITEM_NORMAL);
-	menuBar->Append(itemMenu67, _("&Help"));
+	wxMenu* itemMenu66 = new wxMenu;
+	itemMenu66->Append(wxID_ABOUT, _("&About\tF1"), wxEmptyString, wxITEM_NORMAL);
+	menuBar->Append(itemMenu66, _("&Help"));
 	itemFrame1->SetMenuBar(menuBar);
 
 	m_toolBar = new wxToolBar( itemFrame1, IDT_MAIN_TOOLBAR, wxDefaultPosition, wxDefaultSize, wxTB_FLAT|wxTB_HORIZONTAL|wxTB_NODIVIDER );
-	wxBitmap itemtool70Bitmap(itemFrame1->GetBitmapResource(wxT("../source/images/align_left.xpm")));
+	wxBitmap itemtool69Bitmap(itemFrame1->GetBitmapResource(wxT("../source/images/align_left.xpm")));
+	wxBitmap itemtool69BitmapDisabled;
+	m_toolBar->AddTool(IDM_ALIGN_LEFT, _("Align Left"), itemtool69Bitmap, itemtool69BitmapDisabled, wxITEM_NORMAL, _("Align Left"), wxEmptyString);
+	wxBitmap itemtool70Bitmap(itemFrame1->GetBitmapResource(wxT("../source/images/align_center.xpm")));
 	wxBitmap itemtool70BitmapDisabled;
-	m_toolBar->AddTool(IDM_ALIGN_LEFT, _("Align Left"), itemtool70Bitmap, itemtool70BitmapDisabled, wxITEM_NORMAL, _("Align Left"), wxEmptyString);
-	wxBitmap itemtool71Bitmap(itemFrame1->GetBitmapResource(wxT("../source/images/align_center.xpm")));
+	m_toolBar->AddTool(IDM_ALIGN_CENTER, _("Align Center"), itemtool70Bitmap, itemtool70BitmapDisabled, wxITEM_NORMAL, _("Align Center"), wxEmptyString);
+	wxBitmap itemtool71Bitmap(itemFrame1->GetBitmapResource(wxT("../source/images/align_right.xpm")));
 	wxBitmap itemtool71BitmapDisabled;
-	m_toolBar->AddTool(IDM_ALIGN_CENTER, _("Align Center"), itemtool71Bitmap, itemtool71BitmapDisabled, wxITEM_NORMAL, _("Align Center"), wxEmptyString);
-	wxBitmap itemtool72Bitmap(itemFrame1->GetBitmapResource(wxT("../source/images/align_right.xpm")));
-	wxBitmap itemtool72BitmapDisabled;
-	m_toolBar->AddTool(IDM_ALIGN_RIGHT, _("Align Right"), itemtool72Bitmap, itemtool72BitmapDisabled, wxITEM_NORMAL, _("Align Right"), wxEmptyString);
+	m_toolBar->AddTool(IDM_ALIGN_RIGHT, _("Align Right"), itemtool71Bitmap, itemtool71BitmapDisabled, wxITEM_NORMAL, _("Align Right"), wxEmptyString);
 	m_toolBar->AddSeparator();
-	wxBitmap itemtool74Bitmap(itemFrame1->GetBitmapResource(wxT("../source/images/align_top.xpm")));
+	wxBitmap itemtool73Bitmap(itemFrame1->GetBitmapResource(wxT("../source/images/align_top.xpm")));
+	wxBitmap itemtool73BitmapDisabled;
+	m_toolBar->AddTool(IDM_ALIGN_TOP, _("Align Top"), itemtool73Bitmap, itemtool73BitmapDisabled, wxITEM_NORMAL, _("Align Top"), wxEmptyString);
+	wxBitmap itemtool74Bitmap(itemFrame1->GetBitmapResource(wxT("../source/images/align_middle.xpm")));
 	wxBitmap itemtool74BitmapDisabled;
-	m_toolBar->AddTool(IDM_ALIGN_TOP, _("Align Top"), itemtool74Bitmap, itemtool74BitmapDisabled, wxITEM_NORMAL, _("Align Top"), wxEmptyString);
-	wxBitmap itemtool75Bitmap(itemFrame1->GetBitmapResource(wxT("../source/images/align_middle.xpm")));
+	m_toolBar->AddTool(IDM_ALIGN_MIDDLE, _("Align Middle"), itemtool74Bitmap, itemtool74BitmapDisabled, wxITEM_NORMAL, _("Align Middle"), wxEmptyString);
+	wxBitmap itemtool75Bitmap(itemFrame1->GetBitmapResource(wxT("../source/images/align_bottom.xpm")));
 	wxBitmap itemtool75BitmapDisabled;
-	m_toolBar->AddTool(IDM_ALIGN_MIDDLE, _("Align Middle"), itemtool75Bitmap, itemtool75BitmapDisabled, wxITEM_NORMAL, _("Align Middle"), wxEmptyString);
-	wxBitmap itemtool76Bitmap(itemFrame1->GetBitmapResource(wxT("../source/images/align_bottom.xpm")));
-	wxBitmap itemtool76BitmapDisabled;
-	m_toolBar->AddTool(IDM_ALIGN_BOTTOM, _("Align Bottom"), itemtool76Bitmap, itemtool76BitmapDisabled, wxITEM_NORMAL, _("Align Bottom"), wxEmptyString);
+	m_toolBar->AddTool(IDM_ALIGN_BOTTOM, _("Align Bottom"), itemtool75Bitmap, itemtool75BitmapDisabled, wxITEM_NORMAL, _("Align Bottom"), wxEmptyString);
 	m_toolBar->AddSeparator();
-	wxBitmap itemtool78Bitmap(itemFrame1->GetBitmapResource(wxT("../source/images/gap_horizontal.xpm")));
+	wxBitmap itemtool77Bitmap(itemFrame1->GetBitmapResource(wxT("../source/images/gap_horizontal.xpm")));
+	wxBitmap itemtool77BitmapDisabled;
+	m_toolBar->AddTool(IDM_ALIGN_GAP_HORIZONTAL, _("Average Gap Horizontal"), itemtool77Bitmap, itemtool77BitmapDisabled, wxITEM_NORMAL, _("Average Gap Horizontal"), wxEmptyString);
+	wxBitmap itemtool78Bitmap(itemFrame1->GetBitmapResource(wxT("../source/images/gap_vertical.xpm")));
 	wxBitmap itemtool78BitmapDisabled;
-	m_toolBar->AddTool(IDM_ALIGN_GAP_HORIZONTAL, _("Average Gap Horizontal"), itemtool78Bitmap, itemtool78BitmapDisabled, wxITEM_NORMAL, _("Average Gap Horizontal"), wxEmptyString);
-	wxBitmap itemtool79Bitmap(itemFrame1->GetBitmapResource(wxT("../source/images/gap_vertical.xpm")));
-	wxBitmap itemtool79BitmapDisabled;
-	m_toolBar->AddTool(IDM_ALIGN_GAP_VERTICAL, _("Average Gap Vertical"), itemtool79Bitmap, itemtool79BitmapDisabled, wxITEM_NORMAL, _("Average Gap Vertical"), wxEmptyString);
+	m_toolBar->AddTool(IDM_ALIGN_GAP_VERTICAL, _("Average Gap Vertical"), itemtool78Bitmap, itemtool78BitmapDisabled, wxITEM_NORMAL, _("Average Gap Vertical"), wxEmptyString);
 	m_toolBar->AddSeparator();
-	wxBitmap itemtool81Bitmap(itemFrame1->GetBitmapResource(wxT("../source/images/size_width.xpm")));
+	wxBitmap itemtool80Bitmap(itemFrame1->GetBitmapResource(wxT("../source/images/size_width.xpm")));
+	wxBitmap itemtool80BitmapDisabled;
+	m_toolBar->AddTool(IDM_ALIGN_SAME_WIDTH, _("Make Same Width"), itemtool80Bitmap, itemtool80BitmapDisabled, wxITEM_NORMAL, _("Make Same Width"), wxEmptyString);
+	wxBitmap itemtool81Bitmap(itemFrame1->GetBitmapResource(wxT("../source/images/size_height.xpm")));
 	wxBitmap itemtool81BitmapDisabled;
-	m_toolBar->AddTool(IDM_ALIGN_SAME_WIDTH, _("Make Same Width"), itemtool81Bitmap, itemtool81BitmapDisabled, wxITEM_NORMAL, _("Make Same Width"), wxEmptyString);
-	wxBitmap itemtool82Bitmap(itemFrame1->GetBitmapResource(wxT("../source/images/size_height.xpm")));
+	m_toolBar->AddTool(IDM_ALIGN_SAME_HEIGHT, _("Make Same Height"), itemtool81Bitmap, itemtool81BitmapDisabled, wxITEM_NORMAL, _("Make Same Height"), wxEmptyString);
+	wxBitmap itemtool82Bitmap(itemFrame1->GetBitmapResource(wxT("../source/images/size_width_and_height.xpm")));
 	wxBitmap itemtool82BitmapDisabled;
-	m_toolBar->AddTool(IDM_ALIGN_SAME_HEIGHT, _("Make Same Height"), itemtool82Bitmap, itemtool82BitmapDisabled, wxITEM_NORMAL, _("Make Same Height"), wxEmptyString);
-	wxBitmap itemtool83Bitmap(itemFrame1->GetBitmapResource(wxT("../source/images/size_width_and_height.xpm")));
-	wxBitmap itemtool83BitmapDisabled;
-	m_toolBar->AddTool(IDM_ALIGN_SAME_SIZE, _("Make Same Size"), itemtool83Bitmap, itemtool83BitmapDisabled, wxITEM_NORMAL, _("Make Same Size"), wxEmptyString);
+	m_toolBar->AddTool(IDM_ALIGN_SAME_SIZE, _("Make Same Size"), itemtool82Bitmap, itemtool82BitmapDisabled, wxITEM_NORMAL, _("Make Same Size"), wxEmptyString);
 	m_toolBar->AddSeparator();
-	wxBitmap itemtool85Bitmap(itemFrame1->GetBitmapResource(wxT("../source/images/zoom_in.xpm")));
+	wxBitmap itemtool84Bitmap(itemFrame1->GetBitmapResource(wxT("../source/images/zoom_in.xpm")));
+	wxBitmap itemtool84BitmapDisabled;
+	m_toolBar->AddTool(wxID_ZOOM_IN, _("Zoom In"), itemtool84Bitmap, itemtool84BitmapDisabled, wxITEM_NORMAL, wxEmptyString, wxEmptyString);
+	wxBitmap itemtool85Bitmap(itemFrame1->GetBitmapResource(wxT("../source/images/zoom_out.xpm")));
 	wxBitmap itemtool85BitmapDisabled;
-	m_toolBar->AddTool(wxID_ZOOM_IN, _("Zoom In"), itemtool85Bitmap, itemtool85BitmapDisabled, wxITEM_NORMAL, wxEmptyString, wxEmptyString);
-	wxBitmap itemtool86Bitmap(itemFrame1->GetBitmapResource(wxT("../source/images/zoom_out.xpm")));
+	m_toolBar->AddTool(wxID_ZOOM_OUT, _("Zoom Out"), itemtool85Bitmap, itemtool85BitmapDisabled, wxITEM_NORMAL, wxEmptyString, wxEmptyString);
+	wxBitmap itemtool86Bitmap(itemFrame1->GetBitmapResource(wxT("../source/images/zoom_100.xpm")));
 	wxBitmap itemtool86BitmapDisabled;
-	m_toolBar->AddTool(wxID_ZOOM_OUT, _("Zoom Out"), itemtool86Bitmap, itemtool86BitmapDisabled, wxITEM_NORMAL, wxEmptyString, wxEmptyString);
-	wxBitmap itemtool87Bitmap(itemFrame1->GetBitmapResource(wxT("../source/images/zoom_100.xpm")));
-	wxBitmap itemtool87BitmapDisabled;
-	m_toolBar->AddTool(wxID_ZOOM_100, _("Zoom 100"), itemtool87Bitmap, itemtool87BitmapDisabled, wxITEM_NORMAL, wxEmptyString, wxEmptyString);
+	m_toolBar->AddTool(wxID_ZOOM_100, _("Zoom 100"), itemtool86Bitmap, itemtool86BitmapDisabled, wxITEM_NORMAL, wxEmptyString, wxEmptyString);
 	m_toolBar->Realize();
 	itemFrame1->GetAuiManager().AddPane(m_toolBar, wxAuiPaneInfo()
 		.ToolbarPane().Name(_T("Pane1")).Top().Layer(10).CaptionVisible(false).CloseButton(false).DestroyOnClose(false).Resizable(false).Floatable(false).Movable(false).PaneBorder(false));
+
+	wxNotebook* itemNotebook87 = new wxNotebook( itemFrame1, ID_NOTEBOOK_LAYOUT_LEFT, wxDefaultPosition, wxDefaultSize, wxBK_DEFAULT );
+
+	m_treeProjects = new wxTreeCtrl( itemNotebook87, ID_TREECTRL_PROJECTS, wxDefaultPosition, wxDefaultSize, wxTR_SINGLE );
+
+	itemNotebook87->AddPage(m_treeProjects, _("Projects"));
+
+	itemFrame1->GetAuiManager().AddPane(itemNotebook87, wxAuiPaneInfo()
+		.Name(_T("layout_left")).BestSize(wxSize(300, -1)).CaptionVisible(false).CloseButton(false).DestroyOnClose(false).Resizable(true).Floatable(false));
+
+	wxNotebook* itemNotebook89 = new wxNotebook( itemFrame1, ID_NOTEBOOK_LAYOUT_RIGHT, wxDefaultPosition, wxDefaultSize, wxBK_DEFAULT );
+
+	m_properties = new wxPropertyGrid( itemNotebook89, ID_PROPERTIES, wxDefaultPosition, wxDefaultSize, wxSIMPLE_BORDER );
+
+	itemNotebook89->AddPage(m_properties, _("Properties"));
+
+	itemFrame1->GetAuiManager().AddPane(itemNotebook89, wxAuiPaneInfo()
+		.Name(_T("layout_right")).Right().BestSize(wxSize(300, -1)).CaptionVisible(false).CloseButton(false).DestroyOnClose(false).Resizable(true).Floatable(false));
+
+	wxNotebook* itemNotebook91 = new wxNotebook( itemFrame1, ID_NOTEBOOK_LAYOUT_CENTER, wxDefaultPosition, wxDefaultSize, wxBK_DEFAULT );
+
+	wxPanel* itemPanel92 = new wxPanel( itemNotebook91, ID_PANEL, wxDefaultPosition, wxDefaultSize, wxSUNKEN_BORDER|wxTAB_TRAVERSAL );
+	wxFlexGridSizer* itemFlexGridSizer93 = new wxFlexGridSizer(2, 2, 0, 0);
+	itemPanel92->SetSizer(itemFlexGridSizer93);
+
+	m_glView = new OpenGLView( itemPanel92, ID_GLCANVAS, wxDefaultPosition, wxDefaultSize, 0 );
+	itemFlexGridSizer93->Add(m_glView, 0, wxGROW|wxGROW, 5);
+
+	m_scrollV = new wxScrollBar( itemPanel92, ID_SCROLLBAR_V, wxDefaultPosition, wxDefaultSize, wxSB_VERTICAL );
+	m_scrollV->SetScrollbar(0, 1, 100, 1);
+	itemFlexGridSizer93->Add(m_scrollV, 0, wxALIGN_CENTER_HORIZONTAL|wxGROW, 5);
+
+	m_scrollH = new wxScrollBar( itemPanel92, ID_SCROLLBAR_H, wxDefaultPosition, wxDefaultSize, wxSB_HORIZONTAL );
+	m_scrollH->SetScrollbar(0, 1, 100, 1);
+	itemFlexGridSizer93->Add(m_scrollH, 0, wxGROW|wxALIGN_CENTER_VERTICAL, 5);
+
+	itemFlexGridSizer93->AddGrowableRow(0);
+	itemFlexGridSizer93->AddGrowableCol(0);
+
+	itemNotebook91->AddPage(itemPanel92, _("Preview"));
+
+	itemFrame1->GetAuiManager().AddPane(itemNotebook91, wxAuiPaneInfo()
+		.Name(_T("layout_center")).Centre().CaptionVisible(false).CloseButton(false).DestroyOnClose(false).Resizable(true).Floatable(false));
+
+	wxStatusBar* itemStatusBar97 = new wxStatusBar( itemFrame1, ID_STATUSBAR, wxST_SIZEGRIP|wxNO_BORDER );
+	itemStatusBar97->SetFieldsCount(4);
+	itemStatusBar97->SetStatusText(_("Batch"), 0);
+	itemStatusBar97->SetStatusText(wxEmptyString, 1);
+	itemStatusBar97->SetStatusText(_("Dialog Pos"), 2);
+	itemStatusBar97->SetStatusText(_("Screen Pos"), 3);
+	int itemStatusBar97Widths[4];
+	itemStatusBar97Widths[0] = 200;
+	itemStatusBar97Widths[1] = -1;
+	itemStatusBar97Widths[2] = 200;
+	itemStatusBar97Widths[3] = 200;
+	itemStatusBar97->SetStatusWidths(4, itemStatusBar97Widths);
+	itemFrame1->SetStatusBar(itemStatusBar97);
 
 	GetAuiManager().Update();
 
