@@ -1,0 +1,5 @@
+to build the samples for html5 platform
+
+1, install emscripten from http://kripken.github.io/emscripten-site/
+2, navigate to the sample project root using cmd. ex: (samples/HelloGLES/proj.html5)
+3, run build.bat

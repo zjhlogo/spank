@@ -149,7 +149,7 @@ void MandelbrotApp::updateInfo()
 
 	m_pLblInfo->setText(text);
 
-	glm::vec2 textSize = m_pLblInfo->calcTextSize();
+	glm::vec2 textSize = m_pLblInfo->calcTextSize(text);
 	const glm::vec2& surfaceSize = getRenderer()->getSurfaceSize();
 
 	m_pLblInfo->setPos(glm::vec2(-surfaceSize.x*0.5f, surfaceSize.y*0.5f - textSize.y) + glm::vec2(10.0f, -10.0f));
