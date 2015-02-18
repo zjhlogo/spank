@@ -8,6 +8,8 @@
 #pragma once
 
 #include "../base/PlatformDefine.h"
+#include <sstream>
+#include <iomanip>
 
 namespace spank
 {
@@ -28,23 +30,23 @@ public:
 	StringBuilder(const char* pszFormat);
 	~StringBuilder();
 
-	StringBuilder& add(int nValue, const char* pszFormat = NULL);
-	StringBuilder& add(uint nValue, const char* pszFormat = NULL);
+	template <typename T> StringBuilder& add(T value, int width = 0, int precision = 0)
+	{
+		std::stringstream ss;
+		if (width > 0) ss << std::setfill('0') << std::setw(width);
+		if (precision > 0) ss << std::setprecision(precision);
+		ss << value;
 
-	StringBuilder& add(int64 nValue, const char* pszFormat = NULL);
-	StringBuilder& add(uint64 nValue, const char* pszFormat = NULL);
+		std::string strValue;
+		ss >> strValue;
 
-	StringBuilder& add(float fValue, const char* pszFormat = NULL);
-	StringBuilder& add(double dValue, const char* pszFormat = NULL);
-	StringBuilder& add(const std::string& strValue);
+		m_vReplacement.push_back(strValue);
+		return (*this);
+	}
 
 	std::string build();
 
 	static StringBuilder format(const char* pszFormat);
-
-private:
-	void parseFormat(const char* pszFormat);
-	static bool strformat(std::string& strOut, const char* strFormat, ...);
 
 private:
 	TV_REPLACE_INFO m_vReplaceInfo;

@@ -113,7 +113,7 @@ bool Shader::reload(bool freeOld)
 	AutoDeleteShaderObj fragmentShaderObj(fragmentId);
 	if (fragmentId == 0) return false;
 
-	// attach shaders
+	// attach shader
 	glAttachShader(m_programId, vertexId);
 	glAttachShader(m_programId, fragmentId);
 
@@ -238,7 +238,7 @@ void Shader::drawBuffer(MemVertexBuffer* pVertexBuffer, int start, int numVerts)
 		const VertexAttributes::ATTRIBUTE_ITEM* pAttrItem = m_pVertAttributes->getAttributeItem(i);
 
 		glEnableVertexAttribArray(i);
-		glVertexAttribPointer(i, pAttrItem->size, pAttrItem->glType, GL_FALSE, stride, (void*)(pVertexBuffer->getBufferMemAddr() + pAttrItem->offset));
+		glVertexAttribPointer(i, pAttrItem->size, pAttrItem->glType, GL_FALSE, stride, (GLvoid*)(pVertexBuffer->getBufferMemAddr() + pAttrItem->offset));
 	}
 
 	// Draws a non-indexed triangle array
@@ -267,7 +267,7 @@ void Shader::drawBuffer(VMemVertexBuffer* pVertexBuffer, int start, int numVerts
 		const VertexAttributes::ATTRIBUTE_ITEM* pAttrItem = m_pVertAttributes->getAttributeItem(i);
 
 		glEnableVertexAttribArray(i);
-		glVertexAttribPointer(i, pAttrItem->size, pAttrItem->glType, GL_FALSE, stride, (void*)pAttrItem->offset);
+		glVertexAttribPointer(i, pAttrItem->size, pAttrItem->glType, GL_FALSE, stride, (GLvoid*)((intptr_t)pAttrItem->offset));
 	}
 
 	// Draws a non-indexed triangle array
@@ -301,7 +301,7 @@ void Shader::drawBuffer(MemVertexBuffer* pVertexBuffer, MemIndexBuffer* pIndexBu
 		const VertexAttributes::ATTRIBUTE_ITEM* pAttrItem = m_pVertAttributes->getAttributeItem(i);
 
 		glEnableVertexAttribArray(i);
-		glVertexAttribPointer(i, pAttrItem->size, pAttrItem->glType, GL_FALSE, stride, (void*)(pVertexBuffer->getBufferMemAddr() + pAttrItem->offset));
+		glVertexAttribPointer(i, pAttrItem->size, pAttrItem->glType, GL_FALSE, stride, (GLvoid*)(pVertexBuffer->getBufferMemAddr() + pAttrItem->offset));
 	}
 
 	// Draws a non-indexed triangle array
@@ -333,7 +333,7 @@ void Shader::drawBuffer(VMemVertexBuffer* pVertexBuffer, VMemIndexBuffer* pIndex
 		const VertexAttributes::ATTRIBUTE_ITEM* pAttrItem = m_pVertAttributes->getAttributeItem(i);
 
 		glEnableVertexAttribArray(i);
-		glVertexAttribPointer(i, pAttrItem->size, pAttrItem->glType, GL_FALSE, stride, (void*)(pAttrItem->offset));
+		glVertexAttribPointer(i, pAttrItem->size, pAttrItem->glType, GL_FALSE, stride, (GLvoid*)((intptr_t)pAttrItem->offset));
 	}
 
 	// Bind the IBO
