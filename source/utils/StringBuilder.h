@@ -19,12 +19,12 @@ class StringBuilder
 public:
 	typedef struct REPLACE_INFO_tag
 	{
-		std::string strString;
+		tstring strString;
 		int index;
 	} REPLACE_INFO;
 
 	typedef std::vector<REPLACE_INFO> TV_REPLACE_INFO;
-	typedef std::vector<std::string> TV_STRING;
+	typedef std::vector<tstring> TV_STRING;
 
 public:
 	StringBuilder(const char* pszFormat);
@@ -37,14 +37,14 @@ public:
 		if (precision > 0) ss << std::setprecision(precision);
 		ss << value;
 
-		std::string strValue;
+		tstring strValue;
 		ss >> strValue;
 
 		m_vReplacement.push_back(strValue);
 		return (*this);
 	}
 
-	std::string build();
+	tstring build();
 
 	static StringBuilder format(const char* pszFormat);
 

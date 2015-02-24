@@ -1,31 +1,8 @@
 /* -*- mode: c; tab-width: 8; -*- */
 /* vi: set sw=4 ts=8: */
-/* Reference version of egl.h for EGL 1.4.
- * $Revision: 9356 $ on $Date: 2009-10-21 02:52:25 -0700 (Wed, 21 Oct 2009) $
+/* Reference version of egl.h for EGL 1.3.
+ * Last modified 2006/11/12
  */
-
-/*
-** Copyright (c) 2007-2009 The Khronos Group Inc.
-**
-** Permission is hereby granted, free of charge, to any person obtaining a
-** copy of this software and/or associated documentation files (the
-** "Materials"), to deal in the Materials without restriction, including
-** without limitation the rights to use, copy, modify, merge, publish,
-** distribute, sublicense, and/or sell copies of the Materials, and to
-** permit persons to whom the Materials are furnished to do so, subject to
-** the following conditions:
-**
-** The above copyright notice and this permission notice shall be included
-** in all copies or substantial portions of the Materials.
-**
-** THE MATERIALS ARE PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-** EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-** MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
-** IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
-** CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
-** TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
-** MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
-*/
 
 #ifndef __egl_h_
 #define __egl_h_
@@ -40,7 +17,7 @@ extern "C" {
 #endif
 
 /* EGL Types */
-/* EGLint is defined in eglplatform.h */
+typedef int EGLint;
 typedef unsigned int EGLBoolean;
 typedef unsigned int EGLenum;
 typedef void *EGLConfig;
@@ -54,7 +31,6 @@ typedef void *EGLClientBuffer;
 #define EGL_VERSION_1_1			1
 #define EGL_VERSION_1_2			1
 #define EGL_VERSION_1_3			1
-#define EGL_VERSION_1_4			1
 
 /* EGL Enumerants. Bitmasks and other exceptional cases aside, most
  * enums are assigned unique values starting at 0x3000.
@@ -65,7 +41,7 @@ typedef void *EGLClientBuffer;
 #define EGL_TRUE			1
 
 /* Out-of-band handle values */
-#define EGL_DEFAULT_DISPLAY		((EGLNativeDisplayType)0)
+#define EGL_DEFAULT_DISPLAY		((NativeDisplayType)0)
 #define EGL_NO_CONTEXT			((EGLContext)0)
 #define EGL_NO_DISPLAY			((EGLDisplay)0)
 #define EGL_NO_SURFACE			((EGLSurface)0)
@@ -150,13 +126,10 @@ typedef void *EGLClientBuffer;
 #define EGL_WINDOW_BIT			0x0004	/* EGL_SURFACE_TYPE mask bits */
 #define EGL_VG_COLORSPACE_LINEAR_BIT	0x0020	/* EGL_SURFACE_TYPE mask bits */
 #define EGL_VG_ALPHA_FORMAT_PRE_BIT	0x0040	/* EGL_SURFACE_TYPE mask bits */
-#define EGL_MULTISAMPLE_RESOLVE_BOX_BIT 0x0200	/* EGL_SURFACE_TYPE mask bits */
-#define EGL_SWAP_BEHAVIOR_PRESERVED_BIT 0x0400	/* EGL_SURFACE_TYPE mask bits */
 
 #define EGL_OPENGL_ES_BIT		0x0001	/* EGL_RENDERABLE_TYPE mask bits */
 #define EGL_OPENVG_BIT			0x0002	/* EGL_RENDERABLE_TYPE mask bits */
 #define EGL_OPENGL_ES2_BIT		0x0004	/* EGL_RENDERABLE_TYPE mask bits */
-#define EGL_OPENGL_BIT			0x0008	/* EGL_RENDERABLE_TYPE mask bits */
 
 /* QueryString targets */
 #define EGL_VENDOR			0x3053
@@ -164,7 +137,7 @@ typedef void *EGLClientBuffer;
 #define EGL_EXTENSIONS			0x3055
 #define EGL_CLIENT_APIS			0x308D
 
-/* QuerySurface / SurfaceAttrib / CreatePbufferSurface targets */
+/* QuerySurface / CreatePbufferSurface targets */
 #define EGL_HEIGHT			0x3056
 #define EGL_WIDTH			0x3057
 #define EGL_LARGEST_PBUFFER		0x3058
@@ -179,7 +152,6 @@ typedef void *EGLClientBuffer;
 #define EGL_VERTICAL_RESOLUTION		0x3091
 #define EGL_PIXEL_ASPECT_RATIO		0x3092
 #define EGL_SWAP_BEHAVIOR		0x3093
-#define EGL_MULTISAMPLE_RESOLVE		0x3099
 
 /* EGL_RENDER_BUFFER values / BindTexImage / ReleaseTexImage buffer targets */
 #define EGL_BACK_BUFFER			0x3084
@@ -214,14 +186,9 @@ typedef void *EGLClientBuffer;
 /* CreateContext attributes */
 #define EGL_CONTEXT_CLIENT_VERSION	0x3098
 
-/* Multisample resolution behaviors */
-#define EGL_MULTISAMPLE_RESOLVE_DEFAULT 0x309A	/* EGL_MULTISAMPLE_RESOLVE value */
-#define EGL_MULTISAMPLE_RESOLVE_BOX	0x309B	/* EGL_MULTISAMPLE_RESOLVE value */
-
 /* BindAPI/QueryAPI targets */
 #define EGL_OPENGL_ES_API		0x30A0
 #define EGL_OPENVG_API			0x30A1
-#define EGL_OPENGL_API			0x30A2
 
 /* GetCurrentSurface targets */
 #define EGL_DRAW			0x3059
@@ -314,14 +281,7 @@ EGLAPI EGLBoolean EGLAPIENTRY eglSwapBuffers(EGLDisplay dpy, EGLSurface surface)
 EGLAPI EGLBoolean EGLAPIENTRY eglCopyBuffers(EGLDisplay dpy, EGLSurface surface,
 			  EGLNativePixmapType target);
 
-/* This is a generic function pointer type, whose name indicates it must
- * be cast to the proper type *and calling convention* before use.
- */
-typedef void (*__eglMustCastToProperFunctionPointerType)(void);
-
-/* Now, define eglGetProcAddress using the generic function ptr. type */
-EGLAPI __eglMustCastToProperFunctionPointerType EGLAPIENTRY
-       eglGetProcAddress(const char *procname);
+EGLAPI void (* EGLAPIENTRY eglGetProcAddress(const char *procname))(void);
 
 #ifdef __cplusplus
 }

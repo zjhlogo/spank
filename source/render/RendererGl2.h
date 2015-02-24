@@ -18,10 +18,10 @@ namespace spank
 class RendererGl2 : public IRenderer
 {
 public:
-	typedef std::map<std::string, Texture*> TM_TEXTURE;
-	typedef std::map<std::string, Shader*> TM_SHADER;
+	typedef std::map<tstring, Texture*> TM_TEXTURE;
+	typedef std::map<tstring, Shader*> TM_SHADER;
 	typedef std::set<RenderBuffer*> TS_RENDER_BUFFER;
-	typedef std::map<std::string, VertexAttributes*> TM_VERTEX_ATTRIBUTE;
+	typedef std::map<tstring, VertexAttributes*> TM_VERTEX_ATTRIBUTE;
 
 public:
 	RendererGl2();
@@ -36,8 +36,8 @@ public:
 	virtual const glm::mat4& getOrthoMatrix() const override;
 	virtual const glm::mat4& getPerspectiveMatrix() const override;
 
-	virtual Texture* createTexture(const std::string& filePath) override;
-	virtual Shader* createShader(const std::string& filePath) override;
+	virtual Texture* createTexture(const tstring& filePath) override;
+	virtual Shader* createShader(const tstring& filePath) override;
 
 	virtual MemVertexBuffer* createMemVertexBuffer(const VertexAttributes* pVertAttrs) override;
 	virtual VMemVertexBuffer* createVMemVertexBuffer(const VertexAttributes* pVertAttrs) override;
@@ -45,7 +45,7 @@ public:
 	virtual MemIndexBuffer* createMemIndexBuffer() override;
 	virtual VMemIndexBuffer* createVMemIndexBuffer() override;
 
-	virtual VertexAttributes* createVertexAttributes(const std::string& filePath) override;
+	virtual VertexAttributes* createVertexAttributes(const tstring& filePath) override;
 
 protected:
 	virtual bool removeTexture(Texture* pTexture) override;

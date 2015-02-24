@@ -33,12 +33,12 @@ MeshData::~MeshData()
 	destroy();
 }
 
-bool MeshData::loadFromFile(const std::string& filePath)
+bool MeshData::loadFromFile(const tstring& filePath)
 {
 	BUFFER_DATA bufferData;
 	if (!FileUtil::readFile(bufferData, filePath)) return false;
 
-	std::string baseDir = StringUtil::getFileDir(filePath);
+	tstring baseDir = StringUtil::getFileDir(filePath);
 
 	BufferStream bufferStream(bufferData);
 	if (parseMeshFile(&bufferStream, baseDir))
@@ -64,7 +64,7 @@ void MeshData::preDelete()
 	m_pModelMgr->removeMeshData(this);
 }
 
-bool MeshData::parseMeshFile(BufferStream* pStream, const std::string& baseDir)
+bool MeshData::parseMeshFile(BufferStream* pStream, const tstring& baseDir)
 {
 	destroy();
 
@@ -102,7 +102,7 @@ bool MeshData::parseMeshFile(BufferStream* pStream, const std::string& baseDir)
 	for (const auto& pieceInfo : pieceInfoList)
 	{
 		// create shader for piece
-		std::string shaderFullPath = m_pRenderer->getShaderBaseDir() + "/" + pieceInfo.szShader;
+		tstring shaderFullPath = m_pRenderer->getShaderBaseDir() + "/" + pieceInfo.szShader;
 		Shader* pShader = m_pRenderer->createShader(shaderFullPath);
 		if (!pShader)
 		{

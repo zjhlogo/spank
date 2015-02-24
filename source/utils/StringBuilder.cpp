@@ -67,9 +67,9 @@ StringBuilder::~StringBuilder()
 
 }
 
-std::string StringBuilder::build()
+tstring StringBuilder::build()
 {
-	std::string strFinal;
+	tstring strFinal;
 
 	for (TV_REPLACE_INFO::iterator it = m_vReplaceInfo.begin(); it != m_vReplaceInfo.end(); ++it)
 	{

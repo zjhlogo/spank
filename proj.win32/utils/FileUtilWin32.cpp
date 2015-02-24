@@ -12,7 +12,7 @@
 namespace spank
 {
 
-bool FileUtil::readFile(BUFFER_DATA& bufferOut, const std::string& filePath)
+bool FileUtil::readFile(BUFFER_DATA& bufferOut, const tstring& filePath)
 {
 	FILE* pFile = fopen(filePath.c_str(), "rb");
 	if (!pFile)

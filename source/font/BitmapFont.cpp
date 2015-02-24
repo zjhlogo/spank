@@ -18,7 +18,7 @@
 namespace spank
 {
 
-BitmapFont::BitmapFont(const std::string& strId, IRenderer* pRenderer)
+BitmapFont::BitmapFont(const tstring& strId, IRenderer* pRenderer)
 	:IFont(strId)
 	, m_pRenderer(pRenderer)
 {
@@ -45,9 +45,9 @@ const IFont::CHAR_INFO& BitmapFont::getCharInfo(uint charId)
 	return it->second;
 }
 
-bool BitmapFont::loadFont(const std::string& filePath)
+bool BitmapFont::loadFont(const tstring& filePath)
 {
-	std::string xmlData;
+	tstring xmlData;
 	if (!FileUtil::readStringFile(xmlData, filePath))
 	{
 		LOGE("Load Bitmap font failed %s", filePath.c_str());
@@ -61,7 +61,7 @@ bool BitmapFont::loadFont(const std::string& filePath)
 		return false;
 	}
 
-	std::string strDir = StringUtil::getFileDir(filePath);
+	tstring strDir = StringUtil::getFileDir(filePath);
 
 	tinyxml2::XMLElement* pXmlFont = doc.RootElement();
 	if (!pXmlFont) return false;
@@ -85,7 +85,7 @@ bool BitmapFont::loadFont(const std::string& filePath)
 	tinyxml2::XMLElement* pXmlPage = pXmlPageType->FirstChildElement("page");
 	while (pXmlPage)
 	{
-		std::string strTexturePath = pXmlPage->Attribute("file");
+		tstring strTexturePath = pXmlPage->Attribute("file");
 		strTexturePath = strDir + "/" + strTexturePath;
 
 		Texture* pFontTexture = m_pRenderer->createTexture(strTexturePath);

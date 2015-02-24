@@ -43,11 +43,11 @@ public:
 		ATTRIBUTE_ITEM_TYPE attrType{ AIT_UNKNOWN };
 		GLenum glType{ GL_FLOAT };
 		GLuint offset{ 0 };
-		std::string name;
+		tstring name;
 	} ATTRIBUTE_ITEM;
 
 public:
-	bool loadFromFile(const std::string& filePath);
+	bool loadFromFile(const tstring& filePath);
 
 	inline uint getStride() const { return m_attributeItems[m_numItems].offset; };
 	inline int getNumAttributeItems() const { return m_numItems; };
@@ -65,7 +65,7 @@ protected:
 private:
 	static GLenum getGlType(ATTRIBUTE_ITEM_TYPE eType);
 	static GLuint getAttributeItemSize(uint nSize, ATTRIBUTE_ITEM_TYPE eType);
-	static ATTRIBUTE_ITEM_TYPE getAttributeItemType(const std::string& strType);
+	static ATTRIBUTE_ITEM_TYPE getAttributeItemType(const tstring& strType);
 
 	bool createVertexAttribute(const ATTRIBUTE_ITEM* pAttrItems);
 

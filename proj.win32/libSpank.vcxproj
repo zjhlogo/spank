@@ -116,7 +116,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_WARNINGS;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>../vendor/PowerVR_SDK_3.3_R2/inc/;../source/;../vendor/</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../vendor/OpenGL_ES_2.0_Emulator_v1.0/include/;../source/;../vendor/</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>4351</DisableSpecificWarnings>
     </ClCompile>
     <Link>
@@ -133,8 +133,8 @@
     </Lib>
     <ProjectReference />
     <PostBuildEvent>
-      <Command>echo "copy /Y ..\vendor\PowerVR_SDK_3.3_R2\bin\*.dll ..\bin\"
-copy /Y ..\vendor\PowerVR_SDK_3.3_R2\bin\*.dll ..\bin\
+      <Command>echo "copy /Y ..\vendor\OpenGL_ES_2.0_Emulator_v1.0\bin\*.dll ..\bin\"
+copy /Y ..\vendor\OpenGL_ES_2.0_Emulator_v1.0\bin\*.dll ..\bin\
 </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -147,7 +147,7 @@ copy /Y ..\vendor\PowerVR_SDK_3.3_R2\bin\*.dll ..\bin\
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_WARNINGS;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>../vendor/PowerVR_SDK_3.3_R2/inc/;../source/;../vendor/</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../vendor/OpenGL_ES_2.0_Emulator_v1.0/include/;../source/;../vendor/</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>4351</DisableSpecificWarnings>
     </ClCompile>
     <Link>
@@ -166,8 +166,8 @@ copy /Y ..\vendor\PowerVR_SDK_3.3_R2\bin\*.dll ..\bin\
     </Lib>
     <ProjectReference />
     <PostBuildEvent>
-      <Command>echo "copy /Y ..\vendor\PowerVR_SDK_3.3_R2\bin\*.dll ..\bin\"
-copy /Y ..\vendor\PowerVR_SDK_3.3_R2\bin\*.dll ..\bin\
+      <Command>echo "copy /Y ..\vendor\OpenGL_ES_2.0_Emulator_v1.0\bin\*.dll ..\bin\"
+copy /Y ..\vendor\OpenGL_ES_2.0_Emulator_v1.0\bin\*.dll ..\bin\
 </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>

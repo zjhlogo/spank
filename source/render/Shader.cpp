@@ -44,9 +44,9 @@ Shader::~Shader()
 	SAFE_RELEASE(m_pVertAttributes);
 }
 
-bool Shader::loadFromFile(const std::string& filePath)
+bool Shader::loadFromFile(const tstring& filePath)
 {
-	std::string xmlData;
+	tstring xmlData;
 	if (!FileUtil::readStringFile(xmlData, filePath)) return false;
 
 	tinyxml2::XMLDocument doc;
@@ -75,7 +75,7 @@ bool Shader::loadFromFile(const std::string& filePath)
 		m_textureInfoMap.insert(std::make_pair(textureInfo.slotId, textureInfo));
 	}
 
-	std::string strDir = StringUtil::getFileDir(filePath);
+	tstring strDir = StringUtil::getFileDir(filePath);
 
 	// create vertex attributes
 	m_pVertAttributes = m_pRenderer->createVertexAttributes(strDir + "/" + pszAttrFile);
@@ -360,7 +360,7 @@ void Shader::destroyProgram()
 	}
 }
 
-GLuint Shader::compileShader(GLuint shaderType, const std::string& shaderData)
+GLuint Shader::compileShader(GLuint shaderType, const tstring& shaderData)
 {
 	if (shaderData.length() <= 0) return 0;
 

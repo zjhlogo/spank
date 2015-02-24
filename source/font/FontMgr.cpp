@@ -38,7 +38,7 @@ void FontMgr::terminate()
 	m_fontMap.clear();
 }
 
-IFont* FontMgr::createFont(const std::string& filePath)
+IFont* FontMgr::createFont(const tstring& filePath)
 {
 	// font font first
 	TM_FONT::iterator it = m_fontMap.find(filePath);

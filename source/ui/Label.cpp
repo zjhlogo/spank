@@ -29,7 +29,7 @@ Label::~Label()
 	clearBuffer();
 }
 
-void Label::setText(const std::string& text)
+void Label::setText(const tstring& text)
 {
 	if (m_text == text) return;
 	m_text = text;
@@ -38,7 +38,7 @@ void Label::setText(const std::string& text)
 	createBuffer(m_text);
 }
 
-glm::vec2 Label::calcTextSize(const std::string& text)
+glm::vec2 Label::calcTextSize(const tstring& text)
 {
 	// calculate the number of lines
 	int numLines = 1;
@@ -107,7 +107,7 @@ void Label::clearBuffer()
 	m_indexBufferInfoMap.clear();
 }
 
-bool Label::createBuffer(const std::string& text)
+bool Label::createBuffer(const tstring& text)
 {
 	clearBuffer();
 

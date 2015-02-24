@@ -21,10 +21,10 @@ public:
 	typedef std::vector<Texture*> TV_TEXTURE;
 
 public:
-	BitmapFont(const std::string& strId, IRenderer* pRenderer);
+	BitmapFont(const tstring& strId, IRenderer* pRenderer);
 	virtual ~BitmapFont();
 
-	bool loadFont(const std::string& filePath);
+	bool loadFont(const tstring& filePath);
 
 	virtual int getLineHeight() const override { return m_lineHeight; };
 	virtual int getLineBase() const override { return m_lineBase; };

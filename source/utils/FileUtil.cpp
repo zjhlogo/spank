@@ -10,7 +10,7 @@
 namespace spank
 {
 
-bool FileUtil::readStringFile(std::string& strOut, const std::string& filePath)
+bool FileUtil::readStringFile(tstring& strOut, const tstring& filePath)
 {
 	BUFFER_DATA buffer;
 	if (!readFile(buffer, filePath)) return false;

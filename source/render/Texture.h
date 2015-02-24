@@ -21,7 +21,7 @@ class Texture : public RenderObject
 	friend class RendererGl2;
 
 public:
-	bool loadFromFile(const std::string& filePath);
+	bool loadFromFile(const tstring& filePath);
 	bool reload(bool freeOld);
 
 	inline uint getTextureId() const { return m_textureId; };

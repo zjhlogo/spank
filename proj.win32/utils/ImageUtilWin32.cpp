@@ -11,7 +11,7 @@
 namespace spank
 {
 
-GLuint ImageUtil::decodeImage(IMAGE_FILE_TYPE eImageFileType, const std::string& filePath)
+GLuint ImageUtil::decodeImage(IMAGE_FILE_TYPE eImageFileType, const tstring& filePath)
 {
 	GLuint textureId = 0;
 

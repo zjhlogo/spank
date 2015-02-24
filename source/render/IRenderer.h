@@ -41,8 +41,8 @@ public:
 	virtual const glm::mat4& getOrthoMatrix() const = 0;
 	virtual const glm::mat4& getPerspectiveMatrix() const = 0;
 
-	virtual Texture* createTexture(const std::string& filePath) = 0;
-	virtual Shader* createShader(const std::string& filePath) = 0;
+	virtual Texture* createTexture(const tstring& filePath) = 0;
+	virtual Shader* createShader(const tstring& filePath) = 0;
 
 	virtual MemVertexBuffer* createMemVertexBuffer(const VertexAttributes* pVertAttrs) = 0;
 	virtual VMemVertexBuffer* createVMemVertexBuffer(const VertexAttributes* pVertAttrs) = 0;
@@ -50,10 +50,10 @@ public:
 	virtual MemIndexBuffer* createMemIndexBuffer() = 0;
 	virtual VMemIndexBuffer* createVMemIndexBuffer() = 0;
 
-	virtual VertexAttributes* createVertexAttributes(const std::string& filePath) = 0;
+	virtual VertexAttributes* createVertexAttributes(const tstring& filePath) = 0;
 
-	inline void setShaderBaseDir(const std::string& shaderBaseDir) { m_shaderBaseDir = shaderBaseDir; };
-	inline const std::string& getShaderBaseDir() const { return m_shaderBaseDir; };
+	inline void setShaderBaseDir(const tstring& shaderBaseDir) { m_shaderBaseDir = shaderBaseDir; };
+	inline const tstring& getShaderBaseDir() const { return m_shaderBaseDir; };
 
 protected:
 	virtual bool removeTexture(Texture* pTexture) = 0;
@@ -62,7 +62,7 @@ protected:
 	virtual bool removeVertexAttributes(VertexAttributes* pVertAttrs) = 0;
 
 private:
-	std::string m_shaderBaseDir;
+	tstring m_shaderBaseDir;
 
 };
 

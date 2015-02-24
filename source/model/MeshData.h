@@ -35,7 +35,7 @@ public:
 	typedef struct MATERIAL_ITEM_tag
 	{
 		MeshFileFormat::MATERIAL_INFO materialInfo;
-		std::string texDiffuseFullPath;
+		tstring texDiffuseFullPath;
 		Texture* pTexDiffuse{ nullptr };
 	} MATERIAL_ITEM;
 	typedef std::vector<MATERIAL_ITEM> TV_MATERIAL_ITEM;
@@ -55,7 +55,7 @@ public:
 	 * \param filePath the mesh file path
 	 * \return return true if success, otherwise return false
 	 */
-	bool loadFromFile(const std::string& filePath);
+	bool loadFromFile(const tstring& filePath);
 
 	Texture* getMaterialTexDiffuse(int materialId);
 
@@ -71,7 +71,7 @@ private:
 	 * \param pReader the stream of mesh file
 	 * \return return true if parse success, otherwise return false
 	 */
-	bool parseMeshFile(BufferStream* pStream, const std::string& baseDir);
+	bool parseMeshFile(BufferStream* pStream, const tstring& baseDir);
 
 	/*!
 	 * \brief destroy all resources

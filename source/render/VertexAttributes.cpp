@@ -31,9 +31,9 @@ VertexAttributes::~VertexAttributes()
 	// TODO: 
 }
 
-bool VertexAttributes::loadFromFile(const std::string& filePath)
+bool VertexAttributes::loadFromFile(const tstring& filePath)
 {
-	std::string xmlData;
+	tstring xmlData;
 	if (!FileUtil::readStringFile(xmlData, filePath)) return false;
 
 	tinyxml2::XMLDocument doc;
@@ -140,7 +140,7 @@ GLuint VertexAttributes::getAttributeItemSize(uint nSize, ATTRIBUTE_ITEM_TYPE eT
 	return nSize*s_ItemSizes[eType];
 }
 
-VertexAttributes::ATTRIBUTE_ITEM_TYPE VertexAttributes::getAttributeItemType(const std::string& strType)
+VertexAttributes::ATTRIBUTE_ITEM_TYPE VertexAttributes::getAttributeItemType(const tstring& strType)
 {
 	if (strType == "AIT_UNKNOWN") return AIT_UNKNOWN;
 	else if (strType == "AIT_BYTE") return AIT_BYTE;

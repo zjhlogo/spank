@@ -39,7 +39,7 @@ void ModelMgr::terminate()
 	m_meshDataMap.clear();
 }
 
-MeshData* ModelMgr::createMeshData(const std::string& filePath)
+MeshData* ModelMgr::createMeshData(const tstring& filePath)
 {
 	// find from cache
 	TM_MESH_DATA::iterator it = m_meshDataMap.find(filePath);

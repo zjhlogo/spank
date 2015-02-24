@@ -25,7 +25,7 @@ Texture::~Texture()
 	destroyTexture();
 }
 
-bool Texture::loadFromFile(const std::string& filePath)
+bool Texture::loadFromFile(const tstring& filePath)
 {
 	if (m_textureId != 0) return false;
 
@@ -51,7 +51,7 @@ bool Texture::reload(bool freeOld)
 {
 	if (freeOld) destroyTexture();
 
-	const std::string& filePath = getId();
+	const tstring& filePath = getId();
 	m_textureId = ImageUtil::decodeImage(m_eImageFileType, filePath);
 	if (m_textureId != 0) return true;
 

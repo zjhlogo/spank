@@ -12,6 +12,7 @@
 #include "RenderBuffer.h"
 #include "VertexAttributes.h"
 #include "../utils/LogUtil.h"
+#include "../utils/StringUtil.h"
 #include <GLES2/gl2.h>
 
 #define LOG_GL_INT_CAPACITY(x) \
@@ -39,7 +40,14 @@ bool RendererGl2::initialize()
 	LOGI("Version: %s", glGetString(GL_VERSION));
 	LOGI("Vendor: %s", glGetString(GL_VENDOR));
 	LOGI("Renderer: %s", glGetString(GL_RENDERER));
-	LOGI("Extensions: %s", glGetString(GL_EXTENSIONS));
+
+	const GLubyte* pszExtensions = glGetString(GL_EXTENSIONS);
+	TV_STRING extensionsArray;
+	StringUtil::splitString(extensionsArray, reinterpret_cast<const char*>(pszExtensions), " ");
+	for (const auto& ext : extensionsArray)
+	{
+		LOGI("Extensions: %s", ext.c_str());
+	}
 
 	LOG_GL_INT_CAPACITY(GL_DEPTH_BITS);
 	LOG_GL_INT_CAPACITY(GL_STENCIL_BITS);
@@ -172,7 +180,7 @@ const glm::mat4& RendererGl2::getPerspectiveMatrix() const
 	return m_matPerspective;
 }
 
-Texture* RendererGl2::createTexture(const std::string& filePath)
+Texture* RendererGl2::createTexture(const tstring& filePath)
 {
 	// first, find from map
 	TM_TEXTURE::iterator it = m_textureMap.find(filePath);
@@ -196,7 +204,7 @@ Texture* RendererGl2::createTexture(const std::string& filePath)
 	return pTexture;
 }
 
-Shader* RendererGl2::createShader(const std::string& filePath)
+Shader* RendererGl2::createShader(const tstring& filePath)
 {
 	// first, find shader from map
 	TM_SHADER::iterator it = m_shaderMap.find(filePath);
@@ -268,7 +276,7 @@ VMemIndexBuffer* RendererGl2::createVMemIndexBuffer()
 	return pRenderBuffer;
 }
 
-VertexAttributes* RendererGl2::createVertexAttributes(const std::string& filePath)
+VertexAttributes* RendererGl2::createVertexAttributes(const tstring& filePath)
 {
 	// first, find shader from map
 	TM_VERTEX_ATTRIBUTE::iterator it = m_vertexAttributeMap.find(filePath);

@@ -10,7 +10,7 @@
 namespace spank
 {
 
-IFont::IFont(const std::string& strId)
+IFont::IFont(const tstring& strId)
 	:m_strFontId(strId)
 {
 	// TODO: 

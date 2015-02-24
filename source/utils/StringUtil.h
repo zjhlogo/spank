@@ -15,8 +15,13 @@ namespace spank
 class StringUtil
 {
 public:
-	static std::string getFileDir(const std::string& strIn);
-	static std::string getFileExt(const std::string& strIn);
+
+	static tstring getFileDir(const tstring& strIn);
+	static tstring getFileExt(const tstring& strIn);
+
+	static int splitString(TV_STRING& arrOut, const tstring& strIn, const tstring& strSplit);
+	static tstring joinString(const TV_STRING& arrIn, const tstring& strSplit, bool reverse = false);
+	static int replaceString(tstring& strInOut, const tstring& strSearch, const tstring& strReplace);
 
 };
 

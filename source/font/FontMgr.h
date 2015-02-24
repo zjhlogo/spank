@@ -19,7 +19,7 @@ class IRenderer;
 class FontMgr : public IMgr
 {
 public:
-	typedef std::map<std::string, IFont*> TM_FONT;
+	typedef std::map<tstring, IFont*> TM_FONT;
 
 public:
 	FontMgr(IRenderer* pRenderer);
@@ -28,7 +28,7 @@ public:
 	virtual bool initialize() override;
 	virtual void terminate() override;
 
-	IFont* createFont(const std::string& filePath);
+	IFont* createFont(const tstring& filePath);
 
 private:
 	IRenderer* m_pRenderer{ nullptr };

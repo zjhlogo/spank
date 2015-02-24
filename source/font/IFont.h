@@ -42,10 +42,10 @@ public:
 	};
 
 public:
-	IFont(const std::string& strId);
+	IFont(const tstring& strId);
 	virtual ~IFont();
 
-	inline const std::string& getFontId() const { return m_strFontId; };
+	inline const tstring& getFontId() const { return m_strFontId; };
 
 	virtual int getLineHeight() const = 0;
 	virtual int getLineBase() const = 0;
@@ -57,7 +57,7 @@ public:
 	inline bool checkFontState(int state) const { return ((m_nFontState & state) == state); };
 
 private:
-	std::string m_strFontId;
+	tstring m_strFontId;
 	int m_nFontState{ 0 };
 
 };

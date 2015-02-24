@@ -15,9 +15,9 @@
 namespace spank
 {
 
-ImageUtil::IMAGE_FILE_TYPE spank::ImageUtil::getImageFileType(const std::string& filePath)
+ImageUtil::IMAGE_FILE_TYPE spank::ImageUtil::getImageFileType(const tstring& filePath)
 {
-	std::string strExt = StringUtil::getFileExt(filePath);
+	tstring strExt = StringUtil::getFileExt(filePath);
 	if (strExt == "png") return IFT_PNG;
 	if (strExt == "pvr") return IFT_PVR;
 	return IFT_UNKNOWN;
@@ -33,7 +33,7 @@ static void FuncReaderCallback(png_structp pPngStruct, png_bytep pData, png_size
 	}
 }
 
-GLuint ImageUtil::decodePngImage(const std::string& filePath)
+GLuint ImageUtil::decodePngImage(const tstring& filePath)
 {
 	BUFFER_DATA fileBuffer;
 	if (!FileUtil::readFile(fileBuffer, filePath))

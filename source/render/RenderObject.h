@@ -21,8 +21,8 @@ public:
 	RenderObject();
 	virtual ~RenderObject();
 
-	inline void setId(const std::string& strId) { m_strId = strId; };
-	inline const std::string getId() const { return m_strId; };
+	inline void setId(const tstring& strId) { m_strId = strId; };
+	inline const tstring getId() const { return m_strId; };
 
 	void release();
 
@@ -34,7 +34,7 @@ protected:
 
 private:
 	int m_ref{ 1 };
-	std::string m_strId;
+	tstring m_strId;
 
 };
 

@@ -40,19 +40,19 @@ public:
 	Label(IRenderer* pRenderer, IFont* pFont);
 	virtual ~Label();
 
-	void setText(const std::string& text);
-	inline const std::string& getText() const { return m_text; };
+	void setText(const tstring& text);
+	inline const tstring& getText() const { return m_text; };
 
 	inline void setPos(const glm::vec2& pos) { m_pos = pos; };
 	inline const glm::vec2& getPos() const { return m_pos; };
 
-	glm::vec2 calcTextSize(const std::string& text);
+	glm::vec2 calcTextSize(const tstring& text);
 
 	void render();
 
 private:
 	void clearBuffer();
-	bool createBuffer(const std::string& text);
+	bool createBuffer(const tstring& text);
 
 	INDEX_BUFFER_INFO* findIndexBuffer(Texture* pTexture);
 
@@ -62,7 +62,7 @@ private:
 	Texture* m_pTexture{ nullptr };
 	IFont* m_pFont{ nullptr };
 
-	std::string m_text;
+	tstring m_text;
 	glm::vec2 m_pos;
 
 	VMemVertexBuffer* m_vertexBuffer{ nullptr };

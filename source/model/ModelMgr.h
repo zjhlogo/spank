@@ -21,7 +21,7 @@ class ModelMgr : public IMgr
 public:
 	friend class MeshData;
 
-	typedef std::map<std::string, MeshData*> TM_MESH_DATA;
+	typedef std::map<tstring, MeshData*> TM_MESH_DATA;
 
 public:
 	ModelMgr(IRenderer* pRenderer);
@@ -30,7 +30,7 @@ public:
 	virtual bool initialize() override;
 	virtual void terminate() override;
 
-	MeshData* createMeshData(const std::string& filePath);
+	MeshData* createMeshData(const tstring& filePath);
 
 protected:
 	bool removeMeshData(MeshData* pMeshData);

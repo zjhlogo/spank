@@ -24,12 +24,12 @@ public:
 	};
 
 public:
-	static IMAGE_FILE_TYPE getImageFileType(const std::string& filePath);
-	static GLuint decodeImage(IMAGE_FILE_TYPE eImageFileType, const std::string& filePath);
+	static IMAGE_FILE_TYPE getImageFileType(const tstring& filePath);
+	static GLuint decodeImage(IMAGE_FILE_TYPE eImageFileType, const tstring& filePath);
 	static GLuint createTextureFromRawData(int width, int height, int channels, const BUFFER_DATA& bufferData);
 
 private:
-	static GLuint decodePngImage(const std::string& filePath);
+	static GLuint decodePngImage(const tstring& filePath);
 
 };
 

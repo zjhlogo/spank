@@ -31,13 +31,13 @@ public:
 	typedef struct TEXTURE_INFO_tag
 	{
 		int slotId{ 0 };
-		std::string name;
+		tstring name;
 	} TEXTURE_INFO;
 
 	typedef std::map<int, TEXTURE_INFO> TM_TEXTURE_INFO;
 
 public:
-	bool loadFromFile(const std::string& filePath);
+	bool loadFromFile(const tstring& filePath);
 	bool reload(bool freeOld);
 
 	void useProgram();
@@ -63,7 +63,7 @@ protected:
 
 private:
 	void destroyProgram();
-	GLuint compileShader(GLuint shaderType, const std::string& shaderData);
+	GLuint compileShader(GLuint shaderType, const tstring& shaderData);
 	bool getShaderErrorLog(GLuint shaderId);
 	bool getProgramErrorLog(GLuint programId);
 
@@ -73,9 +73,9 @@ private:
 	IRenderer* m_pRenderer{ nullptr };
 	VertexAttributes* m_pVertAttributes{ nullptr };
 
-	std::string m_vertexShaderData;
-	std::string m_fragShaderData;
-	std::string m_errorLog;
+	tstring m_vertexShaderData;
+	tstring m_fragShaderData;
+	tstring m_errorLog;
 
 	TM_TEXTURE_INFO m_textureInfoMap;
 

@@ -25,7 +25,9 @@ typedef long long          int64;
 typedef unsigned long long uint64;
 typedef unsigned int       uint;
 
-typedef std::vector<char> BUFFER_DATA;
+typedef std::string		          tstring;
+typedef std::vector<char>         BUFFER_DATA;
+typedef std::vector<tstring>      TV_STRING;
 
 #define SAFE_DELETE(x) if (x) {delete x; x=nullptr;}
 #define SAFE_DELETE_ARRAY(x) if (x) {delete[] x; x=nullptr;}
