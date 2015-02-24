@@ -23,13 +23,20 @@ public:
 		IFT_PVR,
 	};
 
+	typedef struct TEXTURE_INFO_tag
+	{
+		GLuint textureId{ 0 };
+		int width{ 0 };
+		int height{ 0 };
+	} TEXTURE_INFO;
+
 public:
 	static IMAGE_FILE_TYPE getImageFileType(const tstring& filePath);
-	static GLuint decodeImage(IMAGE_FILE_TYPE eImageFileType, const tstring& filePath);
-	static GLuint createTextureFromRawData(int width, int height, int channels, const BUFFER_DATA& bufferData);
+	static bool decodeImage(TEXTURE_INFO& textureInfo, IMAGE_FILE_TYPE eImageFileType, const tstring& filePath);
+	static bool createTextureFromRawData(TEXTURE_INFO& textureInfo, int width, int height, int channels, const BUFFER_DATA& bufferData);
 
 private:
-	static GLuint decodePngImage(const tstring& filePath);
+	static bool decodePngImage(TEXTURE_INFO& textureInfo, const tstring& filePath);
 
 };
 

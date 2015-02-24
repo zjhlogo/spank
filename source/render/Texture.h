@@ -25,6 +25,8 @@ public:
 	bool reload(bool freeOld);
 
 	inline uint getTextureId() const { return m_textureId; };
+	inline int getWidth() const{ return m_width; };
+	inline int getHeight() const{ return m_height; };
 
 protected:
 	Texture(IRenderer* pRenderer);
@@ -38,6 +40,8 @@ private:
 private:
 	ImageUtil::IMAGE_FILE_TYPE m_eImageFileType{ ImageUtil::IFT_UNKNOWN };
 	GLuint m_textureId{ 0 };
+	int m_width{ 0 };
+	int m_height{ 0 };
 	IRenderer* m_pRenderer{ nullptr };
 
 };

@@ -18,6 +18,7 @@ class FileUtil
 public:
 	static bool readFile(BUFFER_DATA& bufferOut, const tstring& filePath);
 	static bool readStringFile(tstring& strOut, const tstring& filePath);
+	static bool readFileDataOwnerFree(void** bufferOut, long& fileSize, const tstring& filePath);
 };
 
 }

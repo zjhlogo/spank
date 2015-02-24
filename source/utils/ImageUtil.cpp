@@ -33,7 +33,7 @@ static void FuncReaderCallback(png_structp pPngStruct, png_bytep pData, png_size
 	}
 }
 
-GLuint ImageUtil::decodePngImage(const tstring& filePath)
+bool ImageUtil::decodePngImage(TEXTURE_INFO& textureInfo, const tstring& filePath)
 {
 	BUFFER_DATA fileBuffer;
 	if (!FileUtil::readFile(fileBuffer, filePath))
@@ -78,7 +78,7 @@ GLuint ImageUtil::decodePngImage(const tstring& filePath)
 	if (nColorType == PNG_COLOR_TYPE_GRAY_ALPHA) png_set_gray_to_rgb(pPngStruct);
 	if (bpp == 16) png_set_strip_16(pPngStruct);
 
-	// expand paletted or RGB images with transparency to full alpha channels so the data will be available as RGBA quartets.
+	// expand palette or RGB images with transparency to full alpha channels so the data will be available as RGBA quartets.
 	if (png_get_valid(pPngStruct, pPngInfo, PNG_INFO_tRNS)) png_set_tRNS_to_alpha(pPngStruct);
 
 	BUFFER_DATA imagePixel;
@@ -96,10 +96,10 @@ GLuint ImageUtil::decodePngImage(const tstring& filePath)
 	// free the stream object and png structure
 	png_destroy_read_struct(&pPngStruct, &pPngInfo, NULL);
 
-	return createTextureFromRawData(width, height, channels, imagePixel);
+	return createTextureFromRawData(textureInfo, width, height, channels, imagePixel);
 }
 
-GLuint ImageUtil::createTextureFromRawData(int width, int height, int channels, const BUFFER_DATA& bufferData)
+bool ImageUtil::createTextureFromRawData(TEXTURE_INFO& textureInfo, int width, int height, int channels, const BUFFER_DATA& bufferData)
 {
 	GLint glFormat = GL_ALPHA;
 	switch (channels)
@@ -114,13 +114,13 @@ GLuint ImageUtil::createTextureFromRawData(int width, int height, int channels, 
 		glFormat = GL_RGBA;
 		break;
 	default:
-		return 0;
+		return false;
 		break;
 	}
 
 	GLuint textureId = 0;
 	glGenTextures(1, &textureId);
-	if (textureId == 0) return 0;
+	if (textureId == 0) return false;
 
 	glBindTexture(GL_TEXTURE_2D, textureId);
 	glTexImage2D(GL_TEXTURE_2D, 0, glFormat, width, height, 0, glFormat, GL_UNSIGNED_BYTE, bufferData.data());
@@ -130,7 +130,11 @@ GLuint ImageUtil::createTextureFromRawData(int width, int height, int channels, 
 
 	glBindTexture(GL_TEXTURE_2D, 0);
 
-	return textureId;
+	textureInfo.textureId = textureId;
+	textureInfo.width = width;
+	textureInfo.height = height;
+
+	return true;
 }
 
 }

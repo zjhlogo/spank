@@ -11,23 +11,23 @@
 namespace spank
 {
 
-GLuint ImageUtil::decodeImage(IMAGE_FILE_TYPE eImageFileType, const tstring& filePath)
+bool ImageUtil::decodeImage(TEXTURE_INFO& textureInfo, IMAGE_FILE_TYPE eImageFileType, const tstring& filePath)
 {
-	GLuint textureId = 0;
+	bool result = false;
 
 	switch (eImageFileType)
 	{
 	case ImageUtil::IFT_PNG:
-		textureId = decodePngImage(filePath);
+		result = decodePngImage(textureInfo, filePath);
 		break;
 	case ImageUtil::IFT_PVR:
-		PVRTTextureLoadFromPVR(filePath.c_str(), &textureId);
+		result = (PVRTTextureLoadFromPVR(filePath.c_str(), &textureInfo.textureId) == PVR_SUCCESS);
 		break;
 	default:
 		break;
 	}
 
-	return textureId;
+	return result;
 }
 
 }

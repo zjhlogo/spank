@@ -27,8 +27,6 @@ Texture::~Texture()
 
 bool Texture::loadFromFile(const tstring& filePath)
 {
-	if (m_textureId != 0) return false;
-
 	m_eImageFileType = ImageUtil::getImageFileType(filePath);
 	if (m_eImageFileType == ImageUtil::IFT_UNKNOWN)
 	{
@@ -36,15 +34,9 @@ bool Texture::loadFromFile(const tstring& filePath)
 		return false;
 	}
 
-	m_textureId = ImageUtil::decodeImage(m_eImageFileType, filePath);
-	if (m_textureId != 0)
-	{
-		setId(filePath);
-		return true;
-	}
+	setId(filePath);
 
-	LOGE("Load texture failed %s", filePath.c_str());
-	return false;
+	return reload(false);
 }
 
 bool Texture::reload(bool freeOld)
@@ -52,10 +44,19 @@ bool Texture::reload(bool freeOld)
 	if (freeOld) destroyTexture();
 
 	const tstring& filePath = getId();
-	m_textureId = ImageUtil::decodeImage(m_eImageFileType, filePath);
-	if (m_textureId != 0) return true;
 
-	return false;
+	ImageUtil::TEXTURE_INFO textureInfo;
+	if (!ImageUtil::decodeImage(textureInfo, m_eImageFileType, filePath))
+	{
+		LOGE("Load texture failed %s", filePath.c_str());
+		return false;
+	}
+
+	m_textureId = textureInfo.textureId;
+	m_width = textureInfo.width;
+	m_height = textureInfo.height;
+
+	return true;
 }
 
 void Texture::destroyTexture()

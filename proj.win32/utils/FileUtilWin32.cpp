@@ -22,14 +22,43 @@ bool FileUtil::readFile(BUFFER_DATA& bufferOut, const tstring& filePath)
 	}
 
 	fseek(pFile, 0, SEEK_END);
-	int fileSize = ftell(pFile);
+	long fileSize = ftell(pFile);
 	fseek(pFile, 0, SEEK_SET);
 
 	bufferOut.clear();
 	bufferOut.resize(fileSize);
+
 	if (fileSize > 0)
 	{
 		fread(bufferOut.data(), sizeof(char), bufferOut.size(), pFile);
+	}
+
+	fclose(pFile);
+
+	return true;
+}
+
+bool FileUtil::readFileDataOwnerFree(void** bufferOut, long& fileSizeOut, const tstring& filePath)
+{
+	FILE* pFile = fopen(filePath.c_str(), "rb");
+	if (!pFile)
+	{
+		LOGE("Open file failed %s", filePath.c_str());
+		return false;
+	}
+
+	fseek(pFile, 0, SEEK_END);
+	fileSizeOut = ftell(pFile);
+	fseek(pFile, 0, SEEK_SET);
+
+	if (fileSizeOut > 0)
+	{
+		*bufferOut = malloc(fileSizeOut);
+		fread(*bufferOut, sizeof(char), fileSizeOut, pFile);
+	}
+	else
+	{
+		*bufferOut = nullptr;
 	}
 
 	fclose(pFile);
