@@ -74,11 +74,14 @@ bool SpineApp::initialize()
 
 	m_pSkeleton->r = m_pSkeleton->g = m_pSkeleton->b = m_pSkeleton->a = 1.0f;
 
+	m_pSkeletonState = spAnimationState_create(spAnimationStateData_create(m_pSkeleton->data));
+	spAnimationState_setAnimationByName(m_pSkeletonState, 0, "walk", true);
+
 	m_pShader = g_pRenderer->createShader("data/shaders/pos3_uv2.shader");
 	if (!m_pShader) return false;
 
-	m_pMemVertexBuffer = g_pRenderer->createMemVertexBuffer(m_pShader->getVertexAttributes());
-	m_pMemIndexBuffer = getRenderer()->createMemIndexBuffer();
+	m_pMemVertexBuffer = g_pRenderer->createVMemVertexBuffer(m_pShader->getVertexAttributes());
+	m_pMemIndexBuffer = getRenderer()->createVMemIndexBuffer();
 
 	return true;
 }
@@ -89,6 +92,8 @@ void SpineApp::terminate()
 	SAFE_RELEASE(m_pMemVertexBuffer);
 	SAFE_RELEASE(m_pShader);
 
+	spAnimationStateData_dispose(m_pSkeletonState->data);
+	spAnimationState_dispose(m_pSkeletonState);
 	spSkeletonData_dispose(m_pSkeletonData);
 	spAtlas_dispose(m_pAtlas);
 	spSkeleton_dispose(m_pSkeleton);
@@ -100,6 +105,9 @@ void SpineApp::update(float dt)
 {
 	updateFPS(dt);
 	spSkeleton_update(m_pSkeleton, dt);
+	spAnimationState_update(m_pSkeletonState, dt);
+	spAnimationState_apply(m_pSkeletonState, m_pSkeleton);
+	spSkeleton_updateWorldTransform(m_pSkeleton);
 }
 
 void SpineApp::render()
@@ -170,6 +178,8 @@ void SpineApp::render()
 // 			a = attachment->a;
 		}
 		break;
+		default:
+			break;
 		}
 
 		if (pTexture)
@@ -206,18 +216,20 @@ bool SpineApp::add(spank::Texture* pTexture, const float* pos, const float* uvs,
 
 	spank::VERT_ATTR_POS3_UV2 vert;
 	vert.z = 0.0f;
+
+	int baseIndex = m_vertices.size();
 	for (int i = 0; i < nVerts; ++i)
 	{
-		vert.x = pos[i + 0];
-		vert.y = pos[i + 1];
-		vert.u = uvs[i + 0];
-		vert.v = uvs[i + 1];
+		vert.x = pos[i * 2 + 0];
+		vert.y = pos[i * 2 + 1];
+		vert.u = uvs[i * 2 + 0];
+		vert.v = 1.0f - uvs[i * 2 + 1];
 		m_vertices.push_back(vert);
 	}
 
 	for (int i = 0; i < nIndis; ++i)
 	{
-		m_vindices.push_back(pIndis[i]);
+		m_vindices.push_back(baseIndex + pIndis[i]);
 	}
 
 	return true;
@@ -231,8 +243,12 @@ void SpineApp::flush()
 	m_pMemVertexBuffer->uploadBuffer(&m_vertices[0], sizeof(spank::VERT_ATTR_POS3_UV2)*m_vertices.size());
 	m_pMemIndexBuffer->uploadBuffer(&m_vindices[0], sizeof(short)*m_vindices.size());
 
+	glm::mat4 matTrans = glm::mat4(1.0f);
+	matTrans = glm::translate(matTrans, glm::vec3(0.0f, -300.0f, 0.0f));
+	glm::mat4 matMVP = getRenderer()->getOrthoMatrix() * matTrans;
+
 	m_pShader->useProgram();
-	m_pShader->setUniform("u_matMVP", getRenderer()->getOrthoMatrix());
+	m_pShader->setUniform("u_matMVP", matMVP);
 	m_pShader->setTexture(m_pCurrTexture, 0);
 	m_pShader->drawBuffer(m_pMemVertexBuffer, m_pMemIndexBuffer);
 

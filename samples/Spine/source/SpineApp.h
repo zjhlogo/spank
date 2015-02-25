@@ -41,12 +41,12 @@ private:
 	spAtlas* m_pAtlas = nullptr;
 	spSkeletonData* m_pSkeletonData = nullptr;
 	spSkeleton* m_pSkeleton = nullptr;
-
+	spAnimationState* m_pSkeletonState = nullptr;
 	spank::Texture* m_pCurrTexture = nullptr;
 
 	spank::Shader* m_pShader = nullptr;
-	spank::MemVertexBuffer* m_pMemVertexBuffer = nullptr;
-	spank::MemIndexBuffer* m_pMemIndexBuffer = nullptr;
+	spank::VMemVertexBuffer* m_pMemVertexBuffer = nullptr;
+	spank::VMemIndexBuffer* m_pMemIndexBuffer = nullptr;
 	TV_VERT_ATTR_POS3_UV2 m_vertices;
 	TV_SHORT m_vindices;
 

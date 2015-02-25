@@ -68,7 +68,7 @@
     <ClInclude Include="..\source\spine\spine.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{8F0A56FE-1D93-4719-8443-1197E95B5725}</ProjectGuid>
+    <ProjectGuid>{D8ACD60B-FAF2-4B21-B9FC-F8649E84CEBE}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>libSpine</RootNamespace>
   </PropertyGroup>

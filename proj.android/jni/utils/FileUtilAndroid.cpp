@@ -47,4 +47,30 @@ bool FileUtil::readFile(BUFFER_DATA& bufferOut, const std::string& filePath)
 	return true;
 }
 
+bool FileUtil::readFileDataOwnerFree(void** bufferOut, long& fileSizeOut, const tstring& filePath)
+{
+	AAsset* pAsset = AAssetManager_open(g_pAssetMgr, filePath.c_str(), AASSET_MODE_UNKNOWN);
+	if (!pAsset)
+	{
+		LOGE("Open file failed %s", filePath.c_str());
+		return false;
+	}
+
+	fileSizeOut = AAsset_getLength(pAsset);
+
+	if (fileSizeOut > 0)
+	{
+		*bufferOut = malloc(fileSizeOut);
+		AAsset_read(pAsset, *bufferOut, fileSizeOut);
+	}
+	else
+	{
+		*bufferOut = nullptr;
+	}
+
+	AAsset_close(pAsset);
+
+	return true;
+}
+
 }

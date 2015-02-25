@@ -304,7 +304,7 @@ void Shader::drawBuffer(MemVertexBuffer* pVertexBuffer, MemIndexBuffer* pIndexBu
 		glVertexAttribPointer(i, pAttrItem->size, pAttrItem->glType, GL_FALSE, stride, (GLvoid*)(pVertexBuffer->getBufferMemAddr() + pAttrItem->offset));
 	}
 
-	// Draws a non-indexed triangle array
+	// Draws a indexed triangle
 	glDrawElements(GL_TRIANGLES, pIndexBuffer->getBufferSize() / sizeof(uint16), GL_UNSIGNED_SHORT, pIndexBuffer->getBufferMemAddr());
 	GL_ERROR_CHECK();
 }

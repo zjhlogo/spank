@@ -24,13 +24,13 @@ static void flipVertical(BUFFER_DATA& bufferData, const char* pixel, int w, int 
 	}
 }
 
-static GLuint decodeImageBySdl(const std::string& filePath)
+static bool decodeImageBySdl(ImageUtil::TEXTURE_INFO& textureInfo, const std::string& filePath)
 {
 	SDL_Surface* pSdlSurface = IMG_Load(filePath.c_str());
 	if (!pSdlSurface)
 	{
 		LOGE("Decode image using IMG_Load failed %s", filePath.c_str());
-		return 0;
+		return false;
 	}
 
 	int w = pSdlSurface->w;
@@ -52,7 +52,7 @@ static GLuint decodeImageBySdl(const std::string& filePath)
 		break;
 	default:
 		SDL_FreeSurface(pSdlSurface);
-		return 0;
+		return false;
 		break;
 	}
 
@@ -66,7 +66,7 @@ static GLuint decodeImageBySdl(const std::string& filePath)
 	{
 		LOGE("Decode image using IMG_Load failed, can not generate texture %s", filePath.c_str());
 		SDL_FreeSurface(pSdlSurface);
-		return 0;
+		return false;
 	}
 
 	glBindTexture(GL_TEXTURE_2D, textureId);
@@ -76,26 +76,30 @@ static GLuint decodeImageBySdl(const std::string& filePath)
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glBindTexture(GL_TEXTURE_2D, 0);
 
-	return textureId;
+	textureInfo.textureId = textureId;
+	textureInfo.width = w;
+	textureInfo.height = h;
+
+	return true;
 }
 
-GLuint ImageUtil::decodeImage(IMAGE_FILE_TYPE eImageFileType, const std::string& filePath)
+bool ImageUtil::decodeImage(TEXTURE_INFO& textureInfo, IMAGE_FILE_TYPE eImageFileType, const tstring& filePath)
 {
-	GLuint textureId = 0;
+	bool result = false;
 
 	switch (eImageFileType)
 	{
 	case ImageUtil::IFT_PNG:
-		textureId = decodeImageBySdl(filePath);
+		result = decodeImageBySdl(textureInfo, filePath);
 		break;
 	case ImageUtil::IFT_PVR:
-		PVRTTextureLoadFromPVR(filePath.c_str(), &textureId);
+		result = (PVRTTextureLoadFromPVR(filePath.c_str(), &textureInfo.textureId) == PVR_SUCCESS);
 		break;
 	default:
 		break;
 	}
 
-	return textureId;
+	return result;
 }
 
 }
