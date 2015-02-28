@@ -90,11 +90,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\common\BaseApp.cpp" />
+    <ClCompile Include="..\source\SpineAnimation.cpp" />
     <ClCompile Include="..\source\SpineApp.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\common\BaseApp.h" />
+    <ClInclude Include="..\source\SpineAnimation.h" />
     <ClInclude Include="..\source\SpineApp.h" />
     <ClInclude Include="main.h" />
   </ItemGroup>

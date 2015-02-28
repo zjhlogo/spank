@@ -55,6 +55,7 @@
     <ClInclude Include="..\source\model\ModelMgr.h" />
     <ClInclude Include="..\source\render\IRenderer.h" />
     <ClInclude Include="..\source\render\RenderBuffer.h" />
+    <ClInclude Include="..\source\render\RenderCache.h" />
     <ClInclude Include="..\source\render\RendererGl2.h" />
     <ClInclude Include="..\source\render\RendererGl3.h" />
     <ClInclude Include="..\source\render\RenderObject.h" />

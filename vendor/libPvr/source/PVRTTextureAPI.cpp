@@ -1009,7 +1009,7 @@ EPVRTError PVRTTextureLoadFromPVR(	const char * const filename,
 									CPVRTMap<unsigned int, CPVRTMap<unsigned int, MetaDataBlock> > *pMetaData)
 {
 	//Attempt to open file.
-	spank::BUFFER_DATA buffer;
+	BUFFER_DATA buffer;
 	if (!spank::FileUtil::readFile(buffer, filename)) return PVR_FAIL;
 
 	//Header size.

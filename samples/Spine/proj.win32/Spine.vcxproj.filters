@@ -4,10 +4,12 @@
     <ClInclude Include="main.h" />
     <ClInclude Include="..\..\common\BaseApp.h" />
     <ClInclude Include="..\source\SpineApp.h" />
+    <ClInclude Include="..\source\SpineAnimation.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="..\..\common\BaseApp.cpp" />
     <ClCompile Include="..\source\SpineApp.cpp" />
+    <ClCompile Include="..\source\SpineAnimation.cpp" />
   </ItemGroup>
 </Project>
