@@ -38,7 +38,7 @@ bool BaseApp::initialize()
 
 	m_pLblFPS = new spank::Label(pRenderer, pFont);
 	if (!m_pLblFPS) return false;
-	m_pLblFPS->setPos(-pRenderer->getSurfaceSize()*0.5f+glm::vec2(10.0f, 0.0f));
+	m_pLblFPS->setPos(-pRenderer->getSurfaceSize()*0.5f + glm::vec2(10.0f, 0.0f));
 
 	m_pBaseAppTouchDelegate = new BaseAppTouchDelegate(this);
 	if (!getFramework()->getTouchDelegateMgr()->addDelegate(m_pBaseAppTouchDelegate)) return false;

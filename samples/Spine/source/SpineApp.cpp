@@ -29,6 +29,12 @@ bool SpineApp::initialize()
 	m_pSpineAnimation = new SpineAnimation();
 	if (!m_pSpineAnimation->loadFromFile("data/spineboy.json", "data/spineboy.atlas")) return false;
 
+	m_pSpineAnimation->setMix("walk", "jump", 0.2f);
+	m_pSpineAnimation->setMix("jump", "run", 0.2f);
+	m_pSpineAnimation->setAnimation("walk", 0, true);
+	m_pSpineAnimation->addAnimation("jump", 0, false, 3.0f);
+	m_pSpineAnimation->addAnimation("run", 0, true, 0.0f);
+
 	return true;
 }
 
@@ -41,6 +47,8 @@ void SpineApp::terminate()
 
 void SpineApp::update(float dt)
 {
+	m_pSpineAnimation->update(dt);
+
 	updateFPS(dt);
 }
 
@@ -57,6 +65,8 @@ void SpineApp::render()
 // 	m_pShader->setUniform("u_matMVP", matMVP);
 // 	m_pShader->setTexture(m_pCurrTexture, 0);
 // 	m_pShader->drawBuffer(m_pMemVertexBuffer, m_pMemIndexBuffer);
+
+	m_pSpineAnimation->render();
 
 	renderFPS();
 }

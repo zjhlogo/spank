@@ -11,6 +11,7 @@
 #include "Texture.h"
 #include "VertexAttributes.h"
 #include "RenderBuffer.h"
+#include <functional>
 
 namespace spank
 {
@@ -25,6 +26,8 @@ public:
 
 	typedef std::vector<T> TV_VERTEX_CACHE;
 	typedef std::vector<short> TV_SHORT;
+
+	typedef std::function<void(Shader* pShader, Texture* pTexture, VMemVertexBuffer*, VMemIndexBuffer*)> FUNC_RENDER;
 
 public:
 	RenderCache(IRenderer* pRenderer, const tstring& strVertAttr, int maxCache = DEFAULT_MAX_VERTEX)
@@ -44,7 +47,7 @@ public:
 
 	bool add(Shader* pShader, Texture* pTexture, const T* pVertexData, int numVertexData, const short* pIndex, int numIndex)
 	{
-		if (!m_pShader || !m_pShader->getVertexAttributes()->isEqual(m_pVertexAttributes)) return false;
+		if (!pShader || !pShader->getVertexAttributes()->isEqual(m_pVertexAttributes)) return false;
 
 		if (m_pShader != pShader || m_pTexture != pTexture)
 		{
@@ -80,7 +83,8 @@ public:
 			m_pVMemVertexBuffer->uploadBuffer(m_vertexCache.data(), sizeof(T)*m_vertexCache.size());
 			m_pVMemIndexBuffer->uploadBuffer(m_indexCache.data(), sizeof(short)*m_indexCache.size());
 
-			// TODO: render the data
+			// render the data
+			m_funcRender(m_pShader, m_pTexture, m_pVMemVertexBuffer, m_pVMemIndexBuffer);
 		}
 
 		m_pShader = nullptr;
@@ -88,6 +92,8 @@ public:
 		m_vertexCache.clear();
 		m_indexCache.clear();
 	}
+
+	void setFuncRender(const FUNC_RENDER& funcRender) { m_funcRender = funcRender; };
 
 private:
 	Shader* m_pShader = nullptr;
@@ -100,6 +106,8 @@ private:
 
 	VMemVertexBuffer* m_pVMemVertexBuffer = nullptr;
 	VMemIndexBuffer* m_pVMemIndexBuffer = nullptr;
+
+	FUNC_RENDER m_funcRender;
 
 };
 

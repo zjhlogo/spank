@@ -67,6 +67,7 @@ void SpineAnimation::setRenderer(spank::IRenderer* pRenderer)
 	if (m_pRenderer)
 	{
 		m_pRenderCache = new spank::RenderCache<spank::VERT_ATTR_POS3_UV2>(m_pRenderer, "data/shaders/pos3_uv2.attrs");
+		m_pRenderCache->setFuncRender(std::bind(&SpineAnimation::internalRender, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4));
 		m_pShader = m_pRenderer->createShader("data/shaders/pos3_uv2.shader");
 	}
 }
@@ -93,9 +94,23 @@ bool SpineAnimation::loadFromFile(const tstring& strJson, const tstring& strAtla
 	if (!m_pSkeleton) return false;
 
 	m_pSkeletonState = spAnimationState_create(spAnimationStateData_create(m_pSkeleton->data));
-	spAnimationState_setAnimationByName(m_pSkeletonState, 0, "walk", true);
 
 	return true;
+}
+
+void SpineAnimation::setAnimation(const tstring& animName, int trackIndex, bool loop)
+{
+	spAnimationState_setAnimationByName(m_pSkeletonState, trackIndex, animName.c_str(), loop);
+}
+
+void SpineAnimation::addAnimation(const tstring& animName, int trackIndex, bool loop, float delay)
+{
+	spAnimationState_addAnimationByName(m_pSkeletonState, trackIndex, animName.c_str(), loop, delay);
+}
+
+void SpineAnimation::setMix(const tstring& fromAnimName, const tstring& toAnimName, float duration)
+{
+	spAnimationStateData_setMixByName(m_pSkeletonState->data, fromAnimName.c_str(), toAnimName.c_str(), duration);
 }
 
 void SpineAnimation::update(float dt)
@@ -220,4 +235,12 @@ bool SpineAnimation::add(spank::Texture* pTexture, const float* pos, const float
 	}
 
 	return m_pRenderCache->add(m_pShader, pTexture, m_vertices.data(), m_vertices.size(), m_indices.data(), m_indices.size());
+}
+
+void SpineAnimation::internalRender(spank::Shader* pShader, spank::Texture* pTexture, spank::VMemVertexBuffer* pVertexBuffer, spank::VMemIndexBuffer* pIndexBuffer)
+{
+	pShader->useProgram();
+	pShader->setUniform("u_matMVP", m_pRenderer->getOrthoMatrix());
+	pShader->setTexture(pTexture, 0);
+	pShader->drawBuffer(pVertexBuffer, pIndexBuffer);
 }
